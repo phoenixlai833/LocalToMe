@@ -3,11 +3,12 @@ import ReactMapGL, { Marker } from "react-map-gl";
 import { Popup } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { getFoodBanks } from "../server/database";
+import MapSlideUp from '../components/MapSlideUp'
 
 const MAPBOX_TOKEN =
   "pk.eyJ1IjoicGhvZW5peGxhaTgzMyIsImEiOiJjbDh2eWpjY2EwOHI5M3Zxb2J1a2Fnb2VkIn0.24SJ2r53reCu3akmdTHUXA"; // Set your mapbox token here
 
-export default function FoodBankMap({ foodBanksList}) {
+export default function FoodBankMap({ foodBanksList }) {
   const [viewport, setViewport] = useState({
     latitude: 49.2827,
     longitude: -123.1207,
@@ -109,6 +110,7 @@ export default function FoodBankMap({ foodBanksList}) {
           )}
         </ReactMapGL>
       </div>
+      <div className="animate__slideInLeft"><MapSlideUp /></div>
     </div>
   );
 }
