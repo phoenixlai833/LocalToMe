@@ -7,7 +7,7 @@ import { getFoodBanks } from "../server/database";
 const MAPBOX_TOKEN =
   "pk.eyJ1IjoicGhvZW5peGxhaTgzMyIsImEiOiJjbDh2eWpjY2EwOHI5M3Zxb2J1a2Fnb2VkIn0.24SJ2r53reCu3akmdTHUXA"; // Set your mapbox token here
 
-export default function FoodBankMap({ foodBanksList}) {
+export default function FoodBankMap({ foodBanksList }) {
   const [viewport, setViewport] = useState({
     latitude: 49.2827,
     longitude: -123.1207,
