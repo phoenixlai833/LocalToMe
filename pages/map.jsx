@@ -1,13 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
-import ReactMapGL, { Marker } from "react-map-gl";
-import { Popup } from 'react-map-gl';
+import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import 'mapbox-gl/dist/mapbox-gl.css'
 import * as foodbankData from "./data/foodbank.json";
 
 
 
-const MAPBOX_TOKEN = "pk.eyJ1IjoicGhvZW5peGxhaTgzMyIsImEiOiJjbDh2eWpjY2EwOHI5M3Zxb2J1a2Fnb2VkIn0.24SJ2r53reCu3akmdTHUXA"; // Set your mapbox token here
+// const MAPBOX_TOKEN = "pk.eyJ1IjoicGhvZW5peGxhaTgzMyIsImEiOiJjbDh2eWpjY2EwOHI5M3Zxb2J1a2Fnb2VkIn0.24SJ2r53reCu3akmdTHUXA"; // Set your mapbox token here
+const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_REACT_APP_MAPBOX_TOKEN; // Set your mapbox token here
 
 export default function FoodBankMap() {
 
