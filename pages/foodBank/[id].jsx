@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import styles from '../../styles/Home.module.css';
 import Link from 'next/link'
-import { getFoodBanks, getFoodBank } from '../../server/database';
+import { getFoodBanks, getFoodBank, addFoodBank } from '../../server/database';
 
 export default function FoodBank({ data }) {
 
@@ -32,7 +32,7 @@ export default function FoodBank({ data }) {
                 <p>providesMeals:{data.providesMeals}</p>
                 <h3>Description:</h3>
                 <p>{data.description}</p>
-                <p>lastUpdatedDate:{data.lastUpdatedDate.seconds}</p>
+                <p>lastUpdatedDate:{data.lastUpdatedDate}</p>
 
             </main>
 
@@ -46,9 +46,26 @@ export async function getServerSideProps({ params }) {
     // console.log(params.id)
     const req = await getFoodBank(params.id)
     const data = JSON.parse(JSON.stringify(req));
-    console.log(data)
+    // console.log(data)
+
+    // set all foodbank data in firestore
+    // const fbDataAPI = await fetch("https://opendata.vancouver.ca/api/records/1.0/search/?dataset=free-and-low-cost-food-programs&q=&rows=200&facet=program_name&facet=local_areas&facet=provides_meals&facet=provides_hampers&facet=takeout_available&facet=wheelchair_accessible&facet=signup_required&facet=requires_referral");
+    // console.log(`this one: ${fbDataAPI}`);
+    // const fbDataToJson = await fbDataAPI.json()
+    // console.log(fbDataToJson.records);
+    // let formattedFbData = fbDataToJson.records.map((fb) => fb.fields)
+    // formattedFbData.map(async (fb) => {
+    //     await addFoodBank(fb)
+    // })
 
     return {
         props: { data },
     }
 }
+
+// export async function getServerSideProps(context) {
+//     const data = await fetch("https://opendata.vancouver.ca/api/records/1.0/search/?dataset=free-and-low-cost-food-programs&q=&rows=200&facet=program_name&facet=local_areas&facet=provides_meals&facet=provides_hampers&facet=takeout_available&facet=wheelchair_accessible&facet=signup_required&facet=requires_referral");
+//     console.log(data);
+//     // const runAddFoodBanks = await addFoodBank(foodBanks);
+
+// }
