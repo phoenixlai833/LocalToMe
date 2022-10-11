@@ -22,8 +22,8 @@ export async function getFoodBank(id) {
     return foodBank;
 }
 
-export async function addFoodBank(foodbank) {
+export async function addFoodBank(foodBanks) {
     const foodBankCol = collection(db, '/foodBank');
-    const foodbankId = await addDoc(foodBankCol, foodbank);
+    const foodbankId = await addDoc(foodBankCol, foodBanks);
     return foodbankId;
 }
