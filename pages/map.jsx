@@ -5,6 +5,8 @@ import Geocoder from "react-map-gl-geocoder";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import { getFoodBanks } from "../server/database";
+import MapSlideUp from '../components/MapSlideUp'
+import Link from 'next/link'
 
 const MAPBOX_TOKEN =
   "pk.eyJ1IjoicGhvZW5peGxhaTgzMyIsImEiOiJjbDh2eWpjY2EwOHI5M3Zxb2J1a2Fnb2VkIn0.24SJ2r53reCu3akmdTHUXA"; // Set your mapbox token here
@@ -64,7 +66,8 @@ export default function FoodBankMap({ foodBanksList }) {
                 <img src="./FoodB.png" alt="foodbank" />
               </button>
             </Marker>
-          ))}
+          )
+          )}
 
           {selectedFoodbank && console.log("hola", selectedFoodbank)}
           {selectedFoodbank && (
@@ -78,31 +81,28 @@ export default function FoodBankMap({ foodBanksList }) {
               }}
             >
               <div>
-                <h2>
-                  <a
-                    href="https://foodbank.bc.ca/"
-                    rel="programName"
-                    className="programNameLink"
-                  >
-                    {selectedFoodbank.programName}
-                  </a>
-                </h2>
+
+                <Link href={`/foodBank/${selectedFoodbank.id}`} className="programNameLink">
+                  <h2>{selectedFoodbank.program_name}</h2>
+
+                </Link>
+
                 <p>
                   <b>Location:</b>
-                  {selectedFoodbank.locationAddress}
+                  {selectedFoodbank.location_address}
                 </p>
 
                 <p>
-                  <b>Contact:</b>
-                  {selectedFoodbank.signupPhoneNumber}
+                  <b>Organization Name:</b>
+                  {selectedFoodbank.organization_name}
                 </p>
                 <p>
                   <b>Email:</b>
-                  {selectedFoodbank.signupEmail}
+                  {selectedFoodbank.signup_email}
                 </p>
                 <p>
-                  <b>Population_served:</b>
-                  {selectedFoodbank.populationServed}
+                  <b>Population served:</b>
+                  {selectedFoodbank.program_population_served}
                 </p>
                 <p>
                   <b>Description:</b>
@@ -121,6 +121,7 @@ export default function FoodBankMap({ foodBanksList }) {
           />
         </ReactMapGL>
       </div>
+      <div className="animate__slideInLeft"><MapSlideUp foodBanks={foodBanksList} /></div>
     </div>
   );
 }
@@ -129,7 +130,9 @@ export async function getServerSideProps(context) {
   // Everything in this function happens on the server
   const foodBanksData = await getFoodBanks();
   const foodBanksList = JSON.parse(JSON.stringify(foodBanksData));
+  // console.log(foodBanksList)
   return {
     props: { foodBanksList }, // will be passed to the page component as props
   };
 }
+
