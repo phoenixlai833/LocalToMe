@@ -4,6 +4,7 @@ import { Popup } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { getFoodBanks } from "../server/database";
 import MapSlideUp from '../components/MapSlideUp'
+import Link from 'next/link'
 
 const MAPBOX_TOKEN =
   "pk.eyJ1IjoicGhvZW5peGxhaTgzMyIsImEiOiJjbDh2eWpjY2EwOHI5M3Zxb2J1a2Fnb2VkIn0.24SJ2r53reCu3akmdTHUXA"; // Set your mapbox token here
@@ -67,8 +68,8 @@ export default function FoodBankMap({ foodBanksList }) {
           {selectedFoodbank && console.log("hola", selectedFoodbank)}
           {selectedFoodbank && (
             <Popup
-              latitude={Number(selectedFoodbank.latitude)}
-              longitude={Number(selectedFoodbank.longitude)}
+              latitude={selectedFoodbank.latitude}
+              longitude={selectedFoodbank.longitude}
               anchor="top"
               closeOnClick={false}
               onClose={() => {
@@ -76,15 +77,12 @@ export default function FoodBankMap({ foodBanksList }) {
               }}
             >
               <div>
-                <h2>
-                  <a
-                    href="https://foodbank.bc.ca/"
-                    rel="programName"
-                    className="programNameLink"
-                  >
-                    {selectedFoodbank.program_name}
-                  </a>
-                </h2>
+
+                <Link href={`/foodBank/${selectedFoodbank.id}`} className="programNameLink">
+                  <h2>{selectedFoodbank.program_name}</h2>
+
+                </Link>
+
                 <p>
                   <b>Location:</b>
                   {selectedFoodbank.location_address}
@@ -111,7 +109,7 @@ export default function FoodBankMap({ foodBanksList }) {
           )}
         </ReactMapGL>
       </div>
-      <div className="animate__slideInLeft"><MapSlideUp /></div>
+      <div className="animate__slideInLeft"><MapSlideUp foodBanks={foodBanksList} /></div>
     </div>
   );
 }
@@ -120,7 +118,7 @@ export async function getServerSideProps(context) {
   // Everything in this function happens on the server
   const foodBanksData = await getFoodBanks();
   const foodBanksList = JSON.parse(JSON.stringify(foodBanksData));
-  console.log(foodBanksList)
+  // console.log(foodBanksList)
   return {
     props: { foodBanksList }, // will be passed to the page component as props
   };
