@@ -20,7 +20,6 @@ export default function FoodBankMap({ foodBanksList }) {
     });
 
     const [selectedFoodbank, setSelectedFoodbank] = useState(null);
-
     useEffect(() => {
         const listener = (e) => {
             if (e.key === "Escape") {
@@ -47,7 +46,6 @@ export default function FoodBankMap({ foodBanksList }) {
                     }}
                 >
                     {foodBanksList.map((item) => (
-
                         <Marker
                             key={item.id}
                             latitude={item.latitude}
@@ -64,13 +62,14 @@ export default function FoodBankMap({ foodBanksList }) {
                                 <img src="./FoodB.png" alt="foodbank" />
                             </button>
                         </Marker>
-                    ))}
+                    )
+                    )}
 
                     {selectedFoodbank && console.log("hola", selectedFoodbank)}
                     {selectedFoodbank && (
                         <Popup
-                            latitude={selectedFoodbank.latitude}
-                            longitude={selectedFoodbank.longitude}
+                            latitude={Number(selectedFoodbank.latitude)}
+                            longitude={Number(selectedFoodbank.longitude)}
                             anchor="top"
                             closeOnClick={false}
                             onClose={() => {
@@ -84,25 +83,25 @@ export default function FoodBankMap({ foodBanksList }) {
                                         rel="programName"
                                         className="programNameLink"
                                     >
-                                        {selectedFoodbank.programName}
+                                        {selectedFoodbank.program_name}
                                     </a>
                                 </h2>
                                 <p>
                                     <b>Location:</b>
-                                    {selectedFoodbank.locationAddress}
+                                    {selectedFoodbank.location_address}
                                 </p>
 
                                 <p>
-                                    <b>Contact:</b>
-                                    {selectedFoodbank.signupPhoneNumber}
+                                    <b>Organization Name:</b>
+                                    {selectedFoodbank.organization_name}
                                 </p>
                                 <p>
                                     <b>Email:</b>
-                                    {selectedFoodbank.signupEmail}
+                                    {selectedFoodbank.signup_email}
                                 </p>
                                 <p>
-                                    <b>Population_served:</b>
-                                    {selectedFoodbank.populationServed}
+                                    <b>Population served:</b>
+                                    {selectedFoodbank.program_population_served}
                                 </p>
                                 <p>
                                     <b>Description:</b>
@@ -118,12 +117,13 @@ export default function FoodBankMap({ foodBanksList }) {
     );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
     // Everything in this function happens on the server
     const foodBanksData = await getFoodBanks();
     const foodBanksList = JSON.parse(JSON.stringify(foodBanksData));
-    console.log("bbbb", foodBanksList);
+    console.log(foodBanksList)
     return {
         props: { foodBanksList }, // will be passed to the page component as props
     };
 }
+

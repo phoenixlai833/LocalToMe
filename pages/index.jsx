@@ -27,7 +27,7 @@ export default function Home({ foodBanksList }) {
       <h1>LocalToMe</h1>
 
       <main className={styles.main}>
-        <ul>{foodBanksComponent}</ul>
+        <h2>HOMEPAGE</h2>
         <p className="map-link">
           Checkout <Link key="link-to-map" href="/map">the map!</Link>
         </p>
