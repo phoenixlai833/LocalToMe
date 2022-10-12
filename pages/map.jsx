@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import ReactMapGL, { Marker } from "react-map-gl";
-import { Popup } from "react-map-gl";
+import ReactMapGL, { Marker, Popup, GeolocateControl } from "react-map-gl";
+
 import "mapbox-gl/dist/mapbox-gl.css";
 import { getFoodBanks } from "../server/database";
 import MapSlideUp from '../components/MapSlideUp'
@@ -10,7 +10,15 @@ const MAPBOX_TOKEN =
 
 export default function FoodBankMap({ foodBanksList }) {
 
-    // console.log("uuuuu", foodBanksList.map((foodBank) => foodBank.longitude));
+    const geolocateControlRef = React.useCallback((ref) => {
+        if (ref) {
+            // Activate as soon as the control is loaded
+            ref.trigger();
+        }
+    }, []);
+
+
+
     const [viewport, setViewport] = useState({
         latitude: 49.2827,
         longitude: -123.1207,
@@ -45,6 +53,7 @@ export default function FoodBankMap({ foodBanksList }) {
                         setViewport(viewport);
                     }}
                 >
+                    <GeolocateControl ref={geolocateControlRef} />
                     {foodBanksList.map((item) => (
                         <Marker
                             key={item.id}
@@ -121,7 +130,7 @@ export async function getServerSideProps(context) {
     // Everything in this function happens on the server
     const foodBanksData = await getFoodBanks();
     const foodBanksList = JSON.parse(JSON.stringify(foodBanksData));
-    console.log(foodBanksList)
+    // console.log(foodBanksList)
     return {
         props: { foodBanksList }, // will be passed to the page component as props
     };
