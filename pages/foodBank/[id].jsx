@@ -1,11 +1,34 @@
 import Head from 'next/head';
 import styles from '../../styles/Home.module.css';
 import Link from 'next/link'
-import { getFoodBanks, getFoodBank, addFoodBank } from '../../server/database';
+import { getFoodBank } from '../../server/database';
 
 export default function FoodBank({ data }) {
 
     // boolean no shopping up yet oops
+    const singleFBComponent = data.map((d) => {
+        console.log(data)
+        return (
+            <>
+                < h1 > {d.program_name.stringValue}</ h1 >
+                {d.organization_name.stringValue && (<h2>Organization Name: {d.organization_name.stringValue}</h2>)}
+                {d.program_population_served && (<h3>Population Served: {d.program_population_served.stringValue}</h3>)}
+                {d.wheelchair_accessible && (<p>Wheelchair Acessible: {d.wheelchair_accessible.stringValue}</p>)}
+                {d.signup_required && (<h3>Signup Required: {d.signup_required.stringValue}</h3>)}
+                {d.requires_referral && (<p>requiresReferral: {d.requires_referral.stringValue}</p>)}
+                {d.signup_email && (<p>signupEmail: {d.signup_email.stringValue}</p>)}
+                {d.location_address && (<h3>locationAddress: {d.location_address.stringValue}</h3>)}
+                {d.local_areas && (<p>localAreas: {d.local_areas.stringValue}</p>)}
+                {d.delivery_available && (<p>deliveryAvailable: {d.delivery_available.stringValue}</p>)}
+                {d.takeout_available && (<p>takeoutAvailable: {d.takeout_available.stringValue}</p>)}
+                {d.hamper_cost && (<p>hamperCost: {d.hamper_cost.stringValue}</p>)}
+                {d.provides_hampers && (<p>providesHampers: {d.provides_hampers.stringValue}</p>)}
+                {d.provides_meals && (<p>providesMeals: {d.provides_meals.stringValue}</p>)}
+                {d.description && (<><h3>Description:</h3><p>{d.description.stringValue}</p></>)}
+                {d.last_updated_date && (<p>lastUpdatedDate: {d.last_updated_date.stringValue}</p>)}
+            </>
+        )
+    })
 
     return (
         <div className={styles.container}>
@@ -16,7 +39,8 @@ export default function FoodBank({ data }) {
             </Head>
 
             <main className={styles.main}>
-                <h1>{data.programName}</h1>
+                {singleFBComponent}
+                {/* <h1>{data.program_name}</h1>
                 <h2>organizationName:{data.organizationName}</h2>
                 <h3>populationServed:{data.populationServed}</h3>
                 <p>wheelchairAcessible:{data.wheelchairAcessible}</p>
@@ -32,7 +56,7 @@ export default function FoodBank({ data }) {
                 <p>providesMeals:{data.providesMeals}</p>
                 <h3>Description:</h3>
                 <p>{data.description}</p>
-                <p>lastUpdatedDate:{data.lastUpdatedDate}</p>
+                <p>lastUpdatedDate:{data.lastUpdatedDate}</p> */}
 
             </main>
 
@@ -45,8 +69,10 @@ export default function FoodBank({ data }) {
 export async function getServerSideProps({ params }) {
     // console.log(params.id)
     const req = await getFoodBank(params.id)
-    const data = JSON.parse(JSON.stringify(req));
-    // console.log(data)
+    // console.log(req)
+    const oneFoodBankObj = JSON.parse(JSON.stringify(req));
+    const data = [oneFoodBankObj._document.data.value.mapValue.fields]
+    console.log(data)
 
     // set all foodbank data in firestore
     // const fbDataAPI = await fetch("https://opendata.vancouver.ca/api/records/1.0/search/?dataset=free-and-low-cost-food-programs&q=&rows=200&facet=program_name&facet=local_areas&facet=provides_meals&facet=provides_hampers&facet=takeout_available&facet=wheelchair_accessible&facet=signup_required&facet=requires_referral");
