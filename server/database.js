@@ -16,9 +16,14 @@ export async function getFoodBanks() {
 export async function getFoodBank(id) {
     const foodBankCol = collection(db, '/foodBank');
     const foodBankSnapshot = await getDocs(foodBankCol);
-    const foodBank = foodBankSnapshot.docs.map(doc => doc.data())[0];
-    // const foodBank = foodBankSnapshot.docs.find(doc => doc.data().id == id);
-    console.log(foodBank)
+    // const foodBank = foodBankSnapshot.docs.map(doc => doc.data())[0];
+    const foodBank = foodBankSnapshot.docs.find(doc => {
+        if (doc.id == id) {
+            let data = doc.data();
+            return { id, ...data }
+        }
+    });
+    // console.log(foodBank)
     return foodBank;
 }
 
