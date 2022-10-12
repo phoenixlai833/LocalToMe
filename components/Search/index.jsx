@@ -7,11 +7,12 @@ const searchClient = algoliasearch(
   "3bb3bff1b3db5e4bf329f4a0de0b3e3e"
 );
 
-export default function Search() {
+export default function Search({ indexName }) {
   return (
     <>
-      <InstantSearch indexName="prod_foodbank" searchClient={searchClient}>
+      <InstantSearch indexName={indexName} searchClient={searchClient}>
         <SearchBox />
+        <Hits />
       </InstantSearch>
     </>
   );

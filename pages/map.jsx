@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import ReactMapGL, { Marker } from "react-map-gl";
 import { Popup } from "react-map-gl";
-import Geocoder from "react-map-gl-geocoder";
+// import Geocoder from "react-map-gl-geocoder";
 import "mapbox-gl/dist/mapbox-gl.css";
-import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
+// import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import { getFoodBanks } from "../server/database";
 import MapSlideUp from '../components/MapSlideUp'
 import Link from 'next/link'
@@ -111,14 +111,14 @@ export default function FoodBankMap({ foodBanksList }) {
               </div>
             </Popup>
           )}
-          <Geocoder
+          {/* <Geocoder
             mapRef={mapRef}
             onViewportChange={(viewport) => {
               setViewport(viewport);
             }}
             mapboxApiAccessToken={MAPBOX_TOKEN}
             position="top-left"
-          />
+          /> */}
         </ReactMapGL>
       </div>
       <div className="animate__slideInLeft"><MapSlideUp foodBanks={foodBanksList} /></div>
