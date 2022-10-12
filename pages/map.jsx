@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactMapGL, { Marker } from "react-map-gl";
 import { Popup } from "react-map-gl";
+import Geocoder from "react-map-gl-geocoder";
 import "mapbox-gl/dist/mapbox-gl.css";
+import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import { getFoodBanks } from "../server/database";
 
 const MAPBOX_TOKEN =
@@ -17,6 +19,7 @@ export default function FoodBankMap({ foodBanksList }) {
   });
 
   const [selectedFoodbank, setSelectedFoodbank] = useState(null);
+  const mapRef = useRef();
 
   useEffect(() => {
     const listener = (e) => {
@@ -35,6 +38,7 @@ export default function FoodBankMap({ foodBanksList }) {
     <div>
       <div className="mapboxgl-canvas">
         <ReactMapGL
+          ref={mapRef}
           key="map"
           initialViewState={viewport}
           mapboxAccessToken={MAPBOX_TOKEN}
@@ -107,6 +111,14 @@ export default function FoodBankMap({ foodBanksList }) {
               </div>
             </Popup>
           )}
+          <Geocoder
+            mapRef={mapRef}
+            onViewportChange={(viewport) => {
+              setViewport(viewport);
+            }}
+            mapboxApiAccessToken={MAPBOX_TOKEN}
+            position="top-left"
+          />
         </ReactMapGL>
       </div>
     </div>
