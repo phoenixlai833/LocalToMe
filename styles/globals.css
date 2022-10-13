@@ -19,8 +19,29 @@ a {
   html {
     color-scheme: dark;
   }
+
   body {
     color: white;
     background: black;
   }
 }
+
+.mapboxgl-canvas {
+  /* z-index: -1; */
+  width: 100%;
+  height: 100%;
+}
+
+.marker-btn img {
+  width: 30px;
+  height: 30px;
+}
+
+.organizationNameLink {
+  color: rgb(38, 142, 233);
+  text-decoration: underline;
+}
+
+/* .search {
+  z-index: 1;
+} */
