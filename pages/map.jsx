@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactMapGL, { Marker } from "react-map-gl";
 import { Popup } from "react-map-gl";
+// import Geocoder from "react-map-gl-geocoder";
 import "mapbox-gl/dist/mapbox-gl.css";
+// import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import { getFoodBanks } from "../server/database";
-import MapSlideUp from '../components/MapSlideUp'
-import Link from 'next/link'
+import MapSlideUp from '../components/MapSlideUp';
+import Link from 'next/link';
+import Image from 'next/image';
 
 const MAPBOX_TOKEN =
     "pk.eyJ1IjoicGhvZW5peGxhaTgzMyIsImEiOiJjbDh2eWpjY2EwOHI5M3Zxb2J1a2Fnb2VkIn0.24SJ2r53reCu3akmdTHUXA"; // Set your mapbox token here
@@ -20,51 +23,54 @@ export default function FoodBankMap({ foodBanksList }) {
         zoom: 12,
     });
 
-    const [selectedFoodbank, setSelectedFoodbank] = useState(null);
-    useEffect(() => {
-        const listener = (e) => {
-            if (e.key === "Escape") {
-                setSelectedFoodbank(null);
-            }
-        };
-        window.addEventListener("keydown", listener);
+  const [selectedFoodbank, setSelectedFoodbank] = useState(null);
+  const mapRef = useRef();
+
+  useEffect(() => {
+    const listener = (e) => {
+      if (e.key === "Escape") {
+        setSelectedFoodbank(null);
+      }
+    };
+    window.addEventListener("keydown", listener);
 
         return () => {
             window.removeEventListener("keydown", listener);
         };
     }, []);
 
-    return (
-        <div>
-            <div className="mapboxgl-canvas">
-                <ReactMapGL
-                    key="map"
-                    initialViewState={viewport}
-                    mapboxAccessToken={MAPBOX_TOKEN}
-                    mapStyle="mapbox://styles/phoenixlai833/cl8xvkhyh001i16o78o71s4k5"
-                    onViewportChange={(viewport) => {
-                        setViewport(viewport);
-                    }}
-                >
-                    {foodBanksList.map((item) => (
-                        <Marker
-                            key={item.id}
-                            latitude={item.latitude}
-                            longitude={item.longitude}
-                            color="red"
-                        >
-                            <button
-                                className="marker-btn"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    setSelectedFoodbank(item);
-                                }}
-                            >
-                                <img src="./FoodB.png" alt="foodbank" />
-                            </button>
-                        </Marker>
-                    )
-                    )}
+  return (
+    <div>
+      <div className="mapboxgl-canvas">
+        <ReactMapGL
+          ref={mapRef}
+          key="map"
+          initialViewState={viewport}
+          mapboxAccessToken={MAPBOX_TOKEN}
+          mapStyle="mapbox://styles/phoenixlai833/cl8xvkhyh001i16o78o71s4k5"
+          onViewportChange={(viewport) => {
+            setViewport(viewport);
+          }}
+        >
+          {foodBanksList.map((item) => (
+            <Marker
+              key={item.id}
+              latitude={item.latitude}
+              longitude={item.longitude}
+              color="red"
+            >
+              <button
+                className="marker-btn"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setSelectedFoodbank(item);
+                }}
+              >
+                <Image src="./FoodB.png" alt="foodbank" />
+              </button>
+            </Marker>
+          )
+          )}
 
                     {selectedFoodbank && console.log("hola", selectedFoodbank)}
                     {selectedFoodbank && (
@@ -108,6 +114,14 @@ export default function FoodBankMap({ foodBanksList }) {
                             </div>
                         </Popup>
                     )}
+          {/* <Geocoder
+            mapRef={mapRef}
+            onViewportChange={(viewport) => {
+              setViewport(viewport);
+            }}
+            mapboxApiAccessToken={MAPBOX_TOKEN}
+            position="top-left"
+          /> */}
                 </ReactMapGL>
             </div>
             <div className="animate__slideInLeft"><MapSlideUp foodBanks={foodBanksList} /></div>
