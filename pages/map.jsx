@@ -5,8 +5,9 @@ import { Popup } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 // import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import { getFoodBanks } from "../server/database";
-import MapSlideUp from '../components/MapSlideUp'
-import Link from 'next/link'
+import MapSlideUp from '../components/MapSlideUp';
+import Link from 'next/link';
+import Image from 'next/image';
 
 const MAPBOX_TOKEN =
   "pk.eyJ1IjoicGhvZW5peGxhaTgzMyIsImEiOiJjbDh2eWpjY2EwOHI5M3Zxb2J1a2Fnb2VkIn0.24SJ2r53reCu3akmdTHUXA"; // Set your mapbox token here
@@ -63,7 +64,7 @@ export default function FoodBankMap({ foodBanksList }) {
                   setSelectedFoodbank(item);
                 }}
               >
-                <img src="./FoodB.png" alt="foodbank" />
+                <Image src="./FoodB.png" alt="foodbank" />
               </button>
             </Marker>
           )
