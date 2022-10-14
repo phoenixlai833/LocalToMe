@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from "react";
-import ReactMapGL, { Marker, Popup, GeolocateControl, NavigationControl } from "react-map-gl";
+import React, { useState, useEffect, useRef } from "react";
+import ReactMapGL, { Marker } from "react-map-gl";
+import { Popup } from "react-map-gl";
+// import Geocoder from "react-map-gl-geocoder";
 import "mapbox-gl/dist/mapbox-gl.css";
+// import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import { getFoodBanks } from "../server/database";
 import MapSlideUp from '../components/MapSlideUp';
 import Link from 'next/link';
+import Image from 'next/image';
 
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_REACT_APP_MAPBOX_TOKEN; // Set your mapbox token here
@@ -29,6 +33,7 @@ export default function FoodBankMap({ foodBanksList }) {
 
     const [selectedFoodbank, setSelectedFoodbank] = useState(null);
     const [userLocation, setUserLocation] = useState({});
+    const mapRef = useRef();
 
     useEffect(() => {
         const listener = (e) => {
@@ -47,6 +52,7 @@ export default function FoodBankMap({ foodBanksList }) {
         <div>
             <div className="mapboxgl-canvas">
                 <ReactMapGL
+                    ref={mapRef}
                     key="map"
                     initialViewState={viewport}
                     mapboxAccessToken={MAPBOX_TOKEN}
@@ -56,7 +62,7 @@ export default function FoodBankMap({ foodBanksList }) {
                     }}
                 >
                     {/* The component will display GPS icon the map. */}
-             
+
                     <div>
                         {/* <GeolocateControl
                         position="top-right"
@@ -66,7 +72,7 @@ export default function FoodBankMap({ foodBanksList }) {
                         /> */}
 
                         <GeolocateControl
-                           // This will automatically set the user's location as the center of the map
+                            // This will automatically set the user's location as the center of the map
                             positionOptions={{ enableHighAccuracy: true }}// This will enable the high accuracy of the location
                             showUserLocation={true}// This will show the user's location on the map
                             trackUserLocation={true}// This will track the user's location on the map
@@ -122,7 +128,7 @@ export default function FoodBankMap({ foodBanksList }) {
                     )
                     )}
 
-                   
+
                     {selectedFoodbank && (
                         <Popup
                             latitude={selectedFoodbank.latitude}
@@ -164,6 +170,14 @@ export default function FoodBankMap({ foodBanksList }) {
                             </div>
                         </Popup>
                     )}
+                    {/* <Geocoder
+            mapRef={mapRef}
+            onViewportChange={(viewport) => {
+              setViewport(viewport);
+            }}
+            mapboxApiAccessToken={MAPBOX_TOKEN}
+            position="top-left"
+          /> */}
                     <NavigationControl />
                 </ReactMapGL>
             </div>
