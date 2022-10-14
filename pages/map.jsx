@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from "react";
-import ReactMapGL, { Marker, Popup, GeolocateControl } from "react-map-gl";
-
+import ReactMapGL, { Marker, Popup, GeolocateControl, NavigationControl } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { getFoodBanks } from "../server/database";
-import MapSlideUp from '../components/MapSlideUp'
-import Link from 'next/link'
+import MapSlideUp from '../components/MapSlideUp';
+import Link from 'next/link';
 
-const MAPBOX_TOKEN =
-    "pk.eyJ1IjoicGhvZW5peGxhaTgzMyIsImEiOiJjbDh2eWpjY2EwOHI5M3Zxb2J1a2Fnb2VkIn0.24SJ2r53reCu3akmdTHUXA"; // Set your mapbox token here
+
+const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_REACT_APP_MAPBOX_TOKEN; // Set your mapbox token here
 
 export default function FoodBankMap({ foodBanksList }) {
 
-    const geolocateControlRef = React.useCallback((ref) => {
-        if (ref) {
-            // Activate as soon as the control is loaded
-            ref.trigger();
-        }
-    }, []);
+    // const geolocateControlRef = React.useCallback((ref) => {
+    //     if (ref) {
+    //         // Activate as soon as the control is loaded
+    //         ref.trigger();
+    //     }
+    // }, []);
 
 
 
@@ -29,6 +28,8 @@ export default function FoodBankMap({ foodBanksList }) {
     });
 
     const [selectedFoodbank, setSelectedFoodbank] = useState(null);
+    const [userLocation, setUserLocation] = useState({});
+
     useEffect(() => {
         const listener = (e) => {
             if (e.key === "Escape") {
@@ -54,7 +55,53 @@ export default function FoodBankMap({ foodBanksList }) {
                         setViewport(viewport);
                     }}
                 >
-                    <GeolocateControl ref={geolocateControlRef} />
+                    {/* The component will display GPS icon the map. */}
+             
+                    <div>
+                        {/* <GeolocateControl
+                        position="top-right"
+                        auto
+                        trackUserLocation={true}
+                        onGeolocate={(e) => dispatch({ type: "SET_USER_LOCATION", payload: {lng:e.coords.longitude, lat:e.coords.latitude}})}
+                        /> */}
+
+                        <GeolocateControl
+                           // This will automatically set the user's location as the center of the map
+                            positionOptions={{ enableHighAccuracy: true }}// This will enable the high accuracy of the location
+                            showUserLocation={true}// This will show the user's location on the map
+                            trackUserLocation={true}// This will track the user's location on the map
+                            onGeolocate={(PositionOptions) => {// This will set the user's location to the state
+                                setUserLocation({
+                                    ...userLocation,
+                                    latitude: PositionOptions["coords"].latitude,
+                                    longitude: PositionOptions["coords"].longitude,
+                                });
+                            }}
+                        />
+                    </div>
+
+                    {/* {Object.keys(userLocation).length > 0 ? (
+                        <Marker
+                            longitude={userLocation.longitude}
+                            latitude={userLocation.latitude}
+                        >
+                            <svg
+                                height={SIZE}
+                                viewBox="0 0 24 24"
+                                style={{
+                                    cursor: "pointer",
+                                    fill: "#d00",
+                                    stroke: "none",
+                                    transform: `translate(${-SIZE / 2}px,${-SIZE}px)`,
+                                }}
+                            >
+                                <title>You are here</title>
+                                <path d={ICON} />
+                            </svg>
+                        </Marker>
+                    ) : null}  */}
+
+
                     {foodBanksList.map((item) => (
                         <Marker
                             key={item.id}
@@ -75,7 +122,7 @@ export default function FoodBankMap({ foodBanksList }) {
                     )
                     )}
 
-                    {selectedFoodbank && console.log("hola", selectedFoodbank)}
+                   
                     {selectedFoodbank && (
                         <Popup
                             latitude={selectedFoodbank.latitude}
@@ -117,6 +164,7 @@ export default function FoodBankMap({ foodBanksList }) {
                             </div>
                         </Popup>
                     )}
+                    <NavigationControl />
                 </ReactMapGL>
             </div>
             <div className="animate__slideInLeft"><MapSlideUp foodBanks={foodBanksList} /></div>
