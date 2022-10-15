@@ -72,7 +72,7 @@ export async function getServerSideProps({ params }) {
     // console.log(req)
     const oneFoodBankObj = JSON.parse(JSON.stringify(req));
     const data = [oneFoodBankObj._document.data.value.mapValue.fields]
-    console.log(data)
+    // console.log(data)
 
     // set all foodbank data in firestore
     // const fbDataAPI = await fetch("https://opendata.vancouver.ca/api/records/1.0/search/?dataset=free-and-low-cost-food-programs&q=&rows=200&facet=program_name&facet=local_areas&facet=provides_meals&facet=provides_hampers&facet=takeout_available&facet=wheelchair_accessible&facet=signup_required&facet=requires_referral");
