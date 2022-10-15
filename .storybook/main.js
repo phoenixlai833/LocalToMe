@@ -1,8 +1,9 @@
 module.exports = {
   "stories": [
-    "../components/LoginForm/LoginForm.stories.js",
-    "../components/MapSlideUp/MapSlideUp.stories.js",
-    "../components/SingleFbCard/SingleFbCard.stories.js"
+    "../components/**/*.stories.mdx",
+    "../components/**/*.stories.@(js|jsx|ts|tsx)",
+    "../pages/**/*.stories.mdx",
+    "../pages/**/*.stories.@(js|jsx|ts|tsx)",
   ],
   "addons": [
     "@storybook/addon-links",
