@@ -66,7 +66,7 @@ export default function FoodBankMap({ foodBanksList }) {
                   setSelectedFoodbank(item);
                 }}
               >
-                <Image src="./FoodB.png" alt="foodbank" />
+                <Image src="/FoodB.png" alt="foodbank" layout='fill' />
               </button>
             </Marker>
           )
