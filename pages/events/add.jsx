@@ -4,7 +4,7 @@ import { getEvents, addEvent } from '../../server/database';
 import { ref, getDownloadURL, uploadBytes } from 'firebase/storage';
 import { collection, getDocs, addDoc } from 'firebase/firestore';
 // import { DeletePopup } from '../../components/DeletePopup'
-import { LoginForm } from '../../components/LoginForm'
+// import { LoginForm } from '../../components/LoginForm'
 
 
 
@@ -40,7 +40,7 @@ export default function newEvent() {
             e.preventDefault();
             console.log(e)
         }
-    }
+    };
 
     useEffect(() => {
         const fetchEvent = async () => {
@@ -70,7 +70,7 @@ export default function newEvent() {
                 })}
             </ul>
             {/* <div>< DeletePopup /></div> */}
-            <div>< LoginForm /></div>
+            {/* <div><LoginForm /></div> */}
             <div>HELLO</div>
         </>
     );
