@@ -3,12 +3,13 @@ import { db, app, storage } from '../../firebase/clientApp';
 import { getEvents, addEvent } from '../../server/database';
 import { ref, getDownloadURL, uploadBytes } from 'firebase/storage';
 import { collection, getDocs, addDoc } from 'firebase/firestore';
+// import Image from `next/image`;
 // import { DeletePopup } from '../../components/DeletePopup'
 // import { LoginForm } from '../../components/LoginForm'
 
 
 
-export default function newEvent() {
+export default function NewEvent() {
     const [fileUrl, setFileUrl] = useState(null);
     const [events, setEvents] = useState([]);
 
