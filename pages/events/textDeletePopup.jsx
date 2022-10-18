@@ -1,6 +1,5 @@
 
 import React, { useState, useEffect } from 'react';
-import styles from './DeletePopup.module.css'
 import Link from 'next/link'
 import { getEvent, deleteEvent } from '../../server/database';
 
