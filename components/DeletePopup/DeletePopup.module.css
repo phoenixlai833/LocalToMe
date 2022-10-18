@@ -1,0 +1,7 @@
+.background {
+  position: absolute;
+  background-color: white;
+  width: 35vw;
+  height: 50vh;
+  padding: 5%;
+}
