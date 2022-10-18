@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function EventsList({ eventList }) {
 
     const eventsList = eventList.map((event) => (
-        <div className={styles.eventBlock}>
+        <div key={event.id} className={styles.eventBlock}>
             <div className={styles.eventDateAndIamge}>
                 <img src={event.eventImage} alt={event.eventName} className={styles.eventImage} />
                 {/* <p className={styles.eventDate}>{event.eventDate}</p> */}
