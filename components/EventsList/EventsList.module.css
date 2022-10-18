@@ -1,0 +1,52 @@
+.eventBlock {
+    display: grid;
+    grid-template-columns: 35% 55%;
+    gap: 10%;
+    align-items: center;
+    width: 100%;
+    height: 200px;
+    margin: 20px;
+
+
+}
+
+.eventDateAndIamge {
+    display: flex;
+    flex-direction: row;
+    height: 200px;
+}
+
+.envenInfo {}
+
+.eventImage {
+    position: relative;
+    min-width: 100%;
+    height: 200px;
+    border-radius: 20px;
+}
+
+.eventDate {
+    position: absolute;
+    background-color: white;
+    width: 2.3em;
+    height: 2.3em;
+    font-size: 1em;
+    border-radius: 5px;
+    text-align: center;
+    left: 7%
+}
+
+.eventTime {
+    background-color: #FFB800;
+    border-radius: 20px;
+    width: 150px;
+    text-align: center;
+
+}
+
+.eventDescription {}
+
+.eventTitle :hover {
+    color: rgb(49, 143, 237);
+    text-decoration: underline;
+}

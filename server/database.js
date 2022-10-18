@@ -32,3 +32,24 @@ export async function addFoodBank(foodBanks) {
     const foodbankId = await addDoc(foodBankCol, foodBanks);
     return foodbankId;
 }
+
+
+
+const eventsListData = [
+    { id: "1", creatorId: "Drake", eventName: "Event 1", eventDate: "JAN 01,2023", eventTime: "12:00pm-2:00pm", eventLocation: "Location 1", eventContactNumber: "6048888888", eventEmail:"foodevent@gmail.com", eventImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdVH3VXUdZDx8JgVLzRLjGAo4rrvLzAnNZ8v0rhVZQqD0vjabyBSg8kR5G-VfZaaQClXk&usqp=CAU", eventDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas condimentum neque scelerisque comm. Ac quis eget quis nec egestas", eventCategoryId:"1"},
+    { id: "2", creatorId: "Drake", eventName: "Event 2", eventDate: "FEB 01,2023", eventTime: "12:00pm-2:00pm", eventLocation: "Location 2", eventContactNumber: "6048888888", eventEmail:"foodevent@gmail.com", eventImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdVH3VXUdZDx8JgVLzRLjGAo4rrvLzAnNZ8v0rhVZQqD0vjabyBSg8kR5G-VfZaaQClXk&usqp=CAU", eventDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas condimentum neque scelerisque comm. Ac quis eget quis nec egestas", eventCategoryId:"2"},
+    { id: "3", creatorId: "Drake", eventName: "Event 3", eventDate: "MAR 01,2023", eventTime: "12:00pm-2:00pm", eventLocation: "Location 3", eventContactNumber: "6048888888", eventEmail:"foodevent@gmail.com", eventImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdVH3VXUdZDx8JgVLzRLjGAo4rrvLzAnNZ8v0rhVZQqD0vjabyBSg8kR5G-VfZaaQClXk&usqp=CAU", eventDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas condimentum neque scelerisque comm. Ac quis eget quis nec egestas", eventCategoryId:"3"},
+    { id: "4", creatorId: "Drake", eventName: "Event 4", eventDate: "APR 01,2023", eventTime: "12:00pm-2:00pm", eventLocation: "Location 4", eventContactNumber: "6048888888", eventEmail:"foodevent@gmail.com", eventImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdVH3VXUdZDx8JgVLzRLjGAo4rrvLzAnNZ8v0rhVZQqD0vjabyBSg8kR5G-VfZaaQClXk&usqp=CAU", eventDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas condimentum neque scelerisque comm. Ac quis eget quis nec egestas", eventCategoryId:"4"},
+    { id: "5", creatorId: "Drake", eventName: "Event 5", eventDate: "MAY 01,2023", eventTime: "12:00pm-2:00pm", eventLocation: "Location 5", eventContactNumber: "6048888888", eventEmail:"foodevent@gmail.com", eventImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdVH3VXUdZDx8JgVLzRLjGAo4rrvLzAnNZ8v0rhVZQqD0vjabyBSg8kR5G-VfZaaQClXk&usqp=CAU", eventDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas condimentum neque scelerisque comm. Ac quis eget quis nec egestas", eventCategoryId:"5"},
+
+]
+
+export async function getEventsList(){
+    return eventsListData;
+
+}
+
+
+export async function getSingleEvent(id) {
+    return eventsListData.find(event => event.id ==id);
+}

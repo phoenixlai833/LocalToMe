@@ -1,7 +1,17 @@
+import SingleEvent from "../../components/SingleEvent";
+import { getSingleEvent } from "../../server/database";
 
-
-export default function event() {
+export default function Event({singleEvent}) {
     return (
-        <h1>Single event page</h1>
+        <div>
+            <SingleEvent singleEvent={singleEvent} />
+        </div >
     )
+}
+
+export async function getServerSideProps(context) {
+    const singleEvent = await getSingleEvent(context.params.id);
+    return {
+        props: { singleEvent },
+    }
 }

@@ -31,6 +31,9 @@ export default function Home({ foodBanksList }) {
         <p className="map-link">
           Checkout <Link key="link-to-map" href="/map">the map!</Link>
         </p>
+        <p>
+          <Link key="link-to-events" href="/events">Checkout the Events</Link>
+        </p>
       </main>
 
       <footer className={styles.footer}></footer>

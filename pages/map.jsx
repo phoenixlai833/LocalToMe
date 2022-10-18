@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef} from "react";
-import ReactMapGL, { Marker, Popup, GeolocateControl, NavigationControl, ScaleControl, Source, Layer } from "react-map-gl";
+import React, { useState, useEffect, useRef } from "react";
+import ReactMapGL, { Marker, Popup, GeolocateControl, NavigationControl, ScaleControl, Source, Layer, useMap } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { getFoodBanks } from "../server/database";
 import MapSlideUp from '../components/MapSlideUp';
@@ -73,7 +73,6 @@ export default function FoodBankMap({ foodBanksList }) {
                     />
 
                     {foodBanksList.map((item) => (
-
                         <Marker
                             key={item.id}
                             latitude={item.latitude}
@@ -145,7 +144,6 @@ export default function FoodBankMap({ foodBanksList }) {
             mapboxApiAccessToken={MAPBOX_TOKEN}
             position="top-left"
           /> */}
-
                 </ReactMapGL >
             </div>
             <div className="animate__slideInLeft"><MapSlideUp foodBanks={foodBanksList} /></div>
@@ -163,46 +161,5 @@ export async function getServerSideProps(context) {
 }
 
 
-// export default function getRoute(end){
-//     const start = [userLocation.longitude, userLocation.latitude];
-//     const end = [selectedFoodbank.longitude, selectedFoodbank.latitude];
-//     const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${start[0]},${start[1]};${end[0]},${end[1]}?geometries=geojson&access_token=${MAPBOX_TOKEN}`;
-//     fetch(url)
-//     .then((res) => res.json())
-//     .then((data) => {
-//         const route = data.routes[0];
-//         const geojson = {
-//             type: 'Feature',
-//             properties: {},
-//             geometry: route.geometry
-//         };
-//         if (map.getSource('route')) { // if the route already exists on the map, reset it using setData
-//             map.getSource('route').setData(geojson);
-//         } else { // if the route doesn't exist, make a new request
-//             map.addLayer({
-//                 id: 'route',
-//                 type: 'line',
-//                 source: {
-//                     type: 'geojson',
-//                     data: {
-//                         type: 'Feature',
-//                         properties: {},
-//                         geometry: geojson
-//                     }
-//                 },
-//                 layout: {
-//                     'line-join': 'round',
-//                     'line-cap': 'round'
-//                 },
-//                 paint: {
-//                     'line-color': '#3887be',
-//                     'line-width': 5,
-//                     'line-opacity': 0.75
-//                 }
-//             });
-//         }
-//         // add turn instructions here at the end
-//     });
 
-// }
 
