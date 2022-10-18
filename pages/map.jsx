@@ -86,7 +86,7 @@ export default function FoodBankMap({ foodBanksList }) {
                                     setSelectedFoodbank(item);
                                 }}
                             >
-                                <img src="./FoodB.png" alt="foodbank" />
+                                <img src="./Food_Bank_Map.svg" alt="foodbank" />
                             </button>
                         </Marker>
                     )
@@ -152,12 +152,17 @@ export default function FoodBankMap({ foodBanksList }) {
 }
 
 export async function getServerSideProps(context) {
-    // Everything in this function happens on the server
-    const foodBanksData = await getFoodBanks();
-    const foodBanksList = JSON.parse(JSON.stringify(foodBanksData));
-    return {
-        props: { foodBanksList }, // will be passed to the page component as props
-    };
+  // Everything in this function happens on the server
+  const foodBanksData = await getFoodBanks();
+  const foodBanksList = JSON.parse(JSON.stringify(foodBanksData));
+
+  // const findMissingLingLat = foodBanksList.map((i) => [i.longitude, i.id]);
+  // console.log(findMissingLingLat)
+
+
+  return {
+    props: { foodBanksList }, // will be passed to the page component as props
+  };
 }
 
 

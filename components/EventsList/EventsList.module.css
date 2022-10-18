@@ -1,3 +1,7 @@
+.eventBlock{
+    height: fit-content;
+}
+
 .eventBlock {
     display: grid;
     grid-template-columns: 35% 55%;
@@ -49,4 +53,9 @@
 .eventTitle :hover {
     color: rgb(49, 143, 237);
     text-decoration: underline;
+}
+
+.readmore{
+    color: rgb(49, 143, 237);
+   
 }

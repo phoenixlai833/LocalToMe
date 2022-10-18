@@ -9,7 +9,7 @@ export default function MapSlideUp({ foodBanks }) {
         <li key={fb.id} className={styles.card}>
             <div className={styles.flexLayout}>
                 <div className={styles.fbImage}>
-                    image
+                    <img width="60" height="60" src={fb.foodBank_Image} alt={fb.program_name} />
                 </div>
                 <div className={styles.fbInfo}>
                     <Link href={`/foodBank/${fb.id}`}>

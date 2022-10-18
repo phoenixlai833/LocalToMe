@@ -1,19 +1,20 @@
 import EventsList from "../../components/EventsList";
-import { getEventsList } from "../../server/database";
+import { getEvents } from "../../server/database";
 
-export default function Events({eventsListData}) {
+export default function Events({ eventList }) {
 
     return (
         <div>
-            <EventsList eventsListData={eventsListData}/>
+            <EventsList eventList={eventList} />
         </div>
     )
 }
 
 export async function getServerSideProps() {
-    const eventsListData = await getEventsList();
+    const req = await getEvents();
+    const eventList = JSON.parse(JSON.stringify(req));
     return {
-        props: { eventsListData },
+        props: { eventList },
     }
 }
 

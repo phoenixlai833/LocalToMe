@@ -2,22 +2,27 @@ import React from "react";
 import styles from "./EventsList.module.css";
 import Link from "next/link";
 
-export default function EventsList({ eventsListData }) {
+export default function EventsList({ eventList }) {
 
-    const eventsList = eventsListData.map((event) => (
+    const eventsList = eventList.map((event) => (
         <div className={styles.eventBlock}>
             <div className={styles.eventDateAndIamge}>
                 <img src={event.eventImage} alt={event.eventName} className={styles.eventImage} />
-                <p className={styles.eventDate}>{event.eventDate.split(",")[0]}</p>
+                {/* <p className={styles.eventDate}>{event.eventDate}</p> */}
             </div>
             <div className={styles.eventInfo}>
                 <p className={styles.eventTime}>{event.eventTime}</p>
                 <Link href={`/events/${event.id}`}>
                     <a className={styles.eventTitle}><h2>{event.eventName}</h2></a>
                 </Link>
-                <p className={styles.eventDescription}>{event.eventDescription}</p>
+                <p className={styles.eventDescription}>{`${event.eventContent.slice(0, 80)}`}
+                    <span className={styles.readmore}>
+                        <Link href={`/events/${event.id}`}>
+                            ...Read More
+                        </Link>
+                    </span></p>
             </div>
-        </div>
+        </div >
     )
     )
 

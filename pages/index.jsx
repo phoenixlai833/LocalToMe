@@ -45,7 +45,7 @@ export async function getServerSideProps(context) {
   // Everything in this function happens on the server
   const foodBanksData = await getFoodBanks();
   const foodBanksList = JSON.parse(JSON.stringify(foodBanksData));
-  console.log(foodBanksList);
+  // console.log(foodBanksList);
   return {
     props: { foodBanksList }, // will be passed to the page component as props
   };
