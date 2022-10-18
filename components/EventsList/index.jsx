@@ -3,6 +3,7 @@ import styles from "./EventsList.module.css";
 import Link from "next/link";
 
 export default function EventsList({ eventList }) {
+    // console.log(eventList.map(e => e.id));
 
     const eventsList = eventList.map((event) => (
         <div key={event.id} className={styles.eventBlock}>
