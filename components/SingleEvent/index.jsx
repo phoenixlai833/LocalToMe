@@ -14,10 +14,10 @@ export default function SingleEvent({ event }) {
     const eventDate = `${mothString} ${day}, ${year}`
 
     return (
-        <div className={styles.bodyy}>
+        <div>
 
 
-            <h2 className={styles.head}>{event.eventName.stringValue}</h2>
+            <h3 className={styles.header}>{event.eventName.stringValue}</h3>
 
             <div className={styles.eventImageBlock} >
                 <img src={event.eventImage.stringValue} alt={event.eventName.stringValue} className={styles.eventImage} />
