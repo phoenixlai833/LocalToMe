@@ -46,25 +46,24 @@ export async function getEvents() {
     return eventList;
 }
 
+export async function getEvent(id) {
+    const eventCollection = collection(db, "/event");
+    const eventSnapshot = await getDocs(eventCollection);
+    const event = eventSnapshot.docs.find((doc) => {
+        if (doc.id == id) {
+            let data = doc.data();
+            return { id, ...data };
+        }
+    });
+    return event;
+}
+
 export async function addEvent(event) {
     const eventCollection = collection(db, "/event");
     const eventId = await addDoc(eventCollection, event);
     return eventId
 }
 
-// export async function getEvent(id) {
-//     console.log(id);
-//     const eventCollection = collection(db, "/event");
-//     const eventSnapshot = await getDocs(eventCollection);
-//     const event = eventSnapshot.docs.find(doc => {
-//         if (doc.id == id) {
-//             let data = doc.data();
-//             return { id, ...data }
-//         }
-//     });
-//     console.log(event);
-//     return event;
-// }
 
 export async function deleteEvent(id) {
     const eventCollection = collection(db, "/event");
@@ -79,3 +78,6 @@ export async function deleteEvent(id) {
     // console.log(event);
     // return event;
 }
+
+
+

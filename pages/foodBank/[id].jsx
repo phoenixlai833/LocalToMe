@@ -7,7 +7,7 @@ export default function FoodBank({ data }) {
 
     // boolean no shopping up yet oops
     const singleFBComponent = data.map((d) => {
-        console.log(data)
+        // console.log(data)
         return (
             <>
                 <img width="100" height="100" src={d.foodBank_Image.stringValue} alt={d.program_name.stringValue} />
