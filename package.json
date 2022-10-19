@@ -27,6 +27,7 @@
     "react-instantsearch-hooks-web": "^6.36.0",
     "react-map-gl": "^7.0.19",
     "react-map-gl-geocoder": "^2.2.0",
+    "storybook-addon-material-ui": "^0.9.0-alpha.24",
     "storybook-addon-next": "^1.6.9",
     "styled-components": "^5.3.6"
   },

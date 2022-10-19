@@ -1,14 +1,13 @@
 import '../styles/globals.css'
 import Head from 'next/head'
-import { FlexBox, Container, Wrapper, Colour } from '../styles/globals.js'
+import { FlexBox, Container, Wrapper, Colour } from '../styles/globals.jsx'
 
 function MyApp({ Component, pageProps }) {
   return <>
     <Head>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      />
+      <title>LocalToMe</title>
+      <meta name="description" content="LocalToMe is a web app that locates and provides low-income families/individuals with free and accessible food resources near their area within their budgets." />
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
     </Head>
     <Component {...pageProps} />
   </>
