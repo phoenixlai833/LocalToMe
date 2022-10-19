@@ -1,0 +1,12 @@
+.background {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  position: absolute;
+  top: 25vh;
+  left: 20vw;
+  background-color: yellow;
+  width: 60vw;
+  height: 50vh;
+  padding: 5%;
+}

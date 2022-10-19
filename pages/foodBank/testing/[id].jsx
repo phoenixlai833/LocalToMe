@@ -31,8 +31,8 @@ export default function FoodBank({ data }) {
 
                 <Bubble text={[d.location_address.stringValue, `${d.program_population_served.stringValue}`]} icon={["location_on", "people"]} />
                 {/* {test.push(d.location_address.stringValue) && icons.push("location_on")} */}
-                {d.program_population_served && test.push(d.program_population_served.stringValue) && icons.push("people")}
-                {test && <Bubble text={test} icon={icons}></Bubble>}
+                {/* {d.program_population_served && test.push(d.program_population_served.stringValue) && icons.push("people")} */}
+                {/* {test && <Bubble text={test} icon={icons}></Bubble>} */}
 
                 <Filter tag={"bank"} active={onActive} onPress={() => setActiveState(true)} />
                 <Filter tag={"pantry"} active={onActive} onPress={() => setActiveState(true)} />

@@ -31,6 +31,9 @@ export default function Home({ foodBanksList }) {
         <p className="map-link">
           Checkout <Link key="link-to-map" href="/map">the map!</Link>
         </p>
+        <p>
+          <Link key="link-to-events" href="/events">Checkout the Events</Link>
+        </p>
       </main>
 
       <footer className={styles.footer}></footer>
@@ -42,7 +45,7 @@ export async function getServerSideProps(context) {
   // Everything in this function happens on the server
   const foodBanksData = await getFoodBanks();
   const foodBanksList = JSON.parse(JSON.stringify(foodBanksData));
-  console.log(foodBanksList);
+  // console.log(foodBanksList);
   return {
     props: { foodBanksList }, // will be passed to the page component as props
   };
