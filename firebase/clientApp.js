@@ -17,12 +17,10 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-// const storageRef = app.storage().ref();
 const storage = getStorage(app);
 
-
-// export const auth = app.auth();
 export { db };
 export { app };
 export { storage };
+
 
