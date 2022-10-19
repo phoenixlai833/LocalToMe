@@ -28,23 +28,38 @@ max-width:none;
 
 `
 export default function LabelBottomNavigation({
-  value = 0,
-  onHome=()=>{r.push('/')},
-  onCommunity=()=>{},
-  onMap=()=>{},
-  onFavourites=()=>{},
-  onProfile=()=>{}
+  value = [value, setState] = useState(0),
+  // onHome=()=>{},
+  // onCommunity=()=>{},
+  // onMap=()=>{},
+  // onFavourites=()=>{},
+  // onProfile=()=>{}
 }) {
   const r = useRouter();
-  var [value, setState] = useState(0);
-  
+  // var [value, setState] = useState(0);
+  const onHome=()=>{
+    r.push("/");
+  }
+  const onCommunity=()=>{
+    r.push("/");
+  }
+  const onMap=()=>{
+    r.push("/map");
+  }
+  const onFavourites=()=>{
+    r.push("/favourites");
+  }
+  const onProfile=()=>{
+    r.push('/profile')
+  }
   return (
     <ThemeProvider theme={Theme}>
       <NavBar
         showLabels
         value={value}
         onChange={(event, newValue) => {
-          setState(newValue);
+          // console.log(value)
+          value = newValue;
         }}
       >
         <NavBarAction label="Home" icon={<HomeIcon />} onClick={onHome}/>
