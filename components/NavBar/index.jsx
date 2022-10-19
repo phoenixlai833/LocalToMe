@@ -28,7 +28,7 @@ max-width:none;
 
 `
 export default function LabelBottomNavigation({
-  value = value,
+  value = 0,
   // onHome=()=>{},
   // onCommunity=()=>{},
   // onMap=()=>{},
