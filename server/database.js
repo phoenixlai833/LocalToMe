@@ -1,5 +1,5 @@
 import { db } from '../firebase/clientApp';
-import { collection, getDocs, addDoc, deleteDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, getDoc, addDoc, deleteDoc, doc } from 'firebase/firestore';
 // import addEvent from '../pages/events/add';
 
 // food banks
@@ -49,14 +49,9 @@ export async function getEvents() {
 }
 
 export async function getEvent(id) {
-  const eventCollection = collection(db, "/event");
-  const eventSnapshot = await getDocs(eventCollection);
-  const event = eventSnapshot.docs.find((doc) => {
-    if (doc.id == id) {
-      let data = doc.data();
-      return { id, ...data };
-    }
-  });
+  const eventRef = doc(db, "event", id);
+  const eventSnapshot = await getDoc(eventRef);
+  const event = { id, ...eventSnapshot.data() };
   return event;
 }
 
