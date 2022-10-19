@@ -1,5 +1,5 @@
-.eventBlock{
-    height: fit-content;
+.category {
+    margin: 20px;
 }
 
 .eventBlock {
@@ -7,10 +7,8 @@
     grid-template-columns: 35% 55%;
     gap: 10%;
     align-items: center;
-    width: 100%;
-    height: 200px;
+    width: 90%;
     margin: 20px;
-
 
 }
 
@@ -20,24 +18,27 @@
     height: 200px;
 }
 
-.envenInfo {}
+
 
 .eventImage {
     position: relative;
-    min-width: 100%;
+    width: 100%;
     height: 200px;
     border-radius: 20px;
+    object-fit: cover;
 }
 
 .eventDate {
     position: absolute;
     background-color: white;
-    width: 2.3em;
-    height: 2.3em;
-    font-size: 1em;
-    border-radius: 5px;
+    width: 42px;
+    height: 42px;
+    font-size: 17px;
+    font-weight: 600;
+    border-radius: 10px;
     text-align: center;
-    left: 7%
+    left: 4%;
+    margin: 3%;
 }
 
 .eventTime {
@@ -48,14 +49,14 @@
 
 }
 
-.eventDescription {}
+
 
 .eventTitle :hover {
     color: rgb(49, 143, 237);
     text-decoration: underline;
 }
 
-.readmore{
+.readmore {
     color: rgb(49, 143, 237);
-   
+
 }
