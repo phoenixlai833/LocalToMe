@@ -60,18 +60,6 @@ export async function getEvent(id) {
   return event;
 }
 
-export async function getEvent(id) {
-    const eventCollection = collection(db, "/event");
-    const eventSnapshot = await getDocs(eventCollection);
-    const event = eventSnapshot.docs.find((doc) => {
-        if (doc.id == id) {
-            let data = doc.data();
-            return { id, ...data };
-        }
-    });
-    return event;
-}
-
 export async function addEvent(event) {
   const eventCollection = collection(db, "/event");
   const eventId = await addDoc(eventCollection, event);
@@ -80,8 +68,9 @@ export async function addEvent(event) {
 
 export async function editEvent(event) {
     const eventCollection = collection(db, "/event");
-    const eventId = await addDoc(eventCollection, event);
-    return eventId
+    const eventSnapshot = await getDocs(eventCollection);
+    await updateDoc(frankDocRef, event);
+    return event.id
 }
 
 export async function deleteEvent(id) {
