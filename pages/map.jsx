@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
-import ReactMapGL, { Marker, Popup, GeolocateControl, NavigationControl, ScaleControl, Source, Layer, useMap } from "react-map-gl";
+import React, { useState, useRef } from "react";
+import ReactMapGL, { GeolocateControl, NavigationControl, ScaleControl, Source, Layer, useMap } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { getFoodBanks } from "../server/database";
 import MapSlideUp from '../components/MapSlideUp';
-import Link from 'next/link';
+import EventMapPin from "../components/EventMapPin";
+import FoodBankMapPin from "../components/FoodBankMapPin";
+import { getEvents } from "../server/database";
 // import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 // import Geocoder from "react-map-gl-geocoder";
 // import 'react-map-gl-directions/dist/mapbox-gl-directions.css';
@@ -11,7 +13,7 @@ import Link from 'next/link';
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_REACT_APP_MAPBOX_TOKEN; // Set your mapbox token here
 
-export default function FoodBankMap({ foodBanksList }) {
+export default function FoodBankMap({ foodBanksList, eventList }) {
 
 
     const [viewport, setViewport] = useState({
@@ -22,24 +24,8 @@ export default function FoodBankMap({ foodBanksList }) {
         zoom: 12,
     });
 
-    const [selectedFoodbank, setSelectedFoodbank] = useState(null);
     const [userLocation, setUserLocation] = useState({});
     const mapRef = useRef();
-
-    useEffect(() => {
-        const listener = (e) => {
-            if (e.key === "Escape") {
-                setSelectedFoodbank(null);
-            }
-        };
-        window.addEventListener("keydown", listener);
-
-        return () => {
-            window.removeEventListener("keydown", listener);
-        };
-    }, []);
-
-
 
     return (
         <div>
@@ -53,7 +39,6 @@ export default function FoodBankMap({ foodBanksList }) {
                     onViewportChange={(viewport) => {
                         setViewport(viewport);
                     }}
-
                 >
                     <ScaleControl position="bottom-right" />
                     <NavigationControl position="bottom-right" />
@@ -69,73 +54,11 @@ export default function FoodBankMap({ foodBanksList }) {
                                 longitude: PositionOptions["coords"].longitude,
                             });
                         }}
-
                     />
 
-                    {foodBanksList.map((item) => (
-                        <Marker
-                            key={item.id}
-                            latitude={item.latitude}
-                            longitude={item.longitude}
-                            color="red"
-                        >
-                            <button
-                                className="marker-btn"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    setSelectedFoodbank(item);
-                                }}
-                            >
-                                <img src="./Food_Bank_Map.svg" alt="foodbank" />
-                            </button>
-                        </Marker>
-                    )
-                    )}
+                    <EventMapPin events={eventList} />
+                    <FoodBankMapPin foodBanksList={foodBanksList} />
 
-                    {selectedFoodbank && (
-                        <Popup
-                            latitude={selectedFoodbank.latitude}
-                            longitude={selectedFoodbank.longitude}
-                            anchor="top"
-                            closeOnClick={false}
-                            onClose={() => {
-                                setSelectedFoodbank(null);
-                            }}
-                        >
-                            <div>
-
-                                <Link href={`/foodBank/${selectedFoodbank.id}`} className="programNameLink">
-                                    <h2>{selectedFoodbank.program_name}</h2>
-
-                                </Link>
-
-                                <p>
-                                    <b>Location:</b>
-                                    {selectedFoodbank.location_address}
-                                </p>
-
-                                <p>
-                                    <b>Organization Name:</b>
-                                    {selectedFoodbank.organization_name}
-                                </p>
-                                <p>
-                                    <b>Email:</b>
-                                    {selectedFoodbank.signup_email}
-                                </p>
-                                <p>
-                                    <b>Population served:</b>
-                                    {selectedFoodbank.program_population_served}
-                                </p>
-                                <p>
-                                    <b>Description:</b>
-                                    {selectedFoodbank.description}
-                                </p>
-                                <button onClick={() => { }}>Get Direction</button>
-
-                            </div>
-
-                        </Popup>
-                    )}
                     {/* <Geocoder
             mapRef={mapRef}
             onViewportChange={(viewport) => {
@@ -152,17 +75,19 @@ export default function FoodBankMap({ foodBanksList }) {
 }
 
 export async function getServerSideProps(context) {
-  // Everything in this function happens on the server
-  const foodBanksData = await getFoodBanks();
-  const foodBanksList = JSON.parse(JSON.stringify(foodBanksData));
+    // Everything in this function happens on the server
+    const foodBanksData = await getFoodBanks();
+    const foodBanksList = JSON.parse(JSON.stringify(foodBanksData));
+    // const findMissingLingLat = foodBanksList.map((i) => [i.longitude, i.id]);
+    // console.log(findMissingLingLat)
 
-  // const findMissingLingLat = foodBanksList.map((i) => [i.longitude, i.id]);
-  // console.log(findMissingLingLat)
+    //get events from database
+    const req = await getEvents();
+    const eventList = JSON.parse(JSON.stringify(req));
 
-
-  return {
-    props: { foodBanksList }, // will be passed to the page component as props
-  };
+    return {
+        props: { foodBanksList, eventList }, // will be passed to the page component as props
+    };
 }
 
 
