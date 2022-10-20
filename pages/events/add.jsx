@@ -58,7 +58,7 @@ export default function NewEvent({ eventList, eventCategories }) {
       eventCreatorId: 1,
       eventDate: startDate,
       latitude: coordinates.lat,
-      longitude: coordinates.lng
+      longitude: coordinates.lon
     };
 
     axios.post('/api/events', event).then((res) => {
