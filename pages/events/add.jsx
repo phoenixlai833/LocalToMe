@@ -146,7 +146,7 @@ export default function NewEvent({ eventList, eventCategories }) {
         <p>Description</p>
         <textarea onChange={handleChangeEventDescription} placeholder="Tell us about your event"></textarea>
         {eventCategories.map((c) => (
-          <button onClick={handleChangeEventCategory}>{c.eventCategory}</button>
+          <button key={c.id} id={c.id} onClick={handleChangeEventCategory}>{c.eventCategory}</button>
         ))}
         <button>Submit</button>
       </form>
