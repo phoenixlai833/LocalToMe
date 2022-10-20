@@ -8,10 +8,10 @@ import FoodBankMapPin from "../components/FoodBankMapPin";
 import { getEvents } from "../server/database";
 // import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 // import Geocoder from "react-map-gl-geocoder";
-// import 'react-map-gl-directions/dist/mapbox-gl-directions.css';
+// import 'react-map-gl-directions/dist/mapbox-gl-directions.css';s
 // import Directions from 'react-map-gl-directions';
 
-const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_REACT_APP_MAPBOX_TOKEN; // Set your mapbox token here
+// const MAPBOX_TOKEN ="pk.eyJ1IjoicGhvZW5peGxhaTgzMyIsImEiOiJjbDh2eWpjY2EwOHI5M3Zxb2J1a2Fnb2VkIn0.24SJ2r53reCu3akmdTHUXA"  ; // Set your mapbox token here
 
 export default function FoodBankMap({ foodBanksList, eventList }) {
 

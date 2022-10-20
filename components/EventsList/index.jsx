@@ -1,13 +1,19 @@
 import React from "react";
 import styles from "./EventsList.module.css";
 import Link from "next/link";
+import {EventHeader} from "../EventPost/EventPostComp";
+import EventPost from "../EventPost/EventPostComp";
+
 
 export default function EventsList({ eventList }) {
 
 
     return (
         <div>
-            <h2 className={styles.category}>Recent Events</h2>
+            {/* <EventHeader>Recent Events</EventHeader> */}
+            <EventPost/>
+
+   <h2 className={styles.category}>Recent Events</h2>
 
             {eventList.map((event) => (
                 < div key={event.id} className={styles.eventBlock} >

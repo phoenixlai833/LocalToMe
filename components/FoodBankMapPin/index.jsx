@@ -83,7 +83,7 @@ export default function FoodBankMapPin({ foodBanksList }) {
                         </p>
                         <p>
                             <b>Description:</b>
-                            {selectedFoodbank.description.slice(0, 45)}
+                            {selectedFoodbank.description && selectedFoodbank.description.slice(0, 45)}
                             <span className={styles.readmore}>
                                 <Link href={`/foodBank/${selectedFoodbank.id}`}>
                                     ...Read More

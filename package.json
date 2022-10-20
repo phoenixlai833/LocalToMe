@@ -23,7 +23,9 @@
     "react-instantsearch-hooks-web": "^6.36.0",
     "react-map-gl": "^7.0.19",
     "react-map-gl-geocoder": "^2.2.0",
-    "storybook-addon-next": "^1.6.9"
+    "storybook": "^6.5.12",
+    "storybook-addon-next": "^1.6.9",
+    "styled-components": "^5.3.6"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
