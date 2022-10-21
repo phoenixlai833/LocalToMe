@@ -10,24 +10,24 @@ export default function FoodBank({ data }) {
         // console.log(data)
         return (
             <>
-                <img width="100" height="100" src={d.foodBank_Image} alt={d.program_name} />
+                <img width="100" height="100" src={d.foodBank_Image.stringValue} alt={d.program_name.stringValue} />
 
-                < h1 > {d.program_name}</ h1 >
-                {d.organization_name && (<h2>Organization Name: {d.organization_name}</h2>)}
-                {d.program_population_served && (<h3>Population Served: {d.program_population_served}</h3>)}
-                {d.wheelchair_accessible && (<p>Wheelchair Acessible: {d.wheelchair_accessible}</p>)}
-                {d.signup_required && (<h3>Signup Required: {d.signup_required}</h3>)}
-                {d.requires_referral && (<p>requiresReferral: {d.requires_referral}</p>)}
-                {d.signup_email && (<p>signupEmail: {d.signup_email}</p>)}
-                {d.location_address && (<h3>locationAddress: {d.location_address}</h3>)}
-                {d.local_areas && (<p>localAreas: {d.local_areas}</p>)}
-                {d.delivery_available && (<p>deliveryAvailable: {d.delivery_available}</p>)}
-                {d.takeout_available && (<p>takeoutAvailable: {d.takeout_available}</p>)}
-                {d.hamper_cost && (<p>hamperCost: {d.hamper_cost}</p>)}
-                {d.provides_hampers && (<p>providesHampers: {d.provides_hampers}</p>)}
-                {d.provides_meals && (<p>providesMeals: {d.provides_meals}</p>)}
-                {d.description && (<><h3>Description:</h3><p>{d.description}</p></>)}
-                {d.last_updated_date && (<p>lastUpdatedDate: {d.last_updated_date}</p>)}
+                < h1 > {d.program_name.stringValue}</ h1 >
+                {d.organization_name.stringValue && (<h2>Organization Name: {d.organization_name.stringValue}</h2>)}
+                {d.program_population_served && (<h3>Population Served: {d.program_population_served.stringValue}</h3>)}
+                {d.wheelchair_accessible && (<p>Wheelchair Acessible: {d.wheelchair_accessible.stringValue}</p>)}
+                {d.signup_required && (<h3>Signup Required: {d.signup_required.stringValue}</h3>)}
+                {d.requires_referral && (<p>requiresReferral: {d.requires_referral.stringValue}</p>)}
+                {d.signup_email && (<p>signupEmail: {d.signup_email.stringValue}</p>)}
+                {d.location_address && (<h3>locationAddress: {d.location_address.stringValue}</h3>)}
+                {d.local_areas && (<p>localAreas: {d.local_areas.stringValue}</p>)}
+                {d.delivery_available && (<p>deliveryAvailable: {d.delivery_available.stringValue}</p>)}
+                {d.takeout_available && (<p>takeoutAvailable: {d.takeout_available.stringValue}</p>)}
+                {d.hamper_cost && (<p>hamperCost: {d.hamper_cost.stringValue}</p>)}
+                {d.provides_hampers && (<p>providesHampers: {d.provides_hampers.stringValue}</p>)}
+                {d.provides_meals && (<p>providesMeals: {d.provides_meals.stringValue}</p>)}
+                {d.description && (<><h3>Description:</h3><p>{d.description.stringValue}</p></>)}
+                {d.last_updated_date && (<p>lastUpdatedDate: {d.last_updated_date.stringValue}</p>)}
             </>
         )
     })

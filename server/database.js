@@ -1,6 +1,5 @@
 import { db } from '../firebase/clientApp';
 import { collection, getDocs, getDoc, addDoc, deleteDoc, doc } from 'firebase/firestore';
-// import addEvent from '../pages/events/add';
 
 // food banks
 export async function getFoodBanks() {
@@ -9,7 +8,7 @@ export async function getFoodBanks() {
   const foodBanks = foodBankSnap.docs.map((doc) => {
     let id = doc.id;
     let data = doc.data();
-    return { id, ...data };
+    return { objectID: id, ...data };
   });
   return foodBanks;
 }
