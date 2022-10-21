@@ -6,5 +6,5 @@ export default {
 
 }
 
-export const Default = (args) => <DeletePopup />
+export const Default = (args) => <DeletePopup {...args} />
 export const Error = (args) => <DeletePopup />

@@ -104,7 +104,13 @@ export default function EventMapPin({ events }) {
                                 </Link>
                             </span>
                         </p>
-                        <button onClick={() => { }}>Get Direction</button>
+
+                        <button>
+                            <Link href={`https://google.com/maps/dir/?api=1&destination=${selectedEvent.eventLocation}`}>
+                                <a >Get Direction</a>
+                            </Link>
+                        </button>
+
 
                     </div>
 

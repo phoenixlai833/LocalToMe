@@ -90,7 +90,11 @@ export default function FoodBankMapPin({ foodBanksList }) {
                                 </Link>
                             </span>
                         </p>
-                        <button onClick={() => { }}>Get Direction</button>
+                        <button>
+                            <Link href={`https://google.com/maps/dir/?api=1&destination=${selectedFoodbank.location_address}`}>
+                                <a >Get Direction</a>
+                            </Link>
+                        </button>
 
                     </div>
 

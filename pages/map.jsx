@@ -1,15 +1,20 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import ReactMapGL, { GeolocateControl, NavigationControl, ScaleControl, Source, Layer, useMap } from "react-map-gl";
-import "mapbox-gl/dist/mapbox-gl.css";
+import Script from 'next/script'
 import { getFoodBanks } from "../server/database";
 import MapSlideUp from '../components/MapSlideUp';
 import EventMapPin from "../components/EventMapPin";
 import FoodBankMapPin from "../components/FoodBankMapPin";
 import { getEvents } from "../server/database";
+import { setupMapShit } from "../mapShit";
+import "mapbox-gl/dist/mapbox-gl.css";
 // import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 // import Geocoder from "react-map-gl-geocoder";
 // import 'react-map-gl-directions/dist/mapbox-gl-directions.css';
 // import Directions from 'react-map-gl-directions';
+
+// https://google.com/maps/dir/?api=1&origin=bcit&destination=
+
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_REACT_APP_MAPBOX_TOKEN; // Set your mapbox token here
 
@@ -21,17 +26,51 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
         longitude: -123.1207,
         width: "100vw",
         height: "100vh",
-        zoom: 12,
+        zoom: 11,
     });
 
     const [userLocation, setUserLocation] = useState({});
-    const mapRef = useRef();
+    // const mapRef = useRef();
+    // const mapSetup = useRef(false);
+
+    // function setupMap() {
+    //     if (mapSetup.current && mapRef) return;
+    //     mapSetup.current = true;
+    //     const map = mapRef.current.getMap();
+    //     setupMapShit({ map })
+    // map.addControl(new GeolocateControl({
+    //     positionOptions: {
+    //         enableHighAccuracy: true
+    //     },
+    //     trackUserLocation: true
+    // }));
+    // map.addControl(new NavigationControl());
+    // map.addControl(new ScaleControl());
+
+
+
+    // const setMap = useCallback((map) => {
+    //     mapRef.current = map;
+    //     if (!map) return;
+    //     setupMap();
+
+    // mapRef.current?.getMap()
+
+    // map.getMap().addControl(
+    //     new MapboxDirections({
+    //         accessToken: MAPBOX_TOKEN
+    //     }),
+    //     'top-right'
+    // );
+    // }, [])
 
     return (
-        <div>
+        <>
+            {/* <Script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js" /> */}
+
             <div className="mapboxgl-canvas">
                 <ReactMapGL
-                    ref={mapRef}
+                    // ref={setMap}
                     key="map"
                     initialViewState={viewport}
                     mapboxAccessToken={MAPBOX_TOKEN}
@@ -59,18 +98,11 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
                     <EventMapPin events={eventList} />
                     <FoodBankMapPin foodBanksList={foodBanksList} />
 
-                    {/* <Geocoder
-            mapRef={mapRef}
-            onViewportChange={(viewport) => {
-              setViewport(viewport);
-            }}
-            mapboxApiAccessToken={MAPBOX_TOKEN}
-            position="top-left"
-          /> */}
                 </ReactMapGL >
             </div>
             <div className="animate__slideInLeft"><MapSlideUp foodBanks={foodBanksList} /></div>
-        </div>
+
+        </>
     );
 }
 

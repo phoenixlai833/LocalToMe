@@ -1,6 +1,7 @@
 
 import React from "react";
 import styles from './SingleEvent.module.css';
+import Link from 'next/link';
 
 
 export default function SingleEvent({ event }) {
@@ -43,7 +44,12 @@ export default function SingleEvent({ event }) {
                 <button className={styles.btn}></button>
             </div>
 
-            <button className={styles.getDirections}>Get Direction</button>
+            <button className={styles.getDirections}>
+                <Link href={`https://google.com/maps/dir/?api=1&destination=${event.eventLocation.stringValue}`}>
+                    <a >Get Direction</a>
+                </Link>
+            </button>
+
         </div>
 
 

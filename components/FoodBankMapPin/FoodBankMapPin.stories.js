@@ -7,5 +7,6 @@ export default {
 
 
 
+
 export const Default = () => <FoodBankMapPin />
 export const Error = () => <FoodBankMapPin />
