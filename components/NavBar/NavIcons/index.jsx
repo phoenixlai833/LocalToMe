@@ -13,7 +13,7 @@ export default function NavbarIcons({
    return <div>
          <Icon>
          {!active && <NavIcon src={"/NavbarIcons/" + icon + ".svg"}  />}
-         {active && <NavIcon src={"/NavbarIcons/" + icon + "active.svg"}  />}
+         {active && <NavIcon src={"/NavbarIcons/" + icon + "Active.svg"}  />}
       </Icon>
    </div>
 }
