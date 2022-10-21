@@ -41,7 +41,7 @@ export default function FoodBankMapPin({ foodBanksList }) {
                             setSelectedFoodbank(item);
                         }}
                     >
-                        <img src="./foodBankPin.png" alt="foodbank" />
+                        <img src="./Food_Bank_Map_Pin.svg" alt="foodbank pin" />
                     </button>
                 </Marker>
             )

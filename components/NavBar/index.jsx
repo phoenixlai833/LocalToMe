@@ -38,19 +38,19 @@ export default function LabelBottomNavigation({
 }) {
   const r = useRouter();
   // var [value, setState] = useState(0);
-  const onHome=()=>{
+  const onHome = () => {
     r.push("/");
   }
-  const onCommunity=()=>{
-    r.push("/events");
+  const onCommunity = () => {
+    r.push("/community");
   }
-  const onMap=()=>{
+  const onMap = () => {
     r.push("/map");
   }
-  const onFavourites=()=>{
+  const onFavourites = () => {
     r.push("/favourites");
   }
-  const onProfile=()=>{
+  const onProfile = () => {
     r.push('/profile')
   }
   return (
@@ -65,10 +65,10 @@ export default function LabelBottomNavigation({
         }}
       >
         {value === 0 ? (<NavBarAction label="Home" icon={<NavbarIcons icon="Home" active={true} />} onClick={onHome} />) : (<NavBarAction label="Home" icon={<NavbarIcons icon="Home" />} onClick={onHome} />)}
-        {value === 1 ? (<NavBarAction label="Community" icon={<NavbarIcons icon="Community" active={true}/>} onClick={onCommunity}/>): (<NavBarAction label="Community" icon={<NavbarIcons icon="Community" />} onClick={onCommunity}/>)}
-        {value === 2 ? (<NavBarAction label="Map" icon={<NavbarIcons icon="Map" active={true}/>} onClick={onMap}/>): (<NavBarAction label="Map" icon={<NavbarIcons icon="Map" />} onClick={onMap}/>)}
-        {value === 3 ? (<NavBarAction label="Favourites" icon={<NavbarIcons icon="Favourite" active={true}/>} onClick={onFavourites}/>): (<NavBarAction label="Favourite" icon={<NavbarIcons icon="Favourite" />} onClick={onFavourites}/>)}
-        {value === 4 ? (<NavBarAction label="Profile" icon={<NavbarIcons icon="Profile" active={true}/>} onClick={onProfile}/>): (<NavBarAction label="Profile" icon={<NavbarIcons icon="Profile" />} onClick={onProfile}/>)}
+        {value === 1 ? (<NavBarAction label="Community" icon={<NavbarIcons icon="Community" active={true} />} onClick={onCommunity} />) : (<NavBarAction label="Community" icon={<NavbarIcons icon="Community" />} onClick={onCommunity} />)}
+        {value === 2 ? (<NavBarAction label="Map" icon={<NavbarIcons icon="Map" active={true} />} onClick={onMap} />) : (<NavBarAction label="Map" icon={<NavbarIcons icon="Map" />} onClick={onMap} />)}
+        {value === 3 ? (<NavBarAction label="Favourites" icon={<NavbarIcons icon="Favourite" active={true} />} onClick={onFavourites} />) : (<NavBarAction label="Favourite" icon={<NavbarIcons icon="Favourite" />} onClick={onFavourites} />)}
+        {value === 4 ? (<NavBarAction label="Profile" icon={<NavbarIcons icon="Profile" active={true} />} onClick={onProfile} />) : (<NavBarAction label="Profile" icon={<NavbarIcons icon="Profile" />} onClick={onProfile} />)}
 
       </NavBar>
     </ThemeProvider>
