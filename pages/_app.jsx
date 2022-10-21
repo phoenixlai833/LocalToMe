@@ -1,6 +1,5 @@
 import '../styles/globals.css'
 import Head from 'next/head'
-import { FlexBox, Container, Wrapper, Colour } from '../styles/globals.jsx'
 import 'react-time-picker/dist/TimePicker.css'
 import 'react-clock/dist/Clock.css'
 
