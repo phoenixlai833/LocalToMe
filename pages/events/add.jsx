@@ -8,7 +8,7 @@ import {
 } from "../../server/database";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { collection, getDocs, addDoc } from "firebase/firestore";
-import Event from "../../components/Event";
+// import Event from "../../components/Event";
 // import Image from `next/image`;
 import DeletePopup from "../../components/DeletePopup";
 import DatePicker from "react-datepicker";
@@ -46,7 +46,7 @@ export default function NewEvent({ eventList, eventCategories }) {
     e.preventDefault();
     const [startHour, startMinute] = startTime.split(":");
     startDate.setHours(startHour, startMinute);
-    
+
     const [endHour, endMinute] = endTime.split(":");
     endDate.setHours(endHour, endMinute);
 
@@ -62,7 +62,7 @@ export default function NewEvent({ eventList, eventCategories }) {
     };
 
     axios.post('/api/events', event).then((res) => {
-      console.log('posted successfully',res.data)
+      console.log('posted successfully', res.data)
     })
   };
 
@@ -122,7 +122,7 @@ export default function NewEvent({ eventList, eventCategories }) {
           placeholder="Event name"
           onChange={handleChangeEventName}
         />
-        <input type="text" name="event-creator" placeholder="Host/Organizer" value="Editing this does nothing, creatorId will always be 1"/>
+        <input type="text" name="event-creator" placeholder="Host/Organizer" value="Editing this does nothing, creatorId will always be 1" />
         <p>Location of your Event</p>
         <input value={eventLocation}></input>
         <p>Date & Time of your Event</p>
