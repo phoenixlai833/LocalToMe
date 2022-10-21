@@ -34,17 +34,25 @@ export default function Home({ foodBanksList }) {
       <h1>LocalToMe</h1>
 
       <Wrapper direction="column">
-        <h2>HOMEPAGE</h2>
+        <h2>Goodmorning</h2>
+        <h3>Slayerina</h3>
         <p className="map-link">
-          Checkout <Link key="link-to-map" href="/map">the map!</Link>
+          <Link key="link-to-map" href="/map">map link</Link>
         </p>
+        <p>Upcoming Events</p>
+        <ul style={{ display: "flex" }}>
+          <li>Event</li>
+          <li>Event</li>
+          <li>Event</li>
+          <li>Event</li>
+        </ul>
         <p>
-          <Link key="link-to-events" href="/events">Checkout the Events</Link>
+          <Link key="link-to-events" href="/community">community link</Link>
         </p>
-      <FloatingActionButton/>
-      <NavBar value={navValue} onChange={(event, newValue) => {
-                    setNavValue(newValue);
-                }} />
+        <FloatingActionButton />
+        <NavBar value={navValue} onChange={(event, newValue) => {
+          setNavValue(newValue);
+        }} />
       </Wrapper>
     </div>
   );
