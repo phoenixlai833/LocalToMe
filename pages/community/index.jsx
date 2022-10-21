@@ -6,8 +6,8 @@ import algoliasearch from "algoliasearch/lite";
 import { InstantSearch, SearchBox } from "react-instantsearch-hooks-web";
 import { getEvents } from "../../server/database";
 const searchClient = algoliasearch(
-  "UOV96BHKDZ",
-  "3bb3bff1b3db5e4bf329f4a0de0b3e3e"
+  process.env.NEXT_PUBLIC_ALGOLIA_CLIENT_ID,
+  process.env.NEXT_PUBLIC_ALGOLIA_API_KEY
 );
 
 export default function Community() {
@@ -57,14 +57,4 @@ export default function Community() {
       {tabContents[tab].component}
     </InstantSearch>
   )
-}
-
-export async function getServerSideProps(context) {
-  const eventData = await getEvents();
-  const eventList = JSON.parse(JSON.stringify(eventData));
-  console.log(JSON.stringify(eventList))
-
-  return {
-    props: {}, // will be passed to the page component as props
-  };
 }
