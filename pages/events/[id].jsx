@@ -11,9 +11,7 @@ export default function Event({ event }) {
 
 export async function getServerSideProps({ params }) {
     const req = await getEvent(params.id);
-    const data = JSON.parse(JSON.stringify(req));
-    const event = data._document.data.value.mapValue.fields;
-    console.log("dddddsdwdwdw", data._document.data.value.mapValue.fields);
+    const event = JSON.parse(JSON.stringify(req));
     return {
         props: { event },
     }
