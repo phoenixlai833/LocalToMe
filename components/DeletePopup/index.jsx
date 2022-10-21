@@ -8,10 +8,6 @@ export default function DeletePopup({ singleEvent }) {
     const [event, setEvent] = useState();
     console.log(singleEvent);
 
-    // async function deleteTheEvent(eventId) {
-    //     deleteEvent(eventId);
-    // }
-
     const handleDelete = (singleEventId) => async (e) => {
         {
             e.preventDefault();
@@ -19,16 +15,6 @@ export default function DeletePopup({ singleEvent }) {
             deleteEvent(singleEventId);
         }
     };
-
-
-    // useEffect(() => {
-    //     const fetchEvent = async (eventId) => {
-    //         const eventInfo = await getEvent(eventId)
-    //         // console.log(eventInfo);
-    //         setEvent(eventInfo);
-    //     };
-    //     fetchEvent();
-    // }, []);
 
     const singleEventComponent = (
         <div>
