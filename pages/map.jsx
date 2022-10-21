@@ -8,18 +8,16 @@ import FoodBankMapPin from "../components/FoodBankMapPin";
 import { getEvents } from "../server/database";
 import { setupMapShit } from "../mapShit";
 import "mapbox-gl/dist/mapbox-gl.css";
-// import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
-// import Geocoder from "react-map-gl-geocoder";
-// import 'react-map-gl-directions/dist/mapbox-gl-directions.css';
-// import Directions from 'react-map-gl-directions';
+import NavBar from '../components/NavBar';
 
-// https://google.com/maps/dir/?api=1&origin=bcit&destination=
 
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_REACT_APP_MAPBOX_TOKEN; // Set your mapbox token here
 
 export default function FoodBankMap({ foodBanksList, eventList }) {
 
+    const [navValue, setNavValue] = useState(2);
+    const [userLocation, setUserLocation] = useState({});
 
     const [viewport, setViewport] = useState({
         latitude: 49.2827,
@@ -29,45 +27,9 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
         zoom: 11,
     });
 
-    const [userLocation, setUserLocation] = useState({});
-    // const mapRef = useRef();
-    // const mapSetup = useRef(false);
-
-    // function setupMap() {
-    //     if (mapSetup.current && mapRef) return;
-    //     mapSetup.current = true;
-    //     const map = mapRef.current.getMap();
-    //     setupMapShit({ map })
-    // map.addControl(new GeolocateControl({
-    //     positionOptions: {
-    //         enableHighAccuracy: true
-    //     },
-    //     trackUserLocation: true
-    // }));
-    // map.addControl(new NavigationControl());
-    // map.addControl(new ScaleControl());
-
-
-
-    // const setMap = useCallback((map) => {
-    //     mapRef.current = map;
-    //     if (!map) return;
-    //     setupMap();
-
-    // mapRef.current?.getMap()
-
-    // map.getMap().addControl(
-    //     new MapboxDirections({
-    //         accessToken: MAPBOX_TOKEN
-    //     }),
-    //     'top-right'
-    // );
-    // }, [])
 
     return (
-        <>
-            {/* <Script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js" /> */}
-
+        <div>
             <div className="mapboxgl-canvas">
                 <ReactMapGL
                     // ref={setMap}
@@ -101,8 +63,10 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
                 </ReactMapGL >
             </div>
             <div className="animate__slideInLeft"><MapSlideUp foodBanks={foodBanksList} /></div>
-
-        </>
+            <NavBar value={navValue} onChange={(event, newValue) => {
+                setNavValue(newValue);
+            }} />
+        </div>
     );
 }
 

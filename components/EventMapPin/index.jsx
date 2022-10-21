@@ -54,7 +54,7 @@ export default function EventMapPin({ events }) {
                             setSelectedEvent(event);
                         }}
                     >
-                        <img src="./EventMapPin.png" alt="foodbank" />
+                        <img src="./eventPin.svg" alt="Event Pin" />
                     </button>
 
                 </Marker>

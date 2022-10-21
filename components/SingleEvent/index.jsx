@@ -6,27 +6,24 @@ import Link from 'next/link';
 
 export default function SingleEvent({ event }) {
 
-    const time = event.eventDate.timestampValue.seconds
+    const time = event.eventDate.seconds
     const date = new Date(time * 1000)
     const eventTime = date.toLocaleString().split(',')[1]
-    const mothString = date.toLocaleString("default", { month: "long" })
-    const day = date.toLocaleString().split(',')[0].split('/')[1]
-    const year = date.toLocaleString().split(',')[0].split('/')[2]
-    const eventDate = `${mothString} ${day}, ${year}`
-
+    const eventDate = date.toLocaleString("default", { month: "long", day: "2-digit", year: "numeric" })
+    // console.log('test', monthString)
     return (
         <div>
 
 
-            <h3 className={styles.header}>{event.eventName.stringValue}</h3>
+            <h3 className={styles.header}>{event.eventName}</h3>
 
             <div className={styles.eventImageBlock} >
-                <img src={event.eventImage.stringValue} alt={event.eventName.stringValue} className={styles.eventImage} />
+                <img src={event.eventImage} alt={event.eventName} className={styles.eventImage} />
             </div>
 
             <div className={styles.eventInfoBlock}>
-                <div className={styles.eventInfoBlockLine}><img src="../locationIcons.png" alt="eventLocation" className={styles.infoIcon} />{event.eventLocation.stringValue}</div>
-                <div className={styles.eventInfoBlockLine}><img src="../phoneIcon.png" alt="phoneNumber" className={styles.infoIcon} />{event.eventContactPhone.stringValue}</div>
+                <div className={styles.eventInfoBlockLine}><img src="../locationIcons.png" alt="eventLocation" className={styles.infoIcon} />{event.eventLocation}</div>
+                <div className={styles.eventInfoBlockLine}><img src="../phoneIcon.png" alt="phoneNumber" className={styles.infoIcon} />{event.eventContactPhone}</div>
                 <div className={styles.eventInfoBlockLine}><img src="../timeIcons.png" alt="eventTime" className={styles.infoIcon} />{eventDate},{eventTime}</div>
             </div>
 
@@ -36,7 +33,7 @@ export default function SingleEvent({ event }) {
 
             <div className={styles.eventDescription}>
                 <b>About:</b>
-                <p>{event.eventContent.stringValue}</p>
+                <p>{event.eventContent}</p>
             </div>
 
             <div className={styles.btns}>
