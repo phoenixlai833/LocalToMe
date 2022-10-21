@@ -6,11 +6,13 @@ import { Colours, Theme } from '../../styles/globals';
 import { ThemeProvider } from '@mui/material';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import Icon from '@mui/material';
 // Placeholder Icons
 import HomeIcon from '@mui/icons-material/Home';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PersonIcon from '@mui/icons-material/Person';
+import NavbarIcons from './NavIcons';
 
 const NavBar = styled(BottomNavigation)`
 width:100vw;
@@ -25,7 +27,6 @@ max-width:none;
 &:hover{
   color:${Colours.primary};
 }
-
 `
 export default function LabelBottomNavigation({
   value = 0,
@@ -41,7 +42,7 @@ export default function LabelBottomNavigation({
     r.push("/");
   }
   const onCommunity=()=>{
-    r.push("/");
+    r.push("/events");
   }
   const onMap=()=>{
     r.push("/map");
@@ -57,16 +58,18 @@ export default function LabelBottomNavigation({
       <NavBar
         showLabels
         value={value}
+        active={value}
         onChange={(event, newValue) => {
           // console.log(value)
           value = newValue;
         }}
       >
-        <NavBarAction label="Home" icon={<HomeIcon />} onClick={onHome}/>
-        <NavBarAction label="Community" icon={<FavoriteIcon />} onClick={onCommunity}/>
-        <NavBarAction label="Map" icon={<LocationOnIcon />} onClick={onMap}/>
-        <NavBarAction label="Favourites" icon={<FavoriteIcon />} onClick={onFavourites}/>
-        <NavBarAction label="Profile" icon={<PersonIcon />} onClick={onProfile}/>
+        {value === 0 ? (<NavBarAction label="Home" icon={<NavbarIcons icon="Home" active={true} />} onClick={onHome} />) : (<NavBarAction label="Home" icon={<NavbarIcons icon="Home" />} onClick={onHome} />)}
+        {value === 1 ? (<NavBarAction label="Community" icon={<NavbarIcons icon="Community" active={true}/>} onClick={onCommunity}/>): (<NavBarAction label="Community" icon={<NavbarIcons icon="Community" />} onClick={onCommunity}/>)}
+        {value === 2 ? (<NavBarAction label="Map" icon={<NavbarIcons icon="Map" active={true}/>} onClick={onMap}/>): (<NavBarAction label="Map" icon={<NavbarIcons icon="Map" />} onClick={onMap}/>)}
+        {value === 3 ? (<NavBarAction label="Favourites" icon={<NavbarIcons icon="Favourite" active={true}/>} onClick={onFavourites}/>): (<NavBarAction label="Favourite" icon={<NavbarIcons icon="Favourite" />} onClick={onFavourites}/>)}
+        {value === 4 ? (<NavBarAction label="Profile" icon={<NavbarIcons icon="Profile" active={true}/>} onClick={onProfile}/>): (<NavBarAction label="Profile" icon={<NavbarIcons icon="Profile" />} onClick={onProfile}/>)}
+
       </NavBar>
     </ThemeProvider>
   );

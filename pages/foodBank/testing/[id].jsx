@@ -18,7 +18,7 @@ export default function FoodBank({ data }) {
 
     const [onActive, setActiveState] = useState(false);
     const [onExpand, setExpand] = useState(false);
-    const [value, setValue] = useState(2);
+    const [navValue, setNavValue] = useState(2);
     // boolean no shopping up yet oops
     const singleFBComponent = data.map((d) => {
         console.log(data);
@@ -92,8 +92,8 @@ export default function FoodBank({ data }) {
                 <p>{data.description}</p>
                 <p>lastUpdatedDate:{data.lastUpdatedDate}</p> */}
 
-                <NavBar value={value} onChange={(event, newValue) => {
-                    setValue(newValue);
+                <NavBar value={navValue} onChange={(event, newValue) => {
+                    setNavValue(newValue);
                 }} />
             </Wrapper>
         </div>
