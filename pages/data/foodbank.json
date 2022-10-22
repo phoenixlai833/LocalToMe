@@ -1,0 +1,734 @@
+[
+    {
+        "datasetid": "free-and-low-cost-food-programs",
+        "recordid": "e714c3b0ab7b6bb03b29a72ff54b0c6a4c7ec153",
+        "fields": {
+            "latitude": 49.28329,
+            "provides_meals": "True",
+            "program_name": "A Loving Spoonful - Meals and groceries",
+            "local_areas": "Grandview-Woodland",
+            "longitude": -123.07419,
+            "description": "Eligible individuals and families can sign up by calling (604) 682-6325, or be referred by a Doctor, Nurse, Dietitian, Case Worker or Social Worker. To refer an individual or family, fax referrals to 604-683-6327 or call (604) 682-6325 with any questions.",
+            "provides_hampers": "True",
+            "program_status": "Open",
+            "location_address": "1449 Powell St, Vancouver, BC",
+            "program_population_served": "individuals and families living with HIV.",
+            "hamper_cost": "Free",
+            "wheelchair_accessible": "Unknown",
+            "delivery_available": "Yes",
+            "takeout_available": "Unknown",
+            "signup_required": "No",
+            "requires_referral": "No",
+            "organization_name": "Loving Spoonful",
+            "meal_cost": "Free",
+            "last_update_date": "2022-07-21T09:39:01+00:00",
+            "geom": [
+                49.28329,
+                -123.07419
+            ]
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -123.07419,
+                49.28329
+            ]
+        },
+        "record_timestamp": "2022-09-16T12:26:26.744Z"
+    },
+    {
+        "datasetid": "free-and-low-cost-food-programs",
+        "recordid": "f04973128dbd0afa4e3d5d76e935d6bc50b0d80f",
+        "fields": {
+            "latitude": 49.281562,
+            "provides_meals": "False",
+            "program_name": "Aboriginal Friendship Centre -Grocery Hampers",
+            "local_areas": "Grandview-Woodland",
+            "longitude": -123.071999,
+            "description": "An Indigenous-operated program. Delivery services are on a first come, first serve basis with limited availability.",
+            "provides_hampers": "True",
+            "program_status": "Open",
+            "location_address": "1607 E Hastings St, Vancouver, BC",
+            "program_population_served": "Indigenous families with young children",
+            "hamper_cost": "Free",
+            "wheelchair_accessible": "Unknown",
+            "delivery_available": "Yes",
+            "takeout_available": "Unknown",
+            "signup_required": "Yes",
+            "signup_phone_number": "604-251-4844",
+            "signup_email": "recreation@vafcs.org",
+            "requires_referral": "No",
+            "organization_name": "Vancouver Aboriginal Friendship Centre Society",
+            "last_update_date": "2020-12-03T12:44:58+00:00",
+            "geom": [
+                49.281562,
+                -123.071999
+            ]
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -123.071999,
+                49.281562
+            ]
+        },
+        "record_timestamp": "2022-09-16T12:26:26.744Z"
+    },
+    {
+        "datasetid": "free-and-low-cost-food-programs",
+        "recordid": "00659fe8c6d1a6816ec92e5266ab202b6ae34d88",
+        "fields": {
+            "latitude": 49.281562,
+            "provides_meals": "True",
+            "program_name": "Aboriginal Friendship Centre-Elder Meals on Wheels",
+            "local_areas": "Grandview-Woodland",
+            "longitude": -123.071999,
+            "description": "An Indigenous-operated program. Provides a daily meal and one hamper per month. Delivery services are on a first come, first serve basis with limited availability.",
+            "provides_hampers": "True",
+            "program_status": "Open",
+            "location_address": "1607 E Hastings St, Vancouver, BC",
+            "program_population_served": "Indigenous Elders",
+            "hamper_cost": "Free",
+            "wheelchair_accessible": "Unknown",
+            "delivery_available": "Yes",
+            "takeout_available": "Unknown",
+            "signup_required": "Yes",
+            "signup_phone_number": "604-251-4844",
+            "signup_email": "elders@vafcs.org",
+            "requires_referral": "No",
+            "organization_name": "Vancouver Aboriginal Friendship Centre Society",
+            "meal_cost": "Free",
+            "last_update_date": "2021-06-15T10:25:55+00:00",
+            "geom": [
+                49.281562,
+                -123.071999
+            ]
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -123.071999,
+                49.281562
+            ]
+        },
+        "record_timestamp": "2022-09-16T12:26:26.744Z"
+    },
+    {
+        "datasetid": "free-and-low-cost-food-programs",
+        "recordid": "b7c42736c60eea86665fe12a2b0aaba6db481bbd",
+        "fields": {
+            "latitude": 49.281633,
+            "provides_meals": "False",
+            "program_name": "Aboriginal Front Door Society - Food Bank",
+            "local_areas": "Strathcona",
+            "longitude": -123.099581,
+            "description": "Wed 10-11am for AFDS members only. Wed after 11am for the general public.",
+            "provides_hampers": "True",
+            "program_status": "Open",
+            "location_address": "384 Main St, Vancouver, BC",
+            "hamper_cost": "Free",
+            "wheelchair_accessible": "Yes",
+            "delivery_available": "No",
+            "takeout_available": "Unknown",
+            "signup_required": "No",
+            "requires_referral": "No",
+            "organization_name": "Aboriginal Front Door Society",
+            "last_update_date": "2022-08-10T15:45:16+00:00",
+            "geom": [
+                49.281633,
+                -123.099581
+            ]
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -123.099581,
+                49.281633
+            ]
+        },
+        "record_timestamp": "2022-09-16T12:26:26.744Z"
+    },
+    {
+        "datasetid": "free-and-low-cost-food-programs",
+        "recordid": "0fdbe4b2075865aae3e5d99131fa34e9a0dab2c6",
+        "fields": {
+            "latitude": 49.285156,
+            "provides_meals": "False",
+            "program_name": "Aboriginal Mother Centre - Hampers for Elders",
+            "local_areas": "Grandview-Woodland",
+            "longitude": -123.062728,
+            "description": "An Indigenous-operated program.",
+            "provides_hampers": "True",
+            "program_status": "Open",
+            "location_address": "2019 Dundas St, Vancouver, BC",
+            "program_population_served": "Indigenous elders",
+            "hamper_cost": "Free",
+            "wheelchair_accessible": "Yes",
+            "delivery_available": "Yes",
+            "takeout_available": "Yes",
+            "signup_required": "Yes",
+            "signup_email": "operations@aboriginalmothercentre.ca",
+            "requires_referral": "No",
+            "organization_name": "Aboriginal Mother Centre Society",
+            "last_update_date": "2020-12-03T12:44:58+00:00",
+            "geom": [
+                49.285156,
+                -123.062728
+            ]
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -123.062728,
+                49.285156
+            ]
+        },
+        "record_timestamp": "2022-09-16T12:26:26.744Z"
+    },
+    {
+        "datasetid": "free-and-low-cost-food-programs",
+        "recordid": "f5ded43830d20a96fe71592922182c1bf4a6369e",
+        "fields": {
+            "latitude": 49.285156,
+            "provides_meals": "True",
+            "program_name": "Aboriginal Mother Centre Society - DTES Meals",
+            "local_areas": "Grandview-Woodland",
+            "longitude": -123.062728,
+            "description": "An Indigenous -operated program. Meals handed out M-F from 3-5pm on the street from Columbia to Gore/Victory square.",
+            "provides_hampers": "False",
+            "program_status": "Open",
+            "location_address": "2019 Dundas St, Vancouver, BC",
+            "wheelchair_accessible": "Yes",
+            "delivery_available": "No",
+            "takeout_available": "Yes",
+            "signup_required": "Unknown",
+            "requires_referral": "No",
+            "organization_name": "Aboriginal Mother Centre Society",
+            "meal_cost": "Free",
+            "last_update_date": "2020-12-03T12:44:58+00:00",
+            "geom": [
+                49.285156,
+                -123.062728
+            ]
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -123.062728,
+                49.285156
+            ]
+        },
+        "record_timestamp": "2022-09-16T12:26:26.744Z"
+    },
+    {
+        "datasetid": "free-and-low-cost-food-programs",
+        "recordid": "d255c1e0a61e28d19c31dd5781f9a458fece0a7c",
+        "fields": {
+            "latitude": 49.277532,
+            "provides_meals": "False",
+            "program_name": "AIDS Vancouver - Supplementary Grocery Program",
+            "local_areas": "Downtown",
+            "longitude": -123.123682,
+            "description": "Patrons can select a variety of groceries including protein, cereal, milk, eggs, produce, as well as personal care items. Pickup a grocery bag between 1-4pm on scheduled days. See current schedule at https://www.aidsvancouver.org/the-grocery-program",
+            "provides_hampers": "True",
+            "program_status": "Open",
+            "location_address": "1101 Seymour St, Vancouver, BC",
+            "program_population_served": "registered clients of AIDS Vancouver living on a limited income",
+            "hamper_cost": "Free",
+            "wheelchair_accessible": "Unknown",
+            "delivery_available": "No",
+            "takeout_available": "Unknown",
+            "signup_required": "Yes",
+            "signup_phone_number": "604-893-2201",
+            "signup_email": "contact@aidsvancouver.org",
+            "requires_referral": "No",
+            "organization_name": "AIDS Vancouver",
+            "last_update_date": "2022-08-09T10:38:52+00:00",
+            "geom": [
+                49.277532,
+                -123.123682
+            ]
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -123.123682,
+                49.277532
+            ]
+        },
+        "record_timestamp": "2022-09-16T12:26:26.744Z"
+    },
+    {
+        "datasetid": "free-and-low-cost-food-programs",
+        "recordid": "8e1509e4344eca6bdfe1a3c8b4ecf8549b8b75f6",
+        "fields": {
+            "latitude": 49.258422,
+            "provides_meals": "True",
+            "program_name": "Care BC - Chinese Meals on Wheels",
+            "address_extra_info": "204",
+            "local_areas": "Fairview",
+            "longitude": -123.139174,
+            "description": "Chinese meals delivered weekdays 11am-1pm by Chinese speaking volunteers. Must be home to receive the meals. More info at https://www.carebc.ca/chinese-mow-vancouverrichmond.html",
+            "provides_hampers": "False",
+            "program_status": "Open",
+            "location_address": "3077 Granville St, Vancouver, BC",
+            "program_population_served": "home-bound people including seniors, caregivers, people with illness or injury.",
+            "wheelchair_accessible": "Unknown",
+            "delivery_available": "Yes",
+            "takeout_available": "Unknown",
+            "signup_required": "Yes",
+            "signup_phone_number": "604-733-6615",
+            "signup_email": "cmow@carebc.ca",
+            "requires_referral": "No",
+            "organization_name": "Health and Home Care Society of BC (aka Care BC)",
+            "meal_cost": "$9.00",
+            "last_update_date": "2022-08-10T15:56:31+00:00",
+            "geom": [
+                49.258422,
+                -123.139174
+            ]
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -123.139174,
+                49.258422
+            ]
+        },
+        "record_timestamp": "2022-09-16T12:26:26.744Z"
+    },
+    {
+        "datasetid": "free-and-low-cost-food-programs",
+        "recordid": "bb4fc72243472e6cab78df4044d24e5135fc56f1",
+        "fields": {
+            "latitude": 49.258422,
+            "provides_meals": "True",
+            "program_name": "Care BC - Western Meals on Wheels",
+            "address_extra_info": "204",
+            "local_areas": "Fairview",
+            "longitude": -123.139174,
+            "description": "Western meals delivered weekdays 11am-1pm, priced from $5-9. Must be home to receive the meals. More info at https://www.carebc.ca/western-mow-vancouverrichmond.html",
+            "provides_hampers": "False",
+            "program_status": "Open",
+            "location_address": "3077 Granville St, Vancouver, BC",
+            "program_population_served": "home-bound people including seniors, caregivers, people with illness or injury.",
+            "wheelchair_accessible": "Unknown",
+            "delivery_available": "Yes",
+            "takeout_available": "Unknown",
+            "signup_required": "Yes",
+            "signup_phone_number": "604-732-7638",
+            "signup_email": "wmow@carebc.ca",
+            "requires_referral": "No",
+            "organization_name": "Health and Home Care Society of BC (aka Care BC)",
+            "meal_cost": "Low cost",
+            "last_update_date": "2022-08-10T15:56:23+00:00",
+            "geom": [
+                49.258422,
+                -123.139174
+            ]
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -123.139174,
+                49.258422
+            ]
+        },
+        "record_timestamp": "2022-09-16T12:26:26.744Z"
+    },
+    {
+        "datasetid": "free-and-low-cost-food-programs",
+        "recordid": "323f9c9d7312a1b43a3dca73d37ed7b928729f3b",
+        "fields": {
+            "latitude": 49.28106,
+            "provides_meals": "True",
+            "program_name": "Carnegie Community Centre - Cafeteria",
+            "local_areas": "Downtown",
+            "longitude": -123.100121,
+            "description": "Meals served daily. Breakfast ($2.25) at 9-11am, Lunch ($2.75) at 12-4pm, Dinner ($3.50) at 5-8pm.",
+            "provides_hampers": "False",
+            "program_status": "Open",
+            "location_address": "401 Main St, Vancouver, BC",
+            "wheelchair_accessible": "Yes",
+            "delivery_available": "No",
+            "takeout_available": "No",
+            "signup_required": "No",
+            "requires_referral": "No",
+            "organization_name": "Carnegie Centre",
+            "meal_cost": "Low cost",
+            "last_update_date": "2022-08-22T11:35:47+00:00",
+            "geom": [
+                49.28106,
+                -123.100121
+            ]
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -123.100121,
+                49.28106
+            ]
+        },
+        "record_timestamp": "2022-09-16T12:26:26.744Z"
+    },
+    {
+        "datasetid": "free-and-low-cost-food-programs",
+        "recordid": "f6c560f6a1ff95ba80c78d662d7b3cd8f565899d",
+        "fields": {
+            "latitude": 49.26068,
+            "provides_meals": "False",
+            "program_name": "Cedar Cottage Food Network - Produce Box",
+            "local_areas": "Kensington-Cedar Cottage",
+            "longitude": -123.064951,
+            "description": "Low cost pre-packaged produce box. Pickup Wed, 11:30am-12:30pm.",
+            "provides_hampers": "True",
+            "program_status": "Open",
+            "location_address": "2670 Victoria Dr, Vancouver, BC",
+            "program_population_served": "residents of Kensington-Cedar Cottage neighbourhood",
+            "wheelchair_accessible": "Yes",
+            "delivery_available": "No",
+            "takeout_available": "Unknown",
+            "signup_required": "Yes",
+            "signup_email": "ccfnmobilemarkets@gmail.com",
+            "requires_referral": "No",
+            "organization_name": "Cedar Cottage Food Network",
+            "last_update_date": "2022-08-22T11:39:35+00:00",
+            "geom": [
+                49.26068,
+                -123.064951
+            ]
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -123.064951,
+                49.26068
+            ]
+        },
+        "record_timestamp": "2022-09-16T12:26:26.744Z"
+    },
+    {
+        "datasetid": "free-and-low-cost-food-programs",
+        "recordid": "cc235aa3247da04568f137f8ba8dd5b1a2f89f20",
+        "fields": {
+            "latitude": 49.280361,
+            "provides_meals": "False",
+            "program_name": "Chinatown Cares - Grocery Hampers",
+            "local_areas": "Downtown",
+            "longitude": -123.10015,
+            "provides_hampers": "True",
+            "program_status": "Open",
+            "location_address": "188 E Pender St, Vancouver, BC",
+            "program_population_served": "Chinese seniors",
+            "hamper_cost": "$10.00",
+            "wheelchair_accessible": "Yes",
+            "delivery_available": "Yes",
+            "takeout_available": "Unknown",
+            "signup_required": "Yes",
+            "signup_phone_number": "236-808-1191",
+            "requires_referral": "No",
+            "organization_name": "Hua Foundation",
+            "last_update_date": "2020-12-18T13:39:12+00:00",
+            "geom": [
+                49.280361,
+                -123.10015
+            ]
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -123.10015,
+                49.280361
+            ]
+        },
+        "record_timestamp": "2022-09-16T12:26:26.744Z"
+    },
+    {
+        "datasetid": "free-and-low-cost-food-programs",
+        "recordid": "a7098038df6c010165db457f4d77f1f10bd5394e",
+        "fields": {
+            "latitude": 49.284484,
+            "provides_meals": "True",
+            "program_name": "Christ Church Cathedral - Maundy Cafe",
+            "local_areas": "Downtown",
+            "longitude": -123.120359,
+            "description": "Mon, Thurs, Fri from 11:30am-12:30pm.",
+            "provides_hampers": "False",
+            "program_status": "Open",
+            "location_address": "690 Burrard St, Vancouver, BC",
+            "wheelchair_accessible": "Yes",
+            "delivery_available": "No",
+            "takeout_available": "Yes",
+            "signup_required": "No",
+            "requires_referral": "No",
+            "organization_name": "Christ Church Cathedral",
+            "meal_cost": "Free",
+            "last_update_date": "2022-09-07T13:43:57+00:00",
+            "geom": [
+                49.284484,
+                -123.120359
+            ]
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -123.120359,
+                49.284484
+            ]
+        },
+        "record_timestamp": "2022-09-16T12:26:26.744Z"
+    },
+    {
+        "datasetid": "free-and-low-cost-food-programs",
+        "recordid": "b22228155c87ef192ddadb16a5ccd1241ed425b7",
+        "fields": {
+            "latitude": 49.261161,
+            "provides_meals": "True",
+            "program_name": "CityReach - Club Freedom Meal",
+            "local_areas": "Renfrew-Collingwood",
+            "longitude": -123.048888,
+            "description": "A Christ-centred worship service and hot meal. Sun 11am. For info contact jemald@cityreach.org.",
+            "provides_hampers": "False",
+            "program_status": "Open",
+            "location_address": "2650 Slocan St, Vancouver, BC",
+            "wheelchair_accessible": "Yes",
+            "delivery_available": "No",
+            "takeout_available": "Unknown",
+            "signup_required": "No",
+            "requires_referral": "No",
+            "organization_name": "CityReach Care Society",
+            "meal_cost": "Free",
+            "last_update_date": "2022-08-11T09:03:18+00:00",
+            "geom": [
+                49.261161,
+                -123.048888
+            ]
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -123.048888,
+                49.261161
+            ]
+        },
+        "record_timestamp": "2022-09-16T12:26:26.744Z"
+    },
+    {
+        "datasetid": "free-and-low-cost-food-programs",
+        "recordid": "daf403484b6ae26ba821023e881782d126d8c985",
+        "fields": {
+            "latitude": 49.227744,
+            "provides_meals": "False",
+            "program_name": "CityReach - Food for Families (Culloden Court)",
+            "local_areas": "Sunset",
+            "longitude": -123.077321,
+            "description": "Nutritious foodbank. Fri 3-4pm. Not currently accepting new registrations, more info at https://www.cityreach.org/foodforfamilies",
+            "provides_hampers": "True",
+            "program_status": "Open",
+            "location_address": "6265 Knight St, Vancouver, BC",
+            "program_population_served": "individuals and families referred by a partner agency or school, and residents within the geographic borders of Main, Victoria, East 41st Avenue and Fraser River",
+            "hamper_cost": "Free",
+            "wheelchair_accessible": "Yes",
+            "delivery_available": "No",
+            "takeout_available": "Unknown",
+            "signup_required": "Yes",
+            "signup_email": "fff@cityreach.org,",
+            "requires_referral": "No",
+            "organization_name": "CityReach Care Society",
+            "last_update_date": "2022-08-11T09:03:59+00:00",
+            "geom": [
+                49.227744,
+                -123.077321
+            ]
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -123.077321,
+                49.227744
+            ]
+        },
+        "record_timestamp": "2022-09-16T12:26:26.744Z"
+    },
+    {
+        "datasetid": "free-and-low-cost-food-programs",
+        "recordid": "e8195abd94d11471d0f437206153e92162ed6662",
+        "fields": {
+            "latitude": 49.261161,
+            "provides_meals": "False",
+            "program_name": "CityReach - Food For Families (Slocan)",
+            "local_areas": "Renfrew-Collingwood",
+            "longitude": -123.048888,
+            "description": "Nutritious foodbank. For families without minors: Tues 4-5:15pm. For families with minors: Tues 5:30-6:30pm or Thurs 11am-noon. Not currently accepting new registrations, more info at https://www.cityreach.org/foodforfamilies",
+            "provides_hampers": "True",
+            "program_status": "Open",
+            "location_address": "2650 Slocan St, Vancouver, BC",
+            "program_population_served": "individuals and families referred by a partner agency or school",
+            "hamper_cost": "Free",
+            "wheelchair_accessible": "Yes",
+            "delivery_available": "No",
+            "takeout_available": "Unknown",
+            "signup_required": "Yes",
+            "signup_phone_number": "604-254-2489",
+            "signup_email": "fff@cityreach.org",
+            "requires_referral": "No",
+            "organization_name": "CityReach Care Society",
+            "last_update_date": "2022-08-11T09:42:43+00:00",
+            "geom": [
+                49.261161,
+                -123.048888
+            ]
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -123.048888,
+                49.261161
+            ]
+        },
+        "record_timestamp": "2022-09-16T12:26:26.744Z"
+    },
+    {
+        "datasetid": "free-and-low-cost-food-programs",
+        "recordid": "a58c257c6ca96fa4a272ae74b53fe4289585c1a2",
+        "fields": {
+            "latitude": 49.22013,
+            "provides_meals": "False",
+            "program_name": "CityReach - Food for Families (YWCA South)",
+            "address_extra_info": "Pacific Spirit Terrace",
+            "local_areas": "Killarney",
+            "longitude": -123.041331,
+            "description": "Nutritious foodbank. Fri, 2-3pm. Not currently accepting new registrations, more info at https://www.cityreach.org/foodforfamilies",
+            "provides_hampers": "True",
+            "program_status": "Open",
+            "location_address": "7001 Kerr St, Vancouver, BC",
+            "program_population_served": "individuals and families referred by a partner agency or school.",
+            "hamper_cost": "Free",
+            "wheelchair_accessible": "Yes",
+            "delivery_available": "No",
+            "takeout_available": "Unknown",
+            "signup_required": "Yes",
+            "signup_email": "fff@cityreach.org",
+            "requires_referral": "No",
+            "organization_name": "CityReach Care Society",
+            "last_update_date": "2022-08-11T09:03:40+00:00",
+            "geom": [
+                49.22013,
+                -123.041331
+            ]
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -123.041331,
+                49.22013
+            ]
+        },
+        "record_timestamp": "2022-09-16T12:26:26.744Z"
+    },
+    {
+        "datasetid": "free-and-low-cost-food-programs",
+        "recordid": "ee6ccb0e56f327e01a3345a6e30e219d90dc9cd1",
+        "fields": {
+            "latitude": 49.245928,
+            "provides_meals": "True",
+            "program_name": "Cityview Church - Open Table",
+            "local_areas": "Riley Park",
+            "longitude": -123.098691,
+            "description": "Thurs at 12pm. Hot lunch and spiritual service, more info at https://www.cityviewchurch.ca/opentable",
+            "provides_hampers": "False",
+            "program_status": "Open",
+            "location_address": "4370 Sophia St, Vancouver, BC",
+            "wheelchair_accessible": "Yes",
+            "delivery_available": "No",
+            "takeout_available": "Yes",
+            "signup_required": "No",
+            "requires_referral": "No",
+            "organization_name": "Cityview Church",
+            "meal_cost": "Free",
+            "last_update_date": "2022-08-10T16:09:45+00:00",
+            "geom": [
+                49.245928,
+                -123.098691
+            ]
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -123.098691,
+                49.245928
+            ]
+        },
+        "record_timestamp": "2022-09-16T12:26:26.744Z"
+    },
+    {
+        "datasetid": "free-and-low-cost-food-programs",
+        "recordid": "f6fd2d4468607254bb2acf2ed71231684a30fae2",
+        "fields": {
+            "latitude": 49.236608,
+            "provides_meals": "False",
+            "program_name": "Collingwood Community Fridge and Pantry",
+            "local_areas": "Renfrew-Collingwood",
+            "longitude": -123.032888,
+            "description": "Fridge and pantry stocked with free food, and located on the west facing side of Collingwood Neighbourhood House, adjacent to the gym entrance. Open 24/7. Wheelchair accessible. More info at https://rcfood.wordpress.com/collingwood-neighbourhood-food-hub/fridge/ or foodhub@cnh.bc.ca",
+            "provides_hampers": "True",
+            "program_status": "Open",
+            "location_address": "5288 Joyce St, Vancouver, BC",
+            "hamper_cost": "Free",
+            "wheelchair_accessible": "Yes",
+            "delivery_available": "No",
+            "takeout_available": "Unknown",
+            "signup_required": "No",
+            "requires_referral": "No",
+            "organization_name": "Collingwood Neighbourhood House",
+            "last_update_date": "2022-08-10T15:56:57+00:00",
+            "geom": [
+                49.236608,
+                -123.032888
+            ]
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -123.032888,
+                49.236608
+            ]
+        },
+        "record_timestamp": "2022-09-16T12:26:26.744Z"
+    },
+    {
+        "datasetid": "free-and-low-cost-food-programs",
+        "recordid": "304e4b3e94fb2724dd638e4abf4a18cc2b82295a",
+        "fields": {
+            "latitude": 49.236608,
+            "provides_meals": "True",
+            "program_name": "Collingwood N'hood House - Morning Star Breakfast",
+            "local_areas": "Renfrew-Collingwood",
+            "longitude": -123.032888,
+            "description": "Sat, 7am clothing and showers, 8-8:30am breakfast. More info 604-435-0323.",
+            "provides_hampers": "False",
+            "program_status": "Open",
+            "location_address": "5288 Joyce St, Vancouver, BC",
+            "wheelchair_accessible": "Yes",
+            "delivery_available": "No",
+            "takeout_available": "Unknown",
+            "signup_required": "Unknown",
+            "requires_referral": "No",
+            "organization_name": "Collingwood Neighbourhood House",
+            "meal_cost": "Free",
+            "last_update_date": "2022-08-22T11:42:09+00:00",
+            "geom": [
+                49.236608,
+                -123.032888
+            ]
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -123.032888,
+                49.236608
+            ]
+        },
+        "record_timestamp": "2022-09-16T12:26:26.744Z"
+    }
+]

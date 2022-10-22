@@ -1,10 +1,9 @@
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
-
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Rubik', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
@@ -16,7 +15,7 @@ a {
   box-sizing: border-box;
 }
 
-/* @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
@@ -25,32 +24,24 @@ a {
     color: white;
     background: black;
   }
-} */
+}
 
 .mapboxgl-canvas {
+  /* z-index: -1; */
   width: 100%;
   height: 100%;
 }
 
+.marker-btn img {
+  width: 30px;
+  height: 30px;
+}
 
 .organizationNameLink {
   color: rgb(38, 142, 233);
   text-decoration: underline;
 }
 
-.map-container {
-  height: 400px;
-}
-
-.sidebar {
-  background-color: rgba(35, 55, 75, 0.9);
-  color: #fff;
-  padding: 6px 12px;
-  font-family: monospace;
+/* .search {
   z-index: 1;
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 12px;
-  border-radius: 4px;
-}
+} */

@@ -1,12 +1,14 @@
 import LoginForm from "./index"
 
+// The default export metadata controls how Storybook lists your stories and provides information used by addons. 
+// https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "LoginForm",
-  component: LoginForm,
-  argTypes: {
-    onLogin: { action: 'logging in thing' },
-  }
+    title: "LoginForm",
+    component: LoginForm,
+    argTypes: {
+        onLogin: { action: 'search' },
+    }
 }
 
-export const Default = (args) => <LoginForm {...args} />
-export const Error = (args) => <LoginForm {...args} />
+// Any other named exports will be treated as stories, which should be functions that return your component
+export const Default = () => <LoginForm />

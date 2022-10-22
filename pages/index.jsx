@@ -6,17 +6,10 @@ import { getFoodBanks } from "../server/database";
 // import { useAuthState } from "react-firebase-hooks/auth"; // to check if user is signed in
 import axios from "axios";
 import { useEffect, useState } from "react";
-import NavBar from '../components/NavBar';
-import NavbarIcons from "../components/NavBar/NavIcons";
-import FloatingActionButton from "../components/FloatButton";
-import { Container, FlexBox, Wrapper } from "../styles/globals";
-
 
 // this should be homepage, just using for testing right now
 // maybe move some of this to map
 export default function Home({ foodBanksList }) {
-  const [navValue, setNavValue] = useState(0);
-
   const foodBanksComponent = foodBanksList.map((foodbank) => (
     // <li key={fb.id}>
     <li key="test">
@@ -33,27 +26,14 @@ export default function Home({ foodBanksList }) {
       </Head>
       <h1>LocalToMe</h1>
 
-      <Wrapper direction="column">
-        <h2>Goodmorning</h2>
-        <h3>Slayerina</h3>
+      <main className={styles.main}>
+        <h2>HOMEPAGE</h2>
         <p className="map-link">
-          <Link key="link-to-map" href="/map">map link</Link>
+          Checkout <Link key="link-to-map" href="/map">the map!</Link>
         </p>
-        <p>Upcoming Events</p>
-        <ul style={{ display: "flex" }}>
-          <li>Event</li>
-          <li>Event</li>
-          <li>Event</li>
-          <li>Event</li>
-        </ul>
-        <p>
-          <Link key="link-to-events" href="/community">community link</Link>
-        </p>
-        <FloatingActionButton />
-        <NavBar value={navValue} onChange={(event, newValue) => {
-          setNavValue(newValue);
-        }} />
-      </Wrapper>
+      </main>
+
+      <footer className={styles.footer}></footer>
     </div>
   );
 }
@@ -62,7 +42,7 @@ export async function getServerSideProps(context) {
   // Everything in this function happens on the server
   const foodBanksData = await getFoodBanks();
   const foodBanksList = JSON.parse(JSON.stringify(foodBanksData));
-  // console.log(foodBanksList);
+  console.log(foodBanksList);
   return {
     props: { foodBanksList }, // will be passed to the page component as props
   };
