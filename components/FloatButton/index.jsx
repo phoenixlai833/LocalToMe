@@ -4,6 +4,7 @@ import AddIcon from '@mui/icons-material/Add'
 import { Colours, Theme } from '../../styles/globals'
 import { ThemeProvider } from '@mui/material';
 import { useRouter } from 'next/router';
+
 const FloatButton = styled(Fab)`
 position:fixed;
 display:flex;
@@ -20,7 +21,8 @@ export default function FloatingActionButton({
 
 }) {
     const r = useRouter();
-    const onPress = () => {r.push('/events/add')}
+    const onPress = () => {r.push('/community/postcreate')}
+    // const onPress = () => {r.push('/events/add')}
     return (
         // <ThemeProvider theme={Theme}>
             <FloatButton aria-label="add" size="large" onClick={onPress}>
