@@ -5,7 +5,9 @@ import styles from './SingleEvent.module.css';
 
 export default function SingleEvent({ event }) {
 
+    console.log("event", event);
     const time = event.eventDate.seconds
+    console.log(time)
     const date = new Date(time * 1000)
     const eventTime = date.toLocaleString().split(',')[1]
     const eventDate = date.toLocaleString("default", { month: "long", day: "2-digit", year: "numeric" })

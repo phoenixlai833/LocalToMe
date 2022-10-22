@@ -37,12 +37,15 @@ export async function getEvents() {
     let data = doc.data();
     return { id, ...data };
   });
+  console.log("sss",events);
   return events;
 }
 
 export async function getEvent(id) {
   const eventRef = doc(db, "event", id);
+  console.log("eventRef",eventRef);
   const eventSnap = await getDoc(eventRef);
+  console.log("eventSnap", eventSnap.data());
   const event = { id, ...eventSnap.data() };
   return event;
 }
