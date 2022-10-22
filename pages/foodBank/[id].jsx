@@ -3,17 +3,55 @@ import Link from 'next/link'
 import { useState } from "react";
 import { getFoodBank, addFoodBank } from '../../server/database';
 import NavBar from '../../components/NavBar';
+import TopBanner from '../../components/TopBanner';
+import TextBubble from '../../components/TextBubble';
+import { Wrapper, Container, FlexBox } from '../../styles/globals';
+import { Filter, EventFilter } from '../../components/Filters';
 
 export default function FoodBank({ d }) {
 
     const [navValue, setNavValue] = useState(2);
+    var locationInfo = [];
+    var locationIcons = [];
+    var signUp = [];
+    var signUpIcons = [];
+    if (d.location_address) { locationInfo.push(d.location_address); locationIcons.push("location_on") }
+    if (d.local_areas) { locationInfo.push(d.local_areas); locationIcons.push("map") }
+    if (d.program_population_served) { locationInfo.push(d.program_population_served); locationIcons.push("people") }
+    // if(d.wheelchair_accessible) {locationInfo.push("Wheelchair Accessible: " + d.wheelchair_accessible); locationIcons.push("accessible")}
+
+    if (d.signup_required) {
+        signUp.push("Signup Required: " + d.signup_required); signUpIcons.push('')
+        if (d.requires_referral) { signUp.push("Requires Referral: " + d.requires_referral); signUpIcons.push("diversity_1") };
+        if (d.signup_email) { signUp.push(d.signup_email); signUpIcons.push("email") };
+        if (d.signup_phone_number) { signUp.push(d.signup_phone_number); signUpIcons.push("call") };
+    };
+
 
     return (
-        <>
-            <img width="100" height="100" src={d.foodBank_Image} alt={d.program_name} />
+        <Wrapper direction="column" gap="20px" >
+            {/* can place d.program_name with d.organization_name */}
+            {d.program_name && <TopBanner text={d.program_name}></TopBanner>}
 
-            < h1 > {d.program_name}</ h1 >
-            {d.organization_name && (<h2>Organization Name: {d.organization_name}</h2>)}
+            <img width="100%" height="30%" src={d.foodBank_Image} alt={d.program_name} style={{marginTop:"-20px"}}/>
+            <TextBubble text={locationInfo} icon={locationIcons}></TextBubble>
+            {d.description && (<FlexBox direction="column" width="80%"><h3>Description:</h3><p>{d.description}</p></FlexBox>)}
+            <TextBubble text={signUp} icon={signUpIcons} />
+
+            <FlexBox direction="column" gap="5px" pd="100px">
+                <FlexBox gap="5px">
+                {d.wheelchair_accessible === "Yes" ? <EventFilter tag={"Wheelchair Accessible"} /> : <EventFilter tag={"Wheelchair Accessible"} active={true} />}
+                {d.delivery_available === "Yes" ? <EventFilter tag={"Delivery Available"} /> : <EventFilter tag={"Delivery Available"} active={true} />}
+                </FlexBox>
+                <FlexBox gap="5px">
+                {d.takeout_available === "Yes" ? <EventFilter tag={"Takeout Available"} /> : <EventFilter tag={"Takeout Available"} active={true} />}
+                {d.provides_hampers === "True" ? <EventFilter tag={"Provides Hampers"} /> : <EventFilter tag={"Provides Hampers"} active={true} />}
+                </FlexBox>
+                {d.provides_meals === "True" ? <EventFilter tag={"Provides Meals"} /> : <EventFilter tag={"Provides Meals"} active={true} />}
+            </FlexBox>
+
+    
+            {/* {d.organization_name && (<h2>Organization Name: {d.organization_name}</h2>)}
             {d.program_population_served && (<h3>Population Served: {d.program_population_served}</h3>)}
             {d.wheelchair_accessible && (<p>Wheelchair Acessible: {d.wheelchair_accessible}</p>)}
             {d.signup_required && (<h3>Signup Required: {d.signup_required}</h3>)}
@@ -27,11 +65,12 @@ export default function FoodBank({ d }) {
             {d.provides_hampers && (<p>providesHampers: {d.provides_hampers}</p>)}
             {d.provides_meals && (<p>providesMeals: {d.provides_meals}</p>)}
             {d.description && (<><h3>Description:</h3><p>{d.description}</p></>)}
-            {d.last_updated_date && (<p>lastUpdatedDate: {d.last_updated_date}</p>)}
+            {d.last_updated_date && (<p>lastUpdatedDate: {d.last_updated_date}</p>)} */}
+    
             <NavBar value={navValue} onChange={(event, newValue) => {
                 setNavValue(newValue);
             }} />
-        </>
+        </Wrapper>
     )
     // })
 }

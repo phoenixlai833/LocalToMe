@@ -6,11 +6,8 @@ import { Avatar } from "@mui/material";
 
 const NewsCont = styled.div`
    background:${Colours.background};
-   // color:${Colours.primary};
    display:flex;
-   // max-width:90vw;
    width:90vw;
-   // min-width:90vw;
    gap:10px;
 `
 
@@ -87,7 +84,6 @@ export default function News({
             <p>{date}</p>
          </InfoDiv>
          <Filters>
-            <Filter tag={tag} active={true} icon={false}></Filter>
             <Filter tag={tag} active={true} icon={false}></Filter>
             <Filter tag={tag} active={true} icon={false}></Filter>
             <Filter tag={tag} active={true} icon={false}></Filter>
