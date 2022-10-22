@@ -6,6 +6,7 @@ import algoliasearch from "algoliasearch/lite";
 import { InstantSearch, SearchBox } from "react-instantsearch-hooks-web";
 import { getEvents } from "../../server/database";
 import NavBar from '../../components/NavBar';
+import FloatingActionButton from "../../components/FloatButton";
 
 
 const searchClient = algoliasearch(
@@ -61,6 +62,7 @@ export default function Community() {
         )}
         {tabContents[tab].component}
       </InstantSearch>
+      <FloatingActionButton/>
       <NavBar value={navValue} onChange={(event, newValue) => {
         setNavValue(newValue);
       }} />
