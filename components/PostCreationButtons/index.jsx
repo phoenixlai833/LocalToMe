@@ -38,7 +38,7 @@ margin: 10px;
 position: absolute;
 `
 
-export default function CreationBttn({BttnPressed=()=>{}}) {
+export default function CreationSection() {
 
     const r = useRouter();
 
