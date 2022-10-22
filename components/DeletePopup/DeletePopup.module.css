@@ -1,0 +1,22 @@
+.background {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  position: absolute;
+  top: 25vh;
+  left: 20vw;
+  background-color: rgb(193, 106, 106);
+  width: 60vw;
+  height: 50vh;
+  padding: 5%;
+  font-family: 'Rubik', sans-serif;
+  text-align: center;
+
+
+}
+
+.h2{
+  /* padding: 1%; */
+  padding-left: 10%;
+  padding-right: 10%;
+}
