@@ -1,12 +1,8 @@
 import React from "react";
 import styles from "./EventsList.module.css";
 import Link from "next/link";
-import { useHits } from "react-instantsearch-hooks-web";
 
-export default function EventsList() {
-  const { hits } = useHits();
-  let eventList = hits;
-
+export default function EventsList({ eventList }) {
   return (
     <div>
       <h2 className={styles.category}>Recent Events</h2>

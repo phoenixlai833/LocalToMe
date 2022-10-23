@@ -3,8 +3,9 @@ import Link from "next/link";
 import EventsList from "../../components/EventsList";
 import Newss from "../../components/Newss";
 import algoliasearch from "algoliasearch/lite";
-import { InstantSearch, SearchBox } from "react-instantsearch-hooks-web";
+import { InstantSearch, SearchBox, useHits, Hits } from "react-instantsearch-hooks-web";
 import { getEvents } from "../../server/database";
+import styled from 'styled-components'
 import NavBar from '../../components/NavBar';
 import FloatingActionButton from "../../components/FloatButton";
 
@@ -14,14 +15,26 @@ const searchClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_API_KEY
 );
 
+export function EventHits() {
+  const { hits } = useHits();
+
+  return <EventsList eventList={hits} />
+}
+
+export function NewsHits() {
+  const { hits } = useHits();
+
+  return <Newss news={hits} />
+}
+
 export default function Community() {
   const [tab, setTab] = useState(0);
   const [isAdd, setIsAdd] = useState(false);
   const [navValue, setNavValue] = useState(1);
 
   const tabContents = {
-    0: { component: <EventsList />, searchIndex: "prod_EVENTS" },
-    1: { component: <Newss />, searchIndex: "prod_NEWS" },
+    0: { component: <EventHits />, searchIndex: "prod_EVENTS"},
+    1: { component: <NewsHits />, searchIndex: "prod_NEWS"},
   };
 
   const handleChangeTab = (e) => {
