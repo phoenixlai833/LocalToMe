@@ -6,6 +6,9 @@ import algoliasearch from "algoliasearch/lite";
 import { InstantSearch, SearchBox, useHits, Hits } from "react-instantsearch-hooks-web";
 import { getEvents } from "../../server/database";
 import styled from 'styled-components'
+import NavBar from '../../components/NavBar';
+import FloatingActionButton from "../../components/FloatButton";
+
 
 const searchClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_CLIENT_ID,
@@ -27,6 +30,7 @@ export function NewsHits() {
 export default function Community() {
   const [tab, setTab] = useState(0);
   const [isAdd, setIsAdd] = useState(false);
+  const [navValue, setNavValue] = useState(1);
 
   const tabContents = {
     0: { component: <EventHits />, searchIndex: "prod_EVENTS"},
@@ -44,31 +48,37 @@ export default function Community() {
   };
 
   return (
-    <InstantSearch indexName={tabContents[tab].searchIndex} searchClient={searchClient}>
-      <SearchBox />
-      <div className="tabs" onClick={handleChangeTab}>
-        <p className="tab" id="0">
-          Events
-        </p>
-        <p className="tab" id="1">
-          News
-        </p>
-      </div>
-      <button className="add-button" onClick={handleAdd}>
-        Add
-      </button>
-      {isAdd && (
-        <div>
-          <h3>What do you want to create today?</h3>
-          <Link href="../events/add">
-            <button>Event</button>
-          </Link>
-          <Link href="../news/add">
-            <button>News Article</button>
-          </Link>
+    <>
+      <InstantSearch indexName={tabContents[tab].searchIndex} searchClient={searchClient}>
+        <SearchBox />
+        <div className="tabs" onClick={handleChangeTab}>
+          <p className="tab" id="0">
+            Events
+          </p>
+          <p className="tab" id="1">
+            News
+          </p>
         </div>
-      )}
-      {tabContents[tab].component}
-    </InstantSearch>
+        <button className="add-button" onClick={handleAdd}>
+          Add
+        </button>
+        {isAdd && (
+          <div>
+            <h3>What do you want to create today?</h3>
+            <Link href="../events/add">
+              <button>Event</button>
+            </Link>
+            <Link href="../news/add">
+              <button>News Article</button>
+            </Link>
+          </div>
+        )}
+        {tabContents[tab].component}
+      </InstantSearch>
+      <FloatingActionButton/>
+      <NavBar value={navValue} onChange={(event, newValue) => {
+        setNavValue(newValue);
+      }} />
+    </>
   )
 }

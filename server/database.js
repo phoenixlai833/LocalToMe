@@ -55,24 +55,24 @@ export async function addEvent(event) {
 }
 
 export async function editEvent(event) {
-    const eventCollection = collection(db, "event");
-    const eventSnap = await getDocs(eventCollection);
-    await updateDoc(frankDocRef, event);
-    return event.id
+  const eventCollection = collection(db, "event");
+  const eventSnap = await getDocs(eventCollection);
+  await updateDoc(frankDocRef, event);
+  return event.id
 }
 
 export async function deleteEvent(id) {
-    const eventCollection = collection(db, "event");
-    const eventSnap = await getDocs(eventCollection);
-    // const eventId = eventSnap.docs.find(doc => {
-    //     if (doc.id == id) {
-    //         // let data = doc.data();
-    //         return id;
-    //     }
-    // });
-    await deleteDoc(doc(db, "event", id));
-    // console.log(event);
-    // return event;
+  const eventCollection = collection(db, "event");
+  const eventSnap = await getDocs(eventCollection);
+  // const eventId = eventSnap.docs.find(doc => {
+  //     if (doc.id == id) {
+  //         // let data = doc.data();
+  //         return id;
+  //     }
+  // });
+  await deleteDoc(doc(db, "event", id));
+  // console.log(event);
+  // return event;
 }
 
 // _________________________________________________________________________
