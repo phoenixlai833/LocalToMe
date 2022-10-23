@@ -10,11 +10,12 @@ import { getEvents } from "../server/database";
 // import Geocoder from "react-map-gl-geocoder";
 // import 'react-map-gl-directions/dist/mapbox-gl-directions.css';
 // import Directions from 'react-map-gl-directions';
+import { InstantSearch, SearchBox, useHits } from "react-instantsearch-hooks-web";
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_REACT_APP_MAPBOX_TOKEN; // Set your mapbox token here
 
-export default function FoodBankMap({ foodBanksList, eventList }) {
-
+export default function Map({ foodBanksList, eventList }) {
+    
 
     const [viewport, setViewport] = useState({
         latitude: 49.2827,

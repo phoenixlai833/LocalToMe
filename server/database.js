@@ -42,7 +42,9 @@ export async function getEvents() {
 export async function getEvent(id) {
   const eventRef = doc(db, "event", id);
   const eventSnap = await getDoc(eventRef);
+  console.log('hey', eventSnap.data())
   const event = { id, ...eventSnap.data() };
+  // console.log('hi', event)
   return event;
 }
 
