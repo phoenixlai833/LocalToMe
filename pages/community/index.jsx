@@ -32,8 +32,8 @@ export default function Community() {
   const [navValue, setNavValue] = useState(1);
 
   const tabContents = {
-    0: { component: <EventHits />, searchIndex: "prod_EVENTS"},
-    1: { component: <NewsHits />, searchIndex: "prod_NEWS"},
+    0: { component: <EventHits />, searchIndex: "prod_EVENTS" },
+    1: { component: <NewsHits />, searchIndex: "prod_NEWS" },
   };
 
 
