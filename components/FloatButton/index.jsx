@@ -15,19 +15,22 @@ color:${Colours.background};
 &:hover{
     background-color:${Colours.secondary};
 }
+@media (max-width: 768px) {
+    left:80vw;
+  }
 `
 export default function FloatingActionButton({
-    
+
 
 }) {
     const r = useRouter();
-    const onPress = () => {r.push('/community/postcreate')}
+    const onPress = () => { r.push('/community/postcreate') }
     // const onPress = () => {r.push('/events/add')}
     return (
         // <ThemeProvider theme={Theme}>
-            <FloatButton aria-label="add" size="large" onClick={onPress}>
-                <AddIcon />
-            </FloatButton>
+        <FloatButton aria-label="add" size="large" onClick={onPress}>
+            <AddIcon />
+        </FloatButton>
         // </ThemeProvider>
     )
 }
