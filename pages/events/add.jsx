@@ -37,7 +37,6 @@ export default function NewEvent({ eventList, eventCategories }) {
     const file = e.target.files[0];
     const fileRef = ref(storage, file.name);
     // await fileRef.put(file);
-    console.log(fileRef);
     await uploadBytes(fileRef, file);
     setEventImage(await getDownloadURL(fileRef));
   };

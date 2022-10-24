@@ -1,48 +1,61 @@
 
 import React from "react";
 import styles from './SingleEvent.module.css';
+import GetDirectionGreenBtn from '../GetDirectionGreenBtn';
+import TextBubble from '../TextBubble';
+import TopBanner from '../TopBanner';
+import UserOfPost from '../UserOfPost';
+import EventCategoryTag from "../EventCategoryTag";
+import styled from "styled-components";
 
+const EventImage = styled.img` 
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+`
+const EventImageBlock = styled.div`
+    width: 100%;
+    height: 200px;
+`
+const EventDescription = styled.div`
+        margin: 30px;
+`
+
+const ExtraSpace = styled.div`
+    height: 50px;
+`
 
 export default function SingleEvent({ event }) {
 
-    console.log("event", event);
     const time = event.eventDate.seconds
-    console.log(time)
     const date = new Date(time * 1000)
     const eventTime = date.toLocaleString().split(',')[1]
-    const eventDate = date.toLocaleString("default", { month: "long", day: "2-digit", year: "numeric" })
-    // console.log('test', monthString)
+    const dateOfEvent = date.toLocaleString("default", { month: "long", day: "2-digit", year: "numeric" })
+    const dateAndTime = dateOfEvent + "," + eventTime
     return (
         <div>
 
+            <TopBanner text={event.eventName} back={true} />
 
-            <h3 className={styles.header}>{event.eventName}</h3>
+            <EventImageBlock >
+                <EventImage src={event.eventImage} alt={event.eventName} />
+            </EventImageBlock>
 
-            <div className={styles.eventImageBlock} >
-                <img src={event.eventImage} alt={event.eventName} className={styles.eventImage} />
-            </div>
+            <TextBubble text={[event.eventLocation, event.eventContactPhone, dateAndTime]} icon={['location_on', 'call', 'access_time']} />
 
-            <div className={styles.eventInfoBlock}>
-                <div className={styles.eventInfoBlockLine}><img src="../locationIcons.png" alt="eventLocation" className={styles.infoIcon} />{event.eventLocation}</div>
-                <div className={styles.eventInfoBlockLine}><img src="../phoneIcon.png" alt="phoneNumber" className={styles.infoIcon} />{event.eventContactPhone}</div>
-                <div className={styles.eventInfoBlockLine}><img src="../timeIcons.png" alt="eventTime" className={styles.infoIcon} />{eventDate},{eventTime}</div>
-            </div>
+            <UserOfPost />
 
-            <div className={styles.creatorInfo}>
-                <img src="https://static.toiimg.com/photo/83890830/83890830.jpg?imgsize=115510" alt="creatorImg" className={styles.creatorImg} /> <span>Hosted by Shane</span>
-            </div>
-
-            <div className={styles.eventDescription}>
+            <EventDescription>
                 <b>About:</b>
                 <p>{event.eventContent}</p>
-            </div>
+            </EventDescription>
 
-            <div className={styles.btns}>
-                <button className={styles.btn}></button>
-                <button className={styles.btn}></button>
-            </div>
+            <EventCategoryTag eventCategories={["Food", "Fundraiser"]} />
 
-            <button className={styles.getDirections}>Get Direction</button>
+            <GetDirectionGreenBtn address={event.eventLocation} onMap={false} />
+
+            <ExtraSpace></ExtraSpace>
         </div>
 
 

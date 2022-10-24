@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Marker, Popup } from "react-map-gl";
 import Link from "next/link";
 import styles from "./EventMapPin.module.css";
+import GetDirectionGreenBtn from "../GetDirectionGreenBtn";
 
 
 export default function EventMapPin({ events }) {
@@ -61,7 +62,9 @@ export default function EventMapPin({ events }) {
             )
             )}
 
+
             {selectedEvent && (
+
                 <Popup
                     latitude={selectedEvent.latitude}
                     longitude={selectedEvent.longitude}
@@ -70,6 +73,7 @@ export default function EventMapPin({ events }) {
                     onClose={() => {
                         setSelectedEvent(null);
                     }}
+
                 >
                     <div>
                         <p className={styles.eventNameLink}>
@@ -104,14 +108,16 @@ export default function EventMapPin({ events }) {
                                 </Link>
                             </span>
                         </p>
-                        <button onClick={() => { }}>Get Direction</button>
 
+                        <GetDirectionGreenBtn address={selectedEvent.eventLocation} onMap={true} />
                     </div>
 
                 </Popup>
-            )}
 
-        </div>
+            )
+            }
+
+        </div >
     )
 }
 

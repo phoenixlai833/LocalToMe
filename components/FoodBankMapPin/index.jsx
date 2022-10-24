@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Marker, Popup } from "react-map-gl";
 import Link from "next/link";
 import styles from "./FoodBankMapPin.module.css";
-
+import GetDirectionGreenBtn from "../GetDirectionGreenBtn";
 
 export default function FoodBankMapPin({ foodBanksList }) {
 
@@ -22,7 +22,6 @@ export default function FoodBankMapPin({ foodBanksList }) {
         };
     }, []);
 
-    console.log(selectedEvent)
 
     return (
         <div>
@@ -90,7 +89,7 @@ export default function FoodBankMapPin({ foodBanksList }) {
                                 </Link>
                             </span>
                         </p>
-                        <button onClick={() => { }}>Get Direction</button>
+                        <GetDirectionGreenBtn address={selectedFoodbank.location_address} onMap={true} />
 
                     </div>
 

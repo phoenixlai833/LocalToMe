@@ -41,12 +41,15 @@
     margin: 3%;
 }
 
-.eventTime {
-    background-color: #FFB800;
-    border-radius: 20px;
-    width: 150px;
-    text-align: center;
 
+.eventTime {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFB800;
+    border-radius: 10px;
+    width: 150px;
+    height: 25px;
 }
 
 
