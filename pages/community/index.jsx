@@ -5,7 +5,6 @@ import Newss from "../../components/Newss";
 import algoliasearch from "algoliasearch/lite";
 import { InstantSearch, SearchBox, useHits, Hits } from "react-instantsearch-hooks-web";
 import { getEvents } from "../../server/database";
-import styled from 'styled-components'
 import NavBar from '../../components/NavBar';
 import FloatingActionButton from "../../components/FloatButton";
 import styled from 'styled-components';
