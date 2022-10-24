@@ -1,4 +1,5 @@
 import EventMapPin from "./index";
+import { InstantSearch } from "react-instantsearch-hooks-web";
 
 export default {
     title: "EventMapPin",
