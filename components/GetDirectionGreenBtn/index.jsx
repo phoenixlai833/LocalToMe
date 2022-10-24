@@ -2,9 +2,8 @@ import * as React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 
-
-
 const GreenBigBtn = styled.button`
+    display:flex;
     background-color: #108928;
     border: none;
     color: white;
@@ -13,11 +12,16 @@ const GreenBigBtn = styled.button`
     height: 50px;
     font-size: large;
     font-family: Rubik;
-    margin: 10%;
+    margin: 8% auto;
     box-shadow: 0px 6px 10px #979494;
+    justify-content: center;
+    align-items: center;
 `;
 
 const GreenSmallBtn = styled.button`
+    display:flex;
+    justify-content: center;
+    align-items: center;
     background-color: #108928;
     border: none;
     color: white;
@@ -27,7 +31,7 @@ const GreenSmallBtn = styled.button`
     font-size: small;
     font-family: Rubik;
     box-shadow: 0px 6px 10px #979494;
-    margin: 5% 24%;
+    margin: 5% auto;
     
 `;
 
