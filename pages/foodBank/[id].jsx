@@ -7,7 +7,7 @@ import TopBanner from '../../components/TopBanner';
 import TextBubble from '../../components/TextBubble';
 import { Wrapper, Container, FlexBox } from '../../styles/globals';
 import { Filter, EventFilter } from '../../components/Filters';
-
+import GetDirectionGreenBtn from '../../components/GetDirectionGreenBtn';
 
 export default function FoodBank({ d }) {
 
@@ -39,7 +39,7 @@ export default function FoodBank({ d }) {
             {d.description && (<FlexBox direction="column" width="80%"><h3>Description:</h3><p>{d.description}</p></FlexBox>)}
             <TextBubble text={signUp} icon={signUpIcons} />
 
-            <FlexBox direction="column" gap="5px" pd="100px">
+            <FlexBox direction="column" gap="5px">
                 <FlexBox gap="5px">
                 {d.wheelchair_accessible === "Yes" ? <EventFilter tag={"Wheelchair Accessible"} /> : <EventFilter tag={"Wheelchair Accessible"} active={true} />}
                 {d.delivery_available === "Yes" ? <EventFilter tag={"Delivery Available"} /> : <EventFilter tag={"Delivery Available"} active={true} />}
@@ -52,7 +52,9 @@ export default function FoodBank({ d }) {
                 {d.provides_meals === "True" ? <EventFilter tag={"Provides Meals"} /> : <EventFilter tag={"Provides Meals"} active={true} />}
                 </FlexBox>
             </FlexBox>
-    
+
+            <GetDirectionGreenBtn address={d.location_address} onMap={false} />
+
             {/* {d.organization_name && (<h2>Organization Name: {d.organization_name}</h2>)}
             {d.program_population_served && (<h3>Population Served: {d.program_population_served}</h3>)}
             {d.wheelchair_accessible && (<p>Wheelchair Acessible: {d.wheelchair_accessible}</p>)}
