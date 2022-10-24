@@ -16,7 +16,7 @@ const Readmore = styled.span`
 `
 
 const MarkerBtn = styled.button`
-    background - color: transparent;
+    background-color: transparent;
     border: none;
     cursor: pointer;
     img {

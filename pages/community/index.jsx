@@ -96,7 +96,7 @@ border-bottom:1.5px solid #D9D9D9;
   cursor: pointer;
   text-decoration: underline ${tab === 0 ? "#FFB800" : "transparent"};
   text-decoration-thickness: 4px;
-  text-underline-offset: 13px;
+  text-underline-offset: 12px;
   font-size: 18px;
   margin-top:8px;
 `
@@ -105,7 +105,7 @@ border-bottom:1.5px solid #D9D9D9;
   cursor: pointer;
   text-decoration: underline ${tab === 1 ? "#FFB800" : "transparent"} ;
   text-decoration-thickness: 4px;
-  text-underline-offset: 13px;
+  text-underline-offset: 12px;
   font-size: 18px;
   margin-top:8px;
 

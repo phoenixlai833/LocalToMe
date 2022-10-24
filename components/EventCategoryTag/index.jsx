@@ -26,7 +26,7 @@ export default function EventCategoryTag({ eventCategories }) {
    return (
       <Categories>
          {eventCategories.map((c) => (
-            <Category>{c}</Category>
+            <Category key={c} id={c}>{c}</Category>
          ))}
       </Categories>
 

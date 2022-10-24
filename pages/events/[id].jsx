@@ -14,11 +14,13 @@ import ShareLink from "../../components/ShareLink";
 import FavoriteBtn from "../../components/FavoriteBtn";
 
 const EventImageBlock = styled.div`
+
 position: relative;
     display: flex;
     flex-direction: row;
     width: 100%;
     height: 250px;
+
 `
 
 const EventImage = styled.img` 
@@ -55,6 +57,7 @@ const ExtraSpace = styled.div`
 
 
 export default function Event({ event }) {
+
     const [navValue, setNavValue] = useState(1);
     const time = event.eventDate.seconds
     const date = new Date(time * 1000)
