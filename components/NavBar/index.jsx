@@ -60,7 +60,6 @@ export default function LabelBottomNavigation({
         value={value}
         active={value}
         onChange={(event, newValue) => {
-          // console.log(value)
           value = newValue;
         }}
       >
