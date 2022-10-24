@@ -14,8 +14,7 @@ import ShareLink from "../../components/ShareLink";
 import FavoriteBtn from "../../components/FavoriteBtn";
 
 const EventImageBlock = styled.div`
-
-position: relative;
+    position: relative;
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -43,7 +42,6 @@ const FunctionsBox = styled.div`
     bottom: 10%;
     border-radius: 20px;
     padding: 8px;
-
 `
 
 
@@ -54,7 +52,6 @@ const EventDescription = styled.div`
 const ExtraSpace = styled.div`
     height: 50px;
 `
-
 
 export default function Event({ event }) {
 

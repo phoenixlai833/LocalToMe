@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { useHits, InstantSearch } from "react-instantsearch-hooks-web";
+// import { useHits, InstantSearch } from "react-instantsearch-hooks-web";
 import styled from "styled-components";
 
 
@@ -83,12 +83,7 @@ const ExtraSpace = styled.div`
   height: 70px;
 `
 
-export default function EventsList() {
-  const { hits } = useHits();
-  let eventList = hits;
-
-
-
+export default function EventsList({ eventList }) {
   return (
     <div>
       <RecentEvent>Recent Events</RecentEvent>
