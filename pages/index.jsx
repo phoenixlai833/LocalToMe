@@ -11,7 +11,7 @@ import NavbarIcons from "../components/NavBar/NavIcons";
 import FloatingActionButton from "../components/FloatButton";
 import { Container, FlexBox, Wrapper } from "../styles/globals";
 import CarouselCard from "../components/CarouselCard";
-import News from "../components/News";
+import NewsCard from "../components/NewsCard";
 import styled from "styled-components";
 
 const SearchBar = styled.div`
@@ -117,7 +117,7 @@ export default function Home({ events }) {
           <p style={{ color: "green" }}>view all</p>
         </Link>
       </div>
-      <News />
+      <NewsCard />
 
       <FloatingActionButton />
       <NavBar value={navValue} onChange={(event, newValue) => {
