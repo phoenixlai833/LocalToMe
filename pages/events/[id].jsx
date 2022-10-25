@@ -47,7 +47,7 @@ const FunctionsBox = styled.div`
 `
 
 const EventDescription = styled.div`
-        margin: 30px;
+    margin: 30px;
 `
 
 const ExtraSpace = styled.div`
