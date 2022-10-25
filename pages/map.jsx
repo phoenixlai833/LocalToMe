@@ -11,7 +11,7 @@ import { getEvents } from "../server/database";
 // import 'react-map-gl-directions/dist/mapbox-gl-directions.css';
 // import Directions from 'react-map-gl-directions';
 import algoliasearch from "algoliasearch/lite";
-import { InstantSearch, SearchBox, useHits, Hits } from "react-instantsearch-hooks-web";
+import { InstantSearch, SearchBox, useHits } from "react-instantsearch-hooks-web";
 import Filters from '../components/Filters';
 import NavBar from '../components/NavBar';
 import styled from "styled-components";
@@ -121,6 +121,10 @@ overflow-y: hidden;
   display: none;
 }
 `
+
+function EventMapPinHits() {
+    
+}
 
 export default function FoodBankMap({ foodBanksList, eventList }) {
 
