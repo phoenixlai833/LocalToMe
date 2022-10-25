@@ -11,18 +11,18 @@ import Icon from '@mui/material';
 import NavbarIcons from './NavIcons';
 
 const NavBar = styled(BottomNavigation)`
-width:100vw;
-position:fixed;
-bottom:0;
-color:#535353;
-box-shadow: 0px -2px 8px rgba(0, 0, 0, 0.25);
-z-index:1;
+  width:100vw;
+  position:fixed;
+  bottom:0;
+  color:#535353;
+  box-shadow: 0px -2px 8px rgba(0, 0, 0, 0.25);
+  z-index:1;
 `
 const NavBarAction = styled(BottomNavigationAction)`
-font-family:'Rubik', sans-serif;
-max-width:none;
-&:hover{
-  color:${Colours.primary};
+  font-family:'Rubik', sans-serif;
+  max-width:none;
+  &:hover{
+    color:${Colours.primary};
 }
 `
 export default function LabelBottomNavigation({

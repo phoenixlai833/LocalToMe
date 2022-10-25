@@ -11,7 +11,7 @@ export default function EditEvent({ event }) {
     // const [title, setTitle] = useState(event.eventTitle);
     // const [creator, setCreator] = useState(event.eventCreator);
     // const [image, setImage] = useState(event.eventImage);
-    
+
     // //
     // const [events, setEvents] = useState([]);
     // useEffect(() => {
@@ -53,7 +53,7 @@ export default function EditEvent({ event }) {
 
     return (
         <>
-        Edit
+            Edit
             {/* <form onSubmit={onSubmit}>
                 <input type="file" onChange={onFileChange} />
                 <input type="text" name="eventname" placeholder="NAME" />
@@ -79,4 +79,3 @@ export default function EditEvent({ event }) {
 //       props: { event },
 //     };
 //   }
-  

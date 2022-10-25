@@ -15,9 +15,9 @@ color:${Colours.background};
 &:hover{
     background-color:${Colours.secondary};
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     left:80vw;
-  }
+}
 `
 export default function FloatingActionButton({
 

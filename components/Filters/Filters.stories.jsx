@@ -43,7 +43,7 @@ EventFilt.args = {
    active: true,
    icon:"check",
    tagline:"test",
-   color:'red',
-   txtcolor:"red"
-
+   color:'white',
+   txtcolor:"red",
+   border:"red 2px solid"
 }
