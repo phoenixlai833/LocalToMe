@@ -6,10 +6,14 @@ import { getEvent, deleteEvent } from '../../server/database';
 
 import styled from 'styled-components';
 
+// const AbsolutePos = styled.div`
+// position: absolute;
+// top: 25vh;
+// left: 20vw;
+// `
+
 const DeleteCont = styled.div`
-background-color: color: #FFFFFF;;
-top: 25vh;
-left: 20vw;
+background-color: #FFFFFF;
 width: 60vw;
 height: 50vh;
 padding: 2%;
@@ -81,6 +85,12 @@ export default function DeletePopup({ singleEvent }) {
         }
     };
 
+    const hidePopup = (e) => {
+        e.preventDefault();
+        console.log("hide")
+        setPosition("static")
+    }
+
     const singleEventComponent = (
         <div>
             {/* <img width="100" height="100" src={singleEvent.eventImage} alt={singleEvent.eventName} /> */}
@@ -93,7 +103,7 @@ export default function DeletePopup({ singleEvent }) {
             <h2 className={styles.h2}>Are you sure you want to delete this posting? This cannot be undone.</h2>
             {singleEventComponent}
             <BtnCont>
-                <CancelBtn>Cancel</CancelBtn>
+                <CancelBtn onClick={hidePopup}>Cancel</CancelBtn>
                 <DeleteBtn onClick={handleDelete(singleEvent.id)}>Confirm</DeleteBtn>
             </BtnCont>
         </DeleteCont>
