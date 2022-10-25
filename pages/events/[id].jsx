@@ -31,7 +31,7 @@ const EventImage = styled.img`
     object-fit: cover;
 `
 
-const FunctionsBox = styled.div`
+export const FunctionsBox = styled.div`
     display:flex;
     flex-direction: column;
     gap: 10px;
@@ -44,6 +44,7 @@ const FunctionsBox = styled.div`
     bottom: 10%;
     border-radius: 20px;
     padding: 8px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `
 
 const EventDescription = styled.div`
@@ -186,7 +187,7 @@ export default function Event({ event }) {
 
             <EventDescription>
                 <b>About:</b>
-                <p>{event.eventContent}</p>
+                <p style={{fontSize: '14px'}}>{event.eventContent}</p>
             </EventDescription>
 
             <EventCategoryTag eventCategories={["Food", "Fundraiser"]} />
