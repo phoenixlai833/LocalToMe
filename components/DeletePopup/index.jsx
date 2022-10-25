@@ -18,7 +18,6 @@ width: 60vw;
 height: 50vh;
 padding: 2%;
 margin: auto;
-font-family: 'Rubik', sans-serif;
 text-align: center;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 border-radius: 15px;

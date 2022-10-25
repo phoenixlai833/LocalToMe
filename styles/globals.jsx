@@ -6,6 +6,8 @@ display:flex;
 flex-direction:${props => props.direction || "row"};
 justify-content:center;
 align-items:center;
+padding-bottom:${props => props.pd || "0px"};
+gap:${props => props.gap || "0px"};
 `
 
 //container for every page
@@ -23,6 +25,8 @@ height:100vh;
 flex-direction:${props => props.direction || "row"};
 // text-align:center;
 max-width:100%;
+gap:${props => props.gap || "0px"};
+
 `
 
 

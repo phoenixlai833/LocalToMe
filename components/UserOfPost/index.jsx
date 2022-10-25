@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const UserInfo = styled.div`
-      display: flex;
-      align-items: center;
+   display: flex;
+   align-items: center;
 `
 const UserImg = styled.img`
    width: 70px;
