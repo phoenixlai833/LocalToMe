@@ -14,7 +14,6 @@ align-items:center;
 gap:3px;
 font-weight:600;
 font-size:12px;
-margin: 2%;
 `
 
 
