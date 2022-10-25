@@ -1,29 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Marker, Popup } from "react-map-gl";
 import Link from "next/link";
-import GetDirectionGreenBtn from "../GetDirectionGreenBtn";
-import styled from "styled-components";
+import styles from "./FoodBankMapPin.module.css";
 
-const FoodBankNameLink = styled.p`
-:hover {
-    color: rgb(49, 143, 237);
-    text - decoration: underline;
-}
-`;
-
-const Readmore = styled.span`
-    color: rgb(49, 143, 237);
-`
-
-const MarkerBtn = styled.button`
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    img {
-    width: 20px;
-    height: 28px;
-    }
-`
 
 export default function FoodBankMapPin({ foodBanksList }) {
 
@@ -43,29 +22,29 @@ export default function FoodBankMapPin({ foodBanksList }) {
         };
     }, []);
 
+    console.log(selectedEvent)
 
     return (
         <div>
 
-            {foodBanksList.map((item) => {
-                console.log(item)
-                return (
+            {foodBanksList.map((item) => (
                 <Marker
                     key={item.id}
                     latitude={item.latitude}
                     longitude={item.longitude}
                     color="red"
                 >
-                    <MarkerBtn
+                    <button
+                        className={styles.markerBtn}
                         onClick={(e) => {
                             e.preventDefault();
                             setSelectedFoodbank(item);
                         }}
                     >
                         <img src="./Food_Bank_Map_Pin.svg" alt="foodbank pin" />
-                    </MarkerBtn>
+                    </button>
                 </Marker>
-            )}
+            )
             )}
 
             {selectedFoodbank && (
@@ -79,12 +58,12 @@ export default function FoodBankMapPin({ foodBanksList }) {
                     }}
                 >
                     <div>
-                        <FoodBankNameLink>
+                        <p className={styles.foodBankNameLink}>
                             <Link href={`/foodBank/${selectedFoodbank.id}`}>
                                 <h2>{selectedFoodbank.program_name}</h2>
 
                             </Link>
-                        </FoodBankNameLink>
+                        </p>
                         <p>
                             <b>Location:</b>
                             {selectedFoodbank.location_address}
@@ -105,13 +84,13 @@ export default function FoodBankMapPin({ foodBanksList }) {
                         <p>
                             <b>Description:</b>
                             {selectedFoodbank.description.slice(0, 45)}
-                            <Readmore>
+                            <span className={styles.readmore}>
                                 <Link href={`/foodBank/${selectedFoodbank.id}`}>
                                     ...Read More
                                 </Link>
-                            </Readmore>
+                            </span>
                         </p>
-                        <GetDirectionGreenBtn address={selectedFoodbank.location_address} onMap={true} />
+                        <button onClick={() => { }}>Get Direction</button>
 
                     </div>
 

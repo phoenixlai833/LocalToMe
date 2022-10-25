@@ -20,7 +20,7 @@ const ImageContainer = styled.div`
 const TextContainer = styled.div`
     display:flex;
     flex-direction:column;
-    line-height: 1.5;
+    line-height:0px;
     color:white;
     font-size: 20px;
     font-weight: 700;
@@ -30,7 +30,6 @@ const Time = styled.p`
     color:#F2DE29;
     font-size: 12px;
     font-weight: 600;
-    line-height: 0;
 `
 const DateContainer = styled.div`
     background:white;
