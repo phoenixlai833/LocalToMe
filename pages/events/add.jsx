@@ -23,7 +23,9 @@ export default function NewEvent({ eventList, eventCategories }) {
 
   const [eventName, setEventName] = useState("");
   const [eventCreator, setEventCreator] = useState(1);
-  const [eventLocation, setEventLocation] = useState("555 Seymour St, Vancouver, BC V6B 3H6");
+  const [eventLocation, setEventLocation] = useState(
+    "555 Seymour St, Vancouver, BC V6B 3H6"
+  );
   const [eventDescription, setEventDescription] = useState("");
   const [eventCategory, setEventCategory] = useState(0);
   const [coordinates, setCoordinates] = useState({ lat: 49.25, lon: -123 });
@@ -57,12 +59,12 @@ export default function NewEvent({ eventList, eventCategories }) {
       eventCreatorId: 1,
       eventDate: startDate,
       latitude: coordinates.lat,
-      longitude: coordinates.lon
+      longitude: coordinates.lon,
     };
 
-    axios.post('/api/events', event).then((res) => {
-      console.log('posted successfully', res.data)
-    })
+    axios.post("/api/events", event).then((res) => {
+      console.log("posted successfully", res.data);
+    });
   };
 
   const onDelete = (passedEvent) => async (e) => {
@@ -78,8 +80,8 @@ export default function NewEvent({ eventList, eventCategories }) {
     setConfirmDelete(false);
   }
 
-  function handleChangeEventName(name) {
-    setEventName(name);
+  function handleChangeEventName(e) {
+    setEventName(e.target.value);
   }
 
   function handleChangeEventCreator() {
@@ -87,8 +89,8 @@ export default function NewEvent({ eventList, eventCategories }) {
     return;
   }
 
-  function handleChangeEventDescription(description) {
-    setEventDescription(description);
+  function handleChangeEventDescription(e) {
+    setEventDescription(e.target.value);
   }
   function handleChangeStartDate(date) {
     setStartDate(date);
@@ -112,44 +114,56 @@ export default function NewEvent({ eventList, eventCategories }) {
 
   return (
     <div>
-      <form onSubmit={onSubmit}>
-        <p>Basic Information</p>
-        <input type="file" onChange={onFileChange} />
-        <input
-          type="text"
-          name="event-name"
-          placeholder="Event name"
-          onChange={handleChangeEventName}
-        />
-        <input type="text" name="event-creator" placeholder="Host/Organizer" value="Editing this does nothing, creatorId will always be 1" />
-        <p>Location of your Event</p>
-        <input value={eventLocation}></input>
-        <p>Date & Time of your Event</p>
-        <p>Start date</p>
-        <DatePicker
-          selected={startDate}
-          onChange={handleChangeStartDate}
-        ></DatePicker>
-        <p>Start time</p>
-        <TimePicker
-          onChange={handleChangeStartTime}
-          value={startTime}
-        ></TimePicker>
-        <p>End date</p>
-        <DatePicker
-          selected={endDate}
-          onChange={handleChangeEndDate}
-        ></DatePicker>
-        <p>End time</p>
-        <TimePicker onChange={handleChangeEndTime} value={endTime}></TimePicker>
-        <p>Description</p>
-        <textarea onChange={handleChangeEventDescription} placeholder="Tell us about your event"></textarea>
-        {eventCategories.map((c) => (
-          <button key={c.id} id={c.id} onClick={handleChangeEventCategory}>{c.eventCategory}</button>
-        ))}
-        <button>Submit</button>
-      </form>
-      <ul>
+    <form onSubmit={onSubmit}>
+      <p>Basic Information</p>
+      <input type="file" onChange={onFileChange} />
+      <input
+        type="text"
+        name="event-name"
+        placeholder="Event name"
+        onChange={handleChangeEventName}
+      />
+      <input
+        readOnly
+        type="text"
+        name="event-creator"
+        placeholder="Host/Organizer"
+        value="Editing this does nothing, creatorId will always be 1"
+      />
+      <p>Location of your Event</p>
+      <input value={eventLocation} readOnly></input>
+      <p>Date & Time of your Event</p>
+      <p>Start date</p>
+      <DatePicker
+        selected={startDate}
+        onChange={handleChangeStartDate}
+      ></DatePicker>
+      <p>Start time</p>
+      <TimePicker
+        onChange={handleChangeStartTime}
+        value={startTime}
+      ></TimePicker>
+      <p>End date</p>
+      <DatePicker
+        selected={endDate}
+        onChange={handleChangeEndDate}
+      ></DatePicker>
+      <p>End time</p>
+      <TimePicker onChange={handleChangeEndTime} value={endTime}></TimePicker>
+      <p>Description</p>
+      <textarea
+        onChange={handleChangeEventDescription}
+        placeholder="Tell us about your event"
+      ></textarea>
+      {eventCategories.map((c) => (
+        <button key={c.id} id={c.id} onClick={handleChangeEventCategory}>
+          {c.eventCategory}
+        </button>
+      ))}
+      <button>Submit</button>
+    </form>
+
+  <ul>
         {eventList.map((e) => {
           return (
             <li key={e.eventName}>
@@ -171,8 +185,8 @@ export default function NewEvent({ eventList, eventCategories }) {
           <DeletePopup singleEvent={eventInfo} />
         </div>
       )}
-    </div>
-  );
+      </div>
+      );
 }
 
 export async function getServerSideProps(context) {
