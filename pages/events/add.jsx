@@ -11,10 +11,9 @@ import { collection, getDocs, addDoc } from "firebase/firestore";
 // import Event from "../../components/Event";
 // import Image from `next/image`;
 import DeletePopup from "../../components/DeletePopup";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import TimePicker from "react-time-picker/dist/entry.nostyle";
+import TimeInput from "../../components/TimeInput";
 import NavBar from '../../components/NavBar';
+import EventForm from "../../components/EventForm";
 import axios from "axios";
 
 export default function NewEvent({ eventList, eventCategories }) {
@@ -100,45 +99,7 @@ export default function NewEvent({ eventList, eventCategories }) {
 
   return (
     <div>
-      <form onSubmit={onSubmit}>
-        <p>Basic Information</p>
-        <input type="file" onChange={onFileChange} />
-        <p>Event Name</p>
-        <input
-          type="text"
-          name="event-name"
-          placeholder="Event name"
-          onChange={handleChangeEventName}
-        />
-        <p>event creator</p>
-        <input type="text" name="event-creator" placeholder="Host/Organizer" value="Editing this does nothing, creatorId will always be 1" />
-        <p>Location of your Event</p>
-        <input value={eventLocation}></input>
-        <p>Date & Time of your Event</p>
-        <p>Start date</p>
-        <DatePicker
-          selected={startDate}
-          onChange={handleChangeStartDate}
-        ></DatePicker>
-        <p>Start time</p>
-        <TimePicker
-          onChange={handleChangeStartTime}
-          value={startTime}
-        ></TimePicker>
-        <p>End date</p>
-        <DatePicker
-          selected={endDate}
-          onChange={handleChangeEndDate}
-        ></DatePicker>
-        <p>End time</p>
-        <TimePicker onChange={handleChangeEndTime} value={endTime}></TimePicker>
-        <p>Description</p>
-        <textarea onChange={handleChangeEventDescription} placeholder="Tell us about your event"></textarea>
-        {eventCategories.map((c) => (
-          <button key={c.id} id={c.id} onClick={handleChangeEventCategory}>{c.eventCategory}</button>
-        ))}
-        <button>Submit</button>
-      </form>
+      <EventForm />
       <NavBar value={navValue} onChange={(event, newValue) => {
         setNavValue(newValue);
       }} />
