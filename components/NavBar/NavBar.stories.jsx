@@ -12,5 +12,4 @@ export const Base = Template.bind({});
 
 Base.args = {
   value:0
-
 };

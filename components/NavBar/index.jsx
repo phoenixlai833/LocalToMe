@@ -2,7 +2,8 @@ import * as React from 'react';
 import styled from 'styled-components'
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import { Colours, Theme } from '../../styles/globals';
+// import { Colours, Theme } from '../../styles/globals';
+import { Colours } from '../../styles/globals';
 import { ThemeProvider } from '@mui/material';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
@@ -20,21 +21,35 @@ const NavBar = styled(BottomNavigation)`
 `
 const NavBarAction = styled(BottomNavigationAction)`
   font-family:'Rubik', sans-serif;
+  // border:1px black solid;
   max-width:none;
   &:hover{
     color:${Colours.primary};
 }
 `
+import { createTheme } from '@mui/material';
+
+export const Theme = createTheme({
+  typography: {
+    fontFamily: [
+      "Rubik, sans-serif"
+    ]
+  },
+  palette: {
+    primary: {
+      main: `#068906`
+    },
+    secondary: {
+      main: `#085617`
+    }
+  }
+});
+
 export default function LabelBottomNavigation({
   value = 0,
-  // onHome=()=>{},
-  // onCommunity=()=>{},
-  // onMap=()=>{},
-  // onFavourites=()=>{},
-  // onProfile=()=>{}
 }) {
   const r = useRouter();
-  // var [value, setState] = useState(0);
+  // let [navValue, setNavValue] = useState(value);
   const onHome = () => {
     r.push("/");
   }

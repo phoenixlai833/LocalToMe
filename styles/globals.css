@@ -59,3 +59,16 @@ a {
   border-radius: 4px;
 }
 
+.MuiBottomNavigationAction-root {
+  padding-top:2px;
+}
+
+.MuiBottomNavigationAction-root .Mui-selected {
+  font-size:12px;
+  display:flex;
+  justify-content:center;
+  border-bottom:#068906 2px solid;
+  border-bottom-left-radius:2px;
+  border-bottom-right-radius:2px;
+  width:30px;
+}

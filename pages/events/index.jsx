@@ -6,15 +6,12 @@ import { useState } from "react";
 import FloatingActionButton from "../../components/FloatButton";
 
 export default function Events({ eventList }) {
-    const [navValue, setNavValue] = useState(1);
 
     return (
         <div>
             <EventsList eventList={eventList} />
             <FloatingActionButton/>
-            <NavBar value={navValue} onChange={(event, newValue) => {
-                    setNavValue(newValue);
-                }} />
+            <NavBar value={1}/>
         </div>
     )
 }

@@ -128,7 +128,6 @@ function EventMapPinHits() {
 
 export default function FoodBankMap({ foodBanksList, eventList }) {
 
-    const [navValue, setNavValue] = useState(2);
 
     const [viewport, setViewport] = useState({
         latitude: 49.2827,
@@ -203,9 +202,7 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
                     </FilterbtnSection>
                 </FilterListContainer>
             </SearchArea>
-            <NavBar value={navValue} onChange={(event, newValue) => {
-                setNavValue(newValue);
-            }} />
+            <NavBar value={2}/>
         </div >
     );
 }

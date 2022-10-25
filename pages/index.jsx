@@ -76,7 +76,7 @@ justify-content: space-between;
 // this should be homepage, just using for testing right now
 // maybe move some of this to map
 export default function Home({ events }) {
-  const [navValue, setNavValue] = useState(0);
+  // const [navValue, setNavValue] = useState(0);
 
   // const foodBanksComponent = foodBanksList.map((foodbank) => (
   //   // <li key={fb.id}>
@@ -156,9 +156,7 @@ export default function Home({ events }) {
       </div>
 
       <FloatingActionButton />
-      <NavBar value={navValue} onChange={(event, newValue) => {
-        setNavValue(newValue);
-      }} />
+      <NavBar value={0}/>
     </div >
   );
 }
