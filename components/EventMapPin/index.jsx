@@ -1,8 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { Marker, Popup } from "react-map-gl";
 import Link from "next/link";
-import styles from "./EventMapPin.module.css";
+import GetDirectionGreenBtn from "../GetDirectionGreenBtn";
+import styled from "styled-components";
 
+const EventNameLink = styled.p`
+ :hover {
+    color: rgb(49, 143, 237);
+    text-decoration: underline;
+}
+`
+
+const Readmore = styled.span`
+    color: rgb(49, 143, 237);
+`
+
+const MarkerBtn = styled.button`
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+ img {
+    width: 20px;
+    height: 28px;
+}
+`
 
 export default function EventMapPin({ events }) {
 
@@ -16,10 +37,7 @@ export default function EventMapPin({ events }) {
         const time = selectedEvent.eventDate.seconds
         const date = new Date(time * 1000)
         eventTime = date.toLocaleString().split(',')[1]
-        const mothString = date.toLocaleString("default", { month: "long" })
-        const day = date.toLocaleString().split(',')[0].split('/')[1]
-        const year = date.toLocaleString().split(',')[0].split('/')[2]
-        eventDate = `${mothString} ${day}, ${year}`
+        eventDate = date.toLocaleString("default", { month: "long", day: "2-digit", year: "numeric" })
     }
 
 
@@ -47,21 +65,22 @@ export default function EventMapPin({ events }) {
                     latitude={event.latitude}
                     longitude={event.longitude}
                 >
-                    <button
-                        className={styles.markerBtn}
+                    <MarkerBtn
                         onClick={(e) => {
                             e.preventDefault();
                             setSelectedEvent(event);
                         }}
                     >
                         <img src="./eventPin.svg" alt="Event Pin" />
-                    </button>
+                    </MarkerBtn>
 
                 </Marker>
             )
             )}
 
+
             {selectedEvent && (
+
                 <Popup
                     latitude={selectedEvent.latitude}
                     longitude={selectedEvent.longitude}
@@ -70,13 +89,14 @@ export default function EventMapPin({ events }) {
                     onClose={() => {
                         setSelectedEvent(null);
                     }}
+
                 >
                     <div>
-                        <p className={styles.eventNameLink}>
+                        <EventNameLink>
                             <Link href={`/events/${selectedEvent.id}`} >
                                 <h2>{selectedEvent.eventName}</h2>
                             </Link>
-                        </p>
+                        </EventNameLink>
                         <p>
                             <b>Location:</b>
                             {selectedEvent.eventLocation}
@@ -98,20 +118,22 @@ export default function EventMapPin({ events }) {
                         <p>
                             <b>Description:</b>
                             {selectedEvent.eventContent.slice(0, 50)}
-                            <span className={styles.readmore}>
+                            <Readmore>
                                 <Link href={`/events/${selectedEvent.id}`}>
                                     ...Read More
                                 </Link>
-                            </span>
+                            </Readmore>
                         </p>
-                        <button onClick={() => { }}>Get Direction</button>
 
+                        <GetDirectionGreenBtn address={selectedEvent.eventLocation} onMap={true} />
                     </div>
 
                 </Popup>
-            )}
 
-        </div>
+            )
+            }
+
+        </div >
     )
 }
 

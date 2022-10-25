@@ -61,7 +61,7 @@ const ReadMore = styled.div`
    align-items:center;
    color:${Colours.primary}
 `
-export default function News({
+export default function NewsCard({
    tag = "event",
    organizer = "Organizer",
    avatar = "",
@@ -73,29 +73,34 @@ export default function News({
    onClose = () => { },
 
 }) {
-   return <NewsCont>
-      <LeftCont>
-         <Avatar src={avatar} />
-         <Divider />
-      </LeftCont>
-      <TextDiv>
-         <InfoDiv>
-            <h2>{organizer}</h2>
-            <p>{date}</p>
-         </InfoDiv>
-         <Filters>
-            <Filter tag={tag} active={true} icon={false}></Filter>
-            <Filter tag={tag} active={true} icon={false}></Filter>
-            <Filter tag={tag} active={true} icon={false}></Filter>
-         </Filters>
-         {expanded === false && <InfoDiv>
-            <Text expanded={expanded}>{info.substring(0, 100) + "..."}</Text> <ReadMore expanded={expanded} onClick={onExpand}>Read More <Icon>expand_more</Icon></ReadMore></InfoDiv>}
-         {expanded === true && <InfoDiv>
-            <Text expanded={expanded}>{info}</Text>
-            <ReadMore expanded={expanded} onClick={onClose}>Read Less <Icon>expand_less</Icon></ReadMore>
-         </InfoDiv>}
+   return (
+      <>
+         <NewsCont>
+            <LeftCont>
+               <Avatar src={avatar} />
+               <Divider />
+            </LeftCont>
+            <TextDiv>
+               <InfoDiv>
+                  <h2>{organizer}</h2>
+                  <p>{date}</p>
+               </InfoDiv>
+               <Filters>
+                  <Filter tag={tag} active={true} icon={false}></Filter>
+                  <Filter tag={tag} active={true} icon={false}></Filter>
+                  <Filter tag={tag} active={true} icon={false}></Filter>
+                  <Filter tag={tag} active={true} icon={false}></Filter>
+               </Filters>
+               {expanded === false && <InfoDiv>
+                  <Text expanded={expanded}>{info.substring(0, 100) + "..."}</Text> <ReadMore expanded={expanded} onClick={onExpand}>Read More <Icon>expand_more</Icon></ReadMore></InfoDiv>}
+               {expanded === true && <InfoDiv>
+                  <Text expanded={expanded}>{info}</Text>
+                  <ReadMore expanded={expanded} onClick={onClose}>Read Less <Icon>expand_less</Icon></ReadMore>
+               </InfoDiv>}
 
-         <ImageContainer src={src}></ImageContainer>
-      </TextDiv>
-   </NewsCont>
+               <ImageContainer src={src}></ImageContainer>
+            </TextDiv>
+         </NewsCont>
+      </>
+   )
 }

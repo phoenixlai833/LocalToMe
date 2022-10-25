@@ -1,11 +1,11 @@
-import News from ".";
+import NewsCard from "./index.jsx";
 
 export default {
    title: 'NewsCard',
-   component: News,
+   component: NewsCard,
 };
 
-const Template = (args) => <News {...args} />;
+const Template = (args) => <NewsCard {...args} />;
 
 export const Base = Template.bind({});
 

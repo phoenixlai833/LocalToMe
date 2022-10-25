@@ -12,6 +12,8 @@ box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
 max-width:85vw;
 min-width:85vw;
 flex-direction:column;
+margin: 15px auto;
+
 `
 
 const BubbleDiv = styled.div`
@@ -29,11 +31,11 @@ export default function Bubble({
    return <BubbleCont>
       {text.map((text, index) => {
          const icons = icon[index]
-      return <BubbleDiv key={index}>
-         {icons && <BubbleIcon>{icons}</BubbleIcon>}
-         <p>{text}</p>
+         return <BubbleDiv key={index}>
+            <BubbleIcon>{icons}</BubbleIcon>
+            <p>{text}</p>
          </BubbleDiv>
-   }
+      }
       )}
    </BubbleCont>
 }

@@ -7,6 +7,7 @@ import TopBanner from '../../components/TopBanner';
 import TextBubble from '../../components/TextBubble';
 import { Wrapper, Container, FlexBox } from '../../styles/globals';
 import { Filter, EventFilter } from '../../components/Filters';
+import GetDirectionGreenBtn from '../../components/GetDirectionGreenBtn';
 
 export default function FoodBank({ d }) {
 
@@ -21,7 +22,7 @@ export default function FoodBank({ d }) {
     // if(d.wheelchair_accessible) {locationInfo.push("Wheelchair Accessible: " + d.wheelchair_accessible); locationIcons.push("accessible")}
 
     if (d.signup_required) {
-        signUp.push("Signup Required: " + d.signup_required); signUpIcons.push('')
+        signUp.push("Signup Required: " + d.signup_required); signUpIcons.push('person_add')
         if (d.requires_referral) { signUp.push("Requires Referral: " + d.requires_referral); signUpIcons.push("diversity_1") };
         if (d.signup_email) { signUp.push(d.signup_email); signUpIcons.push("email") };
         if (d.signup_phone_number) { signUp.push(d.signup_phone_number); signUpIcons.push("call") };
@@ -38,7 +39,7 @@ export default function FoodBank({ d }) {
             {d.description && (<FlexBox direction="column" width="80%"><h3>Description:</h3><p>{d.description}</p></FlexBox>)}
             <TextBubble text={signUp} icon={signUpIcons} />
 
-            <FlexBox direction="column" gap="5px" pd="100px">
+            <FlexBox direction="column" gap="5px">
                 <FlexBox gap="5px">
                 {d.wheelchair_accessible === "Yes" ? <EventFilter tag={"Wheelchair Accessible"} /> : <EventFilter tag={"Wheelchair Accessible"} active={true} />}
                 {d.delivery_available === "Yes" ? <EventFilter tag={"Delivery Available"} /> : <EventFilter tag={"Delivery Available"} active={true} />}
@@ -47,10 +48,13 @@ export default function FoodBank({ d }) {
                 {d.takeout_available === "Yes" ? <EventFilter tag={"Takeout Available"} /> : <EventFilter tag={"Takeout Available"} active={true} />}
                 {d.provides_hampers === "True" ? <EventFilter tag={"Provides Hampers"} /> : <EventFilter tag={"Provides Hampers"} active={true} />}
                 </FlexBox>
+                <FlexBox>
                 {d.provides_meals === "True" ? <EventFilter tag={"Provides Meals"} /> : <EventFilter tag={"Provides Meals"} active={true} />}
+                </FlexBox>
             </FlexBox>
 
-    
+            <GetDirectionGreenBtn address={d.location_address} onMap={false} />
+
             {/* {d.organization_name && (<h2>Organization Name: {d.organization_name}</h2>)}
             {d.program_population_served && (<h3>Population Served: {d.program_population_served}</h3>)}
             {d.wheelchair_accessible && (<p>Wheelchair Acessible: {d.wheelchair_accessible}</p>)}
@@ -76,12 +80,11 @@ export default function FoodBank({ d }) {
 }
 
 export async function getServerSideProps({ params }) {
-    // console.log(params.id)
+
     const req = await getFoodBank(params.id)
-    // console.log(req)
+
     const d = JSON.parse(JSON.stringify(req));
     // const data = [oneFoodBankObj._document.data.value.mapValue.fields]
-    // console.log(d)
 
     // // set all foodbank data in firestore
     // const fbDataAPI = await fetch("https://opendata.vancouver.ca/api/records/1.0/search/?dataset=free-and-low-cost-food-programs&q=&rows=200&facet=program_name&facet=local_areas&facet=provides_meals&facet=provides_hampers&facet=takeout_available&facet=wheelchair_accessible&facet=signup_required&facet=requires_referral");

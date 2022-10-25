@@ -14,13 +14,14 @@ align-items:center;
 gap:2px;
 font-weight:600;
 font-size:12px;
-border: ${props => props.border || "0px" }
+border: ${props => props.border || "0px" };
+margin:2% auto;
 `
 
 
 export default function Filter({
    tag = "",
-   tagline = "",
+   // tagline = filterOpt[tag].tag,
    onPress = () => { },
    active = false,
    icon = filterOpt[tag].icon,
@@ -30,7 +31,8 @@ export default function Filter({
 
    return <FilterCont txtcolor={txtcolor} active={false} onClick={onPress} color={color}>
       {icon && <Icon>{icon}</Icon>}
-      <p>{tagline = filterOpt[tag].tag}</p>
+      {/* <p>{tagline}</p> */}
+      <p>{tag}</p>
    </FilterCont>
 }
 
