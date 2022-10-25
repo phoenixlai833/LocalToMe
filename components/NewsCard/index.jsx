@@ -6,11 +6,8 @@ import { Avatar } from "@mui/material";
 
 const NewsCont = styled.div`
    background:${Colours.background};
-   // color:${Colours.primary};
    display:flex;
-   // max-width:90vw;
    width:90vw;
-   // min-width:90vw;
    gap:10px;
 `
 

@@ -90,12 +90,35 @@ display:none;
 }
 `
 
+// const FilterbtnSection = styled.div`
+// display: flex;
+// justify-content: flex-start;
+// overflow: hidden;
+// @media (max-width: 767px) {
+//     justify-content: flex-end;
+//     width: 100vw;
+// }
+// `
+
 const FilterbtnSection = styled.div`
+width: 30vw;
 display: flex;
 justify-content: flex-start;
-overflow-x: scroll;
+overflow: hidden;
 @media (max-width: 767px) {
+    justify-content: flex-end;
     width: 85vw;
+    overflow: hidden;
+}
+`
+
+const FilterListContainer = styled.div`
+white-space: nowrap;
+overflow-x: scroll;
+overflow-y: hidden;
+-webkit-overflow-scrolling: touch;
+&::-webkit-scrollbar {
+  display: none;
 }
 `
 
@@ -121,7 +144,7 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
     const filterFoodBanks = () => { }
 
     return (
-        <InstantSearch indexName="prod_FOODBANKS" searchClient={searchClient}>
+        <div>
             <div className="mapboxgl-canvas">
                 <ReactMapGL
                     ref={mapRef}
@@ -168,17 +191,22 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
                 {/* <InstantSearch indexName={"10"} searchClient={searchClient}>
                     <StyledSearchBox />
                 </InstantSearch> */}
-                <FilterbtnSection>
-                    <Filters tag={"Food Banks"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} />
-                    <Filters tag={"Events"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} />
-                    <Filters tag={"Open Now"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} />
-                    <Filters tag={"Less than 1km"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} />
-                </FilterbtnSection>
+                <FilterListContainer>
+                    <FilterbtnSection>
+                        <ul style={{ display: "flex", listStyle: "none", padding: "0" }}>
+                            <li><Filters tag={"Food Banks"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} /></li>
+                            <li><Filters tag={"Food Banks"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} /></li>
+                            <li><Filters tag={"Events"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} /></li>
+                            <li><Filters tag={"Open Now"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} /></li>
+                            <li><Filters tag={"Less than 1km"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} /></li>
+                        </ul>
+                    </FilterbtnSection>
+                </FilterListContainer>
             </SearchArea>
             <NavBar value={navValue} onChange={(event, newValue) => {
                 setNavValue(newValue);
             }} />
-        </InstantSearch>
+        </div >
     );
 }
 
