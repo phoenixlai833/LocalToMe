@@ -12,6 +12,7 @@ import AddToCalander from "../../components/AddToCalander";
 import ShareLink from "../../components/ShareLink";
 import FavoriteBtn from "../../components/FavoriteBtn";
 import styled from 'styled-components';
+import { FunctionsBox } from '../events/[id]';
 
 const EventImageBlock = styled.div`
     position: relative;
@@ -27,21 +28,6 @@ const EventImage = styled.img`
     width: 100%;
     height: 250px;
     object-fit: cover;
-`
-
-const FunctionsBox = styled.div`
-    display:flex;
-    flex-direction: column;
-    gap: 10px;
-    position: absolute;
-    background-color: RGBA(255, 255, 255, 0.9);
-    width:40px ;
-    height: 110px;
-    position: absolute;
-    right:3%;
-    bottom: 10%;
-    border-radius: 20px;
-    padding: 8px;
 `
 
 const EventDescription = styled.div`
