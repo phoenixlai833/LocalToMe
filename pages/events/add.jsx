@@ -24,7 +24,9 @@ export default function NewEvent({ eventList, eventCategories }) {
 
   const [eventName, setEventName] = useState("");
   const [eventCreator, setEventCreator] = useState(1);
-  const [eventLocation, setEventLocation] = useState("555 Seymour St, Vancouver, BC V6B 3H6");
+  const [eventLocation, setEventLocation] = useState(
+    "555 Seymour St, Vancouver, BC V6B 3H6"
+  );
   const [eventDescription, setEventDescription] = useState("");
   const [eventCategory, setEventCategory] = useState(0);
   const [coordinates, setCoordinates] = useState({ lat: 49.25, lon: -123 });
@@ -56,12 +58,12 @@ export default function NewEvent({ eventList, eventCategories }) {
       eventCreatorId: 1,
       eventDate: startDate,
       latitude: coordinates.lat,
-      longitude: coordinates.lon
+      longitude: coordinates.lon,
     };
 
-    axios.post('/api/events', event).then((res) => {
-      console.log('posted successfully', res.data)
-    })
+    axios.post("/api/events", event).then((res) => {
+      console.log("posted successfully", res.data);
+    });
   };
 
   function handleChangeEventName(name) {
@@ -73,8 +75,8 @@ export default function NewEvent({ eventList, eventCategories }) {
     return;
   }
 
-  function handleChangeEventDescription(description) {
-    setEventDescription(description);
+  function handleChangeEventDescription(e) {
+    setEventDescription(e.target.value);
   }
   function handleChangeStartDate(date) {
     setStartDate(date);

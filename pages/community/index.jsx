@@ -43,27 +43,15 @@ export default function Community() {
     }
   };
 
-  const handleToggleTab = (e) => {
-    if (e.target.id) {
-      setTab(+e.target.id);
-    }
-  };
-
-
-  // const handleAdd = () => {
-  //   setIsAdd(!isAdd);
-  // };
-
-
-
   const StyledSearchBox = styled(SearchBox)`
-  form{
+  form {
     
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
   }
+
   input {
    position: relative;
     background-color:#E4E4E4;
@@ -74,23 +62,27 @@ export default function Community() {
     border: none;
     font-size: 20px;
   }
-  button {
+
+  .ais-SearchBox-submit {
     position: absolute;
     right: 10%;
-    height:45px;
-    width:45px;
-    border-color:transparent;
-    background-color:transparent;
+    height: 45px;
+    width: 45px;
+    border: none;
+    background-color: transparent;
   }
+
   .ais-SearchBox-submitIcon{
-  width:20px;
-  height:20px;
+    width:20px;
+    height:20px;
   }
-.ais-SearchBox-submitIcon path{
+
+  .ais-SearchBox-submit{
 
   fill:#108928;
 }
-.ais-SearchBox-resetIcon{
+
+  .ais-SearchBox-reset{
   display:none;
 }
   `
@@ -126,7 +118,7 @@ border-bottom:1.5px solid #D9D9D9;
   return (
     <>
       <InstantSearch indexName={tabContents[tab].searchIndex} searchClient={searchClient}>
-        <StyledSearchBox />
+        <StyledSearchBox reset={null}/>
         <Tab onClick={handleChangeTab} >
 
           <EventTab id="0">
@@ -137,20 +129,6 @@ border-bottom:1.5px solid #D9D9D9;
           </NewTab>
 
         </Tab>
-        {/* <button className="add-button" onClick={handleAdd}>
-          Add
-        </button>
-        {isAdd && (
-          <div>
-            <h3>What do you want to create today?</h3>
-            <Link href="../events/add">
-              <button>Event</button>
-            </Link>
-            <Link href="../news/add">
-              <button>News Article</button>
-            </Link>
-          </div>
-        )} */}
         {tabContents[tab].component}
       </InstantSearch>
       <FloatingActionButton />
