@@ -11,10 +11,14 @@ const ImageContainer = styled.div`
     background-repeat: no-repeat;
     border-radius: 15px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    max-width:500px;
-    min-width:300px;
-    min-height:25vh;
-    padding:15px;
+    max-width: 300px;
+    min-width: 250px;
+    max-height: 37vh;
+    padding: 15px 15px 20px;
+    // max-width:500px;
+    // min-width:300px;
+    // min-height:25vh;
+    // padding:15px;
 `;
 
 const TextContainer = styled.div`
@@ -22,15 +26,22 @@ const TextContainer = styled.div`
     flex-direction:column;
     line-height: 1.5;
     color:white;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
-    justify-self:flex-end;
+    justify-self: flex-end;
+    align-items: flex-start;
+    z-index: 1;
+    position: relative;
+    padding: 0px 0px 0px;
+    white-space: pre-wrap;  
+
 `
 const Time = styled.p`
     color:#F2DE29;
     font-size: 12px;
     font-weight: 600;
     line-height: 0;
+    margin: 10px 0px 0px;
 `
 const DateContainer = styled.div`
     background:white;
@@ -38,10 +49,12 @@ const DateContainer = styled.div`
     justify-content:center;
     align-self:flex-end;;
     justify-self:center;
-    padding:5px;
+    padding: 6px 7px 8px;
     border-radius:15px;
     text-align:center;
     font-weight:1000;
+    font-size: 14px;
+
 `
 export default function CarouselCard({
     event = "Event Name",
@@ -60,9 +73,9 @@ export default function CarouselCard({
                 {day}
             </DateContainer>
             <TextContainer>
-                <p>{event}</p>
+                <p style={{marginBottom:0}}>{event}</p>
                 <Time>{time}</Time>
             </TextContainer>
-        </ImageContainer>
+        </ImageContainer> 
     )
 }
