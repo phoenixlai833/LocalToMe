@@ -1,11 +1,12 @@
 import EventMapPin from "./index";
+import { InstantSearch } from "react-instantsearch-hooks-web";
 
 export default {
     title: "EventMapPin",
     component: EventMapPin
 }
 
-const event = [{
+const events = [{
     id: 'testing',
     eventContactEmail: 'surreyfoodbank@gmail.com',
     longitude: '-122.849136',
@@ -31,5 +32,5 @@ const event = [{
     eventDate: { seconds: 1669050000, nanoseconds: 17000000 }
 }];
 
-export const Default = () => <EventMapPin e={event} />
-export const Error = () => <EventMapPin />
+export const Default = () => <EventMapPin events={events} />
+export const Error = () => <EventMapPin events={events} />

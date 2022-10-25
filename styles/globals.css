@@ -6,6 +6,9 @@ body {
   margin: 0;
   font-family: 'Rubik', sans-serif;
 }
+button {
+  font-family: 'Rubik', sans-serif;
+}
 
 a {
   color: inherit;
@@ -54,3 +57,4 @@ a {
   margin: 12px;
   border-radius: 4px;
 }
+

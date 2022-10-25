@@ -11,6 +11,6 @@ export default {
 export const Base = Template.bind({});
 
 Base.args = {
-  test:20
+  value:0
 
 };
