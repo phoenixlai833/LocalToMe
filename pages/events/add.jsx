@@ -14,7 +14,6 @@ import DeletePopup from "../../components/DeletePopup";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TimePicker from "react-time-picker/dist/entry.nostyle";
-import NavBar from '../../components/NavBar';
 import axios from "axios";
 
 export default function NewEvent({ eventList, eventCategories }) {
@@ -24,20 +23,21 @@ export default function NewEvent({ eventList, eventCategories }) {
 
   const [eventName, setEventName] = useState("");
   const [eventCreator, setEventCreator] = useState(1);
-  const [eventLocation, setEventLocation] = useState(
-    "555 Seymour St, Vancouver, BC V6B 3H6"
-  );
+  const [eventLocation, setEventLocation] = useState("555 Seymour St, Vancouver, BC V6B 3H6");
   const [eventDescription, setEventDescription] = useState("");
   const [eventCategory, setEventCategory] = useState(0);
   const [coordinates, setCoordinates] = useState({ lat: 49.25, lon: -123 });
   const [endDate, setEndDate] = useState(new Date());
   const [endTime, setEndTime] = useState("00:00");
-  const [navValue, setNavValue] = useState(1);
+
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [eventInfo, setEventInfo] = useState(null);
 
   const onFileChange = async (e) => {
     const file = e.target.files[0];
     const fileRef = ref(storage, file.name);
     // await fileRef.put(file);
+    console.log(fileRef);
     await uploadBytes(fileRef, file);
     setEventImage(await getDownloadURL(fileRef));
   };
@@ -58,13 +58,26 @@ export default function NewEvent({ eventList, eventCategories }) {
       eventCreatorId: 1,
       eventDate: startDate,
       latitude: coordinates.lat,
-      longitude: coordinates.lon,
+      longitude: coordinates.lon
     };
 
-    axios.post("/api/events", event).then((res) => {
-      console.log("posted successfully", res.data);
-    });
+    axios.post('/api/events', event).then((res) => {
+      console.log('posted successfully', res.data)
+    })
   };
+
+  const onDelete = (passedEvent) => async (e) => {
+    {
+      e.preventDefault();
+      console.log(passedEvent);
+      setEventInfo(passedEvent);
+      setConfirmDelete(true);
+    }
+  };
+
+  function hidePopup() {
+    setConfirmDelete(false);
+  }
 
   function handleChangeEventName(name) {
     setEventName(name);
@@ -75,8 +88,8 @@ export default function NewEvent({ eventList, eventCategories }) {
     return;
   }
 
-  function handleChangeEventDescription(e) {
-    setEventDescription(e.target.value);
+  function handleChangeEventDescription(description) {
+    setEventDescription(description);
   }
   function handleChangeStartDate(date) {
     setStartDate(date);
@@ -103,14 +116,12 @@ export default function NewEvent({ eventList, eventCategories }) {
       <form onSubmit={onSubmit}>
         <p>Basic Information</p>
         <input type="file" onChange={onFileChange} />
-        <p>Event Name</p>
         <input
           type="text"
           name="event-name"
           placeholder="Event name"
           onChange={handleChangeEventName}
         />
-        <p>event creator</p>
         <input type="text" name="event-creator" placeholder="Host/Organizer" value="Editing this does nothing, creatorId will always be 1" />
         <p>Location of your Event</p>
         <input value={eventLocation}></input>
@@ -139,9 +150,28 @@ export default function NewEvent({ eventList, eventCategories }) {
         ))}
         <button>Submit</button>
       </form>
-      <NavBar value={navValue} onChange={(event, newValue) => {
-        setNavValue(newValue);
-      }} />
+      <ul>
+        {eventList.map((e) => {
+          return (
+            <li key={e.eventName}>
+              <img
+                width="100"
+                height="100"
+                src={e.eventImage}
+                alt={e.eventName}
+              />
+              <p>{e.eventName}</p>
+              <button onClick={onDelete(e)}>delete</button>
+            </li>
+          );
+        })}
+      </ul>
+      {confirmDelete && (
+        <div>
+          <button onClick={hidePopup}>X</button>
+          <DeletePopup singleEvent={eventInfo} />
+        </div>
+      )}
     </div>
   );
 }
