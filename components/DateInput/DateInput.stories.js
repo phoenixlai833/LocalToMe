@@ -1,9 +1,9 @@
-// import ShortTextInput from ".";
+import DateInput from ".";
 
+export default {
+    title: 'DateInput',
+    component: DateInput,
+}
 
-// export default {
-//    title: 'ShortTextInput',
-//    component: ShortTextInput,
-// };
-
-// export const Template = () => <ShortTextInput />;
+export const NotRequired = () => <DateInput date={(new Date).toString()} label="Label" onChangeDate={() => {}} />
+export const Required = () => <DateInput date={(new Date).toString()} label="Label" onChangeDate={() => {}} required={true}/>

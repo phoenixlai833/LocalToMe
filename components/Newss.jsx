@@ -17,7 +17,7 @@ export default function Newss() {
     <ul>
       {/* {newss.map((news) => (
         <li key={news.newsTitle}>
-          <News
+          <News 
             newsId={news.id}
             newsTitle={news.newsTitle}
           />
