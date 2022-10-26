@@ -187,7 +187,7 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
             <div className="animate__slideInLeft"><MapSlideUp foodBanks={foodBanksList} /></div>
             <SearchArea >
                 <SearchBar>Search</SearchBar>
-                {/* <InstantSearch indexName={"10"} searchClient={searchClient}>
+                {/* <InstantSearch indexName={"prod_EVENTS"} searchClient={searchClient}>
                     <StyledSearchBox />
                 </InstantSearch> */}
                 <FilterListContainer>

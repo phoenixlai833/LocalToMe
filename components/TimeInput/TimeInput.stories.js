@@ -1,9 +1,9 @@
-// import ShortTextInput from ".";
+import TimeInput from ".";
 
+export default {
+    title: 'TimeInput',
+    component: TimeInput,
+}
 
-// export default {
-//    title: 'ShortTextInput',
-//    component: ShortTextInput,
-// };
-
-// export const Template = () => <ShortTextInput />;
+export const NotRequired = () => <TimeInput label="Label" onChangeTime={() => {}} />
+export const Required = () => <TimeInput label="Label" onChangeTime={() => {}} required={true}/>
