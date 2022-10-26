@@ -18,6 +18,9 @@ const NavBar = styled(BottomNavigation)`
   color:#535353;
   box-shadow: 0px -2px 8px rgba(0, 0, 0, 0.25);
   z-index:1;
+  // @media (min-width: 900px) {
+  //   display:none;
+}
 `
 const NavBarAction = styled(BottomNavigationAction)`
   font-family:'Rubik', sans-serif;

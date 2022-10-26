@@ -26,6 +26,9 @@ import Icon from '@mui/material';
 const AppDiv = styled(AppBar)`
 background-color:white;
 color:${Colours.primary};
+@media (max-width: 767px) {
+  display:none;
+}
 `
 //sx={{ my: 1, color: 'white', display: 'flex', flexDirection: "column" }}
 const NavButton = styled(IconButton)`
@@ -34,8 +37,8 @@ flex-direction:column;
 color:${Colours.primary};
 font-size:12px;
 border-radius:0;
-padding:20px 36px;
-max-width:100px;
+padding:18px 30px;
+max-width:90px;
 `
 
 const NavIcons = styled(NavbarIcons)`
@@ -65,8 +68,11 @@ export default function TopNavigation({
   return (
     // <ThemeProvider theme={Theme}>
       <AppDiv>
-        <Container maxWidth="xl" >
+        <Container >
+
           <Toolbar disableGutters>
+          <Container sx={{display:"flex", justifyContent:"flex-start"}}>
+          <NavIcons></NavIcons>
             {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}> */}
             <Typography
               variant="h4"
@@ -76,11 +82,12 @@ export default function TopNavigation({
               sx={{
                 fontWeight: 900,
               }}
-            >
+              >
               LOCALTOME
             </Typography>
+              </Container>
             {/* </Box> */}
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent:"flex-end"} }}>
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex', justifyContent:"flex-end"} }}>
               <NavButton onClick={onHome}>
                 <NavIcons icon="Home"/>
                 Home
