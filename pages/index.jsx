@@ -64,6 +64,9 @@ overflow-y: hidden;
 }
 `
 
+export const SubHeader = styled.p`
+font-size: 16px
+`
 const FirstSection = styled.div`
 display: flex;
 flex-direction: row;
@@ -113,7 +116,7 @@ export default function Home({ events }) {
       <div style={{ padding: "10% 5% 10% 5%" }}>
         <FirstSection>
           <div>
-            <h1>Goodmorning,</h1>
+            <SubHeader>Good Morning,</SubHeader>
             <h1 style={{ color: "green", lineHeight: "0", marginBottom: "5%" }}>Slayerina</h1>
             <SearchBar>Search</SearchBar>
           </div>
@@ -132,7 +135,7 @@ export default function Home({ events }) {
         </FirstSection>
 
         <div style={{ display: "flex", justifyContent: "space-between", marginTop: "5%" }}>
-          <p>Upcoming Events</p>
+          <SubHeader>Upcoming Events</SubHeader>
           <Link href={`/community`}>
             <p style={{ color: "green" }}>view all</p>
           </Link>
@@ -147,7 +150,7 @@ export default function Home({ events }) {
         </UpcomingEventsContainer>
 
         <div style={{ display: "flex", justifyContent: "space-between", marginTop: "5%" }}>
-          <p>Community News</p>
+          <SubHeader>Community News</SubHeader>
           <Link href={`/community`}>
             <p style={{ color: "green" }}>view all</p>
           </Link>
