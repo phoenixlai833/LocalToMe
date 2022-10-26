@@ -5,7 +5,7 @@ const ImageContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 46.35%, #000000 93.75%), url(${props => props.src});
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 46.35%, #000000 95.75%), url(${props => props.src});
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

@@ -3,17 +3,16 @@ import * as React from 'react';
 import { AppBar, Container, Box, Toolbar, IconButton, Button, Delete, Icon, ThemeProvider, Typography } from '@mui/material'
 import NavbarIcons from '../NavBar/NavIcons';
 import { Colours, Theme } from '../../styles/globals';
-
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
 const AppDiv = styled(AppBar)`
-background-color:white;
-color:${Colours.primary};
-z-index:100;
-max-width:100vw;
-@media (max-width: 767px) {
-  display:none;
+  background-color:white;
+  color:${Colours.primary};
+  z-index:100;
+  max-width:100vw;
+  @media (max-width: 767px) {
+    display:none;
 }
 `
 
@@ -58,11 +57,11 @@ export default function TopNavigation({
   }
   return (
     <ThemeProvider theme={Theme}>
-    <AppDiv>
+    <AppDiv position="fixed">
       <Container maxWidth="false">
         <Toolbar disableGutters>
           <Container sx={{ display: "flex", justifyContent: "flex-start" }}>
-            <Logo src="/localtomelogo.svg" alt="local to me logo"/>
+            <Logo src="/localtomelogo.svg" alt="Local To Me logo" aria/>
             {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}> */}
             <Typography
               variant="h4"
@@ -71,6 +70,8 @@ export default function TopNavigation({
               href="/"
               sx={{
                 fontWeight: 900,
+                display:"flex",
+                alignItems:"center"
               }}
             >
               LOCALTOME

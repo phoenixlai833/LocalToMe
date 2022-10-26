@@ -17,7 +17,7 @@ export default function NavbarIcons({
 
    return <div>
       
-         <CustomIcon>
+         <CustomIcon fontSize='large'>
          {!active && <NavIcon src={"/NavbarIcons/" + icon + ".svg"}  />}
          {active && <NavIcon src={"/NavbarIcons/" + icon + "Active.svg"}  />}
       </CustomIcon>

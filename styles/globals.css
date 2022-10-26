@@ -62,6 +62,7 @@ a {
 
 .MuiBottomNavigationAction-root {
   padding-top:3px;
+  font-size: 30px;
 }
 
 .MuiBottomNavigationAction-root .Mui-selected {
@@ -72,4 +73,11 @@ a {
   border-bottom-left-radius:2px;
   border-bottom-right-radius:2px;
   width:30px;
+}
+
+
+@media screen and (min-width:768px) {
+  .TEMPMEDIA {
+    display:none;
+  }
 }

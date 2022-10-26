@@ -20,6 +20,7 @@ const NavBar = styled(BottomNavigation)`
   z-index:100;
   // @media (min-width: 768px) {
   //   display:none;
+  height:7.5vh;
 }
 `
 const NavBarAction = styled(BottomNavigationAction)`

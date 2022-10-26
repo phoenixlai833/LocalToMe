@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { Colours } from '../../styles/globals';
 
 const CreateBttn = styled.div`
-background-color: ${props => props.inactive || '#108928'};
+background-color: ${props => props.inactive || Colours.primary};
 width: 100%;
 height: 50px;
 color: white;
@@ -11,7 +12,7 @@ flex-direction: row;
 align-items: center;
 justify-content: center;
 &:hover {
-background-color: ${props => props.active || '#085617'};
+background-color: ${props => props.active || Colours.secondary};
 }
 `
 
