@@ -39,11 +39,11 @@ Event.args = {
 };
 
 EventFilt.args = {
-   tag: "Accepts xxx",
+   tag: "Accepts only Henry",
    active: true,
    icon:"check",
    tagline:"test",
    color:'white',
-   txtcolor:"red",
-   border:"red 2px solid"
+   txtcolor:"green",
+   border:"green 2px solid"
 }

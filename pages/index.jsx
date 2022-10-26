@@ -160,7 +160,8 @@ export default function Home({ events }) {
       </div>
 
       <FloatingActionButton />
-      <NavBar value={0}/>
+      <NavBar value={0}
+      />
     </div >
   );
 }

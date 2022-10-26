@@ -7,9 +7,9 @@ export default {
 
  const Template = (args) => <CarouselCard {...args} />;
 
-export const Base = Template.bind({});
+export const Default = Template.bind({});
 
-Base.args = {
+Default.args = {
   day: 20,
   event: "Event Name",
   time: "12:00PM - 3:00PM",

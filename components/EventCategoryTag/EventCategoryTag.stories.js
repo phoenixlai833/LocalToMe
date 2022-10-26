@@ -8,9 +8,9 @@ export default {
 
 const Template = (args) => <EventCategoryTag {...args} />;
 
-export const Base = Template.bind({});
+export const Default = Template.bind({});
 
-Base.args = {
+Default.args = {
    eventCategories: ["Food", "Funraiser"],
 };
 

@@ -8,9 +8,9 @@ export default {
 
 const Template = (args) => <TextBubble {...args} />;
 
-export const Base = Template.bind({});
+export const Default = Template.bind({});
 
-Base.args = {
-   text: ["123 BCIT Street, Vancouver, BC", "dogs and cats"],
+Default.args = {
+   text: ["123 BCIT Street, Vancouver, BC", "Henries"],
    icon: ["schedule", "people"]
 };
