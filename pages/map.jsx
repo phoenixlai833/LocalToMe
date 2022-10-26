@@ -6,22 +6,39 @@ import MapSlideUp from '../components/MapSlideUp';
 import EventMapPin from "../components/EventMapPin";
 import FoodBankMapPin from "../components/FoodBankMapPin";
 import { getEvents } from "../server/database";
-// import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
-// import Geocoder from "react-map-gl-geocoder";
-// import 'react-map-gl-directions/dist/mapbox-gl-directions.css';
-// import Directions from 'react-map-gl-directions';
 import algoliasearch from "algoliasearch/lite";
-import { InstantSearch, SearchBox, useHits, Hits } from "react-instantsearch-hooks-web";
+import { InstantSearch, SearchBox, useHits, useSearchBox } from "react-instantsearch-hooks-web";
 import Filters from '../components/Filters';
 import NavBar from '../components/NavBar';
 import styled from "styled-components";
-
-const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_REACT_APP_MAPBOX_TOKEN; // Set your mapbox token here
+import Search from "../components/Search";
 
 const searchClient = algoliasearch(
     process.env.NEXT_PUBLIC_ALGOLIA_CLIENT_ID,
     process.env.NEXT_PUBLIC_ALGOLIA_API_KEY
 );
+
+const StyledSearch = styled(Search)`
+    * { border: 1px solid red; }
+`;
+
+function CustomSearch() {
+    const { query, refine, clear, isSearchStalled } = useSearchBox();
+
+    function handleSearch(input) {
+        refine(input);
+    }
+    return <StyledSearch onSearch={handleSearch} />
+}
+
+function FoodBankPinHits() {
+    const { hits } = useHits();
+
+    return <FoodBankMapPin foodBanksList={hits} />
+}
+const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_REACT_APP_MAPBOX_TOKEN; // Set your mapbox token here
+
+
 
 const SearchArea = styled.div`
 position: absolute;
@@ -37,6 +54,7 @@ width: 40vw;
     align-items: center;
 }
 `
+
 
 const SearchBar = styled.div`
 height: 5vh;
@@ -90,12 +108,36 @@ display:none;
 }
 `
 
+// const FilterbtnSection = styled.div`
+
+// display: flex;
+// justify-content: flex-start;
+// overflow-x: scroll;
+// @media (max-width: 767px) {
+//     width: 85vw;
+// }
+// `
+
 const FilterbtnSection = styled.div`
+width: 30vw;
 display: flex;
 justify-content: flex-start;
-overflow-x: scroll;
-@media (max-width: 767px) {
+overflow: hidden;
+position: relative;
+@media(max-width: 767px) {
+    justify-content: flex-end;
     width: 85vw;
+    overflow: hidden;
+}
+`
+
+const FilterListContainer = styled.div`
+white-space: nowrap;
+overflow-x: scroll;
+overflow-y: hidden;
+-webkit-overflow-scrolling: touch;
+&::-webkit-scrollbar {
+    display: none;
 }
 `
 
@@ -117,14 +159,17 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
     const filterFoodBanks = () => { }
 
     return (
-        <div>
+        <InstantSearch indexName="prod_FOODBANKS" searchClient={searchClient}>
+
+
             <div className="mapboxgl-canvas">
                 <ReactMapGL
                     ref={mapRef}
                     key="map"
                     initialViewState={viewport}
                     mapboxAccessToken={MAPBOX_TOKEN}
-                    mapStyle="mapbox://styles/phoenixlai833/cl8xvkhyh001i16o78o71s4k5"
+                    // mapStyle="mapbox://styles/phoenixlai833/cl8xvkhyh001i16o78o71s4k5"
+                    mapStyle="mapbox://styles/phoenixlai833/cl9nimfgi001b15l8dgfkvx1t"
                     onViewportChange={(viewport) => {
                         setViewport(viewport);
                     }}
@@ -146,35 +191,30 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
                     />
 
                     <EventMapPin events={eventList} />
-                    <FoodBankMapPin foodBanksList={foodBanksList} />
-
-                    {/* <Geocoder
-            mapRef={mapRef}
-            onViewportChange={(viewport) => {
-              setViewport(viewport);
-            }}
-            mapboxApiAccessToken={MAPBOX_TOKEN}
-            position="top-left"
-          /> */}
+                    <FoodBankPinHits />
+                    {/* <FoodBankMapPin foodBanksList={foodBanksList} /> */}
                 </ReactMapGL >
             </div>
             <div className="animate__slideInLeft"><MapSlideUp foodBanks={foodBanksList} /></div>
-            <SearchArea >
-                <SearchBar>Search</SearchBar>
-                {/* <InstantSearch indexName={"10"} searchClient={searchClient}>
-                    <StyledSearchBox />
-                </InstantSearch> */}
+            {/* <SearchArea > */}
+            <CustomSearch />
+
+            <FilterListContainer>
                 <FilterbtnSection>
-                    <Filters tag={"Food Banks"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} />
-                    <Filters tag={"Events"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} />
-                    <Filters tag={"Open Now"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} />
-                    <Filters tag={"Less than 1km"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} />
+                    <ul style={{ display: "flex", listStyle: "none", padding: "0" }}>
+                        <li><Filters tag={"Food Banks"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} /></li>
+                        <li><Filters tag={"Food Banks"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} /></li>
+                        <li><Filters tag={"Events"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} /></li>
+                        <li><Filters tag={"Open Now"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} /></li>
+                        <li><Filters tag={"Less than 1km"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} /></li>
+                    </ul>
                 </FilterbtnSection>
-            </SearchArea>
+            </FilterListContainer>
+            {/* </SearchArea> */}
             <NavBar value={navValue} onChange={(event, newValue) => {
                 setNavValue(newValue);
             }} />
-        </div>
+        </InstantSearch>
     );
 }
 
