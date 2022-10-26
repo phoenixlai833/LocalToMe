@@ -97,7 +97,6 @@ li{
 
 export default function FoodBankMap({ foodBanksList, eventList }) {
 
-    const [navValue, setNavValue] = useState(2);
 
     const [viewport, setViewport] = useState({
         // latitude: 49.2827,
@@ -178,9 +177,7 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
                         </FilterbtnSection>
                     </FilterListContainer>
                 </SearchArea>
-                <NavBar value={navValue} onChange={(event, newValue) => {
-                    setNavValue(newValue);
-                }} />
+                <NavBar value={2}/>
             </div>
         </InstantSearch>
     );
@@ -201,7 +198,6 @@ export async function getServerSideProps(context) {
         props: { foodBanksList, eventList }, // will be passed to the page component as props
     };
 }
-
 
 
 

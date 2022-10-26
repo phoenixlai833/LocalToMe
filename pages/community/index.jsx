@@ -38,7 +38,6 @@ export function NewsHits() {
 export default function Community() {
   const [tab, setTab] = useState(0);
   // const [isAdd, setIsAdd] = useState(false);
-  const [navValue, setNavValue] = useState(1);
 
   const tabContents = {
     0: { component: <EventHits />, searchIndex: "prod_EVENTS" },
@@ -143,9 +142,7 @@ export default function Community() {
         {tabContents[tab].component}
       </InstantSearch>
       <FloatingActionButton />
-      <NavBar value={navValue} onChange={(event, newValue) => {
-        setNavValue(newValue);
-      }} />
+      <NavBar value={1}/>
     </>
   )
 }
