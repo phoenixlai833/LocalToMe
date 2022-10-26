@@ -20,13 +20,10 @@ align-self: center;
 
 
 export default function Favorites() {
-    const [navValue, setNavValue] = useState(2);
     return (
         <FavorPage>
             <Text>oops, You have no favourites yet !</Text>
-            <NavBar value={navValue} onChange={(event, newValue) => {
-                setNavValue(newValue);
-            }} />
+            <NavBar value={3}/>
         </FavorPage>
     )
 
