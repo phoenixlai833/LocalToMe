@@ -34,7 +34,6 @@ align-items: center;
     justify-content: center;
     align-items: center;
     width: 100vw;
-    height: 17vh; 
 }
 `
 
@@ -43,6 +42,9 @@ width: 100vw;
 height: 0.5vh;
 background-color: gray;
 opacity: 20%;
+@media (max-width: 767px) {
+    width: 100vw;
+}
 `
 
 export default function MapSlideUp({ foodBanks }) {
@@ -52,11 +54,15 @@ export default function MapSlideUp({ foodBanks }) {
         return showing ? setShowing(false) : setShowing(true)
     }
 
-    const foodBankComponent = foodBanks.map((fb) => {
-        // console.log(fb);
-        <li key={fb.id} className={styles.card}>
-            <MapSlideItem fb={fb} />
-        </li>
+    const foodBankComponent = foodBanks.map((foodBank) => {
+        const fb = { foodBank }.foodBank;
+        console.log(fb);
+        return (
+            < li key={fb.id} className={styles.card} >
+                <MapSlideItem fb={fb} />
+                <Divider></Divider>
+            </ li>
+        )
     })
 
     const fb = {
@@ -88,21 +94,8 @@ export default function MapSlideUp({ foodBanks }) {
             <ElementsPos>
                 <div className={`${styles.background} + ${showing ? styles.slidein : styles.slideout}`}>
                     <ul className={styles.noSpace}>
-                        <MapSlideItem fb={fb} />
-                        <Divider></Divider>
-                        <MapSlideItem fb={fb} />
-                        <Divider></Divider>
-                        <MapSlideItem fb={fb} />
-                        <Divider></Divider>
-                        <MapSlideItem fb={fb} />
-                        <Divider></Divider>
-                        <MapSlideItem fb={fb} />
-                        <Divider></Divider>
-                        <MapSlideItem fb={fb} />
-                    </ul>
-                    {/* <ul className={styles.noSpace}>
                         {foodBankComponent}
-                    </ul> */}
+                    </ul>
                     <ButtonArea>
                         <SlideBtn onClick={toggleShowing}></SlideBtn>
                     </ButtonArea>
