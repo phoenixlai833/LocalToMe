@@ -1,38 +1,47 @@
-import * as React from 'react';
 import styled from 'styled-components'
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import AdbIcon from '@mui/icons-material/Adb';
+import Delete from '@mui/icons-material/Delete'
 
 import { Colours, Theme } from '../../styles/globals';
-// import { Colours } from '../../styles/globals';
+import NavbarIcons from '../Navbar/NavIcons';
 import { ThemeProvider } from '@mui/material';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Icon from '@mui/material';
 // Placeholder Icons
-import NavbarIcons from './NavIcons';
 
-const NavBar = styled(BottomNavigation)`
-  width:100vw;
-  position:fixed;
-  bottom:0;
-  color:#535353;
-  box-shadow: 0px -2px 8px rgba(0, 0, 0, 0.25);
-  z-index:1;
+const AppDiv = styled(AppBar)`
+background-color:white;
+color:${Colours.primary};
 `
-const NavBarAction = styled(BottomNavigationAction)`
-  font-family:'Rubik', sans-serif;
-  // border:1px black solid;
-  max-width:none;
-  &:hover{
-    color:${Colours.primary};
-}
+//sx={{ my: 1, color: 'white', display: 'flex', flexDirection: "column" }}
+const NavButton = styled(IconButton)`
+display:flex;
+flex-direction:column;
+color:${Colours.primary};
+font-size:12px;
+border-radius:0;
+padding:20px 36px;
+max-width:100px;
 `
 
-
+const NavIcons = styled(NavbarIcons)`
+width:50px;
+height:50px;
+`
 export default function TopNavigation({
   value = 0,
 }) {
@@ -54,13 +63,49 @@ export default function TopNavigation({
     r.push('/profile')
   }
   return (
-    <ThemeProvider theme={Theme}>
-      <AppBar>
-      <Container maxWidth="xl">
-        
-      </Container>
+    // <ThemeProvider theme={Theme}>
+      <AppDiv>
+        <Container maxWidth="xl" >
+          <Toolbar disableGutters>
+            {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}> */}
+            <Typography
+              variant="h4"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                fontWeight: 900,
+              }}
+            >
+              LOCALTOME
+            </Typography>
+            {/* </Box> */}
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent:"flex-end"} }}>
+              <NavButton onClick={onHome}>
+                <NavIcons icon="Home"/>
+                Home
+              </NavButton>
+              <NavButton onClick={onCommunity}>
+                <NavIcons icon="Community"/>
+                Community
+              </NavButton>
+              <NavButton onClick={onMap}>
+                <NavIcons icon="Map"/>
+                Map
+              </NavButton>
+              <NavButton onClick={onFavourites}>
+                <NavIcons icon="Favourite"/>
+                Favourites
+              </NavButton>
+              <NavButton onClick={onProfile}>
+                <NavIcons icon="Profile"/>
+                Profile
+              </NavButton>
 
-      </AppBar>
-    </ThemeProvider>
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppDiv>
+    // </ThemeProvider>
   );
 }         

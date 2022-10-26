@@ -21,7 +21,6 @@ const NavBar = styled(BottomNavigation)`
 `
 const NavBarAction = styled(BottomNavigationAction)`
   font-family:'Rubik', sans-serif;
-  // border:1px black solid;
   max-width:none;
   &:hover{
     color:${Colours.primary};
@@ -75,7 +74,7 @@ export default function LabelBottomNavigation({
           value = newValue;
         }}
       >
-        {value === 0 ? (<NavBarAction label="Home" icon={<NavbarIcons icon="Home" active={true} />} onClick={onHome}/>) : (<NavBarAction label="Home" icon={<NavbarIcons icon="Home" />} onClick={onHome} />)}
+        {value === 0 ? (<NavBarAction label="Home" icon={<NavbarIcons icon="Home" active={true} />} onClick={onHome} />) : (<NavBarAction label="Home" icon={<NavbarIcons icon="Home" />} onClick={onHome} />)}
         {value === 1 ? (<NavBarAction label="Community" icon={<NavbarIcons icon="Community" active={true} />} onClick={onCommunity} />) : (<NavBarAction label="Community" icon={<NavbarIcons icon="Community" />} onClick={onCommunity} />)}
         {value === 2 ? (<NavBarAction label="Map" icon={<NavbarIcons icon="Map" active={true} />} onClick={onMap} />) : (<NavBarAction label="Map" icon={<NavbarIcons icon="Map" />} onClick={onMap} />)}
         {value === 3 ? (<NavBarAction label="Favourites" icon={<NavbarIcons icon="Favourite" active={true} />} onClick={onFavourites} />) : (<NavBarAction label="Favourites" icon={<NavbarIcons icon="Favourite" />} onClick={onFavourites} />)}

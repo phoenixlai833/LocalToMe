@@ -7,12 +7,12 @@ import { getEvents } from "../server/database";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import NavBar from '../components/NavBar';
-import NavbarIcons from "../components/NavBar/NavIcons";
 import FloatingActionButton from "../components/FloatButton";
 import { Container, FlexBox, Wrapper } from "../styles/globals";
 import CarouselCard from "../components/CarouselCard";
 import NewsCard from "../components/NewsCard";
 import styled from "styled-components";
+import TopNavigation from '../components/NavBarTop';
 
 const SearchBar = styled.div`
 height: 5vh;
@@ -111,6 +111,7 @@ export default function Home({ events }) {
       </Head>
 
       <div style={{ padding: "10% 5% 10% 5%" }}>
+        <TopNavigation/>
         <FirstSection>
           <div>
             <h1>Goodmorning,</h1>
