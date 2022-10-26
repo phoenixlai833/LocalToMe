@@ -5,7 +5,7 @@ const Searchbox = styled.div`
     display: flex;
     flex-direction: row;
     margin:1em auto;
-    // width: 100%;
+    width: 100%;
 `
 
 const SearchBar = styled.input`
