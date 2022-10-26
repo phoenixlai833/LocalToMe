@@ -5,7 +5,5 @@ export default {
     component: CreationBttn
 }
 
-
-
 export const Default = () => <CreationBttn/>
 export const Error = () => <CreationBttn />
