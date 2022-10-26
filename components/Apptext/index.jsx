@@ -9,11 +9,11 @@ import styled from "styled-components"
 
 const BannerText = styled.h1`
 font-weight: 500;
-font-size: 24px;
+font-size: ${props => props.txtsize}
 `
 
-export default function AppText ({txt='hi'}) {
+export default function AppText ({txt='hi', txtsize= '24px'}) {
     return <div>
-        <BannerText>{txt}</BannerText>
+        <BannerText txtsize={txtsize}>{txt}</BannerText>
     </div>
 }
