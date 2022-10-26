@@ -18,6 +18,7 @@ export const Pantry = Template.bind({});
 export const Event = Template.bind({});
 
 export const EventFilt = EventTemplate.bind({});
+export const EventFiltDeny = EventTemplate.bind({});
 
 
 Bank.args = {
@@ -39,9 +40,18 @@ Event.args = {
 };
 
 EventFilt.args = {
-   tag: "Accepts xxx",
+   tag: "Accepts Henry",
    active: true,
    icon:"check",
+   tagline:"test",
+   color:'white',
+   txtcolor:"green",
+   border:"green 2px solid"
+}
+EventFiltDeny.args = {
+   tag: "Accepts Sam",
+   active: true,
+   icon:"close",
    tagline:"test",
    color:'white',
    txtcolor:"red",
