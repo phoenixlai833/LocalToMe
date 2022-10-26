@@ -1,30 +1,22 @@
 import styled from "styled-components";
 import { Colours } from '../../styles/globals';
 
-const CreateBttn = styled.div`
-background-color: ${props => props.inactive || Colours.primary};
-width: 100%;
-height: 50px;
-color: white;
-border-radius: 10px;
-display: flex;
-flex-direction: row;
-align-items: center;
-justify-content: center;
-&:hover {
-background-color: ${props => props.active || Colours.secondary};
-}
-`
+const CreateBttn = styled.button`
+  font-size: 14px;
+  background-color: ${(props) => props.inactive || "#108928"};
+  border: none;
+  width: 100%;
+  height: 3em;
+  color: white;
+  border-radius: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    background-color: ${(props) => props.active || "#085617"};
+  }
+`;
 
-export default function GeneralGreenBtn(
-    {
-        text = "button text",
-    }
-) {
-
-    return (
-        <div>
-            <CreateBttn>{text}</CreateBttn>
-        </div>
-    )
+export default function GeneralGreenBtn({ text = "Button text" }) {
+  return <CreateBttn>{text}</CreateBttn>;
 }

@@ -1,4 +1,3 @@
-// import TimePicker from "react-time-picker";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -12,8 +11,9 @@ const Label = styled.p`
 `;
 
 const Input = styled.input`
-border: none;
-    width: 100%;
+  outline: none;
+  border: none;
+  width: 100%;
 `;
 
 export default function TimeInput({
@@ -22,8 +22,8 @@ export default function TimeInput({
   required = false,
   onChangeTime,
 }) {
-  function handleChangeTime(time) {
-    onChangeTime(time);
+  function handleChangeTime(e) {
+    onChangeTime(e.target.value);
   }
 
   return (
@@ -32,7 +32,7 @@ export default function TimeInput({
         {label}
         {required && "*"}
       </Label>
-      <Input type="time" value={time} />
+      <Input type="time" value={time} onChange={handleChangeTime} />
     </Container>
   );
 }

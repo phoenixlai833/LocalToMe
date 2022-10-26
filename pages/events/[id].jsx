@@ -164,7 +164,7 @@ export default function Event({ event }) {
                 </FunctionsBox>
             </EventImageBlock>
 
-            <TextBubble text={[event.eventLocation, event.eventContactPhone, dateAndTime]} icon={['location_on', 'call', 'access_time']} />
+            <TextBubble text={[event.eventLocation, event.eventContactPhone, (eventTime != undefined ? dateAndTime : new Date(event.eventDate).toString())]} icon={['location_on', 'call', 'access_time']} />
 
             <div style={{ display: "flex", justifyContent: "space-between", margin: "0 5%" }}>
                 <UserOfPost />
