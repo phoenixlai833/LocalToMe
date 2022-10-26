@@ -16,7 +16,7 @@ const Input = styled.input`
     width: 100%;
 `
 
-export default function ShortTextInput({ label, required = false, placeholder, defaultValue, onChange }) {
+export default function ShortTextInput({ label, required = false, placeholder, value, onChange }) {
 
     function handleChange(e) {
         onChange(e.target.value);
@@ -25,7 +25,7 @@ export default function ShortTextInput({ label, required = false, placeholder, d
     return (
         <Container>
             <Label>{label}{required && "*"}</Label>
-            <Input placeholder={placeholder} defaultValue={defaultValue} onChange={handleChange}/>
+            <Input placeholder={placeholder} value={value} onChange={handleChange}/>
         </Container>
     )
 }

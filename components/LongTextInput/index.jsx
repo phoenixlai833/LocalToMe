@@ -1,3 +1,4 @@
+import ImageInput from "../ImageInput";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -22,13 +23,18 @@ export default function LongTextInput({
   label,
   required = false,
   placeholder,
-  defaultValue,
+  value,
   onChange,
+  image,
+  onChangeImage,
 }) {
   function handleChange(e) {
     onChange(e.target.value);
   }
 
+  function handleChangeImage(image) {
+    onChangeImage(image);
+  }
   return (
     <Container>
       <Label>
@@ -37,9 +43,10 @@ export default function LongTextInput({
       </Label>
       <Input
         placeholder={placeholder}
-        defaultValue={defaultValue}
+        value={value}
         onChange={handleChange}
       />
+      <ImageInput image={image} onChangeImage={handleChangeImage}></ImageInput>
     </Container>
   );
 }

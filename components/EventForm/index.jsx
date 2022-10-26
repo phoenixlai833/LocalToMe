@@ -20,110 +20,171 @@ const Form = styled.form`
 `;
 
 const LayoutTime = styled.div`
-display: flex;
-margin-bottom: 5%;
+  display: flex;
+  margin-bottom: 5%;
 `;
 
 const To = styled.div`
-display: flex;
-justify-content: center;
-align-items: center;
-width: 15%;
-margin-left: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15%;
+  margin-left: 5%;
 `;
 
-export default function EventForm({ onSubmit, defaultEvent = {}, onTogglePreview }) {
-  const [event, setEvent] = useState(defaultEvent);
+export default function EventForm({
+  onTogglePreview,
+  event,
+  onChangeEventName,
+  onChangeEventCreator,
+  onChangeEventLocation,
+  onChangeEventStartDate,
+  onChangeEventStartTime,
+  onChangeEventEndDate,
+  onChangeEventEndTime,
+  onChangeEventDescription,
+  onChangeEventImage,
+  onChangeEventTags,
+}) {
+  const [calendarType, setCalendarType] = useState(1);
 
-  function handleSubmit() {
-    onSubmit(eventDetails);
+  function handleSelectStartDate() {
+    setCalendarType(1);
   }
 
+  function handleSelectEndDate() {
+    setCalendarType(0);
+  }
   function handleChangeEventName(eventName) {
-    setEvent({ ...event, eventName });
+    onChangeEventName(eventName);
   }
 
   function handleChangeEventCreator(eventCreator) {
-    setEvent({ ...event, eventCreator });
+    onChangeEventCreator(eventCreator);
+  }
+
+  function handleChangeEventLocation(eventLocation) {
+    onChangeEventLocation(eventLocation);
   }
 
   function handleChangeEventStartDate(eventStartDate) {
-    setEvent({ ...event, eventStartDate });
+    onChangeEventStartDate(eventStartDate);
   }
 
   function handleChangeEventStartTime(eventStartTime) {
-    setEvent({ ...event, eventStartTime });
+    onChangeEventStartTime(eventStartTime);
   }
 
   function handleChangeEventEndDate(eventEndDate) {
-    setEvent({ ...event, eventEndDate });
+    onChangeEventEndDate(eventEndDate);
   }
 
   function handleChangeEventEndTime(eventEndTime) {
-    setEvent({ ...event, eventEndTime });
+    onChangeEventEndTime(eventEndTime);
   }
 
   function handleChangeEventDescription(eventDescription) {
-    setEvent({ ...event, eventDescription });
+    onChangeEventDescription(eventDescription);
   }
 
   function handleChangeEventImage(eventImage) {
-    setEvent({ ...event, eventImage });
+    onChangeEventImage(eventImage);
   }
 
   function handleChangeEventTags(eventTags) {
-    setEvent({ ...event, eventTags });
+    onChangeEventTags(eventTags);
   }
 
   function handleTogglePreview(e) {
     e.preventDefault();
     onTogglePreview();
   }
+
   return (
     <>
       <TopBanner text={"Plan your Event"} />
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleTogglePreview}>
         <b>Basic Information</b>
         <br></br>
         <ShortTextInput
           label="Event Name"
-          defaultValue={defaultEvent.eventName}
+          value={event.eventName}
           onChange={handleChangeEventName}
           required={true}
         />
         <br></br>
         <ShortTextInput
           label="Event Host"
-          defaultValue={defaultEvent.eventCreator}
+          value={event.eventCreator}
           onChange={handleChangeEventCreator}
           required={true}
         />
         <b style={{ marginTop: "5%" }}>Location of your Event</b>
-        <ShortTextInput />
+        <ShortTextInput value={event.eventLocation} onChange={handleChangeEventLocation}/>
         <b style={{ marginTop: "5%" }}>Date & Time of your Event</b>
         <br></br>
         <LayoutTime>
           <div>
-            <DateInput label="Start Date" required={true} />
+            <DateInput
+              selected={calendarType}
+              label="Start Date"
+              required={true}
+              date={event.start.toLocaleString("default", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              })}
+              onSelectDate={handleSelectStartDate}
+            />
             <br></br>
-            <TimeInput label="Start Time" required={true} />
+            <TimeInput
+              label="Start Time"
+              required={true}
+              time={event.start.toLocaleString("default", {hour: "2-digit", minute: "2-digit", hour12: false})}
+              onChangeTime={handleChangeEventStartTime}
+            />
           </div>
-          <To><b>to</b></To>
+          <To>
+            <b>to</b>
+          </To>
           <div>
-            <DateInput label="End Date" />
+            <DateInput
+              selected={calendarType == 0}
+              label="End Date"
+              date={event.end.toLocaleString("default", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              })}
+              onSelectDate={handleSelectEndDate}
+            />
             <br></br>
-            <TimeInput label="End Time" />
+            <TimeInput
+              label="End Time"
+              time={event.end.toLocaleString("default", {hour: "2-digit", minute: "2-digit", hour12: false})}
+              onChangeTime={handleChangeEventEndTime}
+            />
           </div>
         </LayoutTime>
-        <DateCalendar />
+        {calendarType ? (
+          <DateCalendar
+            date={event.start}
+            minDate={new Date}
+            onChangeDate={handleChangeEventStartDate}
+          />
+        ) : (
+          <DateCalendar
+            date={event.end}
+            minDate={event.start}
+            onChangeDate={handleChangeEventEndDate}
+          />
+        )}
         <b style={{ marginTop: "5%" }}>Describe your Event</b>
         <br></br>
-        <LongTextInput></LongTextInput>
-        <b style={{ marginTop: "5%" }}>Select Event Tags</b>
+        <LongTextInput onChange={handleChangeEventDescription} onChangeImage={handleChangeEventImage}></LongTextInput>
+        {/* <b style={{ marginTop: "5%" }}>Select Event Tags</b> */}
+        <GeneralGreenBtn type="submit" text="Continue" />
       </Form>
-      <div style={{ margin: "0 10%" }} onClick={handleTogglePreview} >
-        <GeneralGreenBtn text={"Continue"} />
-      </div>
     </>
   );
 }

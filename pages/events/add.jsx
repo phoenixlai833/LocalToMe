@@ -12,7 +12,7 @@ import { collection, getDocs, addDoc } from "firebase/firestore";
 // import Image from `next/image`;
 import DeletePopup from "../../components/DeletePopup";
 import TimeInput from "../../components/TimeInput";
-import NavBar from '../../components/NavBar';
+import NavBar from "../../components/NavBar";
 import EventForm from "../../components/EventForm";
 import EventPreview from "../../components/EventPreview";
 import axios from "axios";
@@ -20,29 +20,23 @@ import axios from "axios";
 export default function NewEvent({ eventList, eventCategories }) {
   const [event, setEvent] = useState({
     eventName: "",
-    eventImage: "https://firebasestorage.googleapis.com/v0/b/localtome-f84e5.appspot.com/o/foodBankImageTest.jpg?alt=media&token=37d44b9b-ac9d-48d7-8556-693c9a002fb0",
+    eventImage:
+      "https://firebasestorage.googleapis.com/v0/b/localtome-f84e5.appspot.com/o/foodBankImageTest.jpg?alt=media&token=37d44b9b-ac9d-48d7-8556-693c9a002fb0",
     eventContent: "",
     eventCreatorId: 1,
-    start: new Date,
-    end: new Date,
-    eventLocation: "555 Seymour St, Vancouver, BC V6B 3H6",
+    start: new Date(),
+    end: new Date(),
+    eventLocation: "",
     latitude: 49.25,
     longitude: -123,
     eventTags: [],
-  })
+  });
+
   const [isPreview, setIsPreview] = useState(false);
   const [navValue, setNavValue] = useState(1);
 
   const handleTogglePreview = () => {
     setIsPreview(!isPreview);
-  }
-
-  const onFileChange = async (e) => {
-    const file = e.target.files[0];
-    const fileRef = ref(storage, file.name);
-    // await fileRef.put(file);
-    await uploadBytes(fileRef, file);
-    setEventImage(await getDownloadURL(fileRef));
   };
 
   const onSubmit = async (e) => {
@@ -53,8 +47,8 @@ export default function NewEvent({ eventList, eventCategories }) {
     });
   };
 
-  function handleChangeEventName(e) {
-    setEvent({ ...event, eventName: e.target.value });
+  function handleChangeEventName(eventName) {
+    setEvent({ ...event, eventName });
   }
 
   function handleChangeEventCreator() {
@@ -62,35 +56,95 @@ export default function NewEvent({ eventList, eventCategories }) {
     return;
   }
 
+  function handleChangeEventLocation(eventLocation) {
+    setEvent({ ...event, eventLocation });
+    return;
+  }
+
   function handleChangeEventDescription(e) {
     setEvent({ ...event, eventContent: e.target.value });
   }
-  function handleChangeStartDate(date) {
-    setEvent({ ...event, start: date });
+
+
+  // const onFileChange = async (e) => {
+  //   const file = e.target.files[0];
+  //   const fileRef = ref(storage, file.name);
+  //   // await fileRef.put(file);
+  //   await uploadBytes(fileRef, file);
+  //   setEventImage(await getDownloadURL(fileRef));
+  // };
+
+  async function handleChangeEventImage(img) {
+    const imgRef = ref(storage, img.name);
+    await uploadBytes(imgRef, img);
+    const newImgRef = await getDownloadURL(imgRef)
+    setEvent({ ...event, eventImage: newImgRef });
   }
 
-  function handleChangeStartTime(time) {
+  function handleChangeEventStartDate(date) {
+    const [hour, minute] = event.start
+      .toLocaleString("default", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      })
+      .split(":");
+    setEvent({ ...event, start: new Date(date.setHours(hour, minute)) });
+  }
+
+  function handleChangeEventStartTime(time) {
     const [hour, minute] = time.split(":");
-    setEvent({ ...event, start: event.start.setHours(hour, minute) });
+    setEvent({ ...event, start: new Date(event.start.setHours(hour, minute)) });
   }
 
-  function handleChangeEndDate(date) {
-    setEvent({ ...event, end: date });
+  function handleChangeEventEndDate(date) {
+    const [hour, minute] = event.end
+      .toLocaleString("default", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      })
+      .split(":");
+    setEvent({ ...event, end: new Date(date.setHours(hour, minute)) });
   }
 
-
-  function handleChangeEndTime(time) {
+  function handleChangeEventEndTime(time) {
     const [hour, minute] = time.split(":");
-    setEvent({ ...event, end: event.end.setHours(hour, minute) });
+    setEvent({ ...event, end: new Date(event.end.setHours(hour, minute)) });
   }
 
   function handleChangeEventCategory(e) {
     setEvent({ ...event, eventTags: [...eventTags, e.target.id] });
   }
 
+  function handleCancel() {}
+
+  function handleConfirm() {}
+
   return (
     <div>
-      {isPreview ? <EventPreview onTogglePreview={handleTogglePreview} /> : <EventForm onTogglePreview={handleTogglePreview} />}
+      {isPreview ? (
+        <EventPreview
+          onTogglePreview={handleTogglePreview}
+          onCancel={handleCancel}
+          onConfirm={handleConfirm}
+        />
+      ) : (
+        <EventForm
+          onTogglePreview={handleTogglePreview}
+          event={event}
+          onChangeEventName={handleChangeEventName}
+          onChangeEventCreator={handleChangeEventCreator}
+          onChangeEventLocation={handleChangeEventLocation}
+          onChangeEventDescription={handleChangeEventDescription}
+          onChangeEventImage={handleChangeEventImage}
+          onChangeEventStartDate={handleChangeEventStartDate}
+          onChangeEventStartTime={handleChangeEventStartTime}
+          onChangeEventEndDate={handleChangeEventEndDate}
+          onChangeEventEndTime={handleChangeEventEndTime}
+          onChangeEventCategory={handleChangeEventCategory}
+        />
+      )}
     </div>
   );
 }
