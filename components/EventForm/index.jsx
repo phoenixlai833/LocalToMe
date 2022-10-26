@@ -21,7 +21,7 @@ const Form = styled.form`
   }
 `;
 
-export default function EventForm({ onSubmit, defaultEvent = {} }) {
+export default function EventForm({ onSubmit, defaultEvent = {}, onTogglePreview }) {
   const [event, setEvent] = useState(defaultEvent);
 
   function handleSubmit() {
@@ -64,6 +64,10 @@ export default function EventForm({ onSubmit, defaultEvent = {} }) {
     setEvent({ ...event, eventTags });
   }
 
+  function handleTogglePreview(e) {
+    e.preventDefault();
+    onTogglePreview();
+  }
   return (
     <Form onSubmit={handleSubmit}>
       <p>Basic Information</p>
