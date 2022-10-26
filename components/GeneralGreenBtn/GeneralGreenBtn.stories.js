@@ -5,7 +5,11 @@ export default {
     component: GeneralGreenBtn
 }
 
+const Template = (args) => <GeneralGreenBtn {...args} />;
 
+export const Default = Template.bind({});
+export const Error = Template.bind({});
 
-export const Default = () => <GeneralGreenBtn/>
-export const Error = () => <GeneralGreenBtn />
+Default.args = {
+  text:"Button text"
+};
