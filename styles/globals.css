@@ -60,6 +60,15 @@ a {
   border-radius: 4px;
 }
 
+.mapboxgl-ctrl-top-right {
+  margin-top: 2.5%;
+  margin-right: 1%;
+
+}
+
+
+
+
 .MuiBottomNavigationAction-root {
   padding-top:3px;
   font-size: 30px;

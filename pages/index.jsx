@@ -65,7 +65,8 @@ overflow-y: hidden;
 `
 
 export const SubHeader = styled.p`
-font-size: 16px
+font-size: 16px;
+margin-bottom:20px;
 `
 const FirstSection = styled.div`
 display: flex;
@@ -114,12 +115,13 @@ export default function Home({ events }) {
       </Head>
       <TopNavigation />
 
-      <div style={{ padding: "10% 5% 10% 5%", }}>
+      <div style={{ padding: "3% 5% 10% 5%" }}>
+
         <FirstSection>
           <div>
             <SubHeader>Good Morning,</SubHeader>
-            <h1 style={{ color: "green", lineHeight: "0", marginBottom: "5%" }}>Slayerina</h1>
-            <SearchBar>Search</SearchBar>
+            <h1 style={{ color: "green", lineHeight: "0", marginBottom: "4%" }}>Slayerina</h1>
+            {/* <SearchBar>Search</SearchBar> */}
           </div>
 
           <div>
