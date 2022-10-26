@@ -1,12 +1,13 @@
+
 import { Icon } from "@mui/material";
 import styled from 'styled-components';
 
 const NavIcon = styled.img`
-width:28px; 
-height:28px;
+width:30px; 
+height:30px;
 `
 const CustomIcon = styled(Icon)`
-font-size: 28px;
+font-size: 30px;
 `
 // exporting new icons because they are custom icons and not from MUI libraries.
 export default function NavbarIcons({

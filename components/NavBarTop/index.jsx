@@ -16,7 +16,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import Delete from '@mui/icons-material/Delete'
 
 import { Colours, Theme } from '../../styles/globals';
-import NavbarIcons from '../Navbar/NavIcons';
+import NavbarIcons from '../NavBar/NavIcons';
 import { ThemeProvider } from '@mui/material';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
