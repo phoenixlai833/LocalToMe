@@ -91,7 +91,7 @@ export default function Home({ events }) {
 
   const UpcomingEventCards = events.map((e) => {
     const time = e.eventDate.seconds
-    const date = new Date(time * 1000)
+    const date = time ? new Date(time * 1000) : new Date(e.eventDate)
     const eventTime = date.toLocaleString().split(',')[1]
     const dateOfEvent = date.toLocaleString("default", { month: "long", day: "2-digit", year: "numeric" })
     const dateAndTime = dateOfEvent + "," + eventTime

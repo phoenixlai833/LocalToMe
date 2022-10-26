@@ -61,10 +61,9 @@ export default function NewEvent({ eventList, eventCategories }) {
     return;
   }
 
-  function handleChangeEventDescription(e) {
-    setEvent({ ...event, eventContent: e.target.value });
+  function handleChangeEventDescription(eventDescription) {
+    setEvent({ ...event, eventDescription });
   }
-
 
   // const onFileChange = async (e) => {
   //   const file = e.target.files[0];
@@ -77,7 +76,7 @@ export default function NewEvent({ eventList, eventCategories }) {
   async function handleChangeEventImage(img) {
     const imgRef = ref(storage, img.name);
     await uploadBytes(imgRef, img);
-    const newImgRef = await getDownloadURL(imgRef)
+    const newImgRef = await getDownloadURL(imgRef);
     setEvent({ ...event, eventImage: newImgRef });
   }
 
@@ -119,20 +118,35 @@ export default function NewEvent({ eventList, eventCategories }) {
 
   function handleCancel() {}
 
-  function handleConfirm() {}
+  function handleConfirm(event) {
+    const postEvent = {
+      eventContent: event.eventDescription,
+      eventCreatorId: 1,
+      eventDate: event.start,
+      eventImage: event.eventImage,
+      eventLocation: event.eventLocation,
+      eventName: event.eventName,
+    }
+
+    axios.post("/api/events", postEvent).then((res) => {
+      window.location = `/events/${res.data}`
+      console.log("posted successfully", res.data);
+    });
+  }
 
   return (
     <div>
       {isPreview ? (
         <EventPreview
+          event={event}
           onTogglePreview={handleTogglePreview}
           onCancel={handleCancel}
           onConfirm={handleConfirm}
         />
       ) : (
         <EventForm
-          onTogglePreview={handleTogglePreview}
           event={event}
+          onTogglePreview={handleTogglePreview}
           onChangeEventName={handleChangeEventName}
           onChangeEventCreator={handleChangeEventCreator}
           onChangeEventLocation={handleChangeEventLocation}
