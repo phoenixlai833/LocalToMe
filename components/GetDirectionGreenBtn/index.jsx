@@ -11,7 +11,8 @@ const GreenBigBtn = styled.button`
     width: 80%;
     height: 50px;
     font-size: large;
-    margin: 8% auto;
+    font-family: Rubik;
+    margin: 3em auto;
     box-shadow: 0px 6px 10px #979494;
     justify-content: center;
     align-items: center;
