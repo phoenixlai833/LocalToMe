@@ -85,7 +85,6 @@ export default function NewEvent({ eventList, eventCategories }) {
   }
 
   function handleChangeEventCategory(e) {
-    // Save me this is bad code
     setEvent({ ...event, eventTags: [...eventTags, e.target.id] });
   }
 
