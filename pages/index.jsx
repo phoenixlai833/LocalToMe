@@ -115,7 +115,7 @@ export default function Home({ events }) {
       </Head>
       <TopNavigation />
 
-      <div style={{ padding: "5% 5% 10% 5%" }}>
+      <div style={{ padding: "8% 5% 10% 5%" }}>
 
         <FirstSection>
           <div>
