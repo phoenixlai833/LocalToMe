@@ -7,15 +7,16 @@ const FilterCont = styled.div`
    background:${props => props.color || Colours.background};
    color:${props => props.txtcolor || Colours.foreground};
    display:flex;
-   padding:0px 4px;
+   padding:0px 10px;
    border-radius:20px;
-   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+   // box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); 
+   box-shadow: ${props => props.contshadow};
    align-items:center;
    gap:2px;
    font-weight:600;
    font-size:12px;
    border: ${props => props.border || "0px" };
-   margin:2% auto;
+   // margin:2% auto;
 `
 
 
@@ -26,10 +27,11 @@ export default function Filter({
    active = false,
    icon = filterOpt[tag].icon,
    color = active ? filterOpt[tag].color : 'white',
-   txtcolor = active ? Colours.background : Colours.foreground
+   txtcolor = active ? Colours.background : Colours.foregroud,
+   dropshadow = '0px 4px 4px rgba(0, 0, 0, 0.25)'
 }) {
 
-   return <FilterCont txtcolor={txtcolor} active={false} onClick={onPress} color={color}>
+   return <FilterCont contshadow={dropshadow} txtcolor={txtcolor} active={false} onClick={onPress} color={color}>
       {icon && <Icon>{icon}</Icon>}
       {/* <p>{tagline}</p> */}
       <p>{tag}</p>
