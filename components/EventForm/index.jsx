@@ -9,9 +9,15 @@ import styled from "styled-components";
 const Form = styled.form`
   width: 80vw;
   margin-left: 10vw;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   p {
     // margin: 0;
+  }
+
+  * {
+    width: 100%;
   }
 `;
 
@@ -80,7 +86,7 @@ export default function EventForm({ onSubmit, defaultEvent = {} }) {
       <TimeInput label="Start Time" required={true} />
       <DateInput label="End Date" />
       <TimeInput label="End Time" />
-      {/* <DateCalendar /> */}
+      <DateCalendar />
       <p>Describe your Event</p>
       <LongTextInput></LongTextInput>
       <p>Select Event Tags</p>
