@@ -135,7 +135,7 @@ export default function EventsList({ eventList }) {
           </EventInfo>
         </EventBlock>
       ))}
-      <ExtraSpace></ExtraSpace>
+      {/* <ExtraSpace></ExtraSpace> */}
     </div>
   );
 }
