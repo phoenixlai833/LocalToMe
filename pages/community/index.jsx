@@ -54,7 +54,7 @@ export default function Community() {
 
 
   const StyledSearchBox = styled(SearchBox)`
-  form{
+  form {
     
     width: 100%;
     display: flex;
@@ -62,6 +62,7 @@ export default function Community() {
     align-items: center;
     
   }
+
   input {
    position: relative;
     background-color:#E4E4E4;
@@ -74,7 +75,8 @@ export default function Community() {
     padding-left:10%;
     // padding-right: 10%;
   }
-  button {
+
+  .ais-SearchBox-submit {
     position: absolute;
     left: 5%;
     height:45px;
@@ -82,6 +84,7 @@ export default function Community() {
     border-color:transparent;
     background-color:transparent;
   }
+
   .ais-SearchBox-submitIcon{
   width:20px;
   height:20px;

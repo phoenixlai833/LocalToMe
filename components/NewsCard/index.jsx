@@ -6,17 +6,14 @@ import { Avatar } from "@mui/material";
 
 const NewsCont = styled.div`
    background:${Colours.background};
-   // color:${Colours.primary};
    display:flex;
-   // max-width:90vw;
    width:90vw;
-   // min-width:90vw;
    gap:10px;
 `
 
 const Filters = styled.div`
    display:flex;
-   gap:5px;
+   gap:3px;
 `
 const TextDiv = styled.div`
    display:flex;
@@ -89,10 +86,10 @@ export default function NewsCard({
                   <p>{date}</p>
                </InfoDiv>
                <Filters>
-                  <Filter tag={tag} active={true} icon={false}></Filter>
-                  <Filter tag={tag} active={true} icon={false}></Filter>
-                  <Filter tag={tag} active={true} icon={false}></Filter>
-                  <Filter tag={tag} active={true} icon={false}></Filter>
+                  <Filter dropshadow={'none'} tag={tag} active={true} icon={false}></Filter>
+                  <Filter dropshadow={'none'} tag={tag} active={true} icon={false}></Filter>
+                  <Filter dropshadow={'none'} tag={tag} active={true} icon={false}></Filter>
+                  <Filter dropshadow={'none'} tag={tag} active={true} icon={false}></Filter>
                </Filters>
                {expanded === false && <InfoDiv>
                   <Text expanded={expanded}>{info.substring(0, 100) + "..."}</Text> <ReadMore expanded={expanded} onClick={onExpand}>Read More <Icon>expand_more</Icon></ReadMore></InfoDiv>}

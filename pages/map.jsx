@@ -109,12 +109,12 @@ display:none;
 `
 
 // const FilterbtnSection = styled.div`
-
 // display: flex;
 // justify-content: flex-start;
-// overflow-x: scroll;
+// overflow: hidden;
 // @media (max-width: 767px) {
-//     width: 85vw;
+//     justify-content: flex-end;
+//     width: 100vw;
 // }
 // `
 
@@ -123,8 +123,7 @@ width: 30vw;
 display: flex;
 justify-content: flex-start;
 overflow: hidden;
-position: relative;
-@media(max-width: 767px) {
+@media (max-width: 767px) {
     justify-content: flex-end;
     width: 85vw;
     overflow: hidden;
@@ -137,9 +136,13 @@ overflow-x: scroll;
 overflow-y: hidden;
 -webkit-overflow-scrolling: touch;
 &::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 `
+
+function EventMapPinHits() {
+    
+}
 
 export default function FoodBankMap({ foodBanksList, eventList }) {
 
@@ -196,21 +199,23 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
                 </ReactMapGL >
             </div>
             <div className="animate__slideInLeft"><MapSlideUp foodBanks={foodBanksList} /></div>
-            {/* <SearchArea > */}
-            <CustomSearch />
-
-            <FilterListContainer>
-                <FilterbtnSection>
-                    <ul style={{ display: "flex", listStyle: "none", padding: "0" }}>
-                        <li><Filters tag={"Food Banks"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} /></li>
-                        <li><Filters tag={"Food Banks"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} /></li>
-                        <li><Filters tag={"Events"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} /></li>
-                        <li><Filters tag={"Open Now"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} /></li>
-                        <li><Filters tag={"Less than 1km"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} /></li>
-                    </ul>
-                </FilterbtnSection>
-            </FilterListContainer>
-            {/* </SearchArea> */}
+            <SearchArea >
+                <SearchBar>Search</SearchBar>
+                {/* <InstantSearch indexName={"prod_EVENTS"} searchClient={searchClient}>
+                    <StyledSearchBox />
+                </InstantSearch> */}
+                <FilterListContainer>
+                    <FilterbtnSection>
+                        <ul style={{ display: "flex", listStyle: "none", padding: "0" }}>
+                            <li><Filters tag={"Food Banks"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} /></li>
+                            <li><Filters tag={"Food Banks"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} /></li>
+                            <li><Filters tag={"Events"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} /></li>
+                            <li><Filters tag={"Open Now"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} /></li>
+                            <li><Filters tag={"Less than 1km"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} /></li>
+                        </ul>
+                    </FilterbtnSection>
+                </FilterListContainer>
+            </SearchArea>
             <NavBar value={navValue} onChange={(event, newValue) => {
                 setNavValue(newValue);
             }} />

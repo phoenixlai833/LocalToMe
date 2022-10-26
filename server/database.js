@@ -8,7 +8,7 @@ export async function getFoodBanks() {
   const foodBanks = foodBankSnap.docs.map((doc) => {
     let id = doc.id;
     let data = doc.data();
-    return { objectID: id, ...data };
+    return { id, ...data };
   });
   return foodBanks;
 }
@@ -54,10 +54,9 @@ export async function addEvent(event) {
 }
 
 export async function editEvent(event) {
-  const eventCollection = collection(db, "event");
-  const eventSnap = await getDocs(eventCollection);
-  await updateDoc(frankDocRef, event);
-  return event.id
+  const eventRef = doc(db, "event", event.id);
+  const eventSnap = await updateDoc(eventRef, event);
+  return event.id;
 }
 
 export async function deleteEvent(id) {

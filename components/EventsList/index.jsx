@@ -123,7 +123,13 @@ export default function EventsList({ eventList }) {
             <p>
               {`${event.eventContent.slice(0, 80)}`}
               <Readmore>
-                <Link href={`/events/${event.id}`}>...Read More</Link>
+                <Link href={`/events/${event.id}`}>
+                  <a style={{
+                    color: '#108928',
+                  }}>
+                    ...Read More
+                  </a>
+                </Link>
               </Readmore>
             </p>
           </EventInfo>
