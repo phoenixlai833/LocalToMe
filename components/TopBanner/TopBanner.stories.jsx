@@ -6,11 +6,11 @@ export default {
    component: TopBanner,
  };
 
- const Template = (args) => <TopBanner {...args} />;
+ const Default = (args) => <TopBanner {...args} />;
 
-export const Base = Template.bind({});
+export const Base = Default.bind({});
 
-Base.args = {
+Default.args = {
    text:"1234 BCIT Street",
    back:true
 };

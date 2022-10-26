@@ -1,18 +1,27 @@
 import { useState } from "react";
-import Link from "next/link";
 import EventsList from "../../components/EventsList";
 import Newss from "../../components/Newss";
 import algoliasearch from "algoliasearch/lite";
-import { InstantSearch, SearchBox, useHits, Hits } from "react-instantsearch-hooks-web";
+import { InstantSearch, SearchBox, useHits, useSearchBox } from "react-instantsearch-hooks-web";
 import { getEvents } from "../../server/database";
 import NavBar from '../../components/NavBar';
 import FloatingActionButton from "../../components/FloatButton";
 import styled from 'styled-components';
+import Search from "../../components/Search";
 
 const searchClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_CLIENT_ID,
   process.env.NEXT_PUBLIC_ALGOLIA_API_KEY
 );
+
+function CustomSearch() {
+  const { query, refine, clear, isSearchStalled } = useSearchBox();
+
+  function handleSearch(input) {
+    refine(input);
+  }
+  return <Search onSearch={handleSearch} />
+}
 
 export function EventHits() {
   const { hits } = useHits();
@@ -29,7 +38,6 @@ export function NewsHits() {
 export default function Community() {
   const [tab, setTab] = useState(0);
   // const [isAdd, setIsAdd] = useState(false);
-  const [navValue, setNavValue] = useState(1);
 
   const tabContents = {
     0: { component: <EventHits />, searchIndex: "prod_EVENTS" },
@@ -43,6 +51,7 @@ export default function Community() {
     }
   };
 
+
   const StyledSearchBox = styled(SearchBox)`
   form {
     
@@ -50,6 +59,7 @@ export default function Community() {
     display: flex;
     justify-content: center;
     align-items: center;
+    
   }
 
   input {
@@ -61,38 +71,35 @@ export default function Community() {
     border-radius:13px;
     border: none;
     font-size: 20px;
+    padding-left:10%;
+    // padding-right: 10%;
   }
 
   .ais-SearchBox-submit {
     position: absolute;
-    right: 10%;
-    height: 45px;
-    width: 45px;
-    border: none;
-    background-color: transparent;
+    left: 5%;
+    height:45px;
+    width:45px;
+    border-color:transparent;
+    background-color:transparent;
   }
 
   .ais-SearchBox-submitIcon{
-    width:20px;
-    height:20px;
-  }
-
-  .ais-SearchBox-submit{
-
+  width:20px;
+  height:20px;
   fill:#108928;
-}
-
-  .ais-SearchBox-reset{
+  }
+.ais-SearchBox-reset{
   display:none;
 }
   `
 
   const Tab = styled.div`
-display: flex;
-width: 100%;
-height: 40px;
-justify-content: space-around;
-border-bottom:1.5px solid #D9D9D9;
+   display: flex;
+   width: 100%;
+   height: 40px;
+   justify-content: space-around;
+   border-bottom:1.5px solid #D9D9D9;
 
 `
 
@@ -118,7 +125,9 @@ border-bottom:1.5px solid #D9D9D9;
   return (
     <>
       <InstantSearch indexName={tabContents[tab].searchIndex} searchClient={searchClient}>
-        <StyledSearchBox reset={null}/>
+        {/* <Search /> */}
+        <CustomSearch />
+        {/* <StyledSearchBox /> */}
         <Tab onClick={handleChangeTab} >
 
           <EventTab id="0">
@@ -129,12 +138,11 @@ border-bottom:1.5px solid #D9D9D9;
           </NewTab>
 
         </Tab>
+
         {tabContents[tab].component}
       </InstantSearch>
       <FloatingActionButton />
-      <NavBar value={navValue} onChange={(event, newValue) => {
-        setNavValue(newValue);
-      }} />
+      <NavBar value={1}/>
     </>
   )
 }
