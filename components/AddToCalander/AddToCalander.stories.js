@@ -6,4 +6,4 @@ export default {
    component: AddToCalander,
 };
 
-export const Template = () => <AddToCalander />;
+export const Default = () => <AddToCalander />;

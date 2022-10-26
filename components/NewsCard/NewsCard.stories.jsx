@@ -7,9 +7,9 @@ export default {
 
 const Template = (args) => <NewsCard {...args} />;
 
-export const Base = Template.bind({});
+export const Default = Template.bind({});
 
-Base.args = {
+Default.args = {
    tag: "event",
    organizer: "Organizer",
    avatar: "",

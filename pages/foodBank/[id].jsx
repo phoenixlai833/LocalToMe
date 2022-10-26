@@ -20,7 +20,7 @@ const EventImageBlock = styled.div`
     flex-direction: row;
     width: 100%;
     height: 250px;
-    margin-top:-20px;
+    margin-top:-15px;
 `
 
 const EventImage = styled.img` 
@@ -37,8 +37,10 @@ const EventDescription = styled.div`
 const FilterDiv = styled.div`
     display:grid;
     grid-auto-flow: column dense;
+    gap:5px;
+    margin:0 5%;
     @media (max-width: 767px) {
-        grid-template-rows:1fr 1fr;
+        grid-template-rows:1fr 1fr 1fr;
     }
 `
 
@@ -63,7 +65,7 @@ export default function FoodBank({ d }) {
 
 
     return (
-        <Wrapper direction="column" gap="20px" >
+        <Wrapper direction="column" gap="10px" sx={{ alignItems: "normal" }}>
             {/* can place d.program_name with d.organization_name */}
             {d.program_name && <TopBanner text={d.program_name}></TopBanner>}
             <EventImageBlock >
@@ -74,11 +76,9 @@ export default function FoodBank({ d }) {
                     <FavoriteBtn />
                 </FunctionsBox>
             </EventImageBlock>
-            
 
-            {/* <img width="100%" height="30%" src={d.foodBank_Image} alt={d.program_name} style={{marginTop:"-20px"}}/> */}
             <TextBubble text={locationInfo} icon={locationIcons}></TextBubble>
-            {d.description && (<FlexBox direction="column" width="80%"><EventDescription><h3>Description:</h3><p>{d.description}</p></EventDescription></FlexBox>)}
+            {d.description && (<FlexBox pd="0px" direction="column" width="85vw"><EventDescription><h3>Description:</h3><p>{d.description}</p></EventDescription></FlexBox>)}
             <TextBubble text={signUp} icon={signUpIcons} />
 
             <FilterDiv direction="column" gap="5px">
@@ -87,11 +87,11 @@ export default function FoodBank({ d }) {
                 {d.takeout_available === "Yes" ? <EventFilter tag={"Takeout Available"} /> : <EventFilter tag={"Takeout Available"} active={true} />}
                 {d.provides_hampers === "True" ? <EventFilter tag={"Provides Hampers"} /> : <EventFilter tag={"Provides Hampers"} active={true} />}
                 {d.provides_meals === "True" ? <EventFilter tag={"Provides Meals"} /> : <EventFilter tag={"Provides Meals"} active={true} />}
-
             </FilterDiv>
 
             <GetDirectionGreenBtn address={d.location_address} onMap={false} />
-
+            
+            <FlexBox pd="50px" />
             {/* {d.organization_name && (<h2>Organization Name: {d.organization_name}</h2>)}
             {d.program_population_served && (<h3>Population Served: {d.program_population_served}</h3>)}
             {d.wheelchair_accessible && (<p>Wheelchair Acessible: {d.wheelchair_accessible}</p>)}
@@ -106,11 +106,9 @@ export default function FoodBank({ d }) {
             {d.provides_hampers && (<p>providesHampers: {d.provides_hampers}</p>)}
             {d.provides_meals && (<p>providesMeals: {d.provides_meals}</p>)}
             {d.description && (<><h3>Description:</h3><p>{d.description}</p></>)}
-            {d.last_updated_date && (<p>lastUpdatedDate: {d.last_updated_date}</p>)} */}
-    
-            <NavBar value={navValue} onChange={(event, newValue) => {
-                setNavValue(newValue);
-            }} />
+        {d.last_updated_date && (<p>lastUpdatedDate: {d.last_updated_date}</p>)} */}
+
+            <NavBar value={2} />
         </Wrapper>
     )
     // })

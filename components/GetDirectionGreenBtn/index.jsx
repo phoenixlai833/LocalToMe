@@ -1,10 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import { Colours } from '../../styles/globals';
 
 const GreenBigBtn = styled.button`
     display:flex;
-    background-color: #108928;
+    background-color: ${Colours.primary};
     border: none;
     color: white;
     border-radius: 10px;
@@ -22,7 +23,7 @@ const GreenSmallBtn = styled.button`
     display:flex;
     justify-content: center;
     align-items: center;
-    background-color: #108928;
+    background-color: ${Colours.primary};
     border: none;
     color: white;
     border-radius: 5px;

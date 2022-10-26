@@ -6,5 +6,5 @@ export default {
    component: LongTextInput,
 };
 
-export const Template = () => <LongTextInput />;
+export const Default = () => <LongTextInput />;
 

@@ -8,9 +8,9 @@ export default {
 
 const Template = (args) => <UserOfPost {...args} />;
 
-export const Base = Template.bind({});
+export const Default = Template.bind({});
 
-Base.args = {
+Default.args = {
    userImg:"https://com-greenpeakfestival.s3.eu-central-1.amazonaws.com/_338xAUTO_fit_center-center_80_none/22458/Jan-Jaap-Verhoeve.jpg",
    name:"Shane",
 };

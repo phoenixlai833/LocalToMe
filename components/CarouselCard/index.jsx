@@ -5,20 +5,16 @@ const ImageContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 46.35%, #000000 93.75%), url(${props => props.src});
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 46.35%, #000000 95.75%), url(${props => props.src});
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     border-radius: 15px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    max-width: 300px;
-    min-width: 250px;
-    max-height: 37vh;
+    width: 300px;
+    // min-width: 250px;
+    height: 250px;
     padding: 15px 15px 20px;
-    // max-width:500px;
-    // min-width:300px;
-    // min-height:25vh;
-    // padding:15px;
 `;
 
 const TextContainer = styled.div`
@@ -54,7 +50,6 @@ const DateContainer = styled.div`
     text-align:center;
     font-weight:1000;
     font-size: 14px;
-
 `
 export default function CarouselCard({
     event = "Event Name",
