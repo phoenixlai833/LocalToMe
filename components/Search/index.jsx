@@ -1,26 +1,43 @@
-import algoliasearch from "algoliasearch/lite";
-import RenderResult from "next/dist/server/render-result";
-import { InstantSearch, SearchBox, useHits } from "react-instantsearch-hooks-web";
-import React from "react";
-const searchClient = algoliasearch(
-  "UOV96BHKDZ",
-  "3bb3bff1b3db5e4bf329f4a0de0b3e3e"
-);
+import styled from 'styled-components';
 
-export function CustomHits(props) {
-  const { hits, results, sendEvent } = useHits(props);
+const Searchbox = styled.div`
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    margin:1em auto;
+    width: 100%;
+`
 
-  console.log('idk', hits, results, sendEvent)
-  return <>{/* Your JSX */}</>;
-}
+const SearchBar = styled.input`
+    background-color:#E4E4E4;
+    width:90%;
+    height:45px;
+    border-radius:13px;
+    border: none;
+    font-size: 20px;
+    fobnt-weight: 400;
+    margin:0 auto;
+    padding-left:2%;
+`
 
-export default function Search({ indexName }) {
+const SearchIcon = styled.img`
+    position: absolute;
+    right: 10%;
+    top: 30%;
+`
+
+export default function Search({ onSearch }) {
+  function handleSearch(e) {
+    onSearch(e.target.value);
+  }
 
   return (
-    <>
-      <InstantSearch indexName={indexName} searchClient={searchClient}>
-        <SearchBox />
-      </InstantSearch>
-    </>
+    <Searchbox>
+      <SearchBar onChange={handleSearch}>
+      </SearchBar>
+      <SearchIcon src="./searchIcon.png"></SearchIcon>
+    </Searchbox>
   );
 }
+
+

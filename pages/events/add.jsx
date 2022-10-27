@@ -11,76 +11,44 @@ import { collection, getDocs, addDoc } from "firebase/firestore";
 // import Event from "../../components/Event";
 // import Image from `next/image`;
 import DeletePopup from "../../components/DeletePopup";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import TimePicker from "react-time-picker/dist/entry.nostyle";
+import TimeInput from "../../components/TimeInput";
+import NavBar from "../../components/NavBar";
+import EventForm from "../../components/EventForm";
+import EventPreview from "../../components/EventPreview";
 import axios from "axios";
 
 export default function NewEvent({ eventList, eventCategories }) {
-  const [eventImage, setEventImage] = useState(null);
-  const [startDate, setStartDate] = useState(new Date());
-  const [startTime, setStartTime] = useState("00:00");
+  const [event, setEvent] = useState({
+    eventName: "",
+    eventImage:
+      "https://firebasestorage.googleapis.com/v0/b/localtome-f84e5.appspot.com/o/foodBankImageTest.jpg?alt=media&token=37d44b9b-ac9d-48d7-8556-693c9a002fb0",
+    eventContent: "",
+    eventCreatorId: 1,
+    start: new Date(),
+    end: new Date(),
+    eventLocation: "",
+    latitude: 49.25,
+    longitude: -123,
+    eventTags: [],
+  });
 
-  const [eventName, setEventName] = useState("");
-  const [eventCreator, setEventCreator] = useState(1);
-  const [eventLocation, setEventLocation] = useState("555 Seymour St, Vancouver, BC V6B 3H6");
-  const [eventDescription, setEventDescription] = useState("");
-  const [eventCategory, setEventCategory] = useState(0);
-  const [coordinates, setCoordinates] = useState({ lat: 49.25, lon: -123 });
-  const [endDate, setEndDate] = useState(new Date());
-  const [endTime, setEndTime] = useState("00:00");
+  const [isPreview, setIsPreview] = useState(false);
+  const [navValue, setNavValue] = useState(1);
 
-  const [confirmDelete, setConfirmDelete] = useState(false);
-  const [eventInfo, setEventInfo] = useState(null);
-
-  const onFileChange = async (e) => {
-    const file = e.target.files[0];
-    const fileRef = ref(storage, file.name);
-    // await fileRef.put(file);
-    console.log(fileRef);
-    await uploadBytes(fileRef, file);
-    setEventImage(await getDownloadURL(fileRef));
+  const handleTogglePreview = () => {
+    setIsPreview(!isPreview);
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const [startHour, startMinute] = startTime.split(":");
-    startDate.setHours(startHour, startMinute);
 
-    const [endHour, endMinute] = endTime.split(":");
-    endDate.setHours(endHour, endMinute);
-
-    // this needs changing
-    const event = {
-      eventName,
-      eventImage,
-      eventContent: eventDescription,
-      eventCreatorId: 1,
-      eventDate: startDate,
-      latitude: coordinates.lat,
-      longitude: coordinates.lon
-    };
-
-    axios.post('/api/events', event).then((res) => {
-      console.log('posted successfully', res.data)
-    })
+    axios.post("/api/events", event).then((res) => {
+      console.log("posted successfully", res.data);
+    });
   };
 
-  const onDelete = (passedEvent) => async (e) => {
-    {
-      e.preventDefault();
-      console.log(passedEvent);
-      setEventInfo(passedEvent);
-      setConfirmDelete(true);
-    }
-  };
-
-  function hidePopup() {
-    setConfirmDelete(false);
-  }
-
-  function handleChangeEventName(name) {
-    setEventName(name);
+  function handleChangeEventName(eventName) {
+    setEvent({ ...event, eventName });
   }
 
   function handleChangeEventCreator() {
@@ -88,89 +56,108 @@ export default function NewEvent({ eventList, eventCategories }) {
     return;
   }
 
-  function handleChangeEventDescription(description) {
-    setEventDescription(description);
-  }
-  function handleChangeStartDate(date) {
-    setStartDate(date);
+  function handleChangeEventLocation(eventLocation) {
+    setEvent({ ...event, eventLocation });
+    return;
   }
 
-  function handleChangeEndDate(date) {
-    setEndDate(date);
+  function handleChangeEventDescription(eventDescription) {
+    setEvent({ ...event, eventDescription });
   }
 
-  function handleChangeStartTime(time) {
-    setStartTime(time);
+  // const onFileChange = async (e) => {
+  //   const file = e.target.files[0];
+  //   const fileRef = ref(storage, file.name);
+  //   // await fileRef.put(file);
+  //   await uploadBytes(fileRef, file);
+  //   setEventImage(await getDownloadURL(fileRef));
+  // };
+
+  async function handleChangeEventImage(img) {
+    const imgRef = ref(storage, img.name);
+    await uploadBytes(imgRef, img);
+    const newImgRef = await getDownloadURL(imgRef);
+    setEvent({ ...event, eventImage: newImgRef });
   }
 
-  function handleChangeEndTime(time) {
-    setEndTime(time);
+  function handleChangeEventStartDate(date) {
+    const [hour, minute] = event.start
+      .toLocaleString("default", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      })
+      .split(":");
+    setEvent({ ...event, start: new Date(date.setHours(hour, minute)) });
+  }
+
+  function handleChangeEventStartTime(time) {
+    const [hour, minute] = time.split(":");
+    setEvent({ ...event, start: new Date(event.start.setHours(hour, minute)) });
+  }
+
+  function handleChangeEventEndDate(date) {
+    const [hour, minute] = event.end
+      .toLocaleString("default", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      })
+      .split(":");
+    setEvent({ ...event, end: new Date(date.setHours(hour, minute)) });
+  }
+
+  function handleChangeEventEndTime(time) {
+    const [hour, minute] = time.split(":");
+    setEvent({ ...event, end: new Date(event.end.setHours(hour, minute)) });
   }
 
   function handleChangeEventCategory(e) {
-    setEventCategory(e.target.id);
+    setEvent({ ...event, eventTags: [...eventTags, e.target.id] });
+  }
+
+  function handleCancel() {}
+
+  function handleConfirm(event) {
+    const postEvent = {
+      eventContent: event.eventDescription,
+      eventCreatorId: 1,
+      eventDate: event.start,
+      eventImage: event.eventImage,
+      eventLocation: event.eventLocation,
+      eventName: event.eventName,
+    }
+
+    axios.post("/api/events", postEvent).then((res) => {
+      window.location = `/events/${res.data}`
+      console.log("posted successfully", res.data);
+    });
   }
 
   return (
     <div>
-      <form onSubmit={onSubmit}>
-        <p>Basic Information</p>
-        <input type="file" onChange={onFileChange} />
-        <input
-          type="text"
-          name="event-name"
-          placeholder="Event name"
-          onChange={handleChangeEventName}
+      {isPreview ? (
+        <EventPreview
+          event={event}
+          onTogglePreview={handleTogglePreview}
+          onCancel={handleCancel}
+          onConfirm={handleConfirm}
         />
-        <input type="text" name="event-creator" placeholder="Host/Organizer" value="Editing this does nothing, creatorId will always be 1" />
-        <p>Location of your Event</p>
-        <input value={eventLocation}></input>
-        <p>Date & Time of your Event</p>
-        <p>Start date</p>
-        <DatePicker
-          selected={startDate}
-          onChange={handleChangeStartDate}
-        ></DatePicker>
-        <p>Start time</p>
-        <TimePicker
-          onChange={handleChangeStartTime}
-          value={startTime}
-        ></TimePicker>
-        <p>End date</p>
-        <DatePicker
-          selected={endDate}
-          onChange={handleChangeEndDate}
-        ></DatePicker>
-        <p>End time</p>
-        <TimePicker onChange={handleChangeEndTime} value={endTime}></TimePicker>
-        <p>Description</p>
-        <textarea onChange={handleChangeEventDescription} placeholder="Tell us about your event"></textarea>
-        {eventCategories.map((c) => (
-          <button key={c.id} id={c.id} onClick={handleChangeEventCategory}>{c.eventCategory}</button>
-        ))}
-        <button>Submit</button>
-      </form>
-      <ul>
-        {eventList.map((e) => {
-          return (
-            <li key={e.eventName}>
-              <img
-                width="100"
-                height="100"
-                src={e.eventImage}
-                alt={e.eventName}
-              />
-              <p>{e.eventName}</p>
-              <button onClick={onDelete(e)}>delete</button>
-            </li>
-          );
-        })}
-      </ul>
-      {confirmDelete && (
-        <div>
-          <button onClick={hidePopup}>X</button>
-          <DeletePopup singleEvent={eventInfo} />
-        </div>
+      ) : (
+        <EventForm
+          event={event}
+          onTogglePreview={handleTogglePreview}
+          onChangeEventName={handleChangeEventName}
+          onChangeEventCreator={handleChangeEventCreator}
+          onChangeEventLocation={handleChangeEventLocation}
+          onChangeEventDescription={handleChangeEventDescription}
+          onChangeEventImage={handleChangeEventImage}
+          onChangeEventStartDate={handleChangeEventStartDate}
+          onChangeEventStartTime={handleChangeEventStartTime}
+          onChangeEventEndDate={handleChangeEventEndDate}
+          onChangeEventEndTime={handleChangeEventEndTime}
+          onChangeEventCategory={handleChangeEventCategory}
+        />
       )}
     </div>
   );

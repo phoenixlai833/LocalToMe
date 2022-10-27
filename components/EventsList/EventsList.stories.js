@@ -64,5 +64,5 @@ const eventList = [
 ];
 
 
-export const Default = () => <EventsList eList={eventList} />
+export const Default = () => <EventsList eventList={eventList} />
 export const Error = () => <EventsList />
