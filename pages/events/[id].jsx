@@ -2,17 +2,17 @@
 import { getEvent, deleteEvent } from "../../server/database";
 import { useState } from "react";
 import { useRouter } from 'next/router';
-import NavBar from '../../components/NavBar';
+import NavBar from '../../components/Organisms/NavBar';
 import React from "react";
-import GetDirectionGreenBtn from '../../components/GetDirectionGreenBtn';
-import TextBubble from '../../components/TextBubble';
-import TopBanner from '../../components/TopBanner';
-import UserOfPost from '../../components/UserOfPost';
-import EventCategoryTag from "../../components/EventCategoryTag";
+import GetDirectionGreenBtn from '../../components/Atoms/GetDirectionGreenBtn';
+import TextBubble from '../../components/Molecules/TextBubble';
+import TopBanner from '../../components/Molecules/TopBanner';
+import UserOfPost from '../../components/Molecules/UserOfPost';
+import EventCategoryTag from "../../components/Atoms/EventCategoryTag";
 import styled from "styled-components";
-import AddToCalander from "../../components/AddToCalander";
-import ShareLink from "../../components/ShareLink";
-import FavoriteBtn from "../../components/FavoriteBtn";
+import AddtoCalendar from "../../components/Atoms/AddtoCalendar";
+import ShareLink from "../../components/Atoms/ShareLink";
+import FavoriteBtn from "../../components/Atoms/FavoriteBtn";
 import Link from "next/link";
 
 const EventImageBlock = styled.div`
@@ -123,7 +123,6 @@ margin: 2%
 
 export default function Event({ event }) {
 
-    const [navValue, setNavValue] = useState(1);
     const [confirmDelete, setConfirmDelete] = useState(false);
     const router = useRouter()
 
@@ -158,7 +157,7 @@ export default function Event({ event }) {
             <EventImageBlock >
                 <EventImage src={event.eventImage} alt={event.eventName} />
                 <FunctionsBox>
-                    <AddToCalander />
+                    <AddtoCalendar />
                     <ShareLink />
                     <FavoriteBtn />
                 </FunctionsBox>
@@ -187,7 +186,7 @@ export default function Event({ event }) {
 
             <EventDescription>
                 <b>About:</b>
-                <p style={{fontSize: '14px'}}>{event.eventContent}</p>
+                <p style={{ fontSize: '14px' }}>{event.eventContent}</p>
             </EventDescription>
 
             <EventCategoryTag eventCategories={["Food", "Fundraiser"]} />
@@ -210,9 +209,7 @@ export default function Event({ event }) {
                 </AbsPos>
             )}
 
-            <NavBar value={navValue} onChange={(event, newValue) => {
-                setNavValue(newValue);
-            }} />
+            <NavBar value={1} />
         </div >
     )
 }

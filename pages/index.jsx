@@ -5,14 +5,14 @@ import Link from "next/link";
 import { getEvents } from "../server/database";
 // import { useAuthState } from "react-firebase-hooks/auth"; // to check if user is signed in
 import axios from "axios";
+import NavBar from '../components/Organisms/NavBar';
+import FloatingActionButton from "../components/Atoms/FloatButton";
+import CarouselCard from "../components/Organisms/CarouselCard";
+import NewsCard from "../components/Organisms/NewsCard";
+import TopNavigation from '../components/Organisms/NavBarTop';
 import { useEffect, useState } from "react";
-import NavBar from '../components/NavBar';
-import FloatingActionButton from "../components/FloatButton";
 import { Container, FlexBox, Wrapper } from "../styles/globals";
-import CarouselCard from "../components/CarouselCard";
-import NewsCard from "../components/NewsCard";
 import styled from "styled-components";
-import TopNavigation from '../components/NavBarTop';
 
 const SearchBar = styled.div`
 height: 5vh;

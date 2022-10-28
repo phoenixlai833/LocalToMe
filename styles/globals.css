@@ -71,11 +71,9 @@ a {
 
 .MuiBottomNavigationAction-root {
   padding-top:2px;
-  font-size: 30px;
 }
 
 .MuiBottomNavigationAction-root .Mui-selected {
-  font-size:12px;
   display:flex;
   justify-content:center;
   border-bottom:#068906 2px solid;

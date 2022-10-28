@@ -1,13 +1,13 @@
 import { useState } from "react";
-import EventsList from "../../components/EventsList";
+import EventsList from "../../components/Organisms/EventsList";
 import Newss from "../../components/Newss";
 import algoliasearch from "algoliasearch/lite";
 import { InstantSearch, SearchBox, useHits, useSearchBox } from "react-instantsearch-hooks-web";
 import { getEvents } from "../../server/database";
-import NavBar from '../../components/NavBar';
-import FloatingActionButton from "../../components/FloatButton";
+import NavBar from '../../components/Organisms/NavBar';
+import FloatingActionButton from "../../components/Atoms/FloatButton";
 import styled from 'styled-components';
-import Search from "../../components/Search";
+import Search from "../../components/Molecules/Search";
 
 const searchClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_CLIENT_ID,
