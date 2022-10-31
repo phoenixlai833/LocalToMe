@@ -84,3 +84,34 @@ export async function getEventCategories() {
   });
   return eventCategories;
 }
+
+// _________________________________________________________________________
+// news
+export async function getAllNews() {
+  return;
+}
+
+//one news item
+export async function getNews(id) {
+  const newsRef = doc(db, "news", id);
+  const newsSnap = await getDoc(newsRef);
+  const news = { id, ...newsSnap.data() };
+  // console.log('hi', news)
+  return news;
+}
+
+export async function addNews(event) {
+  return;
+}
+
+export async function editNews(id) {
+  return;
+}
+
+export async function deleteNews(id) {
+  return;
+}
+
+export async function getNewsCategories() {
+  return;
+}

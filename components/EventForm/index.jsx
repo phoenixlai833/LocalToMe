@@ -37,12 +37,14 @@ export default function EventForm({
   event,
   onChangeEventName,
   onChangeEventCreator,
+  onChangeEventPhoneNumber,
   onChangeEventLocation,
   onChangeEventStartDate,
   onChangeEventStartTime,
   onChangeEventEndDate,
   onChangeEventEndTime,
   onChangeEventDescription,
+  image,
   onChangeEventImage,
   onChangeEventTags,
 }) {
@@ -61,6 +63,10 @@ export default function EventForm({
 
   function handleChangeEventCreator(eventCreator) {
     onChangeEventCreator(eventCreator);
+  }
+
+  function handleChangeEventPhoneNumber(eventPhoneNumber) {
+    onChangeEventPhoneNumber(eventPhoneNumber);
   }
 
   function handleChangeEventLocation(eventLocation) {
@@ -119,52 +125,59 @@ export default function EventForm({
           onChange={handleChangeEventCreator}
           required={true}
         />
+        <br></br>
+        <ShortTextInput
+          label="Phone Number"
+          value={event.eventPhoneNumber}
+          onChange={handleChangeEventPhoneNumber}
+          required={true}
+        />
         <b style={{ marginTop: "5%" }}>Location of your Event</b>
-        <ShortTextInput value={event.eventLocation} onChange={handleChangeEventLocation} />
+        <br></br>
+        <ShortTextInput label="Location" value={event.eventLocation} onChange={handleChangeEventLocation} required={true} />
         <b style={{ marginTop: "5%" }}>Date & Time of your Event</b>
         <br></br>
         <LayoutTime>
-          <div>
-            <DateInput
-              selected={calendarType}
-              label="Start Date"
-              required={true}
-              date={event.start.toLocaleString("default", {
-                month: "short",
-                day: "numeric",
-                year: "numeric",
-              })}
-              onSelectDate={handleSelectStartDate}
-            />
-            <br></br>
-            <TimeInput
-              label="Start Time"
-              required={true}
-              time={event.start.toLocaleString("default", { hour: "2-digit", minute: "2-digit", hour12: false })}
-              onChangeTime={handleChangeEventStartTime}
-            />
-          </div>
+          <DateInput
+            selected={calendarType}
+            label="Start Date"
+            required={true}
+            date={event.start.toLocaleString("default", {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+            })}
+            onSelectDate={handleSelectStartDate}
+          />
           <To>
             <b>to</b>
           </To>
-          <div>
-            <DateInput
-              selected={calendarType == 0}
-              label="End Date"
-              date={event.end.toLocaleString("default", {
-                month: "short",
-                day: "numeric",
-                year: "numeric",
-              })}
-              onSelectDate={handleSelectEndDate}
-            />
-            <br></br>
-            <TimeInput
-              label="End Time"
-              time={event.end.toLocaleString("default", { hour: "2-digit", minute: "2-digit", hour12: false })}
-              onChangeTime={handleChangeEventEndTime}
-            />
-          </div>
+          <DateInput
+            selected={calendarType == 0}
+            label="End Date"
+            date={event.end.toLocaleString("default", {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+            })}
+            onSelectDate={handleSelectEndDate}
+          />
+        </LayoutTime>
+        <LayoutTime>
+          <TimeInput
+            label="Start Time"
+            required={true}
+            time={event.start.toLocaleString("default", { hour: "2-digit", minute: "2-digit", hour12: false })}
+            onChangeTime={handleChangeEventStartTime}
+          />
+          <To>
+            <b>to</b>
+          </To>
+          <TimeInput
+            label="End Time"
+            time={event.end.toLocaleString("default", { hour: "2-digit", minute: "2-digit", hour12: false })}
+            onChangeTime={handleChangeEventEndTime}
+          />
         </LayoutTime>
         {calendarType ? (
           <DateCalendar
@@ -179,10 +192,11 @@ export default function EventForm({
             onChangeDate={handleChangeEventEndDate}
           />
         )}
-        <b style={{ marginTop: "5%" }}>Describe your Event</b>
+        <b style={{ marginTop: "5%" }}>Describe your Event*</b>
         <br></br>
-        <LongTextInput onChange={handleChangeEventDescription} onChangeImage={handleChangeEventImage}></LongTextInput>
+        <LongTextInput placeholder={"Tell us about your event..."} image={image} onChange={handleChangeEventDescription} onChangeImage={handleChangeEventImage}></LongTextInput>
         {/* <b style={{ marginTop: "5%" }}>Select Event Tags</b> */}
+        <br></br>
         <GeneralGreenBtn type="submit" text="Continue" />
       </Form>
     </>

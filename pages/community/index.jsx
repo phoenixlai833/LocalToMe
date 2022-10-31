@@ -1,6 +1,6 @@
 import { useState } from "react";
 import EventsList from "../../components/EventsList";
-import Newss from "../../components/Newss";
+import AllNews from "../../components/AllNews";
 import algoliasearch from "algoliasearch/lite";
 import { InstantSearch, SearchBox, useHits, useSearchBox } from "react-instantsearch-hooks-web";
 import { getEvents } from "../../server/database";
@@ -32,7 +32,7 @@ export function EventHits() {
 export function NewsHits() {
   const { hits } = useHits();
 
-  return <Newss news={hits} />
+  return <AllNews news={hits} />
 }
 
 export default function Community() {
@@ -142,7 +142,7 @@ export default function Community() {
         {tabContents[tab].component}
       </InstantSearch>
       <FloatingActionButton />
-      <NavBar value={1}/>
+      <NavBar value={1} />
     </>
   )
 }
