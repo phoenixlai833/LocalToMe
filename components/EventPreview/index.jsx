@@ -73,7 +73,7 @@ export default function EventPreview({
 
   return (
     <div>
-      <TopBanner text={"Preview"} />
+      <TopBanner back={false} text={"Preview"} />
       <EventImageBlock>
         <EventImage src={event.eventImage} alt={event.eventName} />
       </EventImageBlock>

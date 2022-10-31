@@ -99,7 +99,7 @@ export default function EventMapPin({ events }) {
                         </EventNameLink>
                         <p>
                             <b>Location:</b>
-                            {selectedEvent.eventLocation}
+                            {selectedEvent.eventLocation && selectedEvent.eventLocation}
                         </p>
                         {eventDate && eventTime && (
                             <p>
@@ -109,15 +109,15 @@ export default function EventMapPin({ events }) {
                         )}
                         <p>
                             <b>Contact:</b>
-                            {selectedEvent.eventContactPhone}
+                            {selectedEvent.eventContactPhone && selectedEvent.eventContactPhone}
                         </p>
                         <p>
                             <b>Email:</b>
-                            {selectedEvent.eventContactEmail}
+                            {selectedEvent.eventContactEmail && selectedEvent.eventContactEmail}
                         </p>
                         <p>
                             <b>Description:</b>
-                            {selectedEvent.eventContent.slice(0, 50)}
+                            {selectedEvent.eventContent && selectedEvent.eventContent.slice(0, 50)}
                             <Readmore>
                                 <Link href={`/events/${selectedEvent.id}`}>
                                     ...Read More

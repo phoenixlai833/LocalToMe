@@ -31,8 +31,8 @@ export default function TopBanner({
    const r = useRouter();
 
    return <Banner>
-      {back === true && <Back fontSize={'large'} onClick={() => r.back()}>arrow_back</Back>}
+      {back === true ? <Back fontSize={'large'} onClick={() => r.back()}>arrow_back</Back> : <div></div>}
       <AppText txt={text}></AppText>
-      {back === true && <div></div>}
+      {<div></div>}
    </Banner>
 }

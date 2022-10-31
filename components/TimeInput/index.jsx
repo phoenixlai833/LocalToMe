@@ -32,7 +32,7 @@ export default function TimeInput({
         {label}
         {required && "*"}
       </Label>
-      <Input type="time" value={time} onChange={handleChangeTime} />
+      <Input type="time" value={time} onChange={handleChangeTime} required/>
     </Container>
   );
 }

@@ -63,6 +63,7 @@ const ReadMore = styled.div`
 `
 export default function NewsCard({
    tag = "event",
+   title = "Title",
    organizer = "Organizer",
    avatar = "",
    date = "Today, 3:00PM",
@@ -82,7 +83,8 @@ export default function NewsCard({
             </LeftCont>
             <TextDiv>
                <InfoDiv>
-                  <h2>{organizer}</h2>
+                  <h3>{organizer}</h3>
+                  <h2>{title}</h2>
                   <p>{date}</p>
                </InfoDiv>
                <Filters>

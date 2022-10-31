@@ -25,7 +25,7 @@ export default function ShortTextInput({ label, required = false, placeholder, v
     return (
         <Container>
             <Label>{label}{required && "*"}</Label>
-            <Input placeholder={placeholder} value={value} onChange={handleChange}/>
+            <Input placeholder={placeholder} value={value} onChange={handleChange} required />
         </Container>
     )
 }

@@ -33,6 +33,7 @@ export default function NewEvent({ eventList, eventCategories }) {
   });
 
   const [isPreview, setIsPreview] = useState(false);
+  const [imageURL, setImageURL] = useState(null);
   const [navValue, setNavValue] = useState(1);
 
   const handleTogglePreview = () => {
@@ -53,6 +54,11 @@ export default function NewEvent({ eventList, eventCategories }) {
 
   function handleChangeEventCreator() {
     // setEventCreator()
+    return;
+  }
+
+  function handleChangeEventPhoneNumber(eventContactPhone) {
+    setEvent({ ...event, eventContactPhone });
     return;
   }
 
@@ -78,6 +84,8 @@ export default function NewEvent({ eventList, eventCategories }) {
     await uploadBytes(imgRef, img);
     const newImgRef = await getDownloadURL(imgRef);
     setEvent({ ...event, eventImage: newImgRef });
+    // console.log(img.name);
+    setImageURL(img.name);
   }
 
   function handleChangeEventStartDate(date) {
@@ -116,7 +124,7 @@ export default function NewEvent({ eventList, eventCategories }) {
     setEvent({ ...event, eventTags: [...eventTags, e.target.id] });
   }
 
-  function handleCancel() {}
+  function handleCancel() { }
 
   function handleConfirm(event) {
     const postEvent = {
@@ -126,6 +134,7 @@ export default function NewEvent({ eventList, eventCategories }) {
       eventImage: event.eventImage,
       eventLocation: event.eventLocation,
       eventName: event.eventName,
+      eventContactPhone: event.eventContactPhone,
     }
 
     axios.post("/api/events", postEvent).then((res) => {
@@ -149,8 +158,10 @@ export default function NewEvent({ eventList, eventCategories }) {
           onTogglePreview={handleTogglePreview}
           onChangeEventName={handleChangeEventName}
           onChangeEventCreator={handleChangeEventCreator}
+          onChangeEventPhoneNumber={handleChangeEventPhoneNumber}
           onChangeEventLocation={handleChangeEventLocation}
           onChangeEventDescription={handleChangeEventDescription}
+          image={imageURL}
           onChangeEventImage={handleChangeEventImage}
           onChangeEventStartDate={handleChangeEventStartDate}
           onChangeEventStartTime={handleChangeEventStartTime}
