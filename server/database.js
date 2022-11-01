@@ -86,10 +86,19 @@ export async function getEventCategories() {
 }
 
 // _________________________________________________________________________
-// news
+// all the news
 export async function getAllNews() {
-  return;
+  const newsCollection = collection(db, "news");
+  const newsSnap = await getDocs(newsCollection);
+  const news = newsSnap.docs.map((doc) => {
+    let id = doc.id;
+    let data = doc.data();
+    return { id, ...data };
+  });
+  return news;
 }
+
+console.log("nnnn",getAllNews());
 
 //one news item
 export async function getNews(id) {

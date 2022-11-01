@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
-import { getEvents } from "../server/database";
+import { getEvents, getAllNews } from "../server/database";
 // import { useAuthState } from "react-firebase-hooks/auth"; // to check if user is signed in
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -13,6 +13,7 @@ import CarouselCard from "../components/CarouselCard";
 import NewsCard from "../components/NewsCard";
 import styled from "styled-components";
 import TopNavigation from '../components/NavBarTop';
+import AllNews from "../components/AllNews";
 
 const SearchBar = styled.div`
 height: 5vh;
@@ -79,7 +80,7 @@ justify-content: space-between;
 
 // this should be homepage, just using for testing right now
 // maybe move some of this to map
-export default function Home({ events }) {
+export default function Home({ events, allNews }) {
   // const [navValue, setNavValue] = useState(0);
 
   // const foodBanksComponent = foodBanksList.map((foodbank) => (
@@ -115,7 +116,7 @@ export default function Home({ events }) {
       </Head>
       <TopNavigation />
 
-      <div style={{ padding: "8% 5% 10% 5%" }}>
+      <div style={{ padding: "8% 5% 5% 5%" }}>
 
         <FirstSection>
           <div>
@@ -151,15 +152,14 @@ export default function Home({ events }) {
             </ul>
           </EventListContainer>
         </UpcomingEventsContainer>
-
-        <div style={{ display: "flex", justifyContent: "space-between", marginTop: "1%" }}>
-          <SubHeader>Community News</SubHeader>
-          <Link href={`/community`}>
-            <p style={{ color: "green" }}>view all</p>
-          </Link>
-        </div>
-        <NewsCard />
       </div>
+      <div style={{ display: "flex", justifyContent: "space-between", margin: "auto 5%" }}>
+        <SubHeader>Community News</SubHeader>
+        <Link href={`/community`}>
+          <p style={{ color: "green" }}>view all</p>
+        </Link>
+      </div>
+      <AllNews allNews={allNews} />
 
       <FloatingActionButton />
       <div class="TEMPMEDIA">
@@ -173,8 +173,10 @@ export default function Home({ events }) {
 export async function getServerSideProps(context) {
   const req = await getEvents();
   const events = JSON.parse(JSON.stringify(req));
-  // console.log(events);
+
+  const news = await getAllNews();
+  const allNews = JSON.parse(JSON.stringify(news));
   return {
-    props: { events },
+    props: { events, allNews },
   }
 }
