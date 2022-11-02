@@ -1,4 +1,5 @@
 import NewsCard from "../../components/NewsCard";
+import Link from "next/link";
 import { getNews } from "../../server/database";
 
 export default function news({ news }) {
@@ -6,18 +7,29 @@ export default function news({ news }) {
         <>
             <h1>Single news page</h1>
             <p>We dont need this actually, use for testing</p>
-            <NewsCard
-
-                title={news.newsTitle}
-                organizer={news.newsCreatorId}
-                avatar={news.newsAvatar}
-                // date={news.newsDateCreated}
-                info={news.newsContent}
-                src={news.newsImage}
-            />
+            <div>
+                <NewsCard
+                    title={news.newsTitle}
+                    organizer={news.newsCreatorId}
+                    avatar={news.newsAvatar}
+                    // date={news.newsDateCreated}
+                    info={news.newsContent}
+                    src={news.newsImage}
+                />
+                <br />
+                <Link href={`/news/edit/${news.id}`}>
+                    <div style={{ display: "flex" }}>
+                        <img src="/Edit-icon.svg" alt="Edit News" />
+                        &nbsp;
+                        <p>Edit News</p>
+                    </div>
+                </Link>
+            </div>
         </>
     )
 }
+
+// /news/3umhg4tybhT8TWbY3vEu
 
 export async function getServerSideProps({ params }) {
     const newsData = await getNews(params.id);

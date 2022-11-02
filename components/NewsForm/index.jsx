@@ -5,7 +5,6 @@ import DateCalendar from "../DateCalendar";
 import TimeInput from "../TimeInput";
 import { useState } from "react";
 import styled from "styled-components";
-import TopBanner from "../TopBanner";
 import GeneralGreenBtn from "../GeneralGreenBtn";
 
 const Form = styled.form`
@@ -36,7 +35,7 @@ export default function NewsForm({
     news,
     onChangeNewsTitle,
     onChangeNewsCreator,
-    onChangeNewsDescription,
+    onChangeNewsContent,
     image,
     onChangeNewsImage,
     onChangeNewsTags,
@@ -51,8 +50,8 @@ export default function NewsForm({
         onChangeNewsCreator(newsCreator);
     }
 
-    function handleChangeNewsDescription(newsDescription) {
-        onChangeNewsDescription(newsDescription);
+    function handleChangeNewsContent(newsContent) {
+        onChangeNewsContent(newsContent);
     }
 
     function handleChangeNewsImage(newsImage) {
@@ -65,7 +64,6 @@ export default function NewsForm({
 
     return (
         <>
-            <TopBanner text={"Create a News"} />
             <Form onSubmit={onConfirm}>
                 <b>Basic Information</b>
                 <br></br>
@@ -78,13 +76,13 @@ export default function NewsForm({
                 <br></br>
                 <ShortTextInput
                     label="Organizer"
-                    value={news.newsCreator}
+                    value={news.newsCreatorId}
                     onChange={handleChangeNewsCreator}
                     required={true}
                 />
-                <b style={{ marginTop: "5%" }}>Describe your News*</b>
+                <b style={{ marginTop: "5%" }}>Details about your News*</b>
                 <br></br>
-                <LongTextInput value={news.newsContent} placeholder={"Tell us about your news..."} image={image} onChange={handleChangeNewsDescription} onChangeImage={handleChangeNewsImage}></LongTextInput>
+                <LongTextInput value={news.newsContent && news.newsContent} placeholder={"Tell us about your news..."} image={image} onChange={handleChangeNewsContent} onChangeImage={handleChangeNewsImage}></LongTextInput>
                 {/* <b style={{ marginTop: "5%" }}>Select News Tags</b> */}
                 <br></br>
                 <GeneralGreenBtn type="submit" text="Post" />
@@ -92,3 +90,5 @@ export default function NewsForm({
         </>
     );
 }
+
+// edit/3umhg4tybhT8TWbY3vEu
