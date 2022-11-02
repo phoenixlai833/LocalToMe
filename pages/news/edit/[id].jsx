@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { storage } from "../../../firebase/clientApp";
 import { getNews, editNews, getNewsCategories } from "../../../server/database";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
+import TopBanner from "../../../components/TopBanner";
 import NewsForm from "../../../components/NewsForm";
 import axios from "axios";
 
 export default function NewNews({ newsItem, newsCategories }) {
+    // console.log(newsItem.id)
     const [news, setNews] = useState({
         newsTitle: newsItem.newsTitle,
         newsCreatorId: newsItem.newsCreatorId,
@@ -27,8 +29,8 @@ export default function NewNews({ newsItem, newsCategories }) {
         return;
     }
 
-    function handleChangeNewsDescription(newsDescription) {
-        setNews({ ...news, newsDescription });
+    function handleChangeNewsContent(newsContent) {
+        setNews({ ...news, newsContent });
     }
 
     async function handleChangeNewsImage(img) {
@@ -46,30 +48,32 @@ export default function NewNews({ newsItem, newsCategories }) {
 
     function handleCancel() { }
 
-    function handleConfirm(news) {
-        const postnews = {
+    function handleConfirm() {
+        const putNews = {
+            id: newsItem.id,
             newsTitle: news.newsTitle,
             newsCreatorId: 1,
             newsAvatar: "",
-            newsDateCreated: Date(),
-            newsContent: news.newsDescription,
+            newsDateCreated: new Date(),
+            newsContent: news.newsContent,
             newsImage: news.newsImage,
-            newsTags: [news.newsTags],
+            newsTags: news.newsTags,
         }
 
-        axios.post("/api/news", postnews).then((res) => {
+        axios.put("/api/news", putNews).then((res) => {
             window.location = `/community`
-            console.log("posted successfully", res.data);
+            console.log("edited successfully", res.data);
         });
     }
 
     return (
         <div>
+            <TopBanner text={"Edit News"} />
             <NewsForm
                 news={news}
                 onChangeNewsTitle={handleChangeNewsTitle}
                 onChangeNewsCreator={handleChangeNewsCreator}
-                onChangeNewsDescription={handleChangeNewsDescription}
+                onChangeNewsContent={handleChangeNewsContent}
                 image={imageURL}
                 onChangeNewsImage={handleChangeNewsImage}
                 onChangeNewsCategory={handleChangeNewsCategory}
