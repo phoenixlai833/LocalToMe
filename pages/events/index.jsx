@@ -1,8 +1,8 @@
 import EventsList from "../../components/Organisms/EventsList";
 import { getEvents } from "../../server/database";
-import NavBar from '../../components/Organisms/NavBar'
 import { FlexBox, Container, Wrapper, Colour } from '../../styles/globals'
 import { useState } from "react";
+import NavBar from '../../components/Organisms/NavBar'
 import FloatingActionButton from "../../components/Atoms/FloatButton";
 
 export default function Events({ eventList }) {

@@ -2,14 +2,14 @@
 import { getEvent, deleteEvent } from "../../server/database";
 import { useState } from "react";
 import { useRouter } from 'next/router';
-import NavBar from '../../components/Organisms/NavBar';
 import React from "react";
+import styled from "styled-components";
+import NavBar from '../../components/Organisms/NavBar';
 import GetDirectionGreenBtn from '../../components/Atoms/GetDirectionGreenBtn';
 import TextBubble from '../../components/Molecules/TextBubble';
 import TopBanner from '../../components/Molecules/TopBanner';
 import UserOfPost from '../../components/Molecules/UserOfPost';
 import EventCategoryTag from "../../components/Atoms/EventCategoryTag";
-import styled from "styled-components";
 import AddtoCalendar from "../../components/Atoms/AddtoCalendar";
 import ShareLink from "../../components/Atoms/ShareLink";
 import FavoriteBtn from "../../components/Atoms/FavoriteBtn";

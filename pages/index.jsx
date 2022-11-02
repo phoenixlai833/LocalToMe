@@ -5,14 +5,14 @@ import Link from "next/link";
 import { getEvents, getAllNews } from "../server/database";
 // import { useAuthState } from "react-firebase-hooks/auth"; // to check if user is signed in
 import axios from "axios";
+import styled from "styled-components";
+import { useEffect, useState } from "react";
+import { Container, FlexBox, Wrapper } from "../styles/globals";
 import NavBar from '../components/Organisms/NavBar';
-import FloatingActionButton from "../components/Atoms/FloatButton";
 import CarouselCard from "../components/Organisms/CarouselCard";
 import NewsCard from "../components/Organisms/NewsCard";
 import TopNavigation from '../components/Organisms/NavBarTop';
-import { useEffect, useState } from "react";
-import { Container, FlexBox, Wrapper } from "../styles/globals";
-import styled from "styled-components";
+import FloatingActionButton from "../components/Atoms/FloatButton";
 import AllNews from "../components/Organisms/AllNews";
 
 
