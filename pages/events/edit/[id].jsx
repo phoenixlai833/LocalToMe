@@ -16,7 +16,6 @@ export default function EditEvent({ defaultEvent, eventCategories }) {
   const [event, setEvent] = useState(defaultEvent);
 
   const [isPreview, setIsPreview] = useState(false);
-  const [navValue, setNavValue] = useState(1);
 
   const handleTogglePreview = () => {
     setIsPreview(!isPreview);
