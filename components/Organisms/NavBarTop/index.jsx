@@ -7,13 +7,13 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 
 const AppDiv = styled(AppBar)`
-//   background-color:white;
-//   color:${Colours.primary};
-//   z-index:100;
-//   max-width:100vw;
-//   @media (max-width: 767px) {
-//     display:none;
-// }
+  // background-color:white;
+  // color:${Colours.primary};
+  // z-index:100;
+  // max-width:100vw;
+  // @media (max-width: 767px) {
+  //   display:none;
+}
 `
 
 const NavButton = styled(IconButton)`
@@ -57,7 +57,7 @@ export default function TopNavigation({
   }
   return (
     <ThemeProvider theme={Theme}>
-    <AppDiv position="fixed">
+    <AppDiv position="fixed" sx={{backgroundColor:"white", color:Colours.primary, maxWidth:"100vw" }}>
       <Container maxWidth="false">
         <Toolbar disableGutters>
           <Container sx={{ display: "flex", justifyContent: "flex-start" }}>
@@ -79,23 +79,23 @@ export default function TopNavigation({
           </Container>
           {/* </Box> */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex', justifyContent: "flex-end" } }}>
-            <NavButton onClick={onHome}>
+            <NavButton onClick={onHome} sx={{display:'flex', flexDirection:'column', borderRadius:"0", padding:"18px 30px", maxWidth:"90px", fontSize:"12px"}}>
               <NavIcons icon="Home" />
               Home
             </NavButton>
-            <NavButton onClick={onCommunity}>
+            <NavButton onClick={onCommunity} sx={{display:'flex', flexDirection:'column', borderRadius:"0", padding:"18px 30px", maxWidth:"90px", fontSize:"12px"}}>
               <NavIcons icon="Community" />
               Community
             </NavButton>
-            <NavButton onClick={onMap}>
+            <NavButton onClick={onMap} sx={{display:'flex', flexDirection:'column', borderRadius:"0", padding:"18px 30px", maxWidth:"90px", fontSize:"12px"}}>
               <NavIcons icon="Map" />
               Map
             </NavButton>
-            <NavButton onClick={onFavourites}>
+            <NavButton onClick={onFavourites} sx={{display:'flex', flexDirection:'column', borderRadius:"0", padding:"18px 30px", maxWidth:"90px", fontSize:"12px"}}>
               <NavIcons icon="Favourite" />
               Favourites
             </NavButton>
-            <NavButton onClick={onProfile}>
+            <NavButton onClick={onProfile} sx={{display:'flex', flexDirection:'column', borderRadius:"0", padding:"18px 30px", maxWidth:"90px", fontSize:"12px"}}>
               <NavIcons icon="Profile" />
               Profile
             </NavButton>

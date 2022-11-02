@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 
 const Categories = styled.div`
-display:flex;
-margin: 30px;
+   display:flex;
+   margin: 30px;
 `
 
 const Category = styled.div`

@@ -6,4 +6,4 @@ export default {
    component: FavoriteBtn,
 };
 
-export const Template = () => <FavoriteBtn />;
+export const Default = () => <FavoriteBtn />;

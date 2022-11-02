@@ -4,7 +4,7 @@ import EventFilter from "./index";
 export default {
    title: 'Atoms/Filter',
    component: Filter,
-   subcomponents: {EventFilter}
+   subcomponents: { EventFilter }
 };
 
 
@@ -42,18 +42,18 @@ Event.args = {
 EventFilt.args = {
    tag: "Accepts Henry",
    active: true,
-   icon:"check",
-   tagline:"test",
-   color:'white',
-   txtcolor:"green",
-   border:"green 2px solid"
+   icon: "check",
+   tagline: "test",
+   color: 'white',
+   txtcolor: "green",
+   border: "green 2px solid"
 }
 EventFiltDeny.args = {
    tag: "Accepts Sam",
    active: true,
-   icon:"close",
-   tagline:"test",
-   color:'white',
-   txtcolor:"red",
-   border:"red 2px solid"
+   icon: "close",
+   tagline: "test",
+   color: 'white',
+   txtcolor: "red",
+   border: "red 2px solid"
 }

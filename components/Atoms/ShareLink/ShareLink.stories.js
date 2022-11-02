@@ -6,4 +6,4 @@ export default {
    component: ShareLink,
 };
 
-export const Template = () => <ShareLink />;
+export const Default = () => <ShareLink />;

@@ -1,15 +1,15 @@
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 14px;
 }
 
 button {
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
 }
 
 a {
@@ -37,7 +37,6 @@ a {
   height: 100%;
 }
 
-
 .organizationNameLink {
   color: rgb(38, 142, 233);
   text-decoration: underline;
@@ -63,11 +62,7 @@ a {
 .mapboxgl-ctrl-top-right {
   margin-top: 2.5%;
   margin-right: 1%;
-
 }
-
-
-
 
 .MuiBottomNavigationAction-root {
   padding-top:2px;
@@ -80,11 +75,22 @@ a {
   border-bottom-left-radius:2px;
   border-bottom-right-radius:2px;
   width:30px;
+  padding-top: 2px;
+  font-size: 30px;
 }
 
+.MuiBottomNavigationAction-root .Mui-selected {
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  border-bottom: #068906 2px solid;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  width: 30px;
+}
 
-@media screen and (min-width:768px) {
+@media screen and (min-width: 768px) {
   .TEMPMEDIA {
-    display:none;
+    display: none;
   }
 }

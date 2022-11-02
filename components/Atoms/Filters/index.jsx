@@ -15,7 +15,7 @@ const FilterCont = styled.div`
    gap:2px;
    font-weight:600;
    font-size:12px;
-   border: ${props => props.border || "0px" };
+   border: ${props => props.border || "0px"};
    // margin:2% auto;
 `
 
@@ -41,10 +41,10 @@ export default function Filter({
 export function EventFilter({
    tag = "",
    active = false,
-   icon = active ? "close": "check",
+   icon = active ? "close" : "check",
    color = Colours.background,
-   txtcolor = active ? "#9B1C1C": Colours.primary,
-   border = active ? "2px solid #9B1C1C": `2px solid ${Colours.primary}`
+   txtcolor = active ? "#9B1C1C" : Colours.primary,
+   border = active ? "2px solid #9B1C1C" : `2px solid ${Colours.primary}`
 }) {
 
    return <FilterCont txtcolor={txtcolor} active={false} color={color} border={border}>

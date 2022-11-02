@@ -90,7 +90,7 @@ export default function FoodBank({ d }) {
             </FilterDiv>
 
             <GetDirectionGreenBtn address={d.location_address} onMap={false} />
-            
+
             <FlexBox pd="50px" />
             {/* {d.organization_name && (<h2>Organization Name: {d.organization_name}</h2>)}
             {d.program_population_served && (<h3>Population Served: {d.program_population_served}</h3>)}

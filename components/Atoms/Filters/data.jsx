@@ -19,11 +19,11 @@ export const filterOpt = {
       color: "#F9B300",
       icon: "event"
    },
-   "open":{
+   "open": {
       tag: "Open Now",
       color: "#454545",
    },
-   "1km":{
+   "1km": {
       tag: "Less than 1km?",
       color: "#454545",
    }

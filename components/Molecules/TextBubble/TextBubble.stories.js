@@ -11,6 +11,6 @@ const Template = (args) => <TextBubble {...args} />;
 export const Default = Template.bind({});
 
 Default.args = {
-   text: ["123 BCIT Street, Vancouver, BC", "Henry and Sam²", "Tonight"],
+   text: ["123 BCIT Street, Vancouver, BC", "BCIT Students", "Tonight"],
    icon: ["location_on", "people", "schedule"]
 };

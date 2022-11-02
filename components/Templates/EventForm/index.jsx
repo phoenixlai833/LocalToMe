@@ -120,7 +120,7 @@ export default function EventForm({
           required={true}
         />
         <b style={{ marginTop: "5%" }}>Location of your Event</b>
-        <ShortTextInput value={event.eventLocation} onChange={handleChangeEventLocation}/>
+        <ShortTextInput value={event.eventLocation} onChange={handleChangeEventLocation} />
         <b style={{ marginTop: "5%" }}>Date & Time of your Event</b>
         <br></br>
         <LayoutTime>
@@ -140,7 +140,7 @@ export default function EventForm({
             <TimeInput
               label="Start Time"
               required={true}
-              time={event.start.toLocaleString("default", {hour: "2-digit", minute: "2-digit", hour12: false})}
+              time={event.start.toLocaleString("default", { hour: "2-digit", minute: "2-digit", hour12: false })}
               onChangeTime={handleChangeEventStartTime}
             />
           </div>
@@ -161,7 +161,7 @@ export default function EventForm({
             <br></br>
             <TimeInput
               label="End Time"
-              time={event.end.toLocaleString("default", {hour: "2-digit", minute: "2-digit", hour12: false})}
+              time={event.end.toLocaleString("default", { hour: "2-digit", minute: "2-digit", hour12: false })}
               onChangeTime={handleChangeEventEndTime}
             />
           </div>

@@ -152,7 +152,7 @@ export default function Home({ events }) {
           </EventListContainer>
         </UpcomingEventsContainer>
 
-        <div style={{ display: "flex", justifyContent: "space-between", marginTop: "5%" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", marginTop: "1%" }}>
           <SubHeader>Community News</SubHeader>
           <Link href={`/community`}>
             <p style={{ color: "green" }}>view all</p>

@@ -50,22 +50,23 @@ export default function FoodBankMapPin({ foodBanksList }) {
             {foodBanksList.map((item) => {
                 console.log(item)
                 return (
-                <Marker
-                    key={item.id}
-                    latitude={item.latitude}
-                    longitude={item.longitude}
-                    color="red"
-                >
-                    <MarkerBtn
-                        onClick={(e) => {
-                            e.preventDefault();
-                            setSelectedFoodbank(item);
-                        }}
+                    <Marker
+                        key={item.id}
+                        latitude={item.latitude}
+                        longitude={item.longitude}
+                        color="red"
                     >
-                        <img src="./Food_Bank_Map_Pin.svg" alt="foodbank pin" />
-                    </MarkerBtn>
-                </Marker>
-            )}
+                        <MarkerBtn
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setSelectedFoodbank(item);
+                            }}
+                        >
+                            <img src="./Food_Bank_Map_Pin.svg" alt="foodbank pin" />
+                        </MarkerBtn>
+                    </Marker>
+                )
+            }
             )}
 
             {selectedFoodbank && (
@@ -80,7 +81,7 @@ export default function FoodBankMapPin({ foodBanksList }) {
                 >
                     <div>
                         <FoodBankNameLink>
-                            <Link href={`/foodBank/${selectedFoodbank.id}`}>
+                            <Link href={`/foodBank/${selectedFoodbank.objectID}`}>
                                 <h2>{selectedFoodbank.program_name}</h2>
 
                             </Link>
@@ -104,7 +105,7 @@ export default function FoodBankMapPin({ foodBanksList }) {
                         </p>
                         <p>
                             <b>Description:</b>
-                            {selectedFoodbank.description.slice(0, 45)}
+                            {selectedFoodbank.description && selectedFoodbank.description.slice(0, 45)}
                             <Readmore>
                                 <Link href={`/foodBank/${selectedFoodbank.id}`}>
                                     ...Read More

@@ -5,5 +5,5 @@ export default {
     component: DateInput,
 }
 
-export const NotRequired = () => <DateInput date={(new Date).toString()} label="Label" onChangeDate={() => {}} />
-export const Required = () => <DateInput date={(new Date).toString()} label="Label" onChangeDate={() => {}} required={true}/>
+export const NotRequired = () => <DateInput date={(new Date).toString()} label="Label" onChangeDate={() => { }} />
+export const Required = () => <DateInput date={(new Date).toString()} label="Label" onChangeDate={() => { }} required={true} />

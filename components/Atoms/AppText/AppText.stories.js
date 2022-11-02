@@ -4,15 +4,15 @@ import AppText from "."
 export default {
     title: 'Atoms/AppText',
     component: AppText,
- }; 
+};
 
- const Template = (args) => <AppText {...args} />;
+const Template = (args) => <AppText {...args} />;
 
 export const PrimaryText = Template.bind({});
 PrimaryText.args = {
-   txt: 'This is the Header',
-   variant: 'primary',
-   txtsize: '24px'
+    txt: 'This is the Header',
+    variant: 'primary',
+    txtsize: '24px'
 };
 
 export const SecondaryText = Template.bind({});
@@ -22,5 +22,5 @@ SecondaryText.args = {
     txtsize: '20px'
 }
 
-export const Default = (args) => <AppText/>
+export const Default = (args) => <AppText />
 export const Error = (args) => <AppText />
