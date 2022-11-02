@@ -162,7 +162,7 @@ export default function Home({ events }) {
       </div>
 
       <FloatingActionButton />
-      <div class="TEMPMEDIA">
+      <div className="TEMPMEDIA">
         <NavBar value={0} />
       </div>
       {/* <NavBar value={0} /> */}
