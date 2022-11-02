@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 const Container = styled.div`
+display: flex;
+align-items: center;
+padding: 0 1em;
 `;
 
 const Img = styled.img`
@@ -9,6 +12,11 @@ const Img = styled.img`
 `;
 
 const Input = styled.input``;
+
+const ImgTitle = styled.p`
+  overflow: hidden;
+  // max-width: 10ch;
+`;
 
 export default function ImageInput({ onChangeImage, image }) {
   function handleChooseImage(e) {
@@ -23,6 +31,7 @@ export default function ImageInput({ onChangeImage, image }) {
     <Container>
       <Img src={image ? "../addImageIconGreen.svg" : "../addImageIcon.svg"} onClick={handleChooseImage} />
       <Input type="file" onChange={handleChangeImage} hidden></Input>
+      <ImgTitle>{image && image}</ImgTitle>
     </Container>
   );
 }

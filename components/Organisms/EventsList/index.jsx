@@ -4,11 +4,6 @@ import Link from "next/link";
 import styled from "styled-components";
 
 
-const RecentEvent = styled.div`
-  font-size:20px;
-  margin: 20px;
-  font-weight: 600;
-`
 const EventBlock = styled.div`
   display: grid;
   grid-template-columns: 35% 55%;
@@ -86,7 +81,6 @@ const ExtraSpace = styled.div`
 export default function EventsList({ eventList }) {
   return (
     <div>
-      <RecentEvent>Recent Events</RecentEvent>
 
       {eventList.map((event) => (
         <EventBlock key={event.id} >

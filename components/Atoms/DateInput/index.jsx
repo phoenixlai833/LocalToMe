@@ -8,7 +8,7 @@ const Container = styled.div`
   ${({ selected }) =>
     selected &&
     `
-  border: 1px solid green;
+  border: 2.5px solid green;
 `}
 `;
 
@@ -39,7 +39,7 @@ export default function DateInput({
         {label}
         {required && "*"}
       </Label>
-      <Input value={date} onClick={handleSelectDate} readOnly />
+      <Input value={date} onClick={handleSelectDate} readOnly required />
     </Container>
   );
 }

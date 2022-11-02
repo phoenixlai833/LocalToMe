@@ -47,20 +47,20 @@ const eventList = [
         eventContactPhone: '7788900980',
         eventImage: 'https://firebasestorage.googleapis.com/v0/b/localtome-f84e5.appspot.com/o/alexComedyShow.jpeg?alt=media&token=93b80bda-7b7f-49ea-9852-15b67569677c'
     },
-    {
-        id: 'testing4',
-        eventCreatorId: '3',
-        eventContent: 'The Diwali festival is one of the most festive celebrations for the South Asian community and all over the world. V4U Entertainment organized a hugely successful Diwali event in Vancouver last year accommodating almost 600 guests after the COVID-19 restrictions eased. This year, due to popular demand and interest from the community, a larger event will be held on October 29th 2022 at the Mirage Banquet Hall in Surrey. This event is organized in association with the Gujarati Association of BC. Everyone is invited to join this sparkling event to enjoy a unique lights show, traditional Diwali activities, and a festive cultural entertainment program lined up for the evening. We are expecting guests and attendees from all South Asian communities and other multicultural communities are welcome to join.  No celebration is complete without a sumptuous feast! At this event, you can expect to enjoy the lavish and delicious traditional Indian cuisine replete with savoury delights and sweetness galore. Aside from the food and festivities, V4U is keen to also support those less fortunate in the Metro Vancouver community. They are proud to raise funds and donations to support the work at the Greater Vancouver Food Bank as part of this mega Diwali event.  Diwali is celebrated as the victory of good over evil, the triumph of hope over despair. V4U invites our community to open our hearts and celebrate together in a generous spirit.  Get your tickets here!',
-        longitude: '-122.730240',
-        eventLocation: '17767 64 Avenue, Surrey, BC, Canada',
-        eventContactPhone: '778-654-0987',
-        eventImage: 'https://firebasestorage.googleapis.com/v0/b/localtome-f84e5.appspot.com/o/megaaDiwaliShow.jpeg?alt=media&token=8cac6aee-d95f-4e00-bbab-643b835d1f82',
-        latitude: '49.118980',
-        eventName: 'Mega Diwali Show',
-        eventCategoryId: 3,
-        eventContactEmail: 'megadiwalishow@gmail.com',
-        eventDate: { seconds: 1667091600, nanoseconds: 765000000 }
-    }
+    // {
+    //     id: 'testing4',
+    //     eventCreatorId: '3',
+    //     eventContent: 'The Diwali festival is one of the most festive celebrations for the South Asian community and all over the world. V4U Entertainment organized a hugely successful Diwali event in Vancouver last year accommodating almost 600 guests after the COVID-19 restrictions eased. This year, due to popular demand and interest from the community, a larger event will be held on October 29th 2022 at the Mirage Banquet Hall in Surrey. This event is organized in association with the Gujarati Association of BC. Everyone is invited to join this sparkling event to enjoy a unique lights show, traditional Diwali activities, and a festive cultural entertainment program lined up for the evening. We are expecting guests and attendees from all South Asian communities and other multicultural communities are welcome to join.  No celebration is complete without a sumptuous feast! At this event, you can expect to enjoy the lavish and delicious traditional Indian cuisine replete with savoury delights and sweetness galore. Aside from the food and festivities, V4U is keen to also support those less fortunate in the Metro Vancouver community. They are proud to raise funds and donations to support the work at the Greater Vancouver Food Bank as part of this mega Diwali event.  Diwali is celebrated as the victory of good over evil, the triumph of hope over despair. V4U invites our community to open our hearts and celebrate together in a generous spirit.  Get your tickets here!',
+    //     longitude: '-122.730240',
+    //     eventLocation: '17767 64 Avenue, Surrey, BC, Canada',
+    //     eventContactPhone: '778-654-0987',
+    //     eventImage: 'https://firebasestorage.googleapis.com/v0/b/localtome-f84e5.appspot.com/o/megaaDiwaliShow.jpeg?alt=media&token=8cac6aee-d95f-4e00-bbab-643b835d1f82',
+    //     latitude: '49.118980',
+    //     eventName: 'Mega Diwali Show',
+    //     eventCategoryId: 3,
+    //     eventContactEmail: 'megadiwalishow@gmail.com',
+    //     eventDate: { seconds: 1667091600, nanoseconds: 765000000 }
+    // }
 ];
 
 

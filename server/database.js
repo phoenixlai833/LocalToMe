@@ -1,5 +1,5 @@
 import { db, storage } from '../firebase/clientApp';
-import { collection, getDocs, getDoc, addDoc, deleteDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, getDoc, addDoc, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { refFromURL } from "firebase/storage";
 
 // food banks
@@ -83,4 +83,48 @@ export async function getEventCategories() {
     return { id, ...data };
   });
   return eventCategories;
+}
+
+// _________________________________________________________________________
+// all the news
+export async function getAllNews() {
+  const newsCollection = collection(db, "news");
+  const newsSnap = await getDocs(newsCollection);
+  const news = newsSnap.docs.map((doc) => {
+    let id = doc.id;
+    let data = doc.data();
+    return { id, ...data };
+  });
+  return news;
+}
+
+
+//one news item
+export async function getNews(id) {
+  const newsRef = doc(db, "news", id);
+  const newsSnap = await getDoc(newsRef);
+  const news = { id, ...newsSnap.data() };
+  // console.log('hi', news)
+  return news;
+}
+
+export async function addNews(news) {
+  const newsCollection = collection(db, "news");
+  const docRef = await addDoc(newsCollection, news);
+  return docRef.id;
+}
+
+export async function editNews(news) {
+  const newsRef = doc(db, "news", news.id);
+  const newsSnap = await updateDoc(newsRef, news);
+  return news.id;
+}
+
+export async function deleteNews(id) {
+
+  await deleteDoc(doc(db, "news", id));
+}
+
+export async function getNewsCategories() {
+  return;
 }
