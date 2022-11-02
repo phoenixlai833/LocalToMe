@@ -24,7 +24,6 @@ const TextDiv = styled.div`
 // Placeholder text 
 const Text = styled.p`
    line-height:normal;
-
 `
 const ImageContainer = styled.div`
    display: flex;
@@ -65,7 +64,7 @@ export default function NewsCard({
    tag = "event",
    title = "Title",
    organizer = "Organizer",
-   avatar = "",
+   avatar = "../../public/images/placeholder.png",
    date = "Today, 3:00PM",
    info = "Lorem ipsum dolor sit amet, conse ctetur adi piscing elit. Fringilla risus est sociis bibendum. Nunc...",
    src = "http://placekitten.com/500/500",

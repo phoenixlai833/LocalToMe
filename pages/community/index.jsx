@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EventsList from "../../components/EventsList";
 import AllNews from "../../components/AllNews";
 import algoliasearch from "algoliasearch/lite";
@@ -8,6 +8,7 @@ import NavBar from '../../components/NavBar';
 import FloatingActionButton from "../../components/FloatButton";
 import styled from 'styled-components';
 import Search from "../../components/Search";
+import { getAllNews } from "../../server/database";
 
 const searchClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_CLIENT_ID,
@@ -29,19 +30,20 @@ export function EventHits() {
   return <EventsList eventList={hits} />
 }
 
-export function NewsHits() {
+export function NewsHits({ allNews }) {
   const { hits } = useHits();
 
-  return <AllNews news={hits} />
+  // return <AllNews news={hits} />
+  return <AllNews allNews={allNews} />
 }
 
-export default function Community() {
-  const [tab, setTab] = useState(0);
+export default function Community({ allNews, tabId }) {
+  const [tab, setTab] = useState(tabId);
   // const [isAdd, setIsAdd] = useState(false);
 
   const tabContents = {
     0: { component: <EventHits />, searchIndex: "prod_EVENTS" },
-    1: { component: <NewsHits />, searchIndex: "prod_NEWS" },
+    1: { component: <NewsHits allNews={allNews} />, searchIndex: "prod_NEWS" },
   };
 
 
@@ -94,6 +96,12 @@ export default function Community() {
 }
   `
 
+  const Heading = styled.p`
+margin: 1em;
+font-size: 1.5em;
+font-weight: 550;
+`
+
   const Tab = styled.div`
    display: flex;
    width: 100%;
@@ -105,7 +113,7 @@ export default function Community() {
 
   const EventTab = styled.p`
   cursor: pointer;
-  text-decoration: underline ${tab === 0 ? "#FFB800" : "transparent"};
+  text-decoration: underline ${tab == 0 ? "#FFB800" : "transparent"};
   text-decoration-thickness: 4px;
   text-underline-offset: 12px;
   font-size: 18px;
@@ -114,7 +122,7 @@ export default function Community() {
 
   const NewTab = styled.p`
   cursor: pointer;
-  text-decoration: underline ${tab === 1 ? "#FFB800" : "transparent"} ;
+  text-decoration: underline ${tab == 1 ? "#FFB800" : "transparent"} ;
   text-decoration-thickness: 4px;
   text-underline-offset: 12px;
   font-size: 18px;
@@ -138,11 +146,25 @@ export default function Community() {
           </NewTab>
 
         </Tab>
-
+        {tab === 0 ? <Heading>Recent Events</Heading> : <Heading>Recent News</Heading>}
         {tabContents[tab].component}
       </InstantSearch>
       <FloatingActionButton />
       <NavBar value={1} />
     </>
   )
+}
+
+
+export async function getServerSideProps(context) {
+  const tabId = context.query.tabId || 0;
+
+  const req = await getAllNews();
+  // console.log("req", req);
+  return {
+    props: {
+      allNews: JSON.parse(JSON.stringify(req)),
+      tabId
+    },
+  };
 }
