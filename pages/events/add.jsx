@@ -50,6 +50,7 @@ export default function NewEvent({ eventList, eventCategories }) {
 
   function handleChangeEventName(eventName) {
     setEvent({ ...event, eventName });
+    return;
   }
 
   function handleChangeEventCreator() {
@@ -126,7 +127,8 @@ export default function NewEvent({ eventList, eventCategories }) {
 
   function handleCancel() { }
 
-  function handleConfirm(event) {
+  function handleConfirm() {
+    // console.log(event)
     const postEvent = {
       eventContent: event.eventDescription,
       eventCreatorId: 1,

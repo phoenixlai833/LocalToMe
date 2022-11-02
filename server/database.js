@@ -1,5 +1,5 @@
 import { db, storage } from '../firebase/clientApp';
-import { collection, getDocs, getDoc, addDoc, deleteDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, getDoc, addDoc, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { refFromURL } from "firebase/storage";
 
 // food banks
@@ -108,12 +108,16 @@ export async function getNews(id) {
   return news;
 }
 
-export async function addNews(event) {
-  return;
+export async function addNews(news) {
+  const newsCollection = collection(db, "news");
+  const docRef = await addDoc(newsCollection, news);
+  return docRef.id;
 }
 
-export async function editNews(id) {
-  return;
+export async function editNews(news) {
+  const newsRef = doc(db, "news", news.id);
+  const newsSnap = await updateDoc(newsRef, news);
+  return news.id;
 }
 
 export async function deleteNews(id) {
