@@ -10,7 +10,7 @@ import TextBubble from '../../components/Molecules/TextBubble';
 import TopBanner from '../../components/Molecules/TopBanner';
 import UserOfPost from '../../components/Molecules/UserOfPost';
 import EventCategoryTag from "../../components/Atoms/EventCategoryTag";
-import AddtoCalendar from "../../components/Atoms/AddtoCalendar";
+import AddToCalendar from "../../components/Atoms/AddToCalendar";
 import ShareLink from "../../components/Atoms/ShareLink";
 import FavoriteBtn from "../../components/Atoms/FavoriteBtn";
 import Link from "next/link";
@@ -157,7 +157,7 @@ export default function Event({ event }) {
             <EventImageBlock >
                 <EventImage src={event.eventImage} alt={event.eventName} />
                 <FunctionsBox>
-                    <AddtoCalendar />
+                    <AddToCalendar />
                     <ShareLink />
                     <FavoriteBtn />
                 </FunctionsBox>

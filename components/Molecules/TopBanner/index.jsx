@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Colours } from "../../../styles/globals";
 import { useRouter } from "next/router";
 import { Icon } from "@mui/material";
-import AppText from "../../Atoms/Apptext";
+import AppText from "../../Atoms/AppText";
 
 const Banner = styled.div`
    width:100%;
