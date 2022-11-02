@@ -20,7 +20,7 @@ export default async function handler(req, res) {
   } else if (req.method === "DELETE") {
     // Handle DELETE requests
     await db.deleteEvent(+req.params.id);
-    index.deleteObject(+req.params.id)
+    index.deleteObject(req.params.id);
     res.sendStatus(200);
   }
 }
