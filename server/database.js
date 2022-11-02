@@ -98,7 +98,6 @@ export async function getAllNews() {
   return news;
 }
 
-console.log("nnnn", getAllNews());
 
 //one news item
 export async function getNews(id) {
