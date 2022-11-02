@@ -13,13 +13,12 @@ const CustomIcon = styled(Icon)`
 export default function NavBarIcons({
    icon = "",
    active = false,
-}){
+}) {
 
    return <div>
-      
-         <CustomIcon fontSize='large'>
-         {!active && <NavIcon src={"/NavbarIcons/" + icon + ".svg"}  />}
-         {active && <NavIcon src={"/NavbarIcons/" + icon + "Active.svg"}  />}
+      <CustomIcon fontSize='large'>
+         {!active && <NavIcon src={"/NavbarIcons/" + icon + ".svg"} />}
+         {active && <NavIcon src={"/NavbarIcons/" + icon + "Active.svg"} />}
       </CustomIcon>
    </div>
 }

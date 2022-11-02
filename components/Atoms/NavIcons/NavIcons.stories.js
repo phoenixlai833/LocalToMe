@@ -7,18 +7,19 @@ export default {
 };
 
 const Template = (args) => <div>
-   <NavBarIcons icon="home" />
-   <NavBarIcons icon="community" />
-   <NavBarIcons icon="map" />
-   <NavBarIcons icon="favourite" />
-   <NavBarIcons icon="profile" />
+   <NavBarIcons icon="Home" />
+   <NavBarIcons icon="Community" />
+   <NavBarIcons icon="Map" />
+   <NavBarIcons icon="Favourite" />
+   <NavBarIcons icon="Profile" />
 </div>;
+
 const ActiveTemplate = (args) => <div>
-<NavBarIcons icon="home" active={true} />
-<NavBarIcons icon="community" active={true} />
-<NavBarIcons icon="map" active={true} />
-<NavBarIcons icon="favourite" active={true} />
-<NavBarIcons icon="profile" active={true} />
+   <NavBarIcons icon="Home" active={true} />
+   <NavBarIcons icon="Community" active={true} />
+   <NavBarIcons icon="Map" active={true} />
+   <NavBarIcons icon="Favourite" active={true} />
+   <NavBarIcons icon="Profile" active={true} />
 </div>;
 
 export const Default = Template.bind({});
