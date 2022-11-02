@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EventsList from "../../components/EventsList";
 import AllNews from "../../components/AllNews";
 import algoliasearch from "algoliasearch/lite";
@@ -37,8 +37,8 @@ export function NewsHits({ allNews }) {
   return <AllNews allNews={allNews} />
 }
 
-export default function Community({ allNews }) {
-  const [tab, setTab] = useState(0);
+export default function Community({ allNews, tabId }) {
+  const [tab, setTab] = useState(tabId);
   // const [isAdd, setIsAdd] = useState(false);
 
   const tabContents = {
@@ -113,7 +113,7 @@ font-weight: 550;
 
   const EventTab = styled.p`
   cursor: pointer;
-  text-decoration: underline ${tab === 0 ? "#FFB800" : "transparent"};
+  text-decoration: underline ${tab == 0 ? "#FFB800" : "transparent"};
   text-decoration-thickness: 4px;
   text-underline-offset: 12px;
   font-size: 18px;
@@ -122,7 +122,7 @@ font-weight: 550;
 
   const NewTab = styled.p`
   cursor: pointer;
-  text-decoration: underline ${tab === 1 ? "#FFB800" : "transparent"} ;
+  text-decoration: underline ${tab == 1 ? "#FFB800" : "transparent"} ;
   text-decoration-thickness: 4px;
   text-underline-offset: 12px;
   font-size: 18px;
@@ -157,11 +157,14 @@ font-weight: 550;
 
 
 export async function getServerSideProps(context) {
+  const tabId = context.query.tabId || 0;
+
   const req = await getAllNews();
   // console.log("req", req);
   return {
     props: {
       allNews: JSON.parse(JSON.stringify(req)),
+      tabId
     },
   };
 }

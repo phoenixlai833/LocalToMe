@@ -140,7 +140,7 @@ export default function Home({ events, allNews }) {
 
         <div style={{ display: "flex", justifyContent: "space-between", marginTop: "5%" }}>
           <SubHeader>Upcoming Events</SubHeader>
-          <Link href={`/community`}>
+          <Link href={`/community?tabId=0`}>
             <p style={{ color: "green" }}>view all</p>
           </Link>
         </div>
@@ -155,14 +155,14 @@ export default function Home({ events, allNews }) {
       </div>
       <div style={{ display: "flex", justifyContent: "space-between", margin: "auto 5%" }}>
         <SubHeader>Community News</SubHeader>
-        <Link href={`/community`}>
+        <Link href={`/community?tabId=1`}>
           <p style={{ color: "green" }}>view all</p>
         </Link>
       </div>
       <AllNews allNews={allNews} />
 
       <FloatingActionButton />
-      <div class="TEMPMEDIA">
+      <div className="TEMPMEDIA">
         <NavBar value={0} />
       </div>
       {/* <NavBar value={0} /> */}

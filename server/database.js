@@ -98,7 +98,7 @@ export async function getAllNews() {
   return news;
 }
 
-console.log("nnnn",getAllNews());
+console.log("nnnn", getAllNews());
 
 //one news item
 export async function getNews(id) {
@@ -118,7 +118,8 @@ export async function editNews(id) {
 }
 
 export async function deleteNews(id) {
-  return;
+
+  await deleteDoc(doc(db, "news", id));
 }
 
 export async function getNewsCategories() {

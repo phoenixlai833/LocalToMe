@@ -4,9 +4,12 @@ import { Colours } from "../../styles/globals";
 import styled from 'styled-components';
 import { Avatar } from "@mui/material";
 import Icon from "@mui/material/Icon";
-
+import Link from "next/link";
+import { useRouter } from 'next/router';
+import { deleteNews } from "../../server/database";
 
 const NewsList = styled.div`
+position: relative;
 width: 100%;
 margin: 0;
 `
@@ -52,9 +55,9 @@ const InfoDiv = styled.div`
    }
 `
 
-const TagList = styled.p`
+const TagList = styled.div`
 // display: flex;
-margin-bottom: 0;
+margin: 1em 1em 0 0;
 `
 
 const Tag = styled.div`
@@ -89,6 +92,7 @@ const Content = styled.div`
 position: relative;
 line-height:1.5;
 margin-bottom:1em;
+
 `
 
 const Hr = styled.hr`
@@ -114,17 +118,115 @@ right:0;
 margin:-10px
 `
 
+const EditNews = styled.div`
+display:flex;
+p{
+    margin:0;
+}
+`
+const DeleteNews = styled.div`
+display:flex;
+p{
+    
+}
+`
+
+const Func = styled.div`
+position:absolute;
+top:0;
+right:13vw;
+`
+
+const AbsPos = styled.div`
+position: absolute;
+top: 10vh;
+left: 20vw;
+`
+
+const DeleteCont = styled.div`
+background-color: #FFFFFF;
+width: 50vw;
+height: 25vh;
+padding: 2%;
+margin: auto;
+font-family: 'Rubik', sans-serif;
+text-align: center;
+box-shadow: 2px 2px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 15px;
+display: flex;
+flex-direction: column;
+justify-content: space-around;
+align-items: center;
+min-height: 210px;
+min-width: 320px;
+`
+const BtnCont = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+margin-bottom: 5%%;
+`
+
+const DeleteBtn = styled.button`
+background: #E24949;
+border-radius: 13px;
+height: 30px;
+width: 137px;
+left: 170px;
+top: 138px;
+font-size: 14px;
+line-height: 17px;
+text-align: center;
+border: 0px;
+color: #FFFFFF;
+margin: 2%;
+`
+const CancelBtn = styled.button`
+background: #FFFFF;
+border: 2px solid #535353;
+border-radius: 13px;
+height: 30px;
+width: 137px;
+left: 170px;
+top: 138px;
+font-size: 14px;
+line-height: 17px;
+text-align: center;
+color: #535353;
+margin: 2%
+`
 export default function AllNews({ allNews }) {
 
   const [showMore, setShowMore] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const router = useRouter()
+  const [popUpId, setPopUpId] = useState(null);
 
+  const handleDelete = (singleEventId) => async (e) => {
+
+    e.preventDefault();
+    deleteNews(singleEventId);
+    router.push('/community')
+
+  };
+
+  const handlePopup = (id) => (e) => {
+    e.preventDefault();
+    setPopUpId(id)
+    setConfirmDelete(true);
+  }
+
+  function hidePopup() {
+    setConfirmDelete(false);
+  }
 
   return (
     <>
 
       {allNews.map((news) => (
-        <NewsList>
-          <NewsCont key={news.newsTitle}>
+        <NewsList key={news.newsTitle}>
+          <NewsCont >
             <LeftCont>
               <Avatar src={news.avatar} />
               <Divider />
@@ -147,7 +249,7 @@ export default function AllNews({ allNews }) {
               </InfoDiv>
               <TagList>
                 {news.newsTags.map((tag) => (
-                  <Tag>
+                  <Tag key={tag}>
                     {tag}
                   </Tag>
                 ))}
@@ -155,25 +257,61 @@ export default function AllNews({ allNews }) {
 
               <Content>
                 <p>
-                  {!showMore && news.newsContent.length > 100 ? news.newsContent.substring(0, 100) + "..." : news.newsContent}
+                  {!showMore && news.newsContent?.length > 100 ? news.newsContent.substring(0, 100) + "..." : news.newsContent}
                 </p>
-                <ReadMoreBtn onClick={() => setShowMore(!showMore)}>
-                  {showMore ? <>Show Less {<Icon>expand_less</Icon>}</> : <>Read More {<Icon>expand_more</Icon>}</>}
+                {news.newsContent?.length > 100 &&
+                  <ReadMoreBtn onClick={() => setShowMore(!showMore)}>
+                    {showMore ? <>Show Less {<Icon>expand_less</Icon>}</> : <>Read More {<Icon>expand_more</Icon>}</>}
 
-                </ReadMoreBtn>
+                  </ReadMoreBtn>
+                }
               </Content>
 
-              <ImageContainer src={news.newsImage}></ImageContainer>
+              <ImageContainer src={news.newsImage ? news.newsImage : "../../no_image.png"}></ImageContainer>
 
             </TextDiv>
 
           </NewsCont>
+
+
+          <Func>
+            <Link href={`/news/edit/${news.id}`}>
+              <EditNews>
+                <img src="/Edit-icon.svg" alt="Edit News" />
+                &nbsp;
+                <p>Edit News</p>
+              </EditNews>
+            </Link>
+            <DeleteNews>
+              <img src="/Delete-icon.svg" alt="Delete News" />
+              &nbsp;
+              <p onClick={handlePopup(news.id)}>Delete News</p>
+            </DeleteNews>
+          </Func>
+
+          {confirmDelete && popUpId == news.id && (
+            <AbsPos>
+              <DeleteCont>
+                <h2 styles={{ paddingRight: "10%" }}>Are you sure you want to delete this News?<br /> This cannot be undone.</h2>
+                <BtnCont>
+                  <CancelBtn onClick={hidePopup}>Cancel</CancelBtn>
+                  <a href={`/community?tab=1`}>
+                    <DeleteBtn onClick={handleDelete(news.id)}>Confirm</DeleteBtn>
+                  </a>
+                </BtnCont>
+              </DeleteCont>
+            </AbsPos>
+          )}
+
+
           <Hr />
         </NewsList>
 
       ))}
 
       <ExtraSpace />
+
+
 
     </>
   );
