@@ -51,7 +51,7 @@ export async function getEvent(id) {
 export async function addEvent(event) {
   const eventCollection = collection(db, "event");
   const docRef = await addDoc(eventCollection, event);
-  return docRef.id;
+  return docRef;
 }
 
 export async function editEvent(event) {
