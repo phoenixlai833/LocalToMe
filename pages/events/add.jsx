@@ -139,6 +139,8 @@ export default function NewEvent({ eventList, eventCategories }) {
       eventContactPhone: event.eventContactPhone,
     }
 
+    console.log('lul', typeof event.start)
+
     axios.post("/api/events", postEvent).then((res) => {
       window.location = `/events/${res.data}`
       console.log("posted successfully", res.data);

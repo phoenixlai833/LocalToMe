@@ -62,9 +62,14 @@ export default function NewsForm({
         onChangeNewsTags(newsTags);
     }
 
+    function handleSubmit(e) {
+        e.preventDefault();
+        onConfirm();
+    }
+    
     return (
         <>
-            <Form onSubmit={onConfirm}>
+            <Form onSubmit={handleSubmit}>
                 <b>Basic Information</b>
                 <br></br>
                 <ShortTextInput
@@ -85,7 +90,7 @@ export default function NewsForm({
                 <LongTextInput value={news.newsContent && news.newsContent} placeholder={"Tell us about your news..."} image={image} onChange={handleChangeNewsContent} onChangeImage={handleChangeNewsImage}></LongTextInput>
                 {/* <b style={{ marginTop: "5%" }}>Select News Tags</b> */}
                 <br></br>
-                <GeneralGreenBtn type="submit" text="Post" />
+                <GeneralGreenBtn text="Post" />
             </Form>
         </>
     );

@@ -15,6 +15,8 @@ export default async function handler(req, res) {
     res.status(200).json(events);
   } else if (req.method === "POST") {
     // Handle POST requests
+    console.log('this', req.body);
+    return;
     const eventRef = await db.addEvent(req.body);
     const event = await db.getEvent(eventRef.id);
     index.saveObject({...event, objectID: event.id}).wait()

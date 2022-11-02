@@ -62,7 +62,7 @@ export default function NewNews({ newsList, newsCategories }) {
 
     function handleCancel() { }
 
-    function handleConfirm() {
+    function handleConfirm(e) {
         // console.log(news);
         const postnews = {
             newsTitle: news.newsTitle,
@@ -73,10 +73,10 @@ export default function NewNews({ newsList, newsCategories }) {
             newsImage: news.newsImage,
             newsTags: news.newsTags,
         }
-
+        console.log('buh',postnews.newsDateCreated);
         axios.post("/api/news", postnews).then((res) => {
-            window.location = `/community`
             console.log("posted successfully", res.data);
+            // window.location = `/community`
         });
     }
 
