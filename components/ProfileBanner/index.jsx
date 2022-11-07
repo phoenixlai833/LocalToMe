@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { Avatar } from "@mui/material"
+import { useRouter } from "next/router"
 
 const ProfileBanner = styled.div`
 display:flex;
@@ -35,8 +36,9 @@ right: 0;
 `
 
 export default function ProfileSection() {
+    const r = useRouter();
     return <div>
-        <SettingIcon src="/cog.svg" />
+        <SettingIcon src="/cog.svg" onClick={()=>r.push('/profile/setting')} />
         <ProfileBanner />
         <AvatarCont>
             <ProfileAvatar
@@ -47,3 +49,4 @@ export default function ProfileSection() {
         </AvatarCont>
     </div>
 }
+
