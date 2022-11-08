@@ -3,7 +3,7 @@ import EventsList from "../../components/Organisms/EventsList";
 // import Newss from "../../components/Newss";
 
 import { useEffect, useState } from "react";
-import AllNews from "../../components/Organisms/AllNews";
+import AllNews from "../../components/Templates/AllNews";
 import algoliasearch from "algoliasearch/lite";
 import { InstantSearch, SearchBox, useHits, useSearchBox } from "react-instantsearch-hooks-web";
 import { getEvents } from "../../server/database";
