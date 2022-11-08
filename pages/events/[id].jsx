@@ -152,7 +152,7 @@ export default function Event({ event }) {
       <EventImageBlock>
         <EventImage src={event.eventImage} alt={event.eventName} />
         <FunctionsBox>
-          <AddToCalander />
+          <AddToCalendar />
           <ShareLink />
           <FavoriteBtn />
         </FunctionsBox>
