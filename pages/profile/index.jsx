@@ -1,5 +1,5 @@
-import ProfileSection from "../../components/ProfileBanner"
-import NavBar from '../../components/NavBar';
+import ProfileSection from "../../components/Organisms/ProfileBanner"
+import NavBar from '../../components/Organisms/NavBar';
 import styled from "styled-components";
 import { useState } from "react";
 

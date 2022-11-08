@@ -2,16 +2,16 @@ import React, { useState, useRef } from "react";
 import ReactMapGL, { GeolocateControl, NavigationControl, ScaleControl, Source, Layer, useMap } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { getFoodBanks } from "../server/database";
-import MapSlideUp from '../components/MapSlideUp';
-import EventMapPin from "../components/EventMapPin";
-import FoodBankMapPin from "../components/FoodBankMapPin";
 import { getEvents } from "../server/database";
 import algoliasearch from "algoliasearch/lite";
 import { InstantSearch, SearchBox, useHits, useSearchBox, Index } from "react-instantsearch-hooks-web";
-import Filters from '../components/Filters';
-import NavBar from '../components/NavBar';
 import styled from "styled-components";
-import Search from "../components/Search";
+import MapSlideUp from '../components/Organisms/MapSlideUp';
+import EventMapPin from "../components/Atoms/EventMapPin";
+import FoodBankMapPin from "../components/Atoms/FoodBankMapPin";
+import Filters from '../components/Atoms/Filters';
+import NavBar from '../components/Organisms/NavBar';
+import Search from "../components/Molecules/Search";
 
 const searchClient = algoliasearch(
     process.env.NEXT_PUBLIC_ALGOLIA_CLIENT_ID,

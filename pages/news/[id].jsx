@@ -1,4 +1,4 @@
-import NewsCard from "../../components/NewsCard";
+import NewsCard from "../../components/Organisms/NewsCard";
 import Link from "next/link";
 import { getNews } from "../../server/database";
 

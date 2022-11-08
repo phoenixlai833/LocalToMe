@@ -5,15 +5,16 @@ import Link from "next/link";
 import { getEvents, getAllNews } from "../server/database";
 // import { useAuthState } from "react-firebase-hooks/auth"; // to check if user is signed in
 import axios from "axios";
-import { useEffect, useState } from "react";
-import NavBar from '../components/NavBar';
-import FloatingActionButton from "../components/FloatButton";
-import { Container, FlexBox, Wrapper } from "../styles/globals";
-import CarouselCard from "../components/CarouselCard";
-import NewsCard from "../components/NewsCard";
 import styled from "styled-components";
-import TopNavigation from '../components/NavBarTop';
-import AllNews from "../components/AllNews";
+import { useEffect, useState } from "react";
+import { Container, FlexBox, Wrapper } from "../styles/globals";
+import NavBar from '../components/Organisms/NavBar';
+import CarouselCard from "../components/Organisms/CarouselCard";
+import NewsCard from "../components/Organisms/NewsCard";
+import TopNavigation from '../components/Organisms/NavBarTop';
+import FloatingActionButton from "../components/Atoms/FloatButton";
+import AllNews from "../components/Templates/AllNews";
+
 
 const SearchBar = styled.div`
 height: 5vh;
@@ -81,7 +82,6 @@ justify-content: space-between;
 // this should be homepage, just using for testing right now
 // maybe move some of this to map
 export default function Home({ events, allNews }) {
-  // const [navValue, setNavValue] = useState(0);
 
   // const foodBanksComponent = foodBanksList.map((foodbank) => (
   //   // <li key={fb.id}>

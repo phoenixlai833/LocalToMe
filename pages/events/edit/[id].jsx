@@ -8,15 +8,14 @@ import {
 } from "../../../server/database";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { collection, getDocs, addDoc } from "firebase/firestore";
-import EventForm from "../../../components/EventForm";
-import EventPreview from "../../../components/EventPreview";
+import EventForm from "../../../components/Templates/EventForm";
+import EventPreview from "../../../components/Templates/EventPreview";
 import axios from "axios";
 
 export default function EditEvent({ defaultEvent, eventCategories }) {
   const [event, setEvent] = useState(defaultEvent);
 
   const [isPreview, setIsPreview] = useState(false);
-  const [navValue, setNavValue] = useState(1);
 
   const handleTogglePreview = () => {
     setIsPreview(!isPreview);

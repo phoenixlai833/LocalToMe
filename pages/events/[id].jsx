@@ -1,18 +1,18 @@
 // import SingleEvent from "../../components/SingleEvent";
 import { getEvent, deleteEvent } from "../../server/database";
 import { useState } from "react";
-import { useRouter } from "next/router";
-import NavBar from "../../components/NavBar";
+import { useRouter } from 'next/router';
 import React from "react";
-import GetDirectionGreenBtn from "../../components/GetDirectionGreenBtn";
-import TextBubble from "../../components/TextBubble";
-import TopBanner from "../../components/TopBanner";
-import UserOfPost from "../../components/UserOfPost";
-import EventCategoryTag from "../../components/EventCategoryTag";
 import styled from "styled-components";
-import AddToCalander from "../../components/AddToCalander";
-import ShareLink from "../../components/ShareLink";
-import FavoriteBtn from "../../components/FavoriteBtn";
+import NavBar from '../../components/Organisms/NavBar';
+import GetDirectionGreenBtn from '../../components/Atoms/GetDirectionGreenBtn';
+import TextBubble from '../../components/Molecules/TextBubble';
+import TopBanner from '../../components/Molecules/TopBanner';
+import UserOfPost from '../../components/Molecules/UserOfPost';
+import EventCategoryTag from "../../components/Atoms/EventCategoryTag";
+import AddToCalendar from "../../components/Atoms/AddToCalendar";
+import ShareLink from "../../components/Atoms/ShareLink";
+import FavoriteBtn from "../../components/Atoms/FavoriteBtn";
 import Link from "next/link";
 
 const EventImageBlock = styled.div`
@@ -152,7 +152,7 @@ export default function Event({ event }) {
       <EventImageBlock>
         <EventImage src={event.eventImage} alt={event.eventName} />
         <FunctionsBox>
-          <AddToCalander />
+          <AddToCalendar />
           <ShareLink />
           <FavoriteBtn />
         </FunctionsBox>
@@ -218,10 +218,7 @@ export default function Event({ event }) {
       )}
 
       <NavBar
-        value={navValue}
-        onChange={(event, newValue) => {
-          setNavValue(newValue);
-        }}
+        value={1}
       />
     </div>
   );
