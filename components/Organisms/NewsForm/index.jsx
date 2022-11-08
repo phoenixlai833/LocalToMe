@@ -1,11 +1,11 @@
-import ShortTextInput from "../Molecules/ShortTextInput";
-import LongTextInput from "../Molecules/LongTextInput";
-import DateInput from "../Atoms/DateInput";
-import DateCalendar from "../Molecules/DateCalendar";
-import TimeInput from "../Molecules/TimeInput";
+import ShortTextInput from "../../Molecules/ShortTextInput";
+import LongTextInput from "../../Molecules/LongTextInput";
+import DateInput from "../../Atoms/DateInput";
+import DateCalendar from "../../Molecules/DateCalendar";
+import TimeInput from "../../Molecules/TimeInput";
 import { useState } from "react";
 import styled from "styled-components";
-import GeneralGreenBtn from "../Atoms/GeneralGreenBtn";
+import GeneralGreenBtn from "../../Atoms/GeneralGreenBtn";
 
 const Form = styled.form`
   width: 80vw;

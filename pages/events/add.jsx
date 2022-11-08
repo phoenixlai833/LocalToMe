@@ -14,7 +14,7 @@ import DeletePopup from "../../components/Organisms/DeletePopup";
 import TimeInput from "../../components/Molecules/TimeInput";
 import NavBar from "../../components/Organisms/NavBar";
 import EventForm from "../../components/Templates/EventForm";
-import EventPreview from "../../components/Organisms/EventPreview";
+import EventPreview from "../../components/Templates/EventPreview";
 import axios from "axios";
 
 export default function NewEvent({ eventList, eventCategories }) {

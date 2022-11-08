@@ -3,7 +3,7 @@ import { storage } from "../../../firebase/clientApp";
 import { getNews, editNews, getNewsCategories } from "../../../server/database";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import TopBanner from "../../../components/Molecules/TopBanner";
-import NewsForm from "../../../components/NewsForm";
+import NewsForm from "../../../components/Organisms/NewsForm";
 import axios from "axios";
 
 export default function NewNews({ newsItem, newsCategories }) {
