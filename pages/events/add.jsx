@@ -10,11 +10,11 @@ import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { collection, getDocs, addDoc } from "firebase/firestore";
 // import Event from "../../components/Event";
 // import Image from `next/image`;
-import DeletePopup from "../../components/DeletePopup";
-import TimeInput from "../../components/TimeInput";
-import NavBar from "../../components/NavBar";
-import EventForm from "../../components/EventForm";
-import EventPreview from "../../components/EventPreview";
+import DeletePopup from "../../components/Organisms/DeletePopup";
+import TimeInput from "../../components/Molecules/TimeInput";
+import NavBar from "../../components/Organisms/NavBar";
+import EventForm from "../../components/Templates/EventForm";
+import EventPreview from "../../components/Templates/EventPreview";
 import axios from "axios";
 
 export default function NewEvent({ eventList, eventCategories }) {

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import NavBar from '../components/NavBar';
+import NavBar from '../components/Organisms/NavBar';
 import { useState } from "react";
 
 const FavorPage = styled.div`
