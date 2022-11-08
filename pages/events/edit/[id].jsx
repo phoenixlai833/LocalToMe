@@ -9,7 +9,7 @@ import {
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { collection, getDocs, addDoc } from "firebase/firestore";
 import EventForm from "../../../components/Templates/EventForm";
-import EventPreview from "../../../components/Organisms/EventPreview";
+import EventPreview from "../../../components/Templates/EventPreview";
 import axios from "axios";
 
 export default function EditEvent({ defaultEvent, eventCategories }) {

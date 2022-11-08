@@ -13,7 +13,7 @@ import CarouselCard from "../components/Organisms/CarouselCard";
 import NewsCard from "../components/Organisms/NewsCard";
 import TopNavigation from '../components/Organisms/NavBarTop';
 import FloatingActionButton from "../components/Atoms/FloatButton";
-import AllNews from "../components/Organisms/AllNews";
+import AllNews from "../components/Templates/AllNews";
 
 
 const SearchBar = styled.div`

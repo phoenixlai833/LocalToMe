@@ -1,7 +1,7 @@
 import NewsForm from ".";
 
 export default {
-    title: 'NewsForm',
+    title: 'Organisms/NewsForm',
     component: NewsForm,
 }
 export const Template = () => <NewsForm />

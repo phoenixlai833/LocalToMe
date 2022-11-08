@@ -1,7 +1,7 @@
 import AllNews from "./index";
 
 export default {
-    title: "AllNews",
+    title: "Templates/AllNews",
     component: AllNews
 }
 

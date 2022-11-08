@@ -2,7 +2,7 @@ import EventPreview from "./index";
 
 
 export default {
-   title: 'Organisms/EventPreview',
+   title: 'Templates/EventPreview',
    component: EventPreview,
 };
 
@@ -22,4 +22,4 @@ const eventPreview = {
 }
 
 
-export const Template = () => <EventPreview event={eventPreview} />;
+export const Default = () => <EventPreview event={eventPreview} />;
