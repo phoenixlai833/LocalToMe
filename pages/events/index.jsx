@@ -1,9 +1,9 @@
-import EventsList from "../../components/EventsList";
+import EventsList from "../../components/Organisms/EventsList";
 import { getEvents } from "../../server/database";
-import NavBar from '../../components/NavBar'
 import { FlexBox, Container, Wrapper, Colour } from '../../styles/globals'
 import { useState } from "react";
-import FloatingActionButton from "../../components/FloatButton";
+import NavBar from '../../components/Organisms/NavBar'
+import FloatingActionButton from "../../components/Atoms/FloatButton";
 
 export default function Events({ eventList }) {
 
