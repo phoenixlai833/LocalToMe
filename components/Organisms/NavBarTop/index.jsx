@@ -71,10 +71,10 @@ export default function TopNavigation({
               sx={{
                 fontWeight: 900,
                 display:"flex",
-                alignItems:"center"
+                alignItems:"center",
               }}
             >
-              LOCALTOME
+              LocalToMe
             </Typography>
           </Container>
           {/* </Box> */}
