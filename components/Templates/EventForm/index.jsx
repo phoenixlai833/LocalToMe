@@ -7,6 +7,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import TopBanner from "../../Molecules/TopBanner";
 import GeneralGreenBtn from "../../Atoms/GeneralGreenBtn";
+import EventCategoryTag from "../../Atoms/EventCategoryTag";
 
 const Form = styled.form`
   width: 80vw;
@@ -47,8 +48,10 @@ export default function EventForm({
   image,
   onChangeEventImage,
   onChangeEventTags,
+  categoriesList
 }) {
   const [calendarType, setCalendarType] = useState(1);
+  // console.log(categoriesList)
 
   function handleSelectStartDate() {
     setCalendarType(1);
@@ -97,7 +100,8 @@ export default function EventForm({
     onChangeEventImage(eventImage);
   }
 
-  function handleChangeEventTags(eventTags) {
+  function handleAddTag(eventTags) {
+    console.log(eventTags)
     onChangeEventTags(eventTags);
   }
 
@@ -196,6 +200,8 @@ export default function EventForm({
         <br></br>
         <LongTextInput placeholder={"Tell us about your event..."} image={image} onChange={handleChangeEventDescription} onChangeImage={handleChangeEventImage}></LongTextInput>
         {/* <b style={{ marginTop: "5%" }}>Select Event Tags</b> */}
+        <br></br>
+        <EventCategoryTag eventCategories={categoriesList} changeCategories={handleAddTag} />
         <br></br>
         <GeneralGreenBtn type="submit" text="Continue" />
       </Form>

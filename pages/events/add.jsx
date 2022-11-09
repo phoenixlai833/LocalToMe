@@ -4,7 +4,7 @@ import {
   getEvents,
   getEvent,
   addEvent,
-  getEventCategories,
+  getAllCategories
 } from "../../server/database";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { collection, getDocs, addDoc } from "firebase/firestore";
@@ -17,7 +17,7 @@ import EventForm from "../../components/Templates/EventForm";
 import EventPreview from "../../components/Templates/EventPreview";
 import axios from "axios";
 
-export default function NewEvent({ eventList, eventCategories }) {
+export default function NewEvent({ categoriesList }) {
   const [event, setEvent] = useState({
     eventName: "",
     eventImage:
@@ -121,8 +121,9 @@ export default function NewEvent({ eventList, eventCategories }) {
     setEvent({ ...event, end: new Date(event.end.setHours(hour, minute)) });
   }
 
-  function handleChangeEventCategory(e) {
-    setEvent({ ...event, eventTags: [...eventTags, e.target.id] });
+  function handleChangeEventCategory(tags) {
+    console.log(...tags)
+    setEvent({ ...event, eventTags: [...tags] });
   }
 
   function handleCancel() { }
@@ -137,6 +138,7 @@ export default function NewEvent({ eventList, eventCategories }) {
       eventLocation: event.eventLocation,
       eventName: event.eventName,
       eventContactPhone: event.eventContactPhone,
+      eventTags: event.eventTags
     }
 
     console.log('lul', typeof event.start)
@@ -171,7 +173,8 @@ export default function NewEvent({ eventList, eventCategories }) {
           onChangeEventStartTime={handleChangeEventStartTime}
           onChangeEventEndDate={handleChangeEventEndDate}
           onChangeEventEndTime={handleChangeEventEndTime}
-          onChangeEventCategory={handleChangeEventCategory}
+          onChangeEventTags={handleChangeEventCategory}
+          categoriesList={categoriesList}
         />
       )}
     </div>
@@ -179,13 +182,16 @@ export default function NewEvent({ eventList, eventCategories }) {
 }
 
 export async function getServerSideProps(context) {
-  const eventData = await getEvents();
-  const eventList = JSON.parse(JSON.stringify(eventData));
+  // const eventData = await getEvents();
+  // const eventList = JSON.parse(JSON.stringify(eventData));
 
-  const eventCategoriesData = await getEventCategories();
-  const eventCategories = JSON.parse(JSON.stringify(eventCategoriesData));
+  // const eventCategoriesData = await getEventCategories();
+  // const eventCategories = JSON.parse(JSON.stringify(eventCategoriesData));
+
+  const categoriesData = await getAllCategories();
+  const categoriesList = JSON.parse(JSON.stringify(categoriesData));
 
   return {
-    props: { eventList, eventCategories }, // will be passed to the page component as props
+    props: { categoriesList }, // will be passed to the page component as props
   };
 }
