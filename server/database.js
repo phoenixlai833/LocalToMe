@@ -1,6 +1,6 @@
-import { db, storage } from '../firebase/clientApp';
+import { db } from '../firebase/clientApp';
 import { collection, getDocs, getDoc, addDoc, deleteDoc, doc, updateDoc } from 'firebase/firestore';
-import { refFromURL } from "firebase/storage";
+import { getStorage, ref, deleteObject } from "firebase/storage";
 
 // food banks
 export async function getFoodBanks() {
@@ -61,13 +61,18 @@ export async function editEvent(event) {
 }
 
 export async function deleteEvent(id) {
-  // const eventCollection = doc(db, "event", id);
-  // const eventSnap = await getDoc(eventCollection);
-  // const fileUrl = eventSnap.data().eventImage
-  // const fileRef = storage.refFromURL(fileUrl);
-  // console.log(fileRef)
-  // fileRef.delete()
-
+  const eventCollection = doc(db, "event", id);
+  const eventSnap = await getDoc(eventCollection);
+  const fileUrl = eventSnap.data().eventImage
+  const storage = getStorage();
+  const fileRef = ref(storage, fileUrl);
+  const fileName = decodeURIComponent(fileUrl.split('/').pop().split('?')[0])
+  console.log(fileName)
+  if (fileName !== "foodBankImageTest.jpg") {
+    deleteObject(fileRef);
+    await deleteDoc(doc(db, "event", id));
+    return;
+  }
   await deleteDoc(doc(db, "event", id));
 }
 
@@ -121,7 +126,12 @@ export async function editNews(news) {
 }
 
 export async function deleteNews(id) {
-
+  const newsCollection = doc(db, "news", id);
+  const newsSnap = await getDoc(newsCollection);
+  const fileUrl = newsSnap.data().newsImage
+  const storage = getStorage();
+  const fileRef = ref(storage, fileUrl);
+  deleteObject(fileRef);
   await deleteDoc(doc(db, "news", id));
 }
 
