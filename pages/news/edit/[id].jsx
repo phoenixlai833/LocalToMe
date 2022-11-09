@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { storage } from "../../../firebase/clientApp";
 import { getNews, editNews, getNewsCategories } from "../../../server/database";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
-import TopBanner from "../../../components/TopBanner";
-import NewsForm from "../../../components/NewsForm";
+import TopBanner from "../../../components/Molecules/TopBanner";
+import NewsForm from "../../../components/Organisms/NewsForm";
 import axios from "axios";
 
 export default function NewNews({ newsItem, newsCategories }) {
@@ -12,7 +12,7 @@ export default function NewNews({ newsItem, newsCategories }) {
         newsTitle: newsItem.newsTitle,
         newsCreatorId: newsItem.newsCreatorId,
         newsAvatar: newsItem.newsAvatar,
-        newDateCreated: new Date(),
+        newDateCreated: newsItem.newsDateCreated,
         newsContent: newsItem.newsContent,
         newsImage: newsItem.newsImage,
         newsTags: newsItem.newsTags,
@@ -54,7 +54,7 @@ export default function NewNews({ newsItem, newsCategories }) {
             newsTitle: news.newsTitle,
             newsCreatorId: 1,
             newsAvatar: "",
-            newsDateCreated: new Date(),
+            newsDateCreated: newsItem.newsDateCreated,
             newsContent: news.newsContent,
             newsImage: news.newsImage,
             newsTags: news.newsTags,

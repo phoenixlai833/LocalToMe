@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { storage } from "../../firebase/clientApp";
 import { addNews, getNewsCategories } from "../../server/database";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
-import TopBanner from "../../components/TopBanner";
-import NewsForm from "../../components/NewsForm";
+import TopBanner from "../../components/Molecules/TopBanner";
+import NewsForm from "../../components/Organisms/NewsForm";
 import axios from "axios";
 
 export default function NewNews({ newsList, newsCategories }) {
@@ -62,7 +62,7 @@ export default function NewNews({ newsList, newsCategories }) {
 
     function handleCancel() { }
 
-    function handleConfirm() {
+    function handleConfirm(e) {
         // console.log(news);
         const postnews = {
             newsTitle: news.newsTitle,
@@ -73,10 +73,10 @@ export default function NewNews({ newsList, newsCategories }) {
             newsImage: news.newsImage,
             newsTags: news.newsTags,
         }
-
+        console.log('buh', postnews.newsDateCreated);
         axios.post("/api/news", postnews).then((res) => {
-            window.location = `/community`
             console.log("posted successfully", res.data);
+            window.location = `/community?tabId=1`
         });
     }
 

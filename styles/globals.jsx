@@ -25,6 +25,7 @@ height:100vh;
 flex-direction:${props => props.direction || "row"};
 // text-align:center;
 max-width:100%;
+padding: ${props => props.padding || "0px"};
 gap:${props => props.gap || "0px"};
 
 `
@@ -32,7 +33,7 @@ gap:${props => props.gap || "0px"};
 
 //colours for styling
 export const Colours = {
-  primary: "#068906",
+  primary: "#108928",
   secondary: "#085617",
   background: "#FFFFFF",
   foreground: "#000000"
