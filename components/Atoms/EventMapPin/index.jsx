@@ -60,6 +60,7 @@ export default function EventMapPin({ events }) {
         <div>
 
             {events.map((event) => (
+                
                 <Marker
                     key={event.id}
                     latitude={event.latitude}
