@@ -2,8 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  compiler:{
-    styledComponents:true
+  compiler: {
+    styledComponents: true
   },
   images: { domains: ["//firebasestorage.googleapis.com"] },
 }

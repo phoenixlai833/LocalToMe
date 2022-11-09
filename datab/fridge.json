@@ -1,0 +1,26 @@
+[
+    {
+        "id": "MkB3qEMKTq8Ltnt8D6nk",
+        "name": "Burnaby Community Fridge #1 (Burnaby Youth Hub)",
+        "longitude": "-122.996600",
+        "latitude": "49.221890",
+        "description": "Free Groceries! Take Something, Leave Something!",
+        "location": "4750 Imperial St, Burnaby, BC V5J 1C2"
+    },
+    {
+        "id": "kGWbbIVsSwHTyIg5RvIx",
+        "name": "Victoria Community Fridge",
+        "longitude": "-123.369820",
+        "latitude": "48.438390",
+        "description": "Organizing on Lekwungen territories as a part of Community Food Support to make food free+accessible to everyone who needs it.",
+        "location": "2725 Rock Bay Ave, Victoria, BC V8T 4R8"
+    },
+    {
+        "id": "YMQNLSKW3g3lJjKmf0ok",
+        "name": "Residential Community Fridge",
+        "longitude": "-123.143520",
+        "latitude": "49.259890",
+        "description": "This fridge is located in the alley behind the red house and big garden",
+        "location": "3066 W 13th Ave, Vancouver, BC V6K 2V1"
+    }
+]

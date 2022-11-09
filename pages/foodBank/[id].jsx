@@ -2,15 +2,15 @@ import Head from 'next/head';
 import Link from 'next/link'
 import { useState } from "react";
 import { getFoodBank, addFoodBank } from '../../server/database';
-import NavBar from '../../components/NavBar';
-import TopBanner from '../../components/TopBanner';
-import TextBubble from '../../components/TextBubble';
+import NavBar from '../../components/Organisms/NavBar';
+import TopBanner from '../../components/Molecules/TopBanner';
+import TextBubble from '../../components/Molecules/TextBubble';
 import { Wrapper, Container, FlexBox } from '../../styles/globals';
-import { Filter, EventFilter } from '../../components/Filters';
-import GetDirectionGreenBtn from '../../components/GetDirectionGreenBtn';
-import AddToCalander from "../../components/AddToCalander";
-import ShareLink from "../../components/ShareLink";
-import FavoriteBtn from "../../components/FavoriteBtn";
+import { Filter, EventFilter } from '../../components/Atoms/Filters';
+import GetDirectionGreenBtn from '../../components/Atoms/GetDirectionGreenBtn';
+import AddToCalendar from "../../components/Atoms/AddToCalendar";
+import ShareLink from "../../components/Atoms/ShareLink";
+import FavoriteBtn from "../../components/Atoms/FavoriteBtn";
 import styled from 'styled-components';
 import { FunctionsBox } from '../events/[id]';
 
@@ -71,7 +71,7 @@ export default function FoodBank({ d }) {
             <EventImageBlock >
                 <EventImage src={d.foodBank_Image} alt={d.program_name} />
                 <FunctionsBox>
-                    <AddToCalander />
+                    <AddToCalendar />
                     <ShareLink />
                     <FavoriteBtn />
                 </FunctionsBox>

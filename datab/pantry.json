@@ -1,0 +1,18 @@
+[
+    {
+        "id": "9MPKrqDBUyLvrArRmWbE",
+        "name": "Marpole Free Pantry",
+        "longitude": "-123.138870",
+        "latitude": "49.205930",
+        "description": "It is free. Take what you need. Donation welcome!",
+        "location": "1445 W 72nd Ave, Vancouver, BC V6P"
+    },
+    {
+        "id": "UfT6MxiCiaag4OVUCLq3",
+        "name": "Hastings-Sunrise Local Open Access Fridge (LOAF)",
+        "longitude": "-123.058050",
+        "latitude": "49.281280",
+        "description": "Community fridge & pantry pilot.Take what you need/leave what you can",
+        "location": "2297 E Hastings St, Vancouver, BC V5L 1V3"
+    }
+]

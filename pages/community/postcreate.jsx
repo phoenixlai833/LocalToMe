@@ -1,4 +1,4 @@
-import CreationSection from "../../components/PostCreationButtons"
+import CreationSection from "../../components/Templates/PostCreationButtons"
 
 export default function PostCreation () {
 
