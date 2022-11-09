@@ -1,7 +1,7 @@
 import TopBanner from '../../components/Molecules/TopBanner';
 import ShortTextInput from '../../components/Molecules/ShortTextInput';
 import { FlexBox, Wrapper } from '../../styles/globals';
-import { MainHeader } from '../../components/Atoms/Apptext/apptext.stories';
+import { MainHeader } from '../../components/Atoms/Apptext/Apptext.stories';
 import GeneralGreenBtn from '../../components/Atoms/GeneralGreenBtn';
 
 export default function EditAccount () {
