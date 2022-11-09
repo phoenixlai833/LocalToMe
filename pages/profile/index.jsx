@@ -2,19 +2,11 @@ import ProfileSection from "../../components/Organisms/ProfileBanner"
 import NavBar from '../../components/Organisms/NavBar';
 import styled from "styled-components";
 import { useState } from "react";
+import FloatButton from '../../components/Atoms/FloatButton';
+
 import { useSession, signIn, signOut } from "next-auth/react";
 import { authOptions } from '../api/auth/[...nextauth].js';
 import { unstable_getServerSession } from "next-auth/next";
-
-// export default function Profile() {
-
-//     return (
-//         <>
-//             <ProfileSection></ProfileSection>
-//             <NavBar value={4} />
-//         </>
-//     )
-// }
 
 export default function Profile() {
     const { data: session } = useSession()
@@ -24,6 +16,7 @@ export default function Profile() {
             <>
                 <ProfileSection></ProfileSection>
                 <NavBar value={4} />
+                <FloatButton/>
                 Signed in as {session.user.email} <br />
                 <img src={session.user.image}></img>
                 {session.user.name}

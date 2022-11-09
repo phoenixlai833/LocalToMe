@@ -8,12 +8,12 @@ import styled from "styled-components"
 // `
 
 const BannerText = styled.h1`
-font-weight: 500;
+font-weight: ${props => props.fontweight};
 font-size: ${props => props.txtsize}
 `
 
-export default function AppText({ txt = 'hi', txtsize = '24px' }) {
+export default function AppText ({txt='hi', txtsize= '24px', fontweight=400}) {
     return <div>
-        <BannerText txtsize={txtsize}>{txt}</BannerText>
-    </div>
+        <BannerText fontweight={fontweight} txtsize={txtsize}>{txt}</BannerText>
+    </div> 
 }

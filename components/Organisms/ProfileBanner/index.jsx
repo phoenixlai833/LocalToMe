@@ -1,5 +1,8 @@
 import styled from "styled-components"
 import { Avatar } from "@mui/material"
+import { useRouter } from "next/router"
+import AddIcon from '@mui/icons-material/Add'
+import { Colours } from "../../../styles/globals"
 
 const ProfileBanner = styled.div`
 display:flex;
@@ -17,7 +20,6 @@ justify-content: center;
 align-items: center;
 width: 100vw;
 height: 55px;
-z-index: 999;
 position: absolute;
 `
 
@@ -34,16 +36,34 @@ position: absolute;
 right: 0;
 `
 
+const EditProfile = styled.div`
+display:flex;
+border-radius: 50px;
+padding: 5px;
+left: 40px;
+bottom: 40px;
+background-color: ${Colours.primary};
+color:${Colours.background};
+z-index:999;
+position: relative;
+&:hover{
+    background-color:${Colours.secondary};
+}
+`
+
 export default function ProfileSection() {
+    const r = useRouter();
     return <div>
-        <SettingIcon src="/cog.svg" />
+        <SettingIcon src="/cog.svg" onClick={() => r.push('/profile/setting')} />
         <ProfileBanner />
         <AvatarCont>
             <ProfileAvatar
                 src='https://placekitten.com/500'
-                sx={{ width: 100, height: 100 }} />
+                sx={{ width: 120, height: 120 }} />
+            <EditProfile><AddIcon  sx={{ width: 25, height: 25 }} /></EditProfile>
             <h3 style={{ margin: 0 }}>Slayerina</h3>
             <p style={{ margin: 5 }}>email123@my.email.ca</p>
         </AvatarCont>
     </div>
 }
+

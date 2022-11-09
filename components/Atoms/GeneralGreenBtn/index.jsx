@@ -5,7 +5,7 @@ const CreateBttn = styled.button`
   font-size: 14px;
   background-color: ${(props) => props.inactive || "#108928"};
   border: none;
-  width: 100%;
+  width: ${(props) => props.width || '100%' };
   height: 3em;
   color: white;
   border-radius: 1em;
@@ -17,6 +17,6 @@ const CreateBttn = styled.button`
   }
 `;
 
-export default function GeneralGreenBtn({ text = "Button text" }) {
-  return <CreateBttn>{text}</CreateBttn>;
+export default function GeneralGreenBtn({ text = "Button text", w }) {
+  return <CreateBttn width={w}>{text}</CreateBttn>;
 }
