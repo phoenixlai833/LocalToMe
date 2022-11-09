@@ -130,10 +130,13 @@ export async function deleteNews(id) {
   const newsCollection = doc(db, "news", id);
   const newsSnap = await getDoc(newsCollection);
   const fileUrl = newsSnap.data().newsImage
-  const storage = getStorage();
-  const fileRef = ref(storage, fileUrl);
-  deleteObject(fileRef);
+  if (fileUrl) {
+    const storage = getStorage();
+    const fileRef = ref(storage, fileUrl);
+    deleteObject(fileRef);
+  }
   await deleteDoc(doc(db, "news", id));
+
 }
 
 export async function getNewsCategories() {

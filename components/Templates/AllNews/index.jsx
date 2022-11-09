@@ -291,11 +291,11 @@ export default function AllNews({ allNews }) {
                 </h2>
                 <BtnCont>
                   <CancelBtn onClick={hidePopup}>Cancel</CancelBtn>
-                  <a href={`/community?tab=1`}>
+                  <Link href="/community?tab=1">
                     <DeleteBtn onClick={handleDelete(news.id)}>
                       Confirm
                     </DeleteBtn>
-                  </a>
+                  </Link>
                 </BtnCont>
               </DeleteCont>
             </AbsPos>
