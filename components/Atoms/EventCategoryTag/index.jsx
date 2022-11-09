@@ -23,12 +23,13 @@ const Category = styled.div`
    }
 `
 
-export default function EventCategoryTag({ eventCategories, changeCategories }) {
-   const [btn, setBtn] = useState(true);
-   // 
-   const tagList = [];
+export default function EventCategoryTag({ eventCategories, exisitingCategories, changeCategories }) {
+   // const [btn, setBtn] = useState(true);
+
+   const tagList = exisitingCategories;
 
    function AddTagToList(c) {
+      // console.log(exisitingCategories)
       if (tagList.length == 0) {
          tagList.push(c);
          // setBtn(true);
@@ -39,6 +40,7 @@ export default function EventCategoryTag({ eventCategories, changeCategories }) 
       }
       // console.log(tagList);
       changeCategories(tagList);
+
    }
 
    return (

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { storage } from "../../firebase/clientApp";
-import { addNews, getAllCategories } from "../../server/database";
+import { getAllCategories } from "../../server/database";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import TopBanner from "../../components/Molecules/TopBanner";
 import NewsForm from "../../components/Organisms/NewsForm";

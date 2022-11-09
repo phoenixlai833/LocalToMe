@@ -18,7 +18,7 @@ const ImgTitle = styled.p`
   // max-width: 10ch;
 `;
 
-export default function ImageInput({ onChangeImage, image }) {
+export default function ImageInput({ onChangeImage, image, mode }) {
   function handleChooseImage(e) {
     e.target.nextSibling.click();
   }
@@ -29,7 +29,9 @@ export default function ImageInput({ onChangeImage, image }) {
 
   return (
     <Container>
-      <Img src={image ? "../addImageIconGreen.svg" : "../addImageIcon.svg"} onClick={handleChooseImage} />
+      {mode == "edit" ?
+        <Img src={image ? "../../addImageIconGreen.svg" : "../../addImageIcon.svg"} onClick={handleChooseImage} />
+        : <Img src={image ? "../addImageIconGreen.svg" : "../addImageIcon.svg"} onClick={handleChooseImage} />}
       <Input type="file" onChange={handleChangeImage} hidden></Input>
       <ImgTitle>{image && image}</ImgTitle>
     </Container>

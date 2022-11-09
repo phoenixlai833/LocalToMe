@@ -26,6 +26,7 @@ width: 100%;
 `;
 
 export default function LongTextInput({
+  mode,
   label,
   required = false,
   placeholder,
@@ -54,7 +55,7 @@ export default function LongTextInput({
         required
       />
       <Line></Line>
-      <ImageInput image={image} onChangeImage={handleChangeImage}></ImageInput>
+      <ImageInput mode={mode} image={image} onChangeImage={handleChangeImage}></ImageInput>
     </Container>
   );
 }
