@@ -66,7 +66,7 @@ export default function NewsForm({
         e.preventDefault();
         onConfirm();
     }
-    
+
     return (
         <>
             <Form onSubmit={handleSubmit}>

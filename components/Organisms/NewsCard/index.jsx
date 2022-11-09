@@ -98,7 +98,6 @@ export default function NewsCard({
                   <Text expanded={expanded}>{info}</Text>
                   <ReadMore expanded={expanded} onClick={onClose}>Read Less <Icon>expand_less</Icon></ReadMore>
                </InfoDiv>}
-
                <ImageContainer src={src}></ImageContainer>
             </TextDiv>
          </NewsCont>
