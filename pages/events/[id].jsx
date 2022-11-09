@@ -131,6 +131,7 @@ export default function Event({ event }) {
     const [navValue, setNavValue] = useState(1);
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [shareUrl, setShareUrl] = useState('');
+    const [share, setShare] = useState(false);
     const router = useRouter()
 
     const time = event.eventDate.seconds
@@ -158,6 +159,7 @@ export default function Event({ event }) {
 
     function onShare() {
         setShareUrl(window.location);
+        setShare(true);
     }
 
 
@@ -221,11 +223,11 @@ export default function Event({ event }) {
                 </AbsPos>
             )}
 
-            {shareUrl && (
+      
                 <Sharebox>
-                    <SharePost shareUrl={shareUrl} />
+                    <SharePost shareUrl={shareUrl} share={share} closeShare={()=>{setShare(false)}} />
                 </Sharebox>
-            )}
+            
 
             <NavBar value={navValue} onChange={(event, newValue) => {
                 setNavValue(newValue);

@@ -92,25 +92,22 @@ position: absolute;
 
 
 
-export default function SharePost({ shareUrl }) {
+export default function SharePost({ share,shareUrl,closeShare }) {
 
 
     const [copied, setCopied] = useState(false);
-    const [showShare, setShowShare] = useState(true);
+    // const [showShare, setShowShare] = useState(true);
 
     const handleOnCopy = () => {
         setCopied(true);
     };
 
-    const handleClose = () => {
-        setShowShare(false);
-    }
 
     return (
         <>
-            {showShare && (
+            {share && (
                 <ShareBox>
-                    <CloseBtn onClick={handleClose}>
+                    <CloseBtn onClick={closeShare}>
                         <Icon>close</Icon>
                     </CloseBtn>
 
