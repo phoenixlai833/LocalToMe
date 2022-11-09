@@ -258,9 +258,9 @@ export default function AllNews({ allNews }) {
                 )}
               </Content>
 
-              <ImageContainer
-                src={news.newsImage ? news.newsImage : "../../no_image.png"}
-              ></ImageContainer>
+              {news.newsImage && <ImageContainer
+                src={news.newsImage}
+              ></ImageContainer>}
             </TextDiv>
           </NewsCont>
 

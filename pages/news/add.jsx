@@ -73,10 +73,10 @@ export default function NewNews({ newsList, newsCategories }) {
             newsImage: news.newsImage,
             newsTags: news.newsTags,
         }
-        console.log('buh',postnews.newsDateCreated);
+        console.log('buh', postnews.newsDateCreated);
         axios.post("/api/news", postnews).then((res) => {
             console.log("posted successfully", res.data);
-            // window.location = `/community`
+            window.location = `/community?tabId=1`
         });
     }
 

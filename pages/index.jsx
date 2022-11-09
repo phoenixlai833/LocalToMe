@@ -14,7 +14,9 @@ import NewsCard from "../components/Organisms/NewsCard";
 import TopNavigation from '../components/Organisms/NavBarTop';
 import FloatingActionButton from "../components/Atoms/FloatButton";
 import AllNews from "../components/Templates/AllNews";
-
+import { useSession, signIn, signOut } from "next-auth/react";
+import { authOptions } from './api/auth/[...nextauth].js';
+import { unstable_getServerSession } from "next-auth/next";
 
 const SearchBar = styled.div`
 height: 5vh;
@@ -82,6 +84,7 @@ justify-content: space-between;
 // this should be homepage, just using for testing right now
 // maybe move some of this to map
 export default function Home({ events, allNews }) {
+  const { data: session } = useSession()
 
   // const foodBanksComponent = foodBanksList.map((foodbank) => (
   //   // <li key={fb.id}>
@@ -120,8 +123,10 @@ export default function Home({ events, allNews }) {
 
         <FirstSection>
           <div>
+            {session ? <button onClick={() => signOut()}>Sign out</button> : <button onClick={() => signIn()}>Sign In</button>}
+
             <SubHeader>Good Morning,</SubHeader>
-            <h1 style={{ color: "green", lineHeight: "0", marginBottom: "4%" }}>Slayerina</h1>
+            <h1 style={{ color: "green", lineHeight: "0", marginBottom: "4%" }}>{session ? session.user.name.split(" ")[0] : "Slayerina"}</h1>
             {/* <SearchBar>Search</SearchBar> */}
           </div>
 
@@ -171,12 +176,22 @@ export default function Home({ events, allNews }) {
 }
 
 export async function getServerSideProps(context) {
+  const session = await unstable_getServerSession(context.req, context.res, authOptions)
+
   const req = await getEvents();
   const events = JSON.parse(JSON.stringify(req));
 
   const news = await getAllNews();
   const allNews = JSON.parse(JSON.stringify(news));
+  // console.log(allNews)
+
+  if (!session) {
+    return {
+      props: { events, allNews }
+    }
+  }
+
   return {
-    props: { events, allNews },
+    props: { events, allNews, session },
   }
 }
