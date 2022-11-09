@@ -7,6 +7,7 @@ import Icon from "@mui/material/Icon";
 import Link from "next/link";
 import { useRouter } from 'next/router';
 import { deleteNews } from "../../../server/database";
+import EventCategoryTag from "../../Atoms/EventCategoryTag";
 
 const NewsList = styled.div`
   position: relative;
@@ -235,11 +236,13 @@ export default function AllNews({ allNews }) {
                   })}
                 </p>
               </InfoDiv>
-              <TagList>
+              {/* <TagList>
                 {news.newsTags.map((tag) => (
                   <Tag key={tag}>{tag}</Tag>
                 ))}
-              </TagList>
+              </TagList> */}
+              <EventCategoryTag eventCategories={news.newsTags} />
+
 
               <Content>
                 <p>

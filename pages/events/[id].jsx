@@ -212,7 +212,7 @@ export default function Event({ event }) {
         <p style={{ fontSize: '14px' }}>{event.eventContent}</p>
       </EventDescription>
 
-      <EventCategoryTag eventCategories={["Food", "Fundraiser"]} />
+      <EventCategoryTag eventCategories={event.eventTags} />
 
       <GetDirectionGreenBtn address={event.eventLocation} onMap={false} />
 

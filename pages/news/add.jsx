@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { storage } from "../../firebase/clientApp";
-import { addNews, getNewsCategories } from "../../server/database";
+import { addNews, getAllCategories } from "../../server/database";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import TopBanner from "../../components/Molecules/TopBanner";
 import NewsForm from "../../components/Organisms/NewsForm";
 import axios from "axios";
 
-export default function NewNews({ newsList, newsCategories }) {
+export default function NewNews({ categoriesList }) {
     const [news, setNews] = useState({
         newsTitle: "",
         newsCreatorId: "Clover Food Bank",
@@ -55,15 +55,16 @@ export default function NewNews({ newsList, newsCategories }) {
         setImageURL(img.name);
     }
 
-    function handleChangeNewsCategory(e) {
-        setNews({ ...news, newsTags: [...newsTags, e.target.id] });
+    function handleChangeNewsCategory(tag) {
+        setNews({ ...news, newsTags: [...tag] });
+        console.log(news)
         return;
     }
 
     function handleCancel() { }
 
     function handleConfirm(e) {
-        // console.log(news);
+        console.log(news);
         const postnews = {
             newsTitle: news.newsTitle,
             newsCreatorId: 1,
@@ -90,7 +91,8 @@ export default function NewNews({ newsList, newsCategories }) {
                 onChangeNewsContent={handleChangeNewsContent}
                 image={imageURL}
                 onChangeNewsImage={handleChangeNewsImage}
-                onChangeNewsCategory={handleChangeNewsCategory}
+                onChangeNewsTags={handleChangeNewsCategory}
+                categoriesList={categoriesList}
                 onConfirm={handleConfirm}
             />
 
@@ -98,14 +100,11 @@ export default function NewNews({ newsList, newsCategories }) {
     );
 }
 
-// export async function getServerSideProps(context) {
-//     const newsData = await getAllNews();
-//     const newsList = JSON.parse(JSON.stringify(newsData));
+export async function getServerSideProps(context) {
+    const categoriesData = await getAllCategories();
+    const categoriesList = JSON.parse(JSON.stringify(categoriesData));
 
-//     const newsCategoriesData = await getNewsCategories();
-//     const newsCategories = JSON.parse(JSON.stringify(newsCategoriesData));
-
-//     return {
-//         props: { newsList, newsCategories }, // will be passed to the page component as props
-//     };
-// }
+    return {
+        props: { categoriesList }
+    };
+}
