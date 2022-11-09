@@ -12,6 +12,7 @@ import UserOfPost from '../../components/Molecules/UserOfPost';
 import EventCategoryTag from "../../components/Atoms/EventCategoryTag";
 import Link from "next/link";
 import SharePost from "../../components/Molecules/SharePost";
+import { collection, query, where } from "firebase/firestore";
 
 const EventImageBlock = styled.div`
   position: relative;
@@ -248,8 +249,15 @@ export default function Event({ event }) {
 export async function getServerSideProps({ params }) {
   const req = await getEvent(params.id);
   const event = JSON.parse(JSON.stringify(req));
+  const creatorId = event.eventCreatorId;
+
+  console.log("cccccccc", creatorId)
+
+  const user = await getUser(creatorId)
+  const userData = JSON.parse(JSON.stringify(user));
+
   return {
-    props: { event },
+    props: { event, userData },
   };
 }
 

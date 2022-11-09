@@ -168,3 +168,24 @@ export async function getFridges() {
   return fridges;
 }
 
+
+//get all the users:
+export async function getUsers() {
+  const userCol = collection(db, "users");
+  const userSnap = await getDocs(userCol);
+  const users = userSnap.docs.map((doc) => {
+    let id = doc.id;
+    let data = doc.data();
+    return { id, ...data };
+  });
+  return users;
+}
+
+//get one user:
+export async function getUser(id) {
+  const userRef = doc(db, "users", id);
+  const userSnap = await getDoc(userRef);
+  const user = { id, ...userSnap.data() };
+  return user;
+}
+
