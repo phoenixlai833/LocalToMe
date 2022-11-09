@@ -108,6 +108,7 @@ export async function getNews(id) {
   return news;
 }
 
+
 export async function addNews(news) {
   const newsCollection = collection(db, "news");
   const docRef = await addDoc(newsCollection, news);
@@ -128,3 +129,32 @@ export async function deleteNews(id) {
 export async function getNewsCategories() {
   return;
 }
+
+
+
+//get all the pantries
+export async function getPantries() {
+  const pantryCol = collection(db, "pantry");
+  const pantrySnap = await getDocs(pantryCol);
+  const pantries = pantrySnap.docs.map((doc) => {
+    let id = doc.id;
+    let data = doc.data();
+    return { id, ...data };
+  });
+  return pantries;
+}
+
+
+
+//get all the fridges
+export async function getFridges() {
+  const fridgeCol = collection(db, "fridge");
+  const fridgeSnap = await getDocs(fridgeCol);
+  const fridges = fridgeSnap.docs.map((doc) => {
+    let id = doc.id;
+    let data = doc.data();
+    return { id, ...data };
+  });
+  return fridges;
+}
+

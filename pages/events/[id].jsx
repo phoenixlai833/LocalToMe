@@ -10,18 +10,15 @@ import TopBanner from '../../components/TopBanner';
 import UserOfPost from '../../components/UserOfPost';
 import EventCategoryTag from "../../components/EventCategoryTag";
 import styled from "styled-components";
-import AddToCalander from "../../components/AddToCalander";
-import ShareLink from "../../components/ShareLink";
-import FavoriteBtn from "../../components/FavoriteBtn";
 import Link from "next/link";
+import SharePost from "../../components/SharePost";
 
 const EventImageBlock = styled.div`
     position: relative;
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: 100%;s
     height: 250px;
-
 `
 
 const EventImage = styled.img` 
@@ -59,6 +56,13 @@ const AbsPos = styled.div`
 position: absolute;
 top: 25vh;
 left: 20vw;
+`
+
+const Sharebox = styled.div`
+position: fixed;
+top: 40%;
+left: 50%;
+transform: translate(-50%, -50%);
 `
 const DeleteCont = styled.div`
 background-color: #FFFFFF;
@@ -121,10 +125,12 @@ margin: 2%
 `
 
 
+
 export default function Event({ event }) {
 
     const [navValue, setNavValue] = useState(1);
     const [confirmDelete, setConfirmDelete] = useState(false);
+    const [shareUrl, setShareUrl] = useState('');
     const router = useRouter()
 
     const time = event.eventDate.seconds
@@ -150,6 +156,11 @@ export default function Event({ event }) {
         setConfirmDelete(false);
     }
 
+    function onShare() {
+        setShareUrl(window.location);
+    }
+
+
 
     return (
         <div>
@@ -158,9 +169,9 @@ export default function Event({ event }) {
             <EventImageBlock >
                 <EventImage src={event.eventImage} alt={event.eventName} />
                 <FunctionsBox>
-                    <AddToCalander />
-                    <ShareLink />
-                    <FavoriteBtn />
+                    <img src="../calenderIcon.png" alt="calendar icon" />
+                    <img src="../shareLinkIcons.png" alt="calendar icon" button onClick={onShare} />
+                    <img src="../favoriteIcon.png" alt="calendar icon" />
                 </FunctionsBox>
             </EventImageBlock>
 
@@ -187,7 +198,7 @@ export default function Event({ event }) {
 
             <EventDescription>
                 <b>About:</b>
-                <p style={{fontSize: '14px'}}>{event.eventContent}</p>
+                <p style={{ fontSize: '14px' }}>{event.eventContent}</p>
             </EventDescription>
 
             <EventCategoryTag eventCategories={["Food", "Fundraiser"]} />
@@ -210,6 +221,12 @@ export default function Event({ event }) {
                 </AbsPos>
             )}
 
+            {shareUrl && (
+                <Sharebox>
+                    <SharePost shareUrl={shareUrl} />
+                </Sharebox>
+            )}
+
             <NavBar value={navValue} onChange={(event, newValue) => {
                 setNavValue(newValue);
             }} />
@@ -224,4 +241,5 @@ export async function getServerSideProps({ params }) {
         props: { event },
     }
 }
+
 
