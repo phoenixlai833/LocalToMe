@@ -10,10 +10,8 @@ import TextBubble from '../../components/Molecules/TextBubble';
 import TopBanner from '../../components/Molecules/TopBanner';
 import UserOfPost from '../../components/Molecules/UserOfPost';
 import EventCategoryTag from "../../components/Atoms/EventCategoryTag";
-import AddToCalendar from "../../components/Atoms/AddToCalendar";
-import ShareLink from "../../components/Atoms/ShareLink";
-import FavoriteBtn from "../../components/Atoms/FavoriteBtn";
 import Link from "next/link";
+import SharePost from "../../components/Molecules/SharePost";
 
 const EventImageBlock = styled.div`
   position: relative;
@@ -21,7 +19,7 @@ const EventImageBlock = styled.div`
   flex-direction: row;
   width: 100%;
   height: 250px;
-`;
+`
 
 const EventImage = styled.img`
   position: relative;
@@ -55,10 +53,17 @@ const ExtraSpace = styled.div`
 `;
 
 const AbsPos = styled.div`
-  position: absolute;
-  top: 25vh;
-  left: 20vw;
-`;
+position: absolute;
+top: 25vh;
+left: 20vw;
+`
+
+const Sharebox = styled.div`
+position: fixed;
+top: 40%;
+left: 50%;
+transform: translate(-50%, -50%);
+`
 const DeleteCont = styled.div`
   background-color: #ffffff;
   width: 60vw;
@@ -100,7 +105,7 @@ const DeleteBtn = styled.button`
 
   color: #ffffff;
   margin: 2%;
-`;
+`
 const CancelBtn = styled.button`
   background: #FFFFF;
   border: 2px solid #535353;
@@ -118,15 +123,20 @@ const CancelBtn = styled.button`
   margin: 2%;
 `;
 
+
+
 export default function Event({ event }) {
+
   const [navValue, setNavValue] = useState(1);
   const [confirmDelete, setConfirmDelete] = useState(false);
-  const router = useRouter();
+  const [shareUrl, setShareUrl] = useState('');
+  const [share, setShare] = useState(false);
+  const router = useRouter()
 
   const dateAndTime = new Date(event.eventDate).toLocaleString("default", {
-      dateStyle: "long",
-      timeStyle: "short",
-    })
+    dateStyle: "long",
+    timeStyle: "short",
+  })
 
   const handleDelete = (singleEventId) => async (e) => {
     {
@@ -145,16 +155,23 @@ export default function Event({ event }) {
     setConfirmDelete(false);
   }
 
+  function onShare() {
+    setShareUrl(window.location);
+    setShare(true);
+  }
+
+
+
   return (
     <div>
       <TopBanner text={event.eventName} back={true} />
 
-      <EventImageBlock>
+      <EventImageBlock >
         <EventImage src={event.eventImage} alt={event.eventName} />
         <FunctionsBox>
-          <AddToCalendar />
-          <ShareLink />
-          <FavoriteBtn />
+          <img src="../calenderIcon.png" alt="calendar icon" />
+          <img src="../shareLinkIcons.png" alt="calendar icon" button onClick={onShare} />
+          <img src="../favoriteIcon.png" alt="calendar icon" />
         </FunctionsBox>
       </EventImageBlock>
 
@@ -189,9 +206,10 @@ export default function Event({ event }) {
         </div>
       </div>
 
+
       <EventDescription>
         <b>About:</b>
-        <p style={{ fontSize: "14px" }}>{event.eventContent}</p>
+        <p style={{ fontSize: '14px' }}>{event.eventContent}</p>
       </EventDescription>
 
       <EventCategoryTag eventCategories={["Food", "Fundraiser"]} />
@@ -203,10 +221,7 @@ export default function Event({ event }) {
       {confirmDelete && (
         <AbsPos>
           <DeleteCont>
-            <h2 styles={{ paddingRight: "10%" }}>
-              Are you sure you want to delete this posting? This cannot be
-              undone.
-            </h2>
+            <h2 styles={{ paddingRight: "10%" }}>Are you sure you want to delete this posting? This cannot be undone.</h2>
             <BtnCont>
               <CancelBtn onClick={hidePopup}>Cancel</CancelBtn>
               <a href={`/community`}>
@@ -217,11 +232,17 @@ export default function Event({ event }) {
         </AbsPos>
       )}
 
-      <NavBar
-        value={1}
-      />
-    </div>
-  );
+
+      <Sharebox>
+        <SharePost shareUrl={shareUrl} share={share} closeShare={() => { setShare(false) }} />
+      </Sharebox>
+
+
+      <NavBar value={navValue} onChange={(event, newValue) => {
+        setNavValue(newValue);
+      }} />
+    </div >
+  )
 }
 
 export async function getServerSideProps({ params }) {
@@ -231,3 +252,5 @@ export async function getServerSideProps({ params }) {
     props: { event },
   };
 }
+
+

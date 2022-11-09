@@ -59,23 +59,27 @@ export default function EventMapPin({ events }) {
     return (
         <div>
 
-            {events.map((event) => (
-                <Marker
-                    key={event.id}
-                    latitude={event.latitude}
-                    longitude={event.longitude}
-                >
-                    <MarkerBtn
-                        onClick={(e) => {
-                            e.preventDefault();
-                            setSelectedEvent(event);
-                        }}
-                    >
-                        <img src="./eventPin.svg" alt="Event Pin" />
-                    </MarkerBtn>
+            {events.map((event) => {
+                if (event.latitude && event.longitude) {
+                    return (
+                        <Marker
+                            key={event.id}
+                            latitude={event.latitude}
+                            longitude={event.longitude}
+                        >
+                            <MarkerBtn
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setSelectedEvent(event);
+                                }}
+                            >
+                                <img src="./eventPin.svg" alt="Event Pin" />
+                            </MarkerBtn>
 
-                </Marker>
-            )
+                        </Marker>
+                    )
+                }
+            }
             )}
 
 

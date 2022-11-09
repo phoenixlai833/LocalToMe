@@ -48,7 +48,7 @@ export default function FoodBankMapPin({ foodBanksList }) {
         <div>
 
             {foodBanksList.map((item) => {
-                console.log(item)
+                if (item.latitude && item.longitude) {
                 return (
                     <Marker
                         key={item.id}
@@ -65,7 +65,7 @@ export default function FoodBankMapPin({ foodBanksList }) {
                             <img src="./Food_Bank_Map_Pin.svg" alt="foodbank pin" />
                         </MarkerBtn>
                     </Marker>
-                )
+                )}
             }
             )}
 
