@@ -1,11 +1,8 @@
 import ShortTextInput from "../../Molecules/ShortTextInput";
 import LongTextInput from "../../Molecules/LongTextInput";
-import DateInput from "../../Atoms/DateInput";
-import DateCalendar from "../../Molecules/DateCalendar";
-import TimeInput from "../../Molecules/TimeInput";
-import { useState } from "react";
 import styled from "styled-components";
 import GeneralGreenBtn from "../../Atoms/GeneralGreenBtn";
+import EventCategoryTag from "../../Atoms/EventCategoryTag";
 
 const Form = styled.form`
   width: 80vw;
@@ -39,6 +36,7 @@ export default function NewsForm({
     image,
     onChangeNewsImage,
     onChangeNewsTags,
+    categoriesList,
     onConfirm,
 }) {
 
@@ -58,8 +56,8 @@ export default function NewsForm({
         onChangeNewsImage(newsImage);
     }
 
-    function handleChangeNewsTags(newsTags) {
-        onChangeNewsTags(newsTags);
+    function handleAddTag(newTags) {
+        onChangeNewsTags(newTags);
     }
 
     function handleSubmit(e) {
@@ -89,6 +87,8 @@ export default function NewsForm({
                 <br></br>
                 <LongTextInput value={news.newsContent && news.newsContent} placeholder={"Tell us about your news..."} image={image} onChange={handleChangeNewsContent} onChangeImage={handleChangeNewsImage}></LongTextInput>
                 {/* <b style={{ marginTop: "5%" }}>Select News Tags</b> */}
+                <br></br>
+                <EventCategoryTag eventCategories={categoriesList} changeCategories={handleAddTag} />
                 <br></br>
                 <GeneralGreenBtn text="Post" />
             </Form>

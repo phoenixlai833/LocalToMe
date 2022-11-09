@@ -77,17 +77,17 @@ export async function deleteEvent(id) {
 }
 
 // _________________________________________________________________________
-// eventCategories
-
-export async function getEventCategories() {
-  const eventCategoryCol = collection(db, "eventCategory");
-  const eventCategorySnap = await getDocs(eventCategoryCol);
-  const eventCategories = eventCategorySnap.docs.map((doc) => {
+// all catergories
+export async function getAllCategories() {
+  const categoryCollection = collection(db, "category");
+  // console.log(categoryCollection)
+  const categorySnap = await getDocs(categoryCollection);
+  const category = categorySnap.docs.map((doc) => {
     let id = doc.id;
     let data = doc.data();
     return { id, ...data };
   });
-  return eventCategories;
+  return category;
 }
 
 // _________________________________________________________________________
