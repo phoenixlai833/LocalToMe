@@ -120,6 +120,7 @@ const NewTab = styled.p`
 `;
 
 export default function Community({ allNews, tabId }) {
+
   const [tab, setTab] = useState(tabId);
   // const [isAdd, setIsAdd] = useState(false);
 
@@ -151,6 +152,7 @@ export default function Community({ allNews, tabId }) {
             News
           </NewTab>
         </Tab>
+
         {tab === 0 ? (
           <Heading>Recent Events</Heading>
         ) : (

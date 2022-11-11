@@ -4,10 +4,10 @@ import { Colours } from '../../../styles/globals';
 const CreateBttn = styled.button`
   font-size: 14px;
   background-color: ${(props) => props.inactive || "#108928"};
-  border: none;
+  border: ${(props) => props.borderstyle || 'none'};
   width: ${(props) => props.width || '100%' };
   height: 3em;
-  color: white;
+  color: ${(props) => props.txtcolor || 'white' };
   border-radius: 1em;
   display: flex;
   align-items: center;
@@ -17,6 +17,12 @@ const CreateBttn = styled.button`
   }
 `;
 
-export default function GeneralGreenBtn({ text = "Button text", w }) {
-  return <CreateBttn width={w}>{text}</CreateBttn>;
+export default function GeneralGreenBtn({ text = "Button text", w, borderstyle, inactive, active, txtcolor }) {
+  return <CreateBttn 
+  active={active}
+  txtcolor={txtcolor} 
+  inactive={inactive}
+   borderstyle={borderstyle} 
+   width={w}>
+    {text}</CreateBttn>;
 }
