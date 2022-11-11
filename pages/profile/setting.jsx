@@ -1,9 +1,9 @@
 import TopBanner from '../../components/Molecules/TopBanner';
 import ProfileDisplay from '../../components/Molecules/ProfileDisplay/ProfileDisplay';
 import styled from 'styled-components';
+import ThemeSection from '../../components/Molecules/ThemeSection/ThemeSection';
 import AccountSection from '../../components/Molecules/AccountSection/AccountSection';
 import { useRouter } from 'next/router';
-import ThemeSection from '../../components/Molecules/ThemeSection/ThemeSection';
 import { FlexBox } from '../../styles/globals';
 import GeneralGreenBtn from '../../components/Atoms/GeneralGreenBtn';
 import NotificationSection from '../../components/Molecules/NotificationSection/NotificationSection';
@@ -26,10 +26,10 @@ export default function Setting() {
     return <div >
         <TopBanner text='Settings'></TopBanner>
         <ProfileDisplayCont>
-           <ProfileDisplay></ProfileDisplay>
+           <ProfileDisplay/>
             <AccountSection onRoute={() => r.push('./editaccount')} />
-            <ThemeSection />
-            <NotificationSection />
+            <ThemeSection/>
+            <NotificationSection/>
             <PrivacySection></PrivacySection>
         </ProfileDisplayCont>
         <FlexBox style={{ height: '60vh' }}>
