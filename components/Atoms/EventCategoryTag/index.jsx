@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 const Categories = styled.div`
@@ -11,48 +11,76 @@ const Category = styled.div`
    display:flex;
    justify-content: center;
    align-items: center;
-   // background-color: ${props => (props.selected ? '#FFB800' : '#FFEAB4')};
-   background-color: #FFB800;
+   background-color: ${props => (props.selected ? '#FFB800' : '#FFEAB4')};
+   // background-color: #FFB800;
    border: none;
    width: 100px;
    height: 40px;
    border-radius: 35px;
    margin-right: 10px;
    &:hover{
-      background-color: #FFEAB4;
+      background-color: #FFB800;
    }
 `
 
-export default function EventCategoryTag({ eventCategories, exisitingCategories, changeCategories }) {
-   // const [btn, setBtn] = useState(true);
+export default function EventCategoryTag({ eventCategories, exisitingCategories = [], changeCategories }) {
+   const [tagList, setTagList] = useState(exisitingCategories)
+   const [categories, setCategories] = useState(eventCategories);
 
-   const tagList = exisitingCategories;
+   // let tagList;
+   const updateCategories = () => eventCategories.map((c) => {
+      // console.log(c.id)
+      tagList.filter((t) => {
+         // console.log(t.id)
+         if (t.id == c.id) {
+            c = { ...c, selected: true };
+            // console.log(c)
+            return { ...c, selected: true };
+         }
+      })
+      return c;
+   })
+
+   // if (tagList.length == 0) {
+   //    setTagList(tagList);
+   // } else {
+   //    const newTagList = tagList.map((c) => {
+   //       return { ...c, selected: true };
+   //    });
+   //    setTagList(newTagList);
+   // }
 
    function AddTagToList(c) {
-      // console.log(exisitingCategories)
+      updateCategories()
+      console.log(eventCategories)
       if (tagList.length == 0) {
-         tagList.push(c);
+         tagList.push({ ...c, selected: true });
          // setBtn(true);
       } else {
          var index = tagList.findIndex(x => x.id == c.id);
-         index === -1 ? tagList.push(c) : tagList.splice(index, 1);
+         if (index === -1) {
+            tagList.push({ ...c, selected: true });
+            updateCategories()
+         }
+         else {
+            tagList.splice(index, 1);
+            updateCategories()
+         }
          // setBtn(false)
       }
-      // console.log(tagList);
-      changeCategories(tagList);
+      console.log(tagList);
+      // changeCategories(tagList);
 
    }
 
    return (
       <Categories>
          {eventCategories.map((c) => (
-            <Category key={c.id} id={c.id} onClick={() => AddTagToList(c)}>{c.categoryName}</Category>
+            <Category selected={c.selected} key={c.id} id={c.id} onClick={() => AddTagToList(c)}>{c.categoryName}</Category>
          ))}
       </Categories>
    )
 }
-
-// selected={btn}  in btn?
 
 // export default function EventCategoryTag({ eventCategories }) {
 

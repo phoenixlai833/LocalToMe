@@ -4,7 +4,7 @@ import {
   getEvents,
   getEvent,
   addEvent,
-  getEventCategories,
+  getAllCategories,
 } from "../../../server/database";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { collection, getDocs, addDoc } from "firebase/firestore";
@@ -12,8 +12,9 @@ import EventForm from "../../../components/Templates/EventForm";
 import EventPreview from "../../../components/Templates/EventPreview";
 import axios from "axios";
 
-export default function EditEvent({ defaultEvent, eventCategories }) {
-  const [event, setEvent] = useState(defaultEvent);
+export default function EditEvent({ defaultEvent, categoriesList }) {
+  // const [event, setEvent] = useState(defaultEvent);
+  const [event, setEvent] = useState({...defaultEvent, start: new Date(event.eventDate), end: new Date(event.end)});
 
   const [isPreview, setIsPreview] = useState(false);
 
@@ -99,9 +100,9 @@ export default function EditEvent({ defaultEvent, eventCategories }) {
     setEvent({ ...event, eventTags: [...eventTags, e.target.id] });
   }
 
-  function handleCancel() {}
+  function handleCancel() { }
 
-  function handleConfirm() {}
+  function handleConfirm() { }
 
   return (
     <div>
@@ -135,10 +136,11 @@ export async function getServerSideProps(context) {
   const eventData = await getEvent(context.params.id);
   const defaultEvent = JSON.parse(JSON.stringify(eventData));
 
-  const eventCategoriesData = await getEventCategories();
-  const eventCategories = JSON.parse(JSON.stringify(eventCategoriesData));
+
+  const categoriesData = await getAllCategories();
+  const categoriesList = JSON.parse(JSON.stringify(categoriesData));
 
   return {
-    props: { defaultEvent, eventCategories }, // will be passed to the page component as props
+    props: { defaultEvent, categoriesList }, // will be passed to the page component as props
   };
 }
