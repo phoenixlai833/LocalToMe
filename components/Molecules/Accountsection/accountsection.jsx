@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { SettingHeader } from "../../Atoms/AppText/AppText.stories";
 
-const Cont = styled.div`
+export const Cont = styled.div`
 display:flex;
 flex-direction: row;
 justify-content: space-between;
@@ -17,16 +18,11 @@ width: 400;
 height: 400;
 `
 
-export const Settingheader = styled.p`
-font-size: 16px;
-margin: 0;
-`
-
 export default function AccountSection({onRoute=()=>{}}) {
 
 
     return <Cont>
-       <Settingheader>Account</Settingheader>
+       <SettingHeader txt='Account' txtsize='16px'></SettingHeader>
        <NextArrow src="/chevron.svg" onClick={()=>onRoute()}></NextArrow>
     </Cont>
 }

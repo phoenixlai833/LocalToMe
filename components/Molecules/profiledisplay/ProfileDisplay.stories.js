@@ -1,4 +1,4 @@
-import ProfileDisplay from "./profiledisplay"
+import ProfileDisplay from "./ProfileDisplay"
 
 export default {
     title: "Profile Display",

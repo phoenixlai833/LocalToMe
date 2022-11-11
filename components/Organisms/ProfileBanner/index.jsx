@@ -37,11 +37,11 @@ right: 0;
 `
 
 const EditProfile = styled.div`
-display:flex;
+display: flex;
 border-radius: 50px;
 padding: 5px;
 left: 40px;
-bottom: 40px;
+bottom: 90px;
 background-color: ${Colours.primary};
 color:${Colours.background};
 z-index:999;
@@ -60,9 +60,9 @@ export default function ProfileSection() {
             <ProfileAvatar
                 src='https://placekitten.com/500'
                 sx={{ width: 120, height: 120 }} />
-            <EditProfile><AddIcon  sx={{ width: 25, height: 25 }} /></EditProfile>
-            <h3 style={{ margin: 0 }}>Slayerina</h3>
+            <h3 style={{ margin: 0}}>Slayerina</h3>
             <p style={{ margin: 5 }}>email123@my.email.ca</p>
+            <EditProfile><AddIcon  sx={{ width: 25, height: 25 }} /></EditProfile>
         </AvatarCont>
     </div>
 }
