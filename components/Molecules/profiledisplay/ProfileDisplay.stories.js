@@ -1,7 +1,7 @@
 import ProfileDisplay from "./ProfileDisplay"
 
 export default {
-    title: "Profile Display",
+    title: "Molecules/ProfileDisplay",
     component: ProfileDisplay
 }
 
