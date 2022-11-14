@@ -11,15 +11,16 @@ const index = client.initIndex("prod_EVENTS");
 export default async function handler(req, res) {
   if (req.method === "GET") {
     // Handle GET requests
-    const events = await db.getEvents();
-    res.status(200).json(events);
+    const id = req.query.id;
+    const event = await db.getEvent(id);
+    res.status(200).json(event);
   } else if (req.method === "POST") {
     // Handle POST requests
     console.log('this', req.body);
     return;
     const eventRef = await db.addEvent(req.body);
     const event = await db.getEvent(eventRef.id);
-    index.saveObject({...event, objectID: event.id}).wait()
+    index.saveObject({ ...event, objectID: event.id }).wait()
     res.status(200).json(event.id);
   }
 }

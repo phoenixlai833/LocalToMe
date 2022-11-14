@@ -1,5 +1,5 @@
 // import SingleEvent from "../../components/SingleEvent";
-import { getEvent, deleteEvent } from "../../server/database";
+import { getEvent, deleteEvent, getUser } from "../../server/database";
 import { useState } from "react";
 import { useRouter } from 'next/router';
 import React from "react";
@@ -13,6 +13,9 @@ import EventCategoryTag from "../../components/Atoms/EventCategoryTag";
 import Link from "next/link";
 import SharePost from "../../components/Molecules/SharePost";
 import { collection, query, where } from "firebase/firestore";
+import {Colours} from "../../styles/globals";
+// import { Colours } from "../../../styles/globals";
+
 
 const EventImageBlock = styled.div`
   position: relative;
@@ -46,7 +49,18 @@ export const FunctionsBox = styled.div`
 `;
 
 const EventDescription = styled.div`
-  margin: 30px;
+
+  background:${Colours.background};
+   display:flex;
+   padding:12px 20px;
+   border-radius:15px;
+   align-items:left;
+   box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
+   max-width:85vw;
+   min-width:85vw;
+   flex-direction:column;
+   margin: 15px auto;
+
 `;
 
 const ExtraSpace = styled.div`
@@ -188,7 +202,7 @@ export default function Event({ event }) {
           margin: "0 5%",
         }}
       >
-        <UserOfPost />
+        <UserOfPost userImg={event.eventCreatorId.image} name={event.eventCreatorId.name} />
         <div>
           <Link href={`/events/edit/${event.id}`}>
             <div style={{ display: "flex" }}>
@@ -249,15 +263,9 @@ export default function Event({ event }) {
 export async function getServerSideProps({ params }) {
   const req = await getEvent(params.id);
   const event = JSON.parse(JSON.stringify(req));
-  const creatorId = event.eventCreatorId;
-
-  console.log("cccccccc", creatorId)
-
-  const user = await getUser(creatorId)
-  const userData = JSON.parse(JSON.stringify(user));
 
   return {
-    props: { event, userData },
+    props: { event },
   };
 }
 
