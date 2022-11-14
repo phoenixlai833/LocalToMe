@@ -23,9 +23,10 @@ export default function Favorites() {
     return (
         <FavorPage>
             <Text>oops, You have no favourites yet !</Text>
-            <NavBar value={3}/>
+            <NavBar value={3} />
         </FavorPage>
     )
 
 
 }
+

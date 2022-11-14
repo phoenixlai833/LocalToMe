@@ -8,12 +8,14 @@ import Link from "next/link";
 import { useRouter } from 'next/router';
 import { deleteNews } from "../../../server/database";
 import EventCategoryTag from "../../Atoms/EventCategoryTag";
+import axios from "axios";
 
 const NewsList = styled.div`
   position: relative;
   width: 100%;
   margin: 0;
-`;
+`
+
 const NewsCont = styled.div`
   margin: 1.5em;
   background: ${Colours.background};
@@ -218,16 +220,22 @@ export default function AllNews({ allNews }) {
 
   return (
     <>
+
       {allNews.map((news) => (
+        // let user;
+        // axios.get(`/api/users/${news.newsCreatorId}`);
+        // return (
         <NewsList key={news.id}>
           <NewsCont>
             <LeftCont>
-              <Avatar src={news.avatar} />
+              <Avatar src={news.newsCreatorId.image} />
+              {/* <img src={user.image} alt="user avatar" /> */}
               <Divider />
             </LeftCont>
             <TextDiv>
               <InfoDiv>
-                <h3>Organizer</h3>
+                {/* <h3>Organizer</h3> */}
+                <h3>{news.newsCreatorId.name}</h3>
                 <h2>{news.newsTitle}</h2>
                 <p>
                   {new Date(news.newsDateCreated).toLocaleString("default", {
@@ -242,7 +250,6 @@ export default function AllNews({ allNews }) {
                 ))}
               </TagList> */}
               <EventCategoryTag eventCategories={news.newsTags} selected={true}/>
-
 
               <Content>
                 <p>
@@ -303,8 +310,9 @@ export default function AllNews({ allNews }) {
 
           <Hr />
         </NewsList>
-      ))}
-
+      )
+      )
+      }
       <ExtraSpace />
     </>
   );

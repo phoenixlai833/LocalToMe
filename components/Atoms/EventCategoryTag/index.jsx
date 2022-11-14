@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 const Categories = styled.div`
    display:flex;
-   margin: 30px;
+   margin: 20px 8% 20px 8%;
 `
 
 const Category = styled.div`
