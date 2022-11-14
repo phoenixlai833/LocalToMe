@@ -5,9 +5,9 @@ const CreateBttn = styled.button`
   font-size: 14px;
   background-color: ${(props) => props.inactive || "#108928"};
   border: ${(props) => props.borderstyle || 'none'};
-  width: ${(props) => props.width || '100%' };
+  width: ${(props) => props.width || '100%'};
   height: 3em;
-  color: ${(props) => props.txtcolor || 'white' };
+  color: ${(props) => props.txtcolor || 'white'};
   border-radius: 1em;
   display: flex;
   align-items: center;
@@ -17,12 +17,13 @@ const CreateBttn = styled.button`
   }
 `;
 
-export default function GeneralGreenBtn({ text = "Button text", w, borderstyle, inactive, active, txtcolor }) {
-  return <CreateBttn 
-  active={active}
-  txtcolor={txtcolor} 
-  inactive={inactive}
-   borderstyle={borderstyle} 
-   width={w}>
+export default function GeneralGreenBtn({ onClick, text = "Button text", w, borderstyle, inactive, active, txtcolor }) {
+  return <CreateBttn
+    onClick={onClick}
+    active={active}
+    txtcolor={txtcolor}
+    inactive={inactive}
+    borderstyle={borderstyle}
+    width={w}>
     {text}</CreateBttn>;
 }

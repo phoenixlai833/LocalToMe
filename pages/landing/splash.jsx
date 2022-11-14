@@ -14,7 +14,7 @@ export default function Splash() {
 
 
     setTimeout(function () {
-        window.location.replace('/splashAndLanding/landingPageOne');
+        window.location.replace('/landing/landingOne');
     }, 3000);
 
     return (

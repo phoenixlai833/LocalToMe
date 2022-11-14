@@ -43,7 +43,9 @@ export async function getEvents() {
 export async function getEvent(id) {
   const eventRef = doc(db, "event", id);
   const eventSnap = await getDoc(eventRef);
-  const event = { id, ...eventSnap.data() };
+  const fileUrl = eventSnap.data().eventImage;
+  let fileName = decodeURIComponent(fileUrl.split('/').pop().split('?')[0])
+  const event = { id, ...eventSnap.data(), fileName };
   // console.log('hi', event)
   return event;
 }
@@ -108,7 +110,10 @@ export async function getAllNews() {
 export async function getNews(id) {
   const newsRef = doc(db, "news", id);
   const newsSnap = await getDoc(newsRef);
-  const news = { id, ...newsSnap.data() };
+  const fileUrl = newsSnap.data().newsImage;
+  let fileName = decodeURIComponent(fileUrl.split('/').pop().split('?')[0])
+  // console.log(fileName)
+  const news = { id, ...newsSnap.data(), fileName };
   // console.log('hi', news)
   return news;
 }
@@ -156,8 +161,6 @@ export async function getPantries() {
   });
   return pantries;
 }
-
-
 
 //get all the fridges
 export async function getFridges() {

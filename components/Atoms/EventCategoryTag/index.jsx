@@ -23,60 +23,75 @@ const Category = styled.div`
    }
 `
 
-export default function EventCategoryTag({ eventCategories, exisitingCategories = [], changeCategories }) {
-   const [tagList, setTagList] = useState(exisitingCategories)
+export default function EventCategoryTag({ eventCategories, exisitingCategories = [], changeCategories, selected }) {
+   const [tagList, setTagList] = useState(exisitingCategories);
    const [categories, setCategories] = useState(eventCategories);
+   // const [newCategories, setNewCategories] = useState(categories);
 
-   // let tagList;
-   const updateCategories = () => eventCategories.map((c) => {
-      // console.log(c.id)
-      tagList.filter((t) => {
-         // console.log(t.id)
-         if (t.id == c.id) {
-            c = { ...c, selected: true };
-            // console.log(c)
-            return { ...c, selected: true };
+   // loop through event catrgories and add selected true to the same ones
+   function updateCategories(tl) {
+      const newCategories = eventCategories.map((c) => {
+         if (tl.length !== 0) {
+            tl.filter((t) => {
+               if (t.id == c.id) {
+                  c = { ...c, selected: true }
+                  return c;
+               } else {
+                  // c = { ...c, selected: false } 
+                  return c;
+               }
+            })
          }
+         return c;
       })
-      return c;
-   })
+      // console.log(updatedCategories)
+      setCategories(newCategories);
+      // setNewCategories(newCategories);
+      return newCategories;
+   }
 
-   // if (tagList.length == 0) {
-   //    setTagList(tagList);
-   // } else {
-   //    const newTagList = tagList.map((c) => {
-   //       return { ...c, selected: true };
-   //    });
-   //    setTagList(newTagList);
-   // }
+   useEffect(() => {
+      updateCategories(tagList);
+      changeCategories ? changeCategories(tagList) : null;
+      console.log(tagList)
+      // console.log(categories)
+   }, [tagList]);
 
+   // onclick of button, toggle selected and toggle add to taglist
    function AddTagToList(c) {
-      updateCategories()
-      console.log(eventCategories)
+      // console.log(tagList)
       if (tagList.length == 0) {
          tagList.push({ ...c, selected: true });
-         // setBtn(true);
       } else {
          var index = tagList.findIndex(x => x.id == c.id);
          if (index === -1) {
-            tagList.push({ ...c, selected: true });
-            updateCategories()
+            const addTl = [...tagList, c]
+            console.log(addTl)
+            setTagList(addTl)
+            // updateCategories(newTl);
+            // console.log(tagList)
          }
          else {
-            tagList.splice(index, 1);
-            updateCategories()
+            // console.log(index)
+            const id = tagList.splice(index, 1)[0].id;
+            const removeTl = tagList.filter((t) => {
+               return t.id !== id
+            })
+            // console.log(removeTl)
+            setTagList(removeTl)
+            // updateCategories(newTl);
          }
          // setBtn(false)
       }
-      console.log(tagList);
-      // changeCategories(tagList);
-
+      // console.log(tagList);
+      // updateCategories();
+      // console.log(categories)
    }
 
    return (
       <Categories>
-         {eventCategories.map((c) => (
-            <Category selected={c.selected} key={c.id} id={c.id} onClick={() => AddTagToList(c)}>{c.categoryName}</Category>
+         {categories.map((c) => (
+            <Category selected={c.selected || selected} key={c.id} id={c.id} onClick={() => AddTagToList(c)}>{c.categoryName}</Category>
          ))}
       </Categories>
    )

@@ -63,6 +63,19 @@ export default function EventPreview({
   onCancel,
   onConfirm,
 }) {
+  const startDay = new Date(event.start).toLocaleString("default", { dateStyle: "long" })
+  const startTime = new Date(event.start).toLocaleString("default", { timeStyle: "short" })
+  const endDay = new Date(event.end).toLocaleString("default", { dateStyle: "long" })
+  const endTime = new Date(event.end).toLocaleString("default", { timeStyle: "short" })
+  let eventTime;
+  if (startDay == endDay) {
+    startTime == endTime ? eventTime = `${startDay} at ${startTime}` : eventTime = `${startDay} at ${startTime} - ${endTime}`;
+  } else {
+    eventTime = `${startDay} at ${startTime} - ${endDay} at ${endTime}`
+  }
+
+  const dateAndTime = eventTime;
+
   function handleTogglePreview() {
     onTogglePreview();
   }
@@ -81,17 +94,17 @@ export default function EventPreview({
         text={[
           event.eventLocation,
           event.eventContactPhone,
-          event.start.toString(),
+          dateAndTime,
         ]}
         icon={["location_on", "call", "access_time"]}
       />
       <UserOfPost />
       <EventDescription>
         <b>About:</b>
-        <p style={{ fontSize: "14px" }}>{event.eventDescription}</p>
+        <p style={{ fontSize: "14px" }}>{event.eventContent}</p>
       </EventDescription>
 
-      <EventCategoryTag eventCategories={["Food", "Fundraiser"]} />
+      <EventCategoryTag eventCategories={event.eventTags} selected={true} />
 
       <EditBtn onClick={handleTogglePreview}>Edit</EditBtn>
       <ConfirmBtn onClick={handleConfirm}>Confirm</ConfirmBtn>

@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     // Handle PUT requests
     console.log(req.body)
     const newsId = await db.editNews(req.body)
-    // res.status(200).json(newsId);
+    res.status(200).json(newsId);
   } else if (req.method === 'DELETE') {
     // Handle DELETE requests
   }

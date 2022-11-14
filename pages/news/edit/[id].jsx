@@ -7,7 +7,7 @@ import NewsForm from "../../../components/Organisms/NewsForm";
 import axios from "axios";
 
 export default function NewNews({ newsItem, categoriesList }) {
-    // console.log(newsItem.id)
+    console.log(newsItem)
     const [news, setNews] = useState({
         newsTitle: newsItem.newsTitle,
         newsCreatorId: newsItem.newsCreatorId,
@@ -17,7 +17,7 @@ export default function NewNews({ newsItem, categoriesList }) {
         newsImage: newsItem.newsImage,
         newsTags: newsItem.newsTags,
     });
-    const [imageURL, setImageURL] = useState(null);
+    const [imageURL, setImageURL] = useState(newsItem.fileName);
 
     function handleChangeNewsTitle(newsTitle) {
         setNews({ ...news, newsTitle });
@@ -59,7 +59,7 @@ export default function NewNews({ newsItem, categoriesList }) {
             newsImage: news.newsImage,
             newsTags: news.newsTags,
         }
-
+        console.log(putNews)
         axios.put("/api/news", putNews).then((res) => {
             console.log("edited successfully", res.data);
             window.location = `/community?tabId=1`
