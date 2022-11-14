@@ -57,7 +57,7 @@ export default function NewNews({ categoriesList }) {
 
     function handleChangeNewsCategory(tag) {
         setNews({ ...news, newsTags: [...tag] });
-        console.log(news)
+        // console.log(news)
         return;
     }
 

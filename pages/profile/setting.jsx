@@ -8,6 +8,10 @@ import { FlexBox } from '../../styles/globals';
 import GeneralGreenBtn from '../../components/Atoms/GeneralGreenBtn';
 import NotificationSection from '../../components/Molecules/NotificationSection/NotificationSection';
 import PrivacySection from '../../components/Molecules/PrivacySection/PrivacySection';
+import { useSession, signIn, signOut } from "next-auth/react";
+import { authOptions } from '../api/auth/[...nextauth].js';
+import { unstable_getServerSession } from "next-auth/next";
+import Link from 'next/link';
 
 export const ProfileDisplayCont = styled.div`
 display: flex;
@@ -21,19 +25,49 @@ max-height: 200%;
 `
 
 export default function Setting() {
+    const { data: session } = useSession()
+    console.log(session.user);
     const r = useRouter();
 
-    return <div >
-        <TopBanner text='Settings'></TopBanner>
-        <ProfileDisplayCont>
-           <ProfileDisplay/>
-            <AccountSection onRoute={() => r.push('./editaccount')} />
-            <ThemeSection/>
-            <NotificationSection/>
-            <PrivacySection></PrivacySection>
-        </ProfileDisplayCont>
-        <FlexBox style={{ height: '60vh' }}>
-            <GeneralGreenBtn w={'200px'} text='Log out'></GeneralGreenBtn>
-        </FlexBox>
-    </div>
+    if (session) {
+        return (
+            <>
+                <TopBanner text='Settings'></TopBanner>
+                <div>
+                    <ProfileDisplayCont>
+                        <ProfileDisplay name={session.user.name} email={session.user.email} />
+                        <AccountSection onRoute={() => r.push('./editaccount')} />
+                        <ThemeSection />
+                        <NotificationSection />
+                        <PrivacySection></PrivacySection>
+                    </ProfileDisplayCont>
+
+                    <FlexBox style={{ alignSelf: "center", marginTop: "5%" }}>
+                        {/* <Link href={"/auth/signout"}> */}
+                        <GeneralGreenBtn w={'25%'} text='Log out' onClick={() => r.push('/auth/signout')}></GeneralGreenBtn>
+                        {/* </Link> */}
+                    </FlexBox>
+                </div>
+            </>
+        )
+    }
+}
+
+export async function getServerSideProps(context) {
+    const session = await unstable_getServerSession(context.req, context.res, authOptions)
+
+    if (!session) {
+        return {
+            redirect: {
+                destination: '/auth/signin',
+                permanent: false,
+            },
+        }
+    }
+
+    return {
+        props: {
+            session,
+        },
+    }
 }

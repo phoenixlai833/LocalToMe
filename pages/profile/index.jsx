@@ -2,7 +2,7 @@ import ProfileSection from "../../components/Organisms/ProfileBanner"
 import NavBar from '../../components/Organisms/NavBar';
 import styled from "styled-components";
 import { useState } from "react";
-import FloatButton from '../../components/Atoms/FloatButton';
+import FloatingActionButton from '../../components/Atoms/FloatButton';
 import Tabs from "../../components/Organisms/Tabs/tabs";
 import ProfileCard from "../../components/Organisms/ProfileCard/ProfileCard";
 
@@ -24,28 +24,18 @@ export default function Profile() {
     if (session) {
         return (
             <>
-                <ProfileSection></ProfileSection>
+                <ProfileSection src={session.user.image} name={session.user.name} email={session.user.email} />
                 <ProfileTab>
-                <Tabs lefttxt="Recent Posts" righttxt="Past Posts"/>
+                    <Tabs lefttxt="Recent Posts" righttxt="Past Posts" />
                 </ProfileTab>
-                <ProfileCard/>
+                <ProfileCard />
                 <NavBar value={4} />
-                <FloatButton/>
-                Signed in as {session.user.email} <br />
-                <img src={session.user.image}></img>
-                {session.user.name}
-                <br />
-                <button onClick={() => signOut()}>Sign out</button>
+                <FloatingActionButton />
+
             </>
         )
     }
-    return (
-        <>
-            Not signed in <br />
-            <button onClick={() => signIn()}>Sign in</button>
-        </>
-    )
-} 
+}
 
 export async function getServerSideProps(context) {
     const session = await unstable_getServerSession(context.req, context.res, authOptions)
@@ -53,7 +43,7 @@ export async function getServerSideProps(context) {
     if (!session) {
         return {
             redirect: {
-                destination: '/',
+                destination: '/auth/signin',
                 permanent: false,
             },
         }

@@ -53,6 +53,9 @@ div:nth-child(3){
     width: 85vw;
     color: white;
     font-size: 20px;
+    &:hover {
+        background-color: #085617;
+      }
     `
 
 
@@ -75,11 +78,13 @@ div:nth-child(3){
 
 
             </Dot>
-            <Button>
-                <Link href="/">
+
+            <Link href="/auth/signin">
+                <Button>
                     Get Started
-                </Link>
-            </Button>
+                </Button>
+            </Link>
+
         </LandOne>
     )
 }

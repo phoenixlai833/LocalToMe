@@ -34,6 +34,7 @@ const To = styled.div`
 `;
 
 export default function EventForm({
+  mode,
   onTogglePreview,
   event,
   onChangeEventName,
@@ -198,10 +199,10 @@ export default function EventForm({
         )}
         <b style={{ marginTop: "5%" }}>Describe your Event*</b>
         <br></br>
-        <LongTextInput placeholder={"Tell us about your event..."} image={image} onChange={handleChangeEventDescription} onChangeImage={handleChangeEventImage}></LongTextInput>
+        <LongTextInput mode={mode} placeholder={"Tell us about your event..."} image={image} onChange={handleChangeEventDescription} onChangeImage={handleChangeEventImage}></LongTextInput>
         {/* <b style={{ marginTop: "5%" }}>Select Event Tags</b> */}
         <br></br>
-        <EventCategoryTag eventCategories={categoriesList} changeCategories={handleAddTag} />
+        <EventCategoryTag eventCategories={categoriesList} exisitingCategories={event.eventTags} changeCategories={handleAddTag} />
         <br></br>
         <GeneralGreenBtn type="submit" text="Continue" />
       </Form>

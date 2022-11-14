@@ -68,8 +68,8 @@ export default function NewEvent({ categoriesList }) {
     return;
   }
 
-  function handleChangeEventDescription(eventDescription) {
-    setEvent({ ...event, eventDescription });
+  function handleChangeEventContent(eventContent) {
+    setEvent({ ...event, eventContent });
   }
 
   // const onFileChange = async (e) => {
@@ -131,9 +131,10 @@ export default function NewEvent({ categoriesList }) {
   function handleConfirm() {
     // console.log(event)
     const postEvent = {
-      eventContent: event.eventDescription,
+      eventContent: event.eventContent,
       eventCreatorId: 1,
-      eventDate: event.start,
+      start: event.start,
+      end: event.end,
       eventImage: event.eventImage,
       eventLocation: event.eventLocation,
       eventName: event.eventName,
@@ -166,7 +167,7 @@ export default function NewEvent({ categoriesList }) {
           onChangeEventCreator={handleChangeEventCreator}
           onChangeEventPhoneNumber={handleChangeEventPhoneNumber}
           onChangeEventLocation={handleChangeEventLocation}
-          onChangeEventDescription={handleChangeEventDescription}
+          onChangeEventDescription={handleChangeEventContent}
           image={imageURL}
           onChangeEventImage={handleChangeEventImage}
           onChangeEventStartDate={handleChangeEventStartDate}

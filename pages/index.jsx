@@ -94,17 +94,28 @@ export default function Home({ events, allNews }) {
   // ));
 
   const UpcomingEventCards = events.map((e) => {
-    const time = e.eventDate.seconds
-    const date = time ? new Date(time * 1000) : new Date(e.eventDate)
-    const eventTime = date.toLocaleString().split(',')[1]
-    const dateOfEvent = date.toLocaleString("default", { month: "long", day: "2-digit", year: "numeric" })
-    const dateAndTime = dateOfEvent + "," + eventTime
-    const day = dateOfEvent.split(" ")[1].split("").splice(0, 2).join("");
-    const month = dateOfEvent.split(" ")[0].split("").splice(0, 3).join("").toUpperCase();
+    // const time = e.start
+    // const date = time ? new Date(time * 1000) : new Date(e.eventDate)
+    const startDay = new Date(e.start).toLocaleString("default", { dateStyle: "long" })
+    const startTime = new Date(e.start).toLocaleString("default", { timeStyle: "short" })
+    const endDay = new Date(e.end).toLocaleString("default", { dateStyle: "long" })
+    const endTime = new Date(e.end).toLocaleString("default", { timeStyle: "short" })
+    const sDay = startDay.split(" ")[1].split("").splice(0, 2).join("");
+    const sMonth = startDay.split(" ")[0].split("").splice(0, 3).join("").toUpperCase();
+    const eDay = endDay.split(" ")[1].split("").splice(0, 2).join("");
+    const eMonth = endDay.split(" ")[0].split("").splice(0, 3).join("").toUpperCase();
+    let eventTime;
+    if (startDay == endDay) {
+      startTime == endTime ? eventTime = startTime : eventTime = `${startTime} - ${endTime}`;
+    } else {
+      eventTime = `${sMonth} ${sDay}, ${startTime} - ${eMonth} ${eDay}, ${endTime}`
+    }
+
+    // const dateOfEvent = date.toLocaleString("default", { month: "long", day: "2-digit", year: "numeric" })
     return (
       <li key={e.id} style={{ marginRight: "5%" }}>
         <a href={`/events/${e.id}`}>
-          <CarouselCard event={e.eventName} time={eventTime} src={e.eventImage} month={month} day={day} />
+          <CarouselCard event={e.eventName} time={eventTime} src={e.eventImage} month={sMonth} day={sDay} />
         </a>
       </li>
     )
