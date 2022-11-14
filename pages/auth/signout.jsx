@@ -5,7 +5,7 @@ import { FlexBox, Wrapper } from '../../styles/globals';
 import GeneralGreenBtn from '../../components/Atoms/GeneralGreenBtn';
 import { useRouter } from 'next/router';
 
-export default function signin() {
+export default function Signout() {
     const r = useRouter();
 
     const Layout = styled.div`

@@ -4,7 +4,7 @@ import { getProviders, signIn, getSession, csrfToken } from "next-auth/react";
 import styled from 'styled-components';
 import Link from 'next/link';
 
-export default function signin({ providers }) {
+export default function Signin({ providers }) {
 
 
     const Layout = styled.div`
