@@ -1,36 +1,73 @@
 import TopBanner from '../../components/Molecules/TopBanner';
-import ProfileDisplay from '../../components/Molecules/profiledisplay/profiledisplay';
+import ProfileDisplay from '../../components/Molecules/ProfileDisplay/ProfileDisplay';
 import styled from 'styled-components';
-import AccountSection from '../../components/Molecules/Accountsection/accountsection';
+import ThemeSection from '../../components/Molecules/ThemeSection/ThemeSection';
+import AccountSection from '../../components/Molecules/AccountSection/AccountSection';
 import { useRouter } from 'next/router';
-import ThemeSection from '../../components/Molecules/ThemeSection/themesection';
 import { FlexBox } from '../../styles/globals';
 import GeneralGreenBtn from '../../components/Atoms/GeneralGreenBtn';
+import NotificationSection from '../../components/Molecules/NotificationSection/NotificationSection';
+import PrivacySection from '../../components/Molecules/PrivacySection/PrivacySection';
+import { useSession, signIn, signOut } from "next-auth/react";
+import { authOptions } from '../api/auth/[...nextauth].js';
+import { unstable_getServerSession } from "next-auth/next";
+import Link from 'next/link';
 
 export const ProfileDisplayCont = styled.div`
 display: flex;
 flex-direction: column;
-justify-content: space-even;
+justify-content: space-evenly;
 align-items: flex-start;
 padding: 30px;
 width:100%;
-max-width:100%;
+height: 100%;
+max-height: 200%;
 `
 
 export default function Setting() {
+    const { data: session } = useSession()
+    console.log(session.user);
     const r = useRouter();
 
-    return <div>
-        <TopBanner text='Settings'></TopBanner>
-        <ProfileDisplayCont>
-            <ProfileDisplay></ProfileDisplay>
+    if (session) {
+        return (
+            <>
+                <TopBanner text='Settings'></TopBanner>
+                <div>
+                    <ProfileDisplayCont>
+                        <ProfileDisplay name={session.user.name} email={session.user.email} />
+                        <AccountSection onRoute={() => r.push('./editaccount')} />
+                        <ThemeSection />
+                        <NotificationSection />
+                        <PrivacySection></PrivacySection>
+                    </ProfileDisplayCont>
 
-            <AccountSection onRoute={()=>r.push('./editaccount')}/>
-            <ThemeSection/>
-            
-        </ProfileDisplayCont>
-        <FlexBox>
-            <GeneralGreenBtn w={'200px'} text='Log out'></GeneralGreenBtn>
-        </FlexBox>
-    </div>
+                    <FlexBox style={{ alignSelf: "center", marginTop: "5%" }}>
+                        {/* <Link href={"/auth/signout"}> */}
+                        <GeneralGreenBtn w={'25%'} text='Log out' onClick={() => r.push('/auth/signout')}></GeneralGreenBtn>
+                        {/* </Link> */}
+                    </FlexBox>
+                </div>
+            </>
+        )
+    }
+}
+
+export async function getServerSideProps(context) {
+    const session = await unstable_getServerSession(context.req, context.res, authOptions)
+
+    if (!session) {
+        return {
+            redirect: {
+                destination: '/auth/signin',
+                permanent: false,
+            },
+        }
+    }
+
+    return {
+        props: {
+            session,
+        },
+    }
 }

@@ -60,13 +60,16 @@ div:nth-child(2){
     width: 85vw;
     color: white;
     font-size: 20px;
+    &:hover {
+        background-color: #085617;
+      }
     `
 
 
     return (
         <LandOne>
             <Skip>
-                <Link href="/">
+                <Link href="/auth/signin">
                     Skip
                 </Link>
             </Skip>
@@ -85,11 +88,13 @@ div:nth-child(2){
                 <div></div>
                 <div></div>
             </Dot>
-            <Button>
-                <Link href="/landing/landingThree">
+
+            <Link href="/landing/landingThree">
+                <Button>
                     Continue
-                </Link>
-            </Button>
+                </Button>
+            </Link>
+
         </LandOne>
     )
 }

@@ -33,7 +33,13 @@ MainHeader.args = {
     fontweight: 700
 }
 
-
+export const SettingHeader =  Template.bind({});
+SettingHeader.args = {
+    txt: 'This is setting header',
+    variant: 'fourth',
+    txtsize: '16px',
+    fontweight: 400
+}
 
 export const Default = (args) => <AppText/>
 export const Error = (args) => <AppText />

@@ -18,9 +18,12 @@ export default async function handler(req, res) {
     // Handle POST requests
     console.log('this', req.body);
     return;
+<<<<<<< HEAD
     const eventRef = await db.addEvent(req.body);
     const event = await db.getEvent(eventRef.id);
     index.saveObject({ ...event, objectID: event.id }).wait()
     res.status(200).json(event.id);
+=======
+>>>>>>> develop
   }
 }

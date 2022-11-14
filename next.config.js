@@ -5,7 +5,7 @@ const nextConfig = {
   compiler: {
     styledComponents: true
   },
-  images: { domains: ["//firebasestorage.googleapis.com"] },
+  domains: ["avatars.githubusercontent.com", "lh3.googleusercontent.com"]
 }
 
 module.exports = nextConfig

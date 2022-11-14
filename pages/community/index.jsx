@@ -151,6 +151,7 @@ export default function Community({ allNews, tabId, usersData }) {
             News
           </NewTab>
         </Tab>
+
         {tab === 0 ? (
           <Heading>Recent Events</Heading>
         ) : (

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { storage } from "../../../firebase/clientApp";
-import { getNews, editNews, getNewsCategories } from "../../../server/database";
+import { getNews, getAllCategories } from "../../../server/database";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import TopBanner from "../../../components/Molecules/TopBanner";
 import NewsForm from "../../../components/Organisms/NewsForm";
 import axios from "axios";
 
-export default function NewNews({ newsItem, newsCategories }) {
-    // console.log(newsItem.id)
+export default function NewNews({ newsItem, categoriesList }) {
+    console.log(newsItem)
     const [news, setNews] = useState({
         newsTitle: newsItem.newsTitle,
         newsCreatorId: newsItem.newsCreatorId,
@@ -17,8 +17,7 @@ export default function NewNews({ newsItem, newsCategories }) {
         newsImage: newsItem.newsImage,
         newsTags: newsItem.newsTags,
     });
-
-    const [imageURL, setImageURL] = useState(null);
+    const [imageURL, setImageURL] = useState(newsItem.fileName);
 
     function handleChangeNewsTitle(newsTitle) {
         setNews({ ...news, newsTitle });
@@ -42,8 +41,9 @@ export default function NewNews({ newsItem, newsCategories }) {
         setImageURL(img.name);
     }
 
-    function handleChangeNewsCategory(e) {
-        setNews({ ...news, newsTags: [...newsTags, e.target.id] });
+    function handleChangeNewsCategory(tags) {
+        setNews({ ...news, newsTags: [...tags] });
+        return;
     }
 
     function handleCancel() { }
@@ -59,10 +59,10 @@ export default function NewNews({ newsItem, newsCategories }) {
             newsImage: news.newsImage,
             newsTags: news.newsTags,
         }
-
+        console.log(putNews)
         axios.put("/api/news", putNews).then((res) => {
-            window.location = `/community`
             console.log("edited successfully", res.data);
+            window.location = `/community?tabId=1`
         });
     }
 
@@ -70,13 +70,15 @@ export default function NewNews({ newsItem, newsCategories }) {
         <div>
             <TopBanner text={"Edit News"} />
             <NewsForm
+                mode={"edit"}
                 news={news}
                 onChangeNewsTitle={handleChangeNewsTitle}
                 onChangeNewsCreator={handleChangeNewsCreator}
                 onChangeNewsContent={handleChangeNewsContent}
                 image={imageURL}
                 onChangeNewsImage={handleChangeNewsImage}
-                onChangeNewsCategory={handleChangeNewsCategory}
+                onChangeNewsTags={handleChangeNewsCategory}
+                categoriesList={categoriesList}
                 onConfirm={handleConfirm}
             />
 
@@ -88,10 +90,10 @@ export async function getServerSideProps({ params }) {
     const newsData = await getNews(params.id);
     const newsItem = JSON.parse(JSON.stringify(newsData));
 
-    // const newsCategoriesData = await getNewsCategories();
-    // const newsCategories = JSON.parse(JSON.stringify(newsCategoriesData));
+    const categoriesData = await getAllCategories();
+    const categoriesList = JSON.parse(JSON.stringify(categoriesData));
 
     return {
-        props: { newsItem }, // will be passed to the page component as props
+        props: { newsItem, categoriesList }
     };
 }

@@ -7,5 +7,7 @@ export default async function handler(req, res) {
         const id = req.query.id;
         const user = await db.getUser(id);
         res.status(200).json(user);
+        //user.favorite.events
+        //user.favorite.locations
     }
 }

@@ -148,10 +148,22 @@ export default function Event({ event }) {
   const [share, setShare] = useState(false);
   const router = useRouter()
 
-  const dateAndTime = new Date(event.eventDate).toLocaleString("default", {
-    dateStyle: "long",
-    timeStyle: "short",
-  })
+  const startDay = new Date(event.start).toLocaleString("default", { dateStyle: "long" })
+  const startTime = new Date(event.start).toLocaleString("default", { timeStyle: "short" })
+  const endDay = new Date(event.end).toLocaleString("default", { dateStyle: "long" })
+  const endTime = new Date(event.end).toLocaleString("default", { timeStyle: "short" })
+  let eventTime;
+  if (startDay == endDay) {
+    startTime == endTime ? eventTime = `${startDay} at ${startTime}` : eventTime = `${startDay} at ${startTime} - ${endTime}`;
+  } else {
+    eventTime = `${startDay} at ${startTime} - ${endDay} at ${endTime}`
+  }
+
+  const dateAndTime = eventTime;
+  // const dateAndTime = new Date(event.start).toLocaleString("default", {
+  //   dateStyle: "long",
+  //   timeStyle: "short",
+  // })
 
   const handleDelete = (singleEventId) => async (e) => {
     {
@@ -227,7 +239,7 @@ export default function Event({ event }) {
         <p style={{ fontSize: '14px' }}>{event.eventContent}</p>
       </EventDescription>
 
-      <EventCategoryTag eventCategories={event.eventTags} />
+      <EventCategoryTag eventCategories={event.eventTags} selected={true} />
 
       <GetDirectionGreenBtn address={event.eventLocation} onMap={false} />
 

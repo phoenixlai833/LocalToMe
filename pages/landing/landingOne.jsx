@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Link from 'next/link';
+import GeneralGreenBtn from '../../components/Atoms/GeneralGreenBtn';
 
 export default function LandingPageOne() {
 
@@ -60,6 +61,9 @@ div:nth-child(1){
     width: 85vw;
     color: white;
     font-size: 20px;
+    &:hover {
+        background-color: #085617;
+      }
     `
 
 
@@ -67,7 +71,7 @@ div:nth-child(1){
         <>
             <LandOne>
                 <Skip>
-                    <Link href="/">
+                    <Link href="/auth/signin">
                         Skip
                     </Link>
                 </Skip>
@@ -86,11 +90,12 @@ div:nth-child(1){
                     <div></div>
 
                 </Dot>
-                <Button>
-                    <Link href="/landing/landingTwo">
+                <Link href="/landing/landingTwo">
+                    {/* <GeneralGreenBtn text={"continue"} /> */}
+                    <Button>
                         Continue
-                    </Link>
-                </Button>
+                    </Button>
+                </Link>
             </LandOne>
         </>
     )

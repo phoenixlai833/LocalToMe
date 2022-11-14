@@ -249,7 +249,7 @@ export default function AllNews({ allNews }) {
                   <Tag key={tag}>{tag}</Tag>
                 ))}
               </TagList> */}
-              <EventCategoryTag eventCategories={news.newsTags} />
+              <EventCategoryTag eventCategories={news.newsTags} selected={true}/>
 
               <Content>
                 <p>
@@ -298,11 +298,11 @@ export default function AllNews({ allNews }) {
                 </h2>
                 <BtnCont>
                   <CancelBtn onClick={hidePopup}>Cancel</CancelBtn>
-                  <a href={`/community?tab=1`}>
+                  <Link href="/community?tab=1">
                     <DeleteBtn onClick={handleDelete(news.id)}>
                       Confirm
                     </DeleteBtn>
-                  </a>
+                  </Link>
                 </BtnCont>
               </DeleteCont>
             </AbsPos>

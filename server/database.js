@@ -44,7 +44,9 @@ export async function getEvents() {
 export async function getEvent(id) {
   const eventRef = doc(db, "event", id);
   const eventSnap = await getDoc(eventRef);
-  const event = { id, ...eventSnap.data() };
+  const fileUrl = eventSnap.data().eventImage;
+  let fileName = decodeURIComponent(fileUrl.split('/').pop().split('?')[0])
+  const event = { id, ...eventSnap.data(), fileName };
   const eventCreatorSnap = await getDoc(event.eventCreatorId);//should change the eventCreatorId to eventCreatorData
   const eventCreator = { id: eventCreatorSnap.id, ...eventCreatorSnap.data() };
   const joinedEvent = {
@@ -53,7 +55,7 @@ export async function getEvent(id) {
   }
   return joinedEvent;
   // console.log('what is', event, eventCreator)
-} 
+}
 // joinedEvent:
 // { "id": "8sahmToVxgeRbkqaMIq5",
 //  "eventContent": "For the month of October,Community Taps + Pizza will be donating $1 from each Fernie beer poured and $2 from every Manchester Pizza sold to the Greater Vancouver Food Bank!", 
@@ -143,7 +145,10 @@ export async function getAllNews() {
 export async function getNews(id) {
   const newsRef = doc(db, "news", id);
   const newsSnap = await getDoc(newsRef);
-  const news = { id, ...newsSnap.data() };
+  const fileUrl = newsSnap.data().newsImage;
+  let fileName = decodeURIComponent(fileUrl.split('/').pop().split('?')[0])
+  // console.log(fileName)
+  const news = { id, ...newsSnap.data(), fileName };
   // console.log('hi', news)
   return news;
 }
@@ -165,10 +170,13 @@ export async function deleteNews(id) {
   const newsCollection = doc(db, "news", id);
   const newsSnap = await getDoc(newsCollection);
   const fileUrl = newsSnap.data().newsImage
-  const storage = getStorage();
-  const fileRef = ref(storage, fileUrl);
-  deleteObject(fileRef);
+  if (fileUrl) {
+    const storage = getStorage();
+    const fileRef = ref(storage, fileUrl);
+    deleteObject(fileRef);
+  }
   await deleteDoc(doc(db, "news", id));
+
 }
 
 export async function getNewsCategories() {
@@ -188,8 +196,6 @@ export async function getPantries() {
   });
   return pantries;
 }
-
-
 
 //get all the fridges
 export async function getFridges() {
@@ -220,6 +226,18 @@ export async function getUsers() {
 export async function getUser(id) {
   const userRef = doc(db, "users", id);
   const userSnap = await getDoc(userRef);
-  const user = { id, ...userSnap.data() };
+  const baseUser = userSnap.data();
+  baseUser.favorite.events = await Promise.all(baseUser.favorite.events.map(async (eventRef) => {
+    const eventObj = await getEvent(eventRef.id);
+    return eventObj
+  }))
+
+  baseUser.favorite.locations = await Promise.all(baseUser.favorite.locations.map(async (locationRef) => {
+    const locationObjSnap = await getDoc(locationRef);
+    const locationObj = locationObjSnap.data();
+    return { id: locationObjSnap.id, ...locationObj }
+  }))
+
+  const user = { id, ...baseUser };
   return user;
 }

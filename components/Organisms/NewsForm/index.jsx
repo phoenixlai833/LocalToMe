@@ -29,6 +29,7 @@ const To = styled.div`
 `;
 
 export default function NewsForm({
+    mode,
     news,
     onChangeNewsTitle,
     onChangeNewsCreator,
@@ -85,10 +86,10 @@ export default function NewsForm({
                 />
                 <b style={{ marginTop: "5%" }}>Details about your News*</b>
                 <br></br>
-                <LongTextInput value={news.newsContent && news.newsContent} placeholder={"Tell us about your news..."} image={image} onChange={handleChangeNewsContent} onChangeImage={handleChangeNewsImage}></LongTextInput>
+                <LongTextInput mode={mode} value={news.newsContent && news.newsContent} placeholder={"Tell us about your news..."} image={image} onChange={handleChangeNewsContent} onChangeImage={handleChangeNewsImage}></LongTextInput>
                 {/* <b style={{ marginTop: "5%" }}>Select News Tags</b> */}
                 <br></br>
-                <EventCategoryTag eventCategories={categoriesList} changeCategories={handleAddTag} />
+                <EventCategoryTag eventCategories={categoriesList} exisitingCategories={news.newsTags} changeCategories={handleAddTag} />
                 <br></br>
                 <GeneralGreenBtn text="Post" />
             </Form>

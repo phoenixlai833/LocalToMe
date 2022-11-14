@@ -37,11 +37,11 @@ right: 0;
 `
 
 const EditProfile = styled.div`
-display:flex;
+display: flex;
 border-radius: 50px;
 padding: 5px;
 left: 40px;
-bottom: 40px;
+bottom: 90px;
 background-color: ${Colours.primary};
 color:${Colours.background};
 z-index:999;
@@ -51,18 +51,18 @@ position: relative;
 }
 `
 
-export default function ProfileSection() {
+export default function ProfileSection({ src = 'https://placekitten.com/500', name = "Slayerina", email = "email123@my.email.ca" }) {
     const r = useRouter();
     return <div>
         <SettingIcon src="/cog.svg" onClick={() => r.push('/profile/setting')} />
         <ProfileBanner />
         <AvatarCont>
             <ProfileAvatar
-                src='https://placekitten.com/500'
+                src={src}
                 sx={{ width: 120, height: 120 }} />
-            <EditProfile><AddIcon  sx={{ width: 25, height: 25 }} /></EditProfile>
-            <h3 style={{ margin: 0 }}>Slayerina</h3>
-            <p style={{ margin: 5 }}>email123@my.email.ca</p>
+            <h3 style={{ margin: 0 }}>{name}</h3>
+            <p style={{ margin: 5 }}>{email}</p>
+            <EditProfile><AddIcon sx={{ width: 25, height: 25 }} /></EditProfile>
         </AvatarCont>
     </div>
 }

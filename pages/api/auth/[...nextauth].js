@@ -23,6 +23,10 @@ export const authOptions = {
         })
         // ...add more providers here
     ],
+    pages: {
+        signIn: "/auth/signin",
+        signOut: "/auth/signout"
+    },
     adapter: FirestoreAdapter({
         apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
         authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,

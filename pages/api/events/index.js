@@ -17,7 +17,12 @@ export default async function handler(req, res) {
     // Handle POST requests
     const eventRef = await db.addEvent(req.body);
     const event = await db.getEvent(eventRef.id);
-    index.saveObject({...event, objectID: event.id}).wait()
+    index.saveObject({ ...event, objectID: event.id }).wait()
     res.status(200).json(event.id);
+  } else if (req.method === 'PUT') {
+    // Handle PUT requests
+    console.log(req.body)
+    const eventId = await db.editEvent(req.body)
+    res.status(200).json(eventId);
   }
 }

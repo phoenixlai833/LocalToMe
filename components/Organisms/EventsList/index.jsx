@@ -13,7 +13,7 @@ const EventBlock = styled.div`
   margin: 20px;
 `
 
-const EventDateAndIamge = styled.div`
+const EventDateAndImage = styled.div`
   display: flex;
   flex-direction: row;
   height: 200px;
@@ -84,7 +84,7 @@ export default function EventsList({ eventList }) {
 
       {eventList.map((event) => (
         <EventBlock key={event.id} >
-          <EventDateAndIamge>
+          <EventDateAndImage>
             <EventImage
               src={event.eventImage}
               alt={event.eventName}
@@ -100,7 +100,7 @@ export default function EventsList({ eventList }) {
                 new Date(event.eventDate.seconds * 1000).getDate()
               ).padStart(2, "0")}
             </EventDate>
-          </EventDateAndIamge>
+          </EventDateAndImage>
           <EventInfo>
             <EventTime>
               {
