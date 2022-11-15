@@ -241,3 +241,19 @@ export async function getUser(id) {
   const user = { id, ...baseUser };
   return user;
 }
+
+//add favorite event/location to user
+export async function addFavorite(userId, type, itemId) {
+  const userRef = doc(db, "users", userId);
+  const userSnap = await getDoc(userRef);
+  const baseUser = userSnap.data();
+  const itemRef = doc(db, type, itemId);
+  if (type === "event") {
+    baseUser.favorite.events.push(itemRef);
+  } else if (type === "pantry" || type === "fridge" || type === "foodBank") {
+    baseUser.favorite.locations.push(itemRef);
+  }
+  await updateDoc(userRef, baseUser);
+  return baseUser;
+}
+// addFavorite(1, "event", itemId)
