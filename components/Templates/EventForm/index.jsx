@@ -123,13 +123,13 @@ export default function EventForm({
           onChange={handleChangeEventName}
           required={true}
         />
-        <br></br>
+        {/* <br></br>
         <ShortTextInput
           label="Event Host"
           value={event.eventCreator}
           onChange={handleChangeEventCreator}
           required={true}
-        />
+        /> */}
         <br></br>
         <ShortTextInput
           label="Phone Number"
@@ -138,6 +138,53 @@ export default function EventForm({
           required={true}
         />
         <b style={{ marginTop: "5%" }}>Location of your Event</b>
+<<<<<<< HEAD:components/EventForm/index.jsx
+        <ShortTextInput value={event.eventLocation} onChange={handleChangeEventLocation} />
+        <b style={{ marginTop: "5%" }}>Date & Time of your Event</b>
+        <br></br>
+        <LayoutTime>
+          <div>
+            <DateInput
+              selected={calendarType}
+              label="Start Date"
+              required={true}
+              date={event.start.toLocaleString("default", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              })}
+              onSelectDate={handleSelectStartDate}
+            />
+            <br></br>
+            <TimeInput
+              label="Start Time"
+              required={true}
+              time={event.start.toLocaleString("default", { hour: "2-digit", minute: "2-digit", hour12: false })}
+              onChangeTime={handleChangeEventStartTime}
+            />
+          </div>
+          <To>
+            <b>to</b>
+          </To>
+          <div>
+            <DateInput
+              selected={calendarType == 0}
+              label="End Date"
+              date={event.end.toLocaleString("default", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              })}
+              onSelectDate={handleSelectEndDate}
+            />
+            <br></br>
+            <TimeInput
+              label="End Time"
+              time={event.end.toLocaleString("default", { hour: "2-digit", minute: "2-digit", hour12: false })}
+              onChangeTime={handleChangeEventEndTime}
+            />
+          </div>
+=======
         <br></br>
         <ShortTextInput label="Location" value={event.eventLocation} onChange={handleChangeEventLocation} required={true} />
         <b style={{ marginTop: "5%" }}>Date & Time of your Event</b>
@@ -183,6 +230,7 @@ export default function EventForm({
             time={event.end.toLocaleString("default", { hour: "2-digit", minute: "2-digit", hour12: false })}
             onChangeTime={handleChangeEventEndTime}
           />
+>>>>>>> f7ea2923f861a4c7acbf34050d59daba9d53aa61:components/Templates/EventForm/index.jsx
         </LayoutTime>
         {calendarType ? (
           <DateCalendar

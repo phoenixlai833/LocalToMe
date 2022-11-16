@@ -52,7 +52,7 @@ export default function NewNews({ newsItem, categoriesList }) {
         const putNews = {
             id: newsItem.id,
             newsTitle: news.newsTitle,
-            newsCreatorId: 1,
+            newsCreatorId: newsItem.newsCreatorId,
             newsAvatar: "",
             newsDateCreated: newsItem.newsDateCreated,
             newsContent: news.newsContent,

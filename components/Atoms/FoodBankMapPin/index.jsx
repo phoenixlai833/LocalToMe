@@ -65,7 +65,11 @@ export default function FoodBankMapPin({ foodBanksList }) {
                             <img src="./Food_Bank_Map_Pin.svg" alt="foodbank pin" />
                         </MarkerBtn>
                     </Marker>
+<<<<<<< HEAD:components/FoodBankMapPin/index.jsx
+                )
+=======
                 )}
+>>>>>>> f7ea2923f861a4c7acbf34050d59daba9d53aa61:components/Atoms/FoodBankMapPin/index.jsx
             }
             )}
 

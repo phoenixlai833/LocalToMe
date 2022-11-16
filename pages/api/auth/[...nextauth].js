@@ -4,6 +4,7 @@ import GoogleProvider from "next-auth/providers/google";
 import { FirestoreAdapter } from "@next-auth/firebase-adapter"
 
 export const authOptions = {
+    secret: process.env.NEXTAUTH_SECRET,
     // Configure one or more authentication providers
     providers: [
         GithubProvider({
@@ -39,5 +40,14 @@ export const authOptions = {
         //     port: 3000
         // },
     }),
+    callbacks: {
+        async session({ session, token, user }) {
+            // Send properties to the client, like an access_token and user id from a provider.
+            //   session.accessToken = token.accessToken
+            session.user.id = user.id
+
+            return session
+        }
+    }
 }
 export default NextAuth(authOptions)

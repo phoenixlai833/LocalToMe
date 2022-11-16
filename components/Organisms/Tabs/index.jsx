@@ -30,12 +30,12 @@ const Tab = styled.div`
   border-bottom: 1.5px solid #d9d9d9;
 `;
 
-
 export default function Tabs({ tab, tabList, onChangeTab }) {
   const tabComponents = tabList.map((singleTab, index) => <FavorTab key={index} id={index} tabId={tab} onClick={() => onChangeTab(index)}>{singleTab}</FavorTab>)
 
   return <Tab>
     {tabComponents}
+
   </Tab>
 
 }
