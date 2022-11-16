@@ -62,12 +62,12 @@ export default function Profile({ events }) {
 
     const recentEvents = events.filter((e) => new Date(e.end) > new Date())
         .map((e) => {
-            return < ProfileCard eventId={e.id} src={e.eventImage} lastEdit={e.eventUpdateDate} title={e.eventName} bodyText={e.eventContent} />
+            return < ProfileCard key={e.id} eventId={e.id} src={e.eventImage} lastEdit={e.eventUpdateDate} title={e.eventName} bodyText={e.eventContent} />
         })
 
     const pastEvents = events.filter((e) => new Date(e.end) <= new Date())
         .map((e) => {
-            return < ProfileCard past={true} eventId={e.id} src={e.eventImage} lastEdit={e.eventUpdateDate} title={e.eventName} bodyText={e.eventContent} />
+            return < ProfileCard key={e.id} past={true} eventId={e.id} src={e.eventImage} lastEdit={e.eventUpdateDate} title={e.eventName} bodyText={e.eventContent} />
         })
 
     const tabContents = {
