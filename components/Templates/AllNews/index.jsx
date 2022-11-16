@@ -249,7 +249,7 @@ export default function AllNews({ allNews }) {
                   <Tag key={tag}>{tag}</Tag>
                 ))}
               </TagList> */}
-              <EventCategoryTag eventCategories={news.newsTags} selected={true}/>
+              <EventCategoryTag eventCategories={news.newsTags} selected={true} />
 
               <Content>
                 <p>

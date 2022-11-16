@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { db, app, storage } from "../../firebase/clientApp";
-import {
-  getEvents,
-  getEvent,
-  addEvent,
-  getAllCategories
-} from "../../server/database";
+import { getAllCategories } from "../../server/database";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { collection, getDocs, addDoc } from "firebase/firestore";
 // import Event from "../../components/Event";
@@ -15,15 +10,20 @@ import TimeInput from "../../components/Molecules/TimeInput";
 import NavBar from "../../components/Organisms/NavBar";
 import EventForm from "../../components/Templates/EventForm";
 import EventPreview from "../../components/Templates/EventPreview";
+import { useSession } from "next-auth/react";
+import { authOptions } from '../api/auth/[...nextauth].js';
+import { unstable_getServerSession } from "next-auth/next";
 import axios from "axios";
 
 export default function NewEvent({ categoriesList }) {
+  const { data: session } = useSession();
+  const userId = session.user.id;
   const [event, setEvent] = useState({
     eventName: "",
     eventImage:
       "https://firebasestorage.googleapis.com/v0/b/localtome-f84e5.appspot.com/o/foodBankImageTest.jpg?alt=media&token=37d44b9b-ac9d-48d7-8556-693c9a002fb0",
     eventContent: "",
-    eventCreatorId: 1,
+    eventCreatorId: userId,
     start: new Date(),
     end: new Date(),
     eventLocation: "",
@@ -132,14 +132,15 @@ export default function NewEvent({ categoriesList }) {
     // console.log(event)
     const postEvent = {
       eventContent: event.eventContent,
-      eventCreatorId: 1,
+      eventCreatorId: userId,
       start: event.start,
       end: event.end,
       eventImage: event.eventImage,
       eventLocation: event.eventLocation,
       eventName: event.eventName,
       eventContactPhone: event.eventContactPhone,
-      eventTags: event.eventTags
+      eventTags: event.eventTags,
+      eventUpdateDate: new Date()
     }
 
     console.log('lul', typeof event.start)
@@ -186,13 +187,21 @@ export async function getServerSideProps(context) {
   // const eventData = await getEvents();
   // const eventList = JSON.parse(JSON.stringify(eventData));
 
-  // const eventCategoriesData = await getEventCategories();
-  // const eventCategories = JSON.parse(JSON.stringify(eventCategoriesData));
+  const session = await unstable_getServerSession(context.req, context.res, authOptions)
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/auth/signin',
+        permanent: false,
+      },
+    }
+  }
 
   const categoriesData = await getAllCategories();
   const categoriesList = JSON.parse(JSON.stringify(categoriesData));
 
   return {
-    props: { categoriesList }, // will be passed to the page component as props
+    props: { categoriesList } // will be passed to the page component as props
   };
 }

@@ -44,14 +44,14 @@ left: 40px;
 bottom: 90px;
 background-color: ${Colours.primary};
 color:${Colours.background};
-z-index:999;
+z-index: 1;
 position: relative;
 &:hover{
     background-color:${Colours.secondary};
 }
 `
 
-export default function ProfileSection({ src = 'https://placekitten.com/500', name = "Slayerina", email = "email123@my.email.ca" }) {
+export default function ProfileSection({ src = 'https://placekitten.com/500', name = "Slayerina", email = "email123@my.email.ca", handleClick }) {
     const r = useRouter();
     return <div>
         <SettingIcon src="/cog.svg" onClick={() => r.push('/profile/setting')} />
@@ -62,7 +62,7 @@ export default function ProfileSection({ src = 'https://placekitten.com/500', na
                 sx={{ width: 120, height: 120 }} />
             <h3 style={{ margin: 0 }}>{name}</h3>
             <p style={{ margin: 5 }}>{email}</p>
-            <EditProfile><AddIcon sx={{ width: 25, height: 25 }} /></EditProfile>
+            <EditProfile><AddIcon sx={{ width: 25, height: 25 }} onClick={handleClick} /></EditProfile>
         </AvatarCont>
     </div>
 }

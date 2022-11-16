@@ -78,12 +78,12 @@ export default function NewsForm({
                     required={true}
                 />
                 <br></br>
-                <ShortTextInput
+                {/* <ShortTextInput
                     label="Organizer"
                     value={news.newsCreatorId}
                     onChange={handleChangeNewsCreator}
                     required={true}
-                />
+                /> */}
                 <b style={{ marginTop: "5%" }}>Details about your News*</b>
                 <br></br>
                 <LongTextInput mode={mode} value={news.newsContent && news.newsContent} placeholder={"Tell us about your news..."} image={image} onChange={handleChangeNewsContent} onChangeImage={handleChangeNewsImage}></LongTextInput>
