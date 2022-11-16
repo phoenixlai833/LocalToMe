@@ -74,7 +74,7 @@ export default function Favorites({ user }) {
                 <Tabs tabId={tab} onChangeTab={handleChangeTab} tabList={tabList} />
                 <FavorPage>
 
-                    {tabContents[tab].component || <Text>There are no favorites yet</Text>}
+                    {tabContents[tab].component}
                     <NavBar value={3} />
                 </FavorPage>
 
