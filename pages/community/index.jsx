@@ -173,7 +173,7 @@ export async function getServerSideProps(context) {
 
   // const users = await getUsers()
   // const usersData = JSON.parse(JSON.stringify(users));
-  console.log("aaaaaa", allNews)
+
   return {
     props: {
       allNews,

@@ -3,7 +3,7 @@ import NavBar from '../../components/Organisms/NavBar';
 import styled from "styled-components";
 import { useState } from "react";
 import FloatingActionButton from '../../components/Atoms/FloatButton';
-import Tabs from "../../components/Organisms/Tabs/tabs";
+import Tabs from "../../components/Organisms/Tabs";
 import ProfileCard from "../../components/Organisms/ProfileCard/ProfileCard";
 
 import { useSession, signIn, signOut } from "next-auth/react";
@@ -39,7 +39,7 @@ export default function Profile() {
 
 export async function getServerSideProps(context) {
     const session = await unstable_getServerSession(context.req, context.res, authOptions)
-
+    
     if (!session) {
         return {
             redirect: {

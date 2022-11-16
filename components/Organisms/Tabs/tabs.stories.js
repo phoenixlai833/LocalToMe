@@ -1,4 +1,4 @@
-import Tabs from "./tabs";
+import Tabs from "./index";
 
 export default {
    title: 'Organisms/Tabs',
