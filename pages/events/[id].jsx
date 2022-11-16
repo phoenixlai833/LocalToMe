@@ -1,5 +1,5 @@
 // import SingleEvent from "../../components/SingleEvent";
-import { getEvent, deleteEvent, getUser } from "../../server/database";
+import { getEvent, deleteEvent, getUser, getUsers } from "../../server/database";
 import { useState } from "react";
 import { useRouter } from 'next/router';
 import React from "react";
@@ -13,8 +13,14 @@ import EventCategoryTag from "../../components/Atoms/EventCategoryTag";
 import Link from "next/link";
 import SharePost from "../../components/Molecules/SharePost";
 import { collection, query, where } from "firebase/firestore";
-import {Colours} from "../../styles/globals";
+import { Colours } from "../../styles/globals";
 // import { Colours } from "../../../styles/globals";
+import FavoriteBtn from "../../components/Atoms/FavoriteBtn";
+import axios from "axios";
+import { useSession, signIn, signOut } from "next-auth/react";
+import { authOptions } from '../api/auth/[...nextauth].js';
+import { unstable_getServerSession } from "next-auth/next";
+
 
 
 const EventImageBlock = styled.div`
@@ -140,7 +146,8 @@ const CancelBtn = styled.button`
 
 
 
-export default function Event({ event }) {
+export default function Event({ event, user }) {
+  const { data: session } = useSession()
 
   const [navValue, setNavValue] = useState(1);
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -159,6 +166,8 @@ export default function Event({ event }) {
     eventTime = `${startDay} at ${startTime} - ${endDay} at ${endTime}`
   }
 
+
+
   const dateAndTime = eventTime;
   // const dateAndTime = new Date(event.start).toLocaleString("default", {
   //   dateStyle: "long",
@@ -168,7 +177,6 @@ export default function Event({ event }) {
   const handleDelete = (singleEventId) => async (e) => {
     {
       e.preventDefault();
-      console.log(singleEventId);
       deleteEvent(singleEventId);
       router.push("/community");
     }
@@ -187,7 +195,27 @@ export default function Event({ event }) {
     setShare(true);
   }
 
+  const ifFavorite = user?.favorite.event.filter((singleEvent) => singleEvent.id === event.id).length > 0 ? true : false;
+  const [favorite, setFavorite] = useState(ifFavorite);
 
+
+  function handleOnClick() {
+    if (!session) {
+      router.push('/auth/signin');
+    } else {
+      axios.put('/api/favorite', {
+        favorite: favorite,
+        type: "event",
+        userId: user.id,
+        itemId: event.id
+      }).then((res) => {
+        console.log("addFav?", res)
+        setFavorite(!favorite)
+
+      })
+    }
+
+  }
 
   return (
     <div>
@@ -197,8 +225,8 @@ export default function Event({ event }) {
         <EventImage src={event.eventImage} alt={event.eventName} />
         <FunctionsBox>
           <img src="../calenderIcon.png" alt="calendar icon" />
-          <img src="../shareLinkIcons.png" alt="calendar icon" button onClick={onShare} />
-          <img src="../favoriteIcon.png" alt="calendar icon" />
+          <img src="../shareLinkIcons.png" alt="calendar icon" onClick={onShare} />
+          <FavoriteBtn favorite={favorite} onClick={handleOnClick} />
         </FunctionsBox>
       </EventImageBlock>
 
@@ -272,13 +300,25 @@ export default function Event({ event }) {
   )
 }
 
-export async function getServerSideProps({ params }) {
-  const req = await getEvent(params.id);
+export async function getServerSideProps(context) {
+  const session = await unstable_getServerSession(context.req, context.res, authOptions)
+  const req = await getEvent(context.params.id);
   const event = JSON.parse(JSON.stringify(req));
 
-  return {
-    props: { event },
-  };
+  if (!session) {
+    return {
+      props: { event },
+    }
+  } else {
+
+    const users = await getUsers();
+    const userId = users.filter((user) => user.email === session.user.email)[0].id;
+    const userData = await getUser(userId);
+    const user = JSON.parse(JSON.stringify(userData));
+
+    return {
+      props: { event, session, user },
+    };
+
+  }
 }
-
-

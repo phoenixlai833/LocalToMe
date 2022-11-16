@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import FloatingActionButton from '../../components/Atoms/FloatButton';
 import AvatarPopup from "../../components/Organisms/AvatarPopup";
-// import Tabs from "../../components/Organisms/Tabs/tabs";
+// import Tabs from "../../components/Organisms/Tabs";
 import ProfileCard from "../../components/Organisms/ProfileCard/ProfileCard";
 import { getEventsWithUser } from "../../server/database";
 import { useSession } from "next-auth/react";
@@ -128,7 +128,8 @@ export async function getServerSideProps(context) {
         }
     }
 
-    const events = await getEventsWithUser(session.user.email);
+    const eventsData = await getEventsWithUser(session.user.email);
+    const events = JSON.parse(JSON.stringify(eventsData));
     // console.log(events)
 
     return {
@@ -137,3 +138,6 @@ export async function getServerSideProps(context) {
         },
     }
 }
+
+
+{/* <Tabs tabId={tab} tabList={tabList} onChangeTab={handleChangeTab} /> */ }

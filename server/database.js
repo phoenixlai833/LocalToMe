@@ -165,9 +165,7 @@ export async function getNews(id) {
   const newsSnap = await getDoc(newsRef);
   const fileUrl = newsSnap.data().newsImage;
   let fileName = decodeURIComponent(fileUrl.split('/').pop().split('?')[0])
-  // console.log(fileName)
   const news = { id, ...newsSnap.data(), fileName };
-  // console.log('hi', news)
   return news;
 }
 
@@ -247,17 +245,61 @@ export async function getUser(id) {
   const userRef = doc(db, "users", id);
   const userSnap = await getDoc(userRef);
   const baseUser = userSnap.data();
-  baseUser.favorite.events = await Promise.all(baseUser.favorite.events.map(async (eventRef) => {
+  baseUser.favorite.event = await Promise.all(baseUser.favorite.event.map(async (eventRef) => {
     const eventObj = await getEvent(eventRef.id);
     return eventObj
   }))
 
-  baseUser.favorite.locations = await Promise.all(baseUser.favorite.locations.map(async (locationRef) => {
-    const locationObjSnap = await getDoc(locationRef);
-    const locationObj = locationObjSnap.data();
-    return { id: locationObjSnap.id, ...locationObj }
+  baseUser.favorite.location = await Promise.all(baseUser.favorite.location.map(async (locationRef) => {
+    const locationObj = await getFoodBank(locationRef.id);
+    // const locationObjSnap = await getDoc(locationRef);
+    // const locationObj = locationObjSnap.data();
+    return { id: locationObj.id, ...locationObj }
   }))
 
+  // baseUser.favorite.foodbank = await Promise.all(baseUser.favorite.foodbank.map(async (locationRef) => {
+  //   const locationObjSnap = await getDoc(locationRef);
+  //   const locationObj = locationObjSnap.data();
+  //   return { id: locationObjSnap.id, ...locationObj }
+  // }))
   const user = { id, ...baseUser };
   return user;
 }
+
+
+
+//add favorite event/location to user
+export async function addFavorite(userId, type, itemId) { //type have to be "event" or "location"
+  const userRef = doc(db, "users", userId);
+  const userSnap = await getDoc(userRef);
+  const baseUser = userSnap.data();
+  const itemRef = doc(db, type, itemId);
+  baseUser.favorite[type].push(itemRef);
+  await updateDoc(userRef, baseUser);
+  return baseUser;
+}
+// addFavorite(1, "event", itemId)
+
+// if (type === "event") {
+//   baseUser.favorite.event.push(itemRef);
+// } else if (type === "foodbank") {
+//   baseUser.favorite.foodbank.push(itemRef);
+// }
+
+
+export async function deleteFavorite(userId, type, itemId) {
+  const userRef = doc(db, "users", userId);
+  const userSnap = await getDoc(userRef);
+  const baseUser = userSnap.data();
+  baseUser.favorite[type] = baseUser.favorite[type].filter(item => item.id != itemId);
+  await updateDoc(userRef, baseUser);
+  return baseUser;
+}
+
+
+
+// if (type === "event") {
+//   baseUser.favorite.event.filter(item => item.id != itemId);
+// } else if (type === "foodbank") {
+//   baseUser.favorite.foodbank.filter(item => item.id != itemId);
+// }
