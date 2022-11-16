@@ -9,6 +9,7 @@ import TopBanner from "/components/Molecules/TopBanner";
 import UserOfPost from "/components/Molecules/UserOfPost";
 import EventCategoryTag from "/components/Atoms/EventCategoryTag";
 import styled from "styled-components";
+import { useSession } from "next-auth/react";
 
 const EventImageBlock = styled.div`
   position: relative;
@@ -63,6 +64,8 @@ export default function EventPreview({
   onCancel,
   onConfirm,
 }) {
+  const { data: session } = useSession();
+
   const startDay = new Date(event.start).toLocaleString("default", { dateStyle: "long" })
   const startTime = new Date(event.start).toLocaleString("default", { timeStyle: "short" })
   const endDay = new Date(event.end).toLocaleString("default", { dateStyle: "long" })
@@ -98,7 +101,7 @@ export default function EventPreview({
         ]}
         icon={["location_on", "call", "access_time"]}
       />
-      <UserOfPost />
+      <UserOfPost userImg={session.user.image} name={session.user.name} />
       <EventDescription>
         <b>About:</b>
         <p style={{ fontSize: "14px" }}>{event.eventContent}</p>

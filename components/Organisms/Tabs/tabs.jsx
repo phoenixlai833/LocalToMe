@@ -31,20 +31,20 @@ const Tab = styled.div`
 `;
 
 
-export default function Tabs({lefttxt='Event', tabId, righttxt='News' }) {
+export default function Tabs({ lefttxt = 'Event', tabId, righttxt = 'News', onClick }) {
 
-    const [tab, setTab] = useState(tabId);
+  const [tab, setTab] = useState(tabId);
 
-    const handleChangeTab = (e) => {
-        if (e.target.id) {
-          setTab(+e.target.id);
-        }
-      };
+  const handleChangeTab = (e) => {
+    if (e.target.id) {
+      setTab(+e.target.id);
+    }
+  };
 
-    return <Tab onClick={handleChangeTab}>
-            <EventTab id="0" tabId={tab}>{lefttxt}</EventTab>
-            <NewTab id="1" tabId={tab}>{righttxt}</NewTab>
-        </Tab>
+  return <Tab onClick={onClick}>
+    <EventTab id="0" tabId={tab}>{lefttxt}</EventTab>
+    <NewTab id="1" tabId={tab}>{righttxt}</NewTab>
+  </Tab>
 
 }
 
