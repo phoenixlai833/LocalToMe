@@ -51,7 +51,7 @@ export default function Favorites({ user }) {
             <FavCard key={singleLocation.id} id={singleLocation.id} type="location" href={`/foodBank/${singleLocation.id}`} img={singleLocation.foodBank_Image} txt="Food Bank" title={singleLocation.program_name} location={singleLocation.location_address} onUnfavorite={handleUnfavorite} backgroundColor="#108928" txtColor="#FFFFFF" />
         ))
 
-        const allList = locationList.concat(eventList)
+        const allList = locationList.concat(eventList);
 
 
 
@@ -66,7 +66,6 @@ export default function Favorites({ user }) {
         const handleChangeTab = (tabId) => {
             setTab(tabId)
         };
-
 
         return (
             <>
