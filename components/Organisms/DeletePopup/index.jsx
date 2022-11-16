@@ -81,11 +81,11 @@ export default function DeletePopup({ eventId, hidePopup }) {
         }
     };
 
-    const hidePopup = (e) => {
-        e.preventDefault();
-        console.log("hide")
-        setPosition("static")
-    }
+    // const hidePopup = (e) => {
+    //     e.preventDefault();
+    //     console.log("hide")
+    //     setPosition("static")
+    // }
 
     const singleEventComponent = (
         <div>
