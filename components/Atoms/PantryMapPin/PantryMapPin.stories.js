@@ -2,7 +2,7 @@ import PantryMapPin from "./index";
 import { InstantSearch } from "react-instantsearch-hooks-web";
 
 export default {
-    title: "PantryMapPin",
+    title: "Atoms/PantryMapPin",
     component: PantryMapPin
 }
 

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { useEffect, useState } from "react";
 
-export const EventTab = styled.p`
+export const AllTab = styled.p`
   cursor: pointer;
   text-decoration: underline
     ${(props) => (props.tabId == props.id ? "#FFB800" : "transparent")};
@@ -12,7 +12,7 @@ export const EventTab = styled.p`
   margin-top: 8px;
 `;
 
-export const NewTab = styled.p`
+export const FavorTab = styled.p`
   cursor: pointer;
   text-decoration: underline
     ${(props) => (props.tabId == props.id ? "#FFB800" : "transparent")};
@@ -31,20 +31,14 @@ const Tab = styled.div`
 `;
 
 
-export default function Tabs({lefttxt='Event', tabId, righttxt='News' }) {
+export default function Tabs({ tab, tabList, onChangeTab }) {
+  const tabComponents = tabList.map((singleTab, index) => <FavorTab key={index} id={index} tabId={tab} onClick={() => onChangeTab(index)}>{singleTab}</FavorTab>)
 
-    const [tab, setTab] = useState(tabId);
+  return <Tab>
+    {tabComponents}
 
-    const handleChangeTab = (e) => {
-        if (e.target.id) {
-          setTab(+e.target.id);
-        }
-      };
 
-    return <Tab onClick={handleChangeTab}>
-            <EventTab id="0" tabId={tab}>{lefttxt}</EventTab>
-            <NewTab id="1" tabId={tab}>{righttxt}</NewTab>
-        </Tab>
+  </Tab>
 
 }
 

@@ -41,7 +41,7 @@ export function EventHits() {
 export function NewsHits({ allNews }) {
   const { hits } = useHits();
 
-  // return <AllNews news={hits} />
+  // return <AllNews allNews={hits} />
   return <AllNews allNews={allNews} />;
 }
 
@@ -119,8 +119,7 @@ const NewTab = styled.p`
   margin-top: 8px;
 `;
 
-export default function Community({ allNews, tabId }) {
-
+export default function Community({ allNews, tabId, usersData }) {
   const [tab, setTab] = useState(tabId);
   // const [isAdd, setIsAdd] = useState(false);
 
@@ -170,11 +169,16 @@ export async function getServerSideProps(context) {
   const tabId = context.query.tabId || 0;
 
   const req = await getAllNews();
-  // console.log("req", req);
+  const allNews = JSON.parse(JSON.stringify(req))
+
+  // const users = await getUsers()
+  // const usersData = JSON.parse(JSON.stringify(users));
+
   return {
     props: {
-      allNews: JSON.parse(JSON.stringify(req)),
+      allNews,
       tabId,
+
     },
   };
 }

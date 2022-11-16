@@ -1,11 +1,11 @@
-import SharePost from ".";
+import SharePost from "./index";
 
 
 export default {
-    title: 'SharePost',
+    title: 'Molecules/SharePost',
     component: SharePost,
 };
 
-const shareUrl = 'https://google/ghhhjjjjhhhjhj.com';
+const shareUrl = 'https://google.com';
 
-export const Template = () => <SharePost shareUrl={shareUrl} />;
+export const Template = () => <SharePost shareUrl={shareUrl} share={true} closeShare />;

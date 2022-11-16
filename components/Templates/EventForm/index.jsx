@@ -127,13 +127,13 @@ export default function EventForm({
           onChange={handleChangeEventName}
           required={true}
         />
-        <br></br>
+        {/* <br></br>
         <ShortTextInput
           label="Event Host"
           value={event.eventCreator}
           onChange={handleChangeEventCreator}
           required={true}
-        />
+        /> */}
         <br></br>
         <ShortTextInput
           label="Phone Number"

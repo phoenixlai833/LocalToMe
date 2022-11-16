@@ -11,6 +11,14 @@ import GetDirectionGreenBtn from '../../components/Atoms/GetDirectionGreenBtn';
 import styled from 'styled-components';
 import { FunctionsBox } from '../events/[id]';
 import SharePost from "../../components/Molecules/SharePost";
+import FavoriteBtn from "../../components/Atoms/FavoriteBtn";
+import axios from "axios";
+import { useSession, signIn, signOut } from "next-auth/react";
+import { authOptions } from '../api/auth/[...nextauth].js';
+import { unstable_getServerSession } from "next-auth/next";
+import { getUsers, getUser } from "../../server/database";
+
+
 
 const EventImageBlock = styled.div`
     position: relative;
@@ -48,8 +56,8 @@ left: 50%;
 transform: translate(-50%, -50%);
 `
 
-export default function FoodBank({ d }) {
-
+export default function FoodBank({ d, user }) {
+    const { data: session } = useSession()
     const [shareUrl, setShareUrl] = useState('');
     const [share, setShare] = useState(false);
     const [navValue, setNavValue] = useState(2);
@@ -75,6 +83,29 @@ export default function FoodBank({ d }) {
     }
 
 
+    const ifFavorite = user.favorite.location.filter((singleLocation) => singleLocation.id === d.id).length > 0 ? true : false;
+    const [favorite, setFavorite] = useState(ifFavorite);
+
+
+    function handleOnClick() {
+        if (!session) {
+            router.push('/auth/signin');
+        } else {
+            axios.put('/api/favorite', {
+                favorite: favorite,
+                type: "location",
+                userId: user.id,
+                itemId: d.id
+            }).then((res) => {
+                console.log("addFav?", res)
+                setFavorite(!favorite)
+
+            })
+        }
+
+    }
+
+
     return (
         <Wrapper direction="column" gap="10px" sx={{ alignItems: "normal" }}>
             {/* can place d.program_name with d.organization_name */}
@@ -83,8 +114,8 @@ export default function FoodBank({ d }) {
                 <EventImage src={d.foodBank_Image} alt={d.program_name} />
                 <FunctionsBox>
                     <img src="../calenderIcon.png" alt="calendar icon" />
-                    <img src="../shareLinkIcons.png" alt="calendar icon" button onClick={onShare} />
-                    <img src="../favoriteIcon.png" alt="calendar icon" />
+                    <img src="../shareLinkIcons.png" alt="calendar icon" onClick={onShare} />
+                    <FavoriteBtn favorite={favorite} onClick={handleOnClick} />
                 </FunctionsBox>
             </EventImageBlock>
 
@@ -130,11 +161,16 @@ export default function FoodBank({ d }) {
     // })
 }
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps(context) {
+    const session = await unstable_getServerSession(context.req, context.res, authOptions)
 
-    const req = await getFoodBank(params.id)
+    const req = await getFoodBank(context.params.id)
 
     const d = JSON.parse(JSON.stringify(req));
+    const users = await getUsers();
+    const userId = users.filter((user) => user.email === session.user.email)[0].id;
+    const userData = await getUser(userId);
+    const user = JSON.parse(JSON.stringify(userData));
     // const data = [oneFoodBankObj._document.data.value.mapValue.fields]
 
     // // set all foodbank data in firestore
@@ -148,7 +184,14 @@ export async function getServerSideProps({ params }) {
     //     await addFoodBank(fbWImage);
     // })
 
+    if (!session) {
+        return {
+            props: { d },
+        };
+    }
+
+
     return {
-        props: { d },
+        props: { d, session, user },
     }
 }

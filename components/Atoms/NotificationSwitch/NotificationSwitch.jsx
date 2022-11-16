@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { Switch } from "@mui/material"
+// import { createMuiTheme } from '@material-ui/core/styles';
 
 const Notif = styled.div`
 display:flex;
@@ -11,10 +12,21 @@ max-width:100%;
 height: 50px;
 `
 
-export default function NotificationSwitch({txt='notfication'}) {
+// const theme = createMuiTheme({
+//     overrides: {
+//         MuiSwitch: { // Name of the component ⚛️ / style sheet
+//             root: { // Name of the rule
+//                 color: 'white', // Some CSS
+//             },
+//         },
+//     },
+// });
+
+export default function NotificationSwitch({ txt = 'notfication' }) {
+
     return <>
         <Notif>
-            {txt} <Switch />
+            {txt} <Switch sx={{ color: '#109125' }} />
         </Notif>
     </>
 }

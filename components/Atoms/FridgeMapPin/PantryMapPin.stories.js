@@ -2,7 +2,7 @@ import FridgeMapPin from "./index";
 import { InstantSearch } from "react-instantsearch-hooks-web";
 
 export default {
-    title: "FridgeMapPin",
+    title: "Atoms/FridgeMapPin",
     component: FridgeMapPin
 }
 

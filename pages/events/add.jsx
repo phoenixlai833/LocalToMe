@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { storage } from "../../firebase/clientApp";
+import React, { useEffect, useState } from "react";
+import { db, app, storage } from "../../firebase/clientApp";
 import { getAllCategories } from "../../server/database";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { collection, getDocs, addDoc } from "firebase/firestore";
@@ -7,6 +7,9 @@ import { collection, getDocs, addDoc } from "firebase/firestore";
 // import Image from `next/image`;
 import EventForm from "../../components/Templates/EventForm";
 import EventPreview from "../../components/Templates/EventPreview";
+import { useSession } from "next-auth/react";
+import { authOptions } from '../api/auth/[...nextauth].js';
+import { unstable_getServerSession } from "next-auth/next";
 import axios from "axios";
 import GooglePlacesAutocomplete, {
   geocodeByAddress,
@@ -14,12 +17,14 @@ import GooglePlacesAutocomplete, {
 } from "react-google-places-autocomplete";
 
 export default function NewEvent({ categoriesList }) {
+  const { data: session } = useSession();
+  const userId = session.user.id;
   const [event, setEvent] = useState({
     eventName: "",
     eventImage:
       "https://firebasestorage.googleapis.com/v0/b/localtome-f84e5.appspot.com/o/foodBankImageTest.jpg?alt=media&token=37d44b9b-ac9d-48d7-8556-693c9a002fb0",
     eventContent: "",
-    eventCreatorId: 1,
+    eventCreatorId: userId,
     start: new Date(),
     end: new Date(),
     eventLocation: "",
@@ -128,7 +133,7 @@ export default function NewEvent({ categoriesList }) {
     // console.log(event)
     const postEvent = {
       eventContent: event.eventContent,
-      eventCreatorId: 1,
+      eventCreatorId: userId,
       start: event.start,
       end: event.end,
       eventImage: event.eventImage,
@@ -136,7 +141,8 @@ export default function NewEvent({ categoriesList }) {
       eventName: event.eventName,
       eventContactPhone: event.eventContactPhone,
       eventTags: event.eventTags,
-    };
+      eventUpdateDate: new Date()
+    }
 
     geocodeByAddress(postEvent.eventLocation)
       .then((results) => getLatLng(results[0]))
@@ -187,13 +193,21 @@ export async function getServerSideProps(context) {
   // const eventData = await getEvents();
   // const eventList = JSON.parse(JSON.stringify(eventData));
 
-  // const eventCategoriesData = await getEventCategories();
-  // const eventCategories = JSON.parse(JSON.stringify(eventCategoriesData));
+  const session = await unstable_getServerSession(context.req, context.res, authOptions)
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/auth/signin',
+        permanent: false,
+      },
+    }
+  }
 
   const categoriesData = await getAllCategories();
   const categoriesList = JSON.parse(JSON.stringify(categoriesData));
 
   return {
-    props: { categoriesList }, // will be passed to the page component as props
+    props: { categoriesList } // will be passed to the page component as props
   };
 }
