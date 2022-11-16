@@ -16,6 +16,7 @@ const FavorPage = styled.div`
 background-color: #CDECC2;
 height: 100vh;
 width: 100vw;
+margin-bottom: 5%;
 `
 
 const Text = styled.h1`
@@ -75,6 +76,7 @@ export default function Favorites({ user }) {
                 {tabContents[tab].component || <Text>There are no favorites yet</Text>}
                 <NavBar value={3} />
             </FavorPage>
+
         </>
     )
 }

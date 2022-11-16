@@ -104,14 +104,15 @@ export default function EditEvent({ defaultEvent, categoriesList }) {
     const putEvent = {
       id: defaultEvent.id,
       eventContent: event.eventDescription,
-      eventCreatorId: 1,
+      eventCreatorId: defaultEvent.eventCreatorId,
       start: event.start,
       end: event.end,
       eventImage: event.eventImage,
       eventLocation: event.eventLocation,
       eventName: event.eventName,
       eventContactPhone: event.eventContactPhone,
-      eventTags: event.eventTags
+      eventTags: event.eventTags,
+      eventUpdateDate: new Date()
     }
 
     // console.log('lul', typeof event.start)
@@ -156,9 +157,9 @@ export default function EditEvent({ defaultEvent, categoriesList }) {
 }
 
 export async function getServerSideProps(context) {
+
   const eventData = await getEvent(context.params.id);
   const defaultEvent = JSON.parse(JSON.stringify(eventData));
-
 
   const categoriesData = await getAllCategories();
   const categoriesList = JSON.parse(JSON.stringify(categoriesData));

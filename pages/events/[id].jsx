@@ -195,7 +195,7 @@ export default function Event({ event, user }) {
     setShare(true);
   }
 
-  const ifFavorite = user.favorite.event.filter((singleEvent) => singleEvent.id === event.id).length > 0 ? true : false;
+  const ifFavorite = user?.favorite.event.filter((singleEvent) => singleEvent.id === event.id).length > 0 ? true : false;
   const [favorite, setFavorite] = useState(ifFavorite);
 
 
@@ -302,24 +302,23 @@ export default function Event({ event, user }) {
 
 export async function getServerSideProps(context) {
   const session = await unstable_getServerSession(context.req, context.res, authOptions)
-
   const req = await getEvent(context.params.id);
   const event = JSON.parse(JSON.stringify(req));
-  const users = await getUsers();
-  const userId = users.filter((user) => user.email === session.user.email)[0].id;
-  const userData = await getUser(userId);
-  const user = JSON.parse(JSON.stringify(userData));
-
 
   if (!session) {
     return {
       props: { event },
+    }
+  } else {
+
+    const users = await getUsers();
+    const userId = users.filter((user) => user.email === session.user.email)[0].id;
+    const userData = await getUser(userId);
+    const user = JSON.parse(JSON.stringify(userData));
+
+    return {
+      props: { event, session, user },
     };
+
   }
-
-  return {
-    props: { event, session, user },
-  };
-
 }
-

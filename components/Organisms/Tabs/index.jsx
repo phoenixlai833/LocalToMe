@@ -36,6 +36,8 @@ export default function Tabs({ tab, tabList, onChangeTab }) {
 
   return <Tab>
     {tabComponents}
+
+
   </Tab>
 
 }

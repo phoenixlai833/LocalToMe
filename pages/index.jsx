@@ -134,7 +134,7 @@ export default function Home({ events, allNews }) {
 
         <FirstSection>
           <div>
-            {session ? <button onClick={() => signOut()}>Sign out</button> : <button onClick={() => signIn()}>Sign In</button>}
+            {!session ? <button onClick={() => signIn()}>Sign In</button> : null}
 
             <SubHeader>Good Morning,</SubHeader>
             <h1 style={{ color: "green", lineHeight: "0", marginBottom: "4%" }}>{session ? session.user.name.split(" ")[0] : "Slayerina"}</h1>

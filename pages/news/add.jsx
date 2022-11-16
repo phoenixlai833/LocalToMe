@@ -4,12 +4,18 @@ import { getAllCategories } from "../../server/database";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import TopBanner from "../../components/Molecules/TopBanner";
 import NewsForm from "../../components/Organisms/NewsForm";
+import { useSession } from "next-auth/react";
+import { authOptions } from '../api/auth/[...nextauth].js';
+import { unstable_getServerSession } from "next-auth/next";
 import axios from "axios";
 
 export default function NewNews({ categoriesList }) {
+    const { data: session } = useSession();
+    const userId = session.user.id;
+
     const [news, setNews] = useState({
         newsTitle: "",
-        newsCreatorId: "Clover Food Bank",
+        newsCreatorId: userId,
         newsAvatar: "",
         newsDateCreated: new Date(),
         newsContent: undefined,
@@ -67,7 +73,7 @@ export default function NewNews({ categoriesList }) {
         console.log(news);
         const postnews = {
             newsTitle: news.newsTitle,
-            newsCreatorId: 1,
+            newsCreatorId: userId,
             newsAvatar: "",
             newsDateCreated: new Date(),
             newsContent: news.newsContent,
@@ -101,6 +107,17 @@ export default function NewNews({ categoriesList }) {
 }
 
 export async function getServerSideProps(context) {
+    const session = await unstable_getServerSession(context.req, context.res, authOptions)
+
+    if (!session) {
+        return {
+            redirect: {
+                destination: '/auth/signin',
+                permanent: false,
+            },
+        }
+    }
+
     const categoriesData = await getAllCategories();
     const categoriesList = JSON.parse(JSON.stringify(categoriesData));
 

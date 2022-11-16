@@ -40,6 +40,22 @@ export async function getEvents() {
   return events;
 }
 
+export async function getEventsWithUser(userEmail) {
+  const eventCollection = collection(db, "event");
+  const eventSnap = await getDocs(eventCollection);
+  let events = eventSnap.docs.map(async (doc) => {
+    let id = doc.id;
+    let data = doc.data();
+    const eventCreatorSnap = await getDoc(data.eventCreatorId)
+    const eventCreator = { id: eventCreatorSnap.id, ...eventCreatorSnap.data() };
+    return { id, ...data, eventCreatorId: eventCreator };
+  })
+  events = await Promise.all(events)
+  events = events.filter((e) => e.eventCreatorId.email == userEmail)
+  // console.log(events)
+  return events;
+}
+
 //get event by id with the creator info
 export async function getEvent(id) {
   const eventRef = doc(db, "event", id);
@@ -74,6 +90,8 @@ export async function getEvent(id) {
 
 export async function addEvent(event) {
   const eventCollection = collection(db, "event");
+  const userRef = doc(db, "users", event.eventCreatorId);
+  event = { ...event, eventCreatorId: userRef }
   const docRef = await addDoc(eventCollection, event);
   return docRef;
 }
@@ -154,6 +172,8 @@ export async function getNews(id) {
 
 export async function addNews(news) {
   const newsCollection = collection(db, "news");
+  const userRef = doc(db, "users", news.newsCreatorId);
+  news = { ...news, newsCreatorId: userRef }
   const docRef = await addDoc(newsCollection, news);
   return docRef.id;
 }
