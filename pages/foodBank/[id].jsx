@@ -2,17 +2,15 @@ import Head from 'next/head';
 import Link from 'next/link'
 import { useState } from "react";
 import { getFoodBank, addFoodBank } from '../../server/database';
-import NavBar from '../../components/NavBar';
-import TopBanner from '../../components/TopBanner';
-import TextBubble from '../../components/TextBubble';
+import NavBar from '../../components/Organisms/NavBar';
+import TopBanner from '../../components/Molecules/TopBanner';
+import TextBubble from '../../components/Molecules/TextBubble';
 import { Wrapper, Container, FlexBox } from '../../styles/globals';
-import { Filter, EventFilter } from '../../components/Filters';
-import GetDirectionGreenBtn from '../../components/GetDirectionGreenBtn';
-import AddToCalander from "../../components/AddToCalander";
-import ShareLink from "../../components/ShareLink";
-import FavoriteBtn from "../../components/FavoriteBtn";
+import { Filter, EventFilter } from '../../components/Atoms/Filters';
+import GetDirectionGreenBtn from '../../components/Atoms/GetDirectionGreenBtn';
 import styled from 'styled-components';
 import { FunctionsBox } from '../events/[id]';
+import SharePost from "../../components/Molecules/SharePost";
 
 const EventImageBlock = styled.div`
     position: relative;
@@ -43,9 +41,17 @@ const FilterDiv = styled.div`
         grid-template-rows:1fr 1fr 1fr;
     }
 `
+const Sharebox = styled.div`
+position: fixed;
+top: 40%;
+left: 50%;
+transform: translate(-50%, -50%);
+`
 
 export default function FoodBank({ d }) {
 
+    const [shareUrl, setShareUrl] = useState('');
+    const [share, setShare] = useState(false);
     const [navValue, setNavValue] = useState(2);
     var locationInfo = [];
     var locationIcons = [];
@@ -63,6 +69,11 @@ export default function FoodBank({ d }) {
         if (d.signup_phone_number) { signUp.push(d.signup_phone_number); signUpIcons.push("call") };
     };
 
+    function onShare() {
+        setShareUrl(window.location);
+        setShare(true);
+    }
+
 
     return (
         <Wrapper direction="column" gap="10px" sx={{ alignItems: "normal" }}>
@@ -71,9 +82,9 @@ export default function FoodBank({ d }) {
             <EventImageBlock >
                 <EventImage src={d.foodBank_Image} alt={d.program_name} />
                 <FunctionsBox>
-                    <AddToCalander />
-                    <ShareLink />
-                    <FavoriteBtn />
+                    <img src="../calenderIcon.png" alt="calendar icon" />
+                    <img src="../shareLinkIcons.png" alt="calendar icon" button onClick={onShare} />
+                    <img src="../favoriteIcon.png" alt="calendar icon" />
                 </FunctionsBox>
             </EventImageBlock>
 
@@ -90,7 +101,7 @@ export default function FoodBank({ d }) {
             </FilterDiv>
 
             <GetDirectionGreenBtn address={d.location_address} onMap={false} />
-            
+
             <FlexBox pd="50px" />
             {/* {d.organization_name && (<h2>Organization Name: {d.organization_name}</h2>)}
             {d.program_population_served && (<h3>Population Served: {d.program_population_served}</h3>)}
@@ -107,6 +118,11 @@ export default function FoodBank({ d }) {
             {d.provides_meals && (<p>providesMeals: {d.provides_meals}</p>)}
             {d.description && (<><h3>Description:</h3><p>{d.description}</p></>)}
         {d.last_updated_date && (<p>lastUpdatedDate: {d.last_updated_date}</p>)} */}
+
+
+            <Sharebox>
+                <SharePost shareUrl={shareUrl} share={share} closeShare={() => { setShare(false) }} />
+            </Sharebox>
 
             <NavBar value={2} />
         </Wrapper>

@@ -1,29 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { db, app, storage } from "../../firebase/clientApp";
-import {
-  getEvents,
-  getEvent,
-  addEvent,
-  getEventCategories,
-} from "../../server/database";
+import { getAllCategories } from "../../server/database";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { collection, getDocs, addDoc } from "firebase/firestore";
 // import Event from "../../components/Event";
 // import Image from `next/image`;
-import DeletePopup from "../../components/DeletePopup";
-import TimeInput from "../../components/TimeInput";
-import NavBar from "../../components/NavBar";
-import EventForm from "../../components/EventForm";
-import EventPreview from "../../components/EventPreview";
+import DeletePopup from "../../components/Organisms/DeletePopup";
+import TimeInput from "../../components/Molecules/TimeInput";
+import NavBar from "../../components/Organisms/NavBar";
+import EventForm from "../../components/Templates/EventForm";
+import EventPreview from "../../components/Templates/EventPreview";
+import { useSession } from "next-auth/react";
+import { authOptions } from '../api/auth/[...nextauth].js';
+import { unstable_getServerSession } from "next-auth/next";
 import axios from "axios";
 
-export default function NewEvent({ eventList, eventCategories }) {
+export default function NewEvent({ categoriesList }) {
+  const { data: session } = useSession();
+  const userId = session.user.id;
   const [event, setEvent] = useState({
     eventName: "",
     eventImage:
       "https://firebasestorage.googleapis.com/v0/b/localtome-f84e5.appspot.com/o/foodBankImageTest.jpg?alt=media&token=37d44b9b-ac9d-48d7-8556-693c9a002fb0",
     eventContent: "",
-    eventCreatorId: 1,
+    eventCreatorId: userId,
     start: new Date(),
     end: new Date(),
     eventLocation: "",
@@ -33,6 +33,7 @@ export default function NewEvent({ eventList, eventCategories }) {
   });
 
   const [isPreview, setIsPreview] = useState(false);
+  const [imageURL, setImageURL] = useState(null);
   const [navValue, setNavValue] = useState(1);
 
   const handleTogglePreview = () => {
@@ -49,10 +50,16 @@ export default function NewEvent({ eventList, eventCategories }) {
 
   function handleChangeEventName(eventName) {
     setEvent({ ...event, eventName });
+    return;
   }
 
   function handleChangeEventCreator() {
     // setEventCreator()
+    return;
+  }
+
+  function handleChangeEventPhoneNumber(eventContactPhone) {
+    setEvent({ ...event, eventContactPhone });
     return;
   }
 
@@ -61,8 +68,8 @@ export default function NewEvent({ eventList, eventCategories }) {
     return;
   }
 
-  function handleChangeEventDescription(eventDescription) {
-    setEvent({ ...event, eventDescription });
+  function handleChangeEventContent(eventContent) {
+    setEvent({ ...event, eventContent });
   }
 
   // const onFileChange = async (e) => {
@@ -78,6 +85,8 @@ export default function NewEvent({ eventList, eventCategories }) {
     await uploadBytes(imgRef, img);
     const newImgRef = await getDownloadURL(imgRef);
     setEvent({ ...event, eventImage: newImgRef });
+    // console.log(img.name);
+    setImageURL(img.name);
   }
 
   function handleChangeEventStartDate(date) {
@@ -112,21 +121,29 @@ export default function NewEvent({ eventList, eventCategories }) {
     setEvent({ ...event, end: new Date(event.end.setHours(hour, minute)) });
   }
 
-  function handleChangeEventCategory(e) {
-    setEvent({ ...event, eventTags: [...eventTags, e.target.id] });
+  function handleChangeEventCategory(tags) {
+    console.log(...tags)
+    setEvent({ ...event, eventTags: [...tags] });
   }
 
-  function handleCancel() {}
+  function handleCancel() { }
 
-  function handleConfirm(event) {
+  function handleConfirm() {
+    // console.log(event)
     const postEvent = {
-      eventContent: event.eventDescription,
-      eventCreatorId: 1,
-      eventDate: event.start,
+      eventContent: event.eventContent,
+      eventCreatorId: userId,
+      start: event.start,
+      end: event.end,
       eventImage: event.eventImage,
       eventLocation: event.eventLocation,
       eventName: event.eventName,
+      eventContactPhone: event.eventContactPhone,
+      eventTags: event.eventTags,
+      eventUpdateDate: new Date()
     }
+
+    console.log('lul', typeof event.start)
 
     axios.post("/api/events", postEvent).then((res) => {
       window.location = `/events/${res.data}`
@@ -149,14 +166,17 @@ export default function NewEvent({ eventList, eventCategories }) {
           onTogglePreview={handleTogglePreview}
           onChangeEventName={handleChangeEventName}
           onChangeEventCreator={handleChangeEventCreator}
+          onChangeEventPhoneNumber={handleChangeEventPhoneNumber}
           onChangeEventLocation={handleChangeEventLocation}
-          onChangeEventDescription={handleChangeEventDescription}
+          onChangeEventDescription={handleChangeEventContent}
+          image={imageURL}
           onChangeEventImage={handleChangeEventImage}
           onChangeEventStartDate={handleChangeEventStartDate}
           onChangeEventStartTime={handleChangeEventStartTime}
           onChangeEventEndDate={handleChangeEventEndDate}
           onChangeEventEndTime={handleChangeEventEndTime}
-          onChangeEventCategory={handleChangeEventCategory}
+          onChangeEventTags={handleChangeEventCategory}
+          categoriesList={categoriesList}
         />
       )}
     </div>
@@ -164,13 +184,24 @@ export default function NewEvent({ eventList, eventCategories }) {
 }
 
 export async function getServerSideProps(context) {
-  const eventData = await getEvents();
-  const eventList = JSON.parse(JSON.stringify(eventData));
+  // const eventData = await getEvents();
+  // const eventList = JSON.parse(JSON.stringify(eventData));
 
-  const eventCategoriesData = await getEventCategories();
-  const eventCategories = JSON.parse(JSON.stringify(eventCategoriesData));
+  const session = await unstable_getServerSession(context.req, context.res, authOptions)
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/auth/signin',
+        permanent: false,
+      },
+    }
+  }
+
+  const categoriesData = await getAllCategories();
+  const categoriesList = JSON.parse(JSON.stringify(categoriesData));
 
   return {
-    props: { eventList, eventCategories }, // will be passed to the page component as props
+    props: { categoriesList } // will be passed to the page component as props
   };
 }

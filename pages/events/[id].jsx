@@ -1,227 +1,284 @@
 // import SingleEvent from "../../components/SingleEvent";
-import { getEvent, deleteEvent } from "../../server/database";
+import { getEvent, deleteEvent, getUser } from "../../server/database";
 import { useState } from "react";
 import { useRouter } from 'next/router';
-import NavBar from '../../components/NavBar';
 import React from "react";
-import GetDirectionGreenBtn from '../../components/GetDirectionGreenBtn';
-import TextBubble from '../../components/TextBubble';
-import TopBanner from '../../components/TopBanner';
-import UserOfPost from '../../components/UserOfPost';
-import EventCategoryTag from "../../components/EventCategoryTag";
 import styled from "styled-components";
-import AddToCalander from "../../components/AddToCalander";
-import ShareLink from "../../components/ShareLink";
-import FavoriteBtn from "../../components/FavoriteBtn";
+import NavBar from '../../components/Organisms/NavBar';
+import GetDirectionGreenBtn from '../../components/Atoms/GetDirectionGreenBtn';
+import TextBubble from '../../components/Molecules/TextBubble';
+import TopBanner from '../../components/Molecules/TopBanner';
+import UserOfPost from '../../components/Molecules/UserOfPost';
+import EventCategoryTag from "../../components/Atoms/EventCategoryTag";
 import Link from "next/link";
+import SharePost from "../../components/Molecules/SharePost";
+import { collection, query, where } from "firebase/firestore";
+import {Colours} from "../../styles/globals";
+// import { Colours } from "../../../styles/globals";
+
 
 const EventImageBlock = styled.div`
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 250px;
-
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 250px;
 `
 
-const EventImage = styled.img` 
-    position: relative;
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-`
+const EventImage = styled.img`
+  position: relative;
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+`;
 
 export const FunctionsBox = styled.div`
-    display:flex;
-    flex-direction: column;
-    gap: 10px;
-    position: absolute;
-    background-color: RGBA(255, 255, 255, 0.9);
-    width:40px ;
-    height: 110px;
-    position: absolute;
-    right:3%;
-    bottom: 10%;
-    border-radius: 20px;
-    padding: 8px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: absolute;
+  background-color: RGBA(255, 255, 255, 0.9);
+  width: 40px;
+  height: 110px;
+  position: absolute;
+  right: 3%;
+  bottom: 10%;
+  border-radius: 20px;
+  padding: 8px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+`;
 
 const EventDescription = styled.div`
-    margin: 30px;
-`
+
+  background:${Colours.background};
+   display:flex;
+   padding:12px 20px;
+   border-radius:15px;
+   align-items:left;
+   box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
+   max-width:85vw;
+   min-width:85vw;
+   flex-direction:column;
+   margin: 15px auto;
+
+`;
 
 const ExtraSpace = styled.div`
-    height: 50px;
-`
+  height: 50px;
+`;
 
 const AbsPos = styled.div`
 position: absolute;
 top: 25vh;
 left: 20vw;
 `
+
+const Sharebox = styled.div`
+position: fixed;
+top: 40%;
+left: 50%;
+transform: translate(-50%, -50%);
+`
 const DeleteCont = styled.div`
-background-color: #FFFFFF;
-width: 60vw;
-height: 30vh;
-padding: 2%;
-margin: auto;
-font-family: 'Rubik', sans-serif;
-text-align: center;
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-border-radius: 15px;
+  background-color: #ffffff;
+  width: 60vw;
+  height: 30vh;
+  padding: 2%;
+  margin: auto;
+  font-family: "Rubik", sans-serif;
+  text-align: center;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
 
-display: flex;
-flex-direction: column;
-justify-content: space-around;
-align-items: center;
-min-height: 210px;
-min-width: 320px;
-
-`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 210px;
+  min-width: 320px;
+`;
 const BtnCont = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: space-around;
-align-items: center;
-margin-bottom: 5%%;
-`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 5%%;
+`;
 
 const DeleteBtn = styled.button`
-background: #E24949;
-border-radius: 13px;
-height: 30px;
-width: 137px;
-left: 170px;
-top: 138px;
+  background: #e24949;
+  border-radius: 13px;
+  height: 30px;
+  width: 137px;
+  left: 170px;
+  top: 138px;
 
-font-size: 14px;
-line-height: 17px;
-text-align: center;
-border: 0px;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  border: 0px;
 
-color: #FFFFFF;
-margin: 2%;
+  color: #ffffff;
+  margin: 2%;
 `
 const CancelBtn = styled.button`
-background: #FFFFF;
-border: 2px solid #535353;
-border-radius: 13px;
-height: 30px;
-width: 137px;
-left: 170px;
-top: 138px;
+  background: #FFFFF;
+  border: 2px solid #535353;
+  border-radius: 13px;
+  height: 30px;
+  width: 137px;
+  left: 170px;
+  top: 138px;
 
-font-size: 14px;
-line-height: 17px;
-text-align: center;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
 
-color: #535353;
-margin: 2%
-`
+  color: #535353;
+  margin: 2%;
+`;
+
 
 
 export default function Event({ event }) {
 
-    const [navValue, setNavValue] = useState(1);
-    const [confirmDelete, setConfirmDelete] = useState(false);
-    const router = useRouter()
+  const [navValue, setNavValue] = useState(1);
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [shareUrl, setShareUrl] = useState('');
+  const [share, setShare] = useState(false);
+  const router = useRouter()
 
-    const time = event.eventDate.seconds
-    const date = new Date(time * 1000)
-    const eventTime = date.toLocaleString().split(',')[1]
-    const dateOfEvent = date.toLocaleString("default", { month: "long", day: "2-digit", year: "numeric" })
-    const dateAndTime = dateOfEvent + "," + eventTime
+  const startDay = new Date(event.start).toLocaleString("default", { dateStyle: "long" })
+  const startTime = new Date(event.start).toLocaleString("default", { timeStyle: "short" })
+  const endDay = new Date(event.end).toLocaleString("default", { dateStyle: "long" })
+  const endTime = new Date(event.end).toLocaleString("default", { timeStyle: "short" })
+  let eventTime;
+  if (startDay == endDay) {
+    startTime == endTime ? eventTime = `${startDay} at ${startTime}` : eventTime = `${startDay} at ${startTime} - ${endTime}`;
+  } else {
+    eventTime = `${startDay} at ${startTime} - ${endDay} at ${endTime}`
+  }
 
-    const handleDelete = (singleEventId) => async (e) => {
-        {
-            e.preventDefault();
-            console.log(singleEventId);
-            deleteEvent(singleEventId);
-            router.push('/community')
-        }
-    };
+  const dateAndTime = eventTime;
+  // const dateAndTime = new Date(event.start).toLocaleString("default", {
+  //   dateStyle: "long",
+  //   timeStyle: "short",
+  // })
 
-    function onDelete() {
-        setConfirmDelete(true);
-    };
-
-    function hidePopup() {
-        setConfirmDelete(false);
+  const handleDelete = (singleEventId) => async (e) => {
+    {
+      e.preventDefault();
+      console.log(singleEventId);
+      deleteEvent(singleEventId);
+      router.push("/community");
     }
+  };
+
+  function onDelete() {
+    setConfirmDelete(true);
+  }
+
+  function hidePopup() {
+    setConfirmDelete(false);
+  }
+
+  function onShare() {
+    setShareUrl(window.location);
+    setShare(true);
+  }
 
 
-    return (
+
+  return (
+    <div>
+      <TopBanner text={event.eventName} back={true} />
+
+      <EventImageBlock >
+        <EventImage src={event.eventImage} alt={event.eventName} />
+        <FunctionsBox>
+          <img src="../calenderIcon.png" alt="calendar icon" />
+          <img src="../shareLinkIcons.png" alt="calendar icon" button onClick={onShare} />
+          <img src="../favoriteIcon.png" alt="calendar icon" />
+        </FunctionsBox>
+      </EventImageBlock>
+
+      <TextBubble
+        text={[event.eventLocation, event.eventContactPhone, dateAndTime]}
+        icon={["location_on", "call", "access_time"]}
+      />
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          margin: "0 5%",
+        }}
+      >
+        <UserOfPost userImg={event.eventCreatorId.image} name={event.eventCreatorId.name} />
         <div>
-            <TopBanner text={event.eventName} back={true} />
-
-            <EventImageBlock >
-                <EventImage src={event.eventImage} alt={event.eventName} />
-                <FunctionsBox>
-                    <AddToCalander />
-                    <ShareLink />
-                    <FavoriteBtn />
-                </FunctionsBox>
-            </EventImageBlock>
-
-            <TextBubble text={[event.eventLocation, event.eventContactPhone, (eventTime != undefined ? dateAndTime : new Date(event.eventDate).toString())]} icon={['location_on', 'call', 'access_time']} />
-
-            <div style={{ display: "flex", justifyContent: "space-between", margin: "0 5%" }}>
-                <UserOfPost />
-                <div>
-                    <Link href={`/events/edit/${event.id}`}>
-                        <div style={{ display: "flex" }}>
-                            <img src="/Edit-icon.svg" alt="Edit Event" />
-                            &nbsp;
-                            <p>Edit Event</p>
-                        </div>
-                    </Link>
-                    <div style={{ display: "flex" }}>
-                        <img src="/Delete-icon.svg" alt="Delete Event" onClick={onDelete} />
-                        &nbsp;
-                        <p style={{ color: "red" }} onClick={onDelete}>Delete Event</p>
-                    </div>
-                </div>
+          <Link href={`/events/edit/${event.id}`}>
+            <div style={{ display: "flex" }}>
+              <img src="/Edit-icon.svg" alt="Edit Event" />
+              &nbsp;
+              <p>Edit Event</p>
             </div>
+          </Link>
+          <div style={{ display: "flex" }}>
+            <img src="/Delete-icon.svg" alt="Delete Event" onClick={onDelete} />
+            &nbsp;
+            <p style={{ color: "red" }} onClick={onDelete}>
+              Delete Event
+            </p>
+          </div>
+        </div>
+      </div>
 
 
-            <EventDescription>
-                <b>About:</b>
-                <p style={{fontSize: '14px'}}>{event.eventContent}</p>
-            </EventDescription>
+      <EventDescription>
+        <b>About:</b>
+        <p style={{ fontSize: '14px' }}>{event.eventContent}</p>
+      </EventDescription>
 
-            <EventCategoryTag eventCategories={["Food", "Fundraiser"]} />
+      <EventCategoryTag eventCategories={event.eventTags} selected={true} />
 
-            <GetDirectionGreenBtn address={event.eventLocation} onMap={false} />
+      <GetDirectionGreenBtn address={event.eventLocation} onMap={false} />
 
-            <ExtraSpace></ExtraSpace>
+      <ExtraSpace></ExtraSpace>
 
-            {confirmDelete && (
-                <AbsPos>
-                    <DeleteCont>
-                        <h2 styles={{ paddingRight: "10%" }}>Are you sure you want to delete this posting? This cannot be undone.</h2>
-                        <BtnCont>
-                            <CancelBtn onClick={hidePopup}>Cancel</CancelBtn>
-                            <a href={`/community`}>
-                                <DeleteBtn onClick={handleDelete(event.id)}>Confirm</DeleteBtn>
-                            </a>
-                        </BtnCont>
-                    </DeleteCont>
-                </AbsPos>
-            )}
+      {confirmDelete && (
+        <AbsPos>
+          <DeleteCont>
+            <h2 styles={{ paddingRight: "10%" }}>Are you sure you want to delete this posting? This cannot be undone.</h2>
+            <BtnCont>
+              <CancelBtn onClick={hidePopup}>Cancel</CancelBtn>
+              <a href={`/community`}>
+                <DeleteBtn onClick={handleDelete(event.id)}>Confirm</DeleteBtn>
+              </a>
+            </BtnCont>
+          </DeleteCont>
+        </AbsPos>
+      )}
 
-            <NavBar value={navValue} onChange={(event, newValue) => {
-                setNavValue(newValue);
-            }} />
-        </div >
-    )
+
+      <Sharebox>
+        <SharePost shareUrl={shareUrl} share={share} closeShare={() => { setShare(false) }} />
+      </Sharebox>
+
+
+      <NavBar value={navValue} onChange={(event, newValue) => {
+        setNavValue(newValue);
+      }} />
+    </div >
+  )
 }
 
 export async function getServerSideProps({ params }) {
-    const req = await getEvent(params.id);
-    const event = JSON.parse(JSON.stringify(req));
-    return {
-        props: { event },
-    }
+  const req = await getEvent(params.id);
+  const event = JSON.parse(JSON.stringify(req));
+
+  return {
+    props: { event },
+  };
 }
+
 

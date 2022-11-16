@@ -1,17 +1,18 @@
 import React, { useState, useRef } from "react";
 import ReactMapGL, { GeolocateControl, NavigationControl, ScaleControl, Source, Layer, useMap } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { getFoodBanks } from "../server/database";
-import MapSlideUp from '../components/MapSlideUp';
-import EventMapPin from "../components/EventMapPin";
-import FoodBankMapPin from "../components/FoodBankMapPin";
-import { getEvents } from "../server/database";
+import { getFoodBanks, getEvents, getPantries, getFridges } from "../server/database";
+import FridgeMapPin from "../components/Atoms/FridgeMapPin";
+import PantryMapPin from "../components/Atoms/PantryMapPin";
 import algoliasearch from "algoliasearch/lite";
 import { InstantSearch, SearchBox, useHits, useSearchBox, Index } from "react-instantsearch-hooks-web";
-import Filters from '../components/Filters';
-import NavBar from '../components/NavBar';
 import styled from "styled-components";
-import Search from "../components/Search";
+import MapSlideUp from '../components/Organisms/MapSlideUp';
+import EventMapPin from "../components/Atoms/EventMapPin";
+import FoodBankMapPin from "../components/Atoms/FoodBankMapPin";
+import Filters from '../components/Atoms/Filters';
+import NavBar from '../components/Organisms/NavBar';
+import Search from "../components/Molecules/Search";
 
 const searchClient = algoliasearch(
     process.env.NEXT_PUBLIC_ALGOLIA_CLIENT_ID,
@@ -29,11 +30,6 @@ function CustomSearch() {
     return <Search onSearch={handleSearch} />
 }
 
-function FoodBankPinHits() {
-    const { hits } = useHits();
-
-    return <FoodBankMapPin foodBanksList={hits} />
-}
 
 function FoodBankSlideUpHits() {
     const { hits } = useHits();
@@ -41,10 +37,29 @@ function FoodBankSlideUpHits() {
     return <MapSlideUp foodBanks={hits} />
 }
 
+
+function FoodBankPinHits() {
+    const { hits } = useHits();
+
+    return <FoodBankMapPin foodBanksList={hits} />
+}
+
 function EventMapPinHits() {
     const { hits } = useHits();
     return <EventMapPin events={hits} />
 }
+
+
+function PantryMapPinHits() {
+    const { hits } = useHits();
+    return <PantryMapPin pantries={hits} />
+}
+
+function FridgeMapPinHits() {
+    const { hits } = useHits();
+    return <FridgeMapPin fridges={hits} />
+}
+
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_REACT_APP_MAPBOX_TOKEN; // Set your mapbox token here
 
@@ -154,6 +169,15 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
                         <FoodBankPinHits />
                     </Index>
 
+                    <Index indexName="prod_PANTRIES">
+                        <PantryMapPinHits />
+                    </Index>
+
+                    <Index indexName="prod_FRIDGES">
+                        <FridgeMapPinHits />
+                    </Index>
+
+
                     {/* <EventMapPin events={eventList} /> */}
                     {/* <FoodBankMapPin foodBanksList={foodBanksList} /> */}
 
@@ -177,25 +201,32 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
                         </FilterbtnSection>
                     </FilterListContainer>
                 </SearchArea>
-                <NavBar value={2}/>
+                <NavBar value={2} />
             </div>
         </InstantSearch>
     );
 }
 
 export async function getServerSideProps(context) {
+
     // Everything in this function happens on the server
     const foodBanksData = await getFoodBanks();
     const foodBanksList = JSON.parse(JSON.stringify(foodBanksData));
-    // const findMissingLingLat = foodBanksList.map((i) => [i.longitude, i.id]);
-    // console.log(findMissingLingLat)
 
     //get events from database
     const req = await getEvents();
     const eventList = JSON.parse(JSON.stringify(req));
 
+    //get pantries from database
+    const pantriesData = await getPantries();
+    const pantriesList = JSON.parse(JSON.stringify(pantriesData));
+
+    //get fridge from database
+    const fridgesData = await getFridges();
+    const fridgesList = JSON.parse(JSON.stringify(fridgesData));
+
     return {
-        props: { foodBanksList, eventList }, // will be passed to the page component as props
+        props: { foodBanksList, eventList, pantriesList, fridgesList }, // will be passed to the page component as props
     };
 }
 

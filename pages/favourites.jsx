@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import NavBar from '../components/NavBar';
+import NavBar from '../components/Organisms/NavBar';
 import { useState } from "react";
 
 const FavorPage = styled.div`
@@ -23,9 +23,10 @@ export default function Favorites() {
     return (
         <FavorPage>
             <Text>oops, You have no favourites yet !</Text>
-            <NavBar value={3}/>
+            <NavBar value={3} />
         </FavorPage>
     )
 
 
 }
+
