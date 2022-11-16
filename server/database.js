@@ -46,7 +46,7 @@ export async function getEvent(id) {
   const fileUrl = eventSnap.data().eventImage;
   let fileName = decodeURIComponent(fileUrl.split('/').pop().split('?')[0])
   const event = { id, ...eventSnap.data(), fileName };
-  // console.log('hi', event)
+  // console.log('hi', event)   
   return event;
 }
 
@@ -174,3 +174,7 @@ export async function getFridges() {
   return fridges;
 }
 
+export async function getUserRefByEmail(email) {
+  const userCol = collection(db, "user");
+  return user;
+}

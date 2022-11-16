@@ -12,6 +12,7 @@ import UserOfPost from '../../components/Molecules/UserOfPost';
 import EventCategoryTag from "../../components/Atoms/EventCategoryTag";
 import Link from "next/link";
 import SharePost from "../../components/Molecules/SharePost";
+import DeletePopup from "../../components/Organisms/DeletePopup";
 
 const EventImageBlock = styled.div`
   position: relative;
@@ -123,8 +124,6 @@ const CancelBtn = styled.button`
   margin: 2%;
 `;
 
-
-
 export default function Event({ event }) {
 
   const [navValue, setNavValue] = useState(1);
@@ -232,7 +231,7 @@ export default function Event({ event }) {
 
       {confirmDelete && (
         <AbsPos>
-          <DeleteCont>
+          {/* <DeleteCont>
             <h2 styles={{ paddingRight: "10%" }}>Are you sure you want to delete this posting? This cannot be undone.</h2>
             <BtnCont>
               <CancelBtn onClick={hidePopup}>Cancel</CancelBtn>
@@ -240,7 +239,8 @@ export default function Event({ event }) {
                 <DeleteBtn onClick={handleDelete(event.id)}>Confirm</DeleteBtn>
               </a>
             </BtnCont>
-          </DeleteCont>
+          </DeleteCont> */}
+          <DeletePopup eventId={event.id} hidePopup={hidePopup} />
         </AbsPos>
       )}
 

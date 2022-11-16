@@ -72,15 +72,12 @@ margin: 2%
 `
 
 
-export default function DeletePopup({ singleEvent }) {
-    const [event, setEvent] = useState();
-    console.log(singleEvent);
+export default function DeletePopup({ eventId, hidePopup }) {
 
-    const handleDelete = (singleEventId) => async (e) => {
+    const handleDelete = (e) => {
         {
             e.preventDefault();
-            console.log(singleEventId);
-            deleteEvent(singleEventId);
+            deleteEvent(eventId);
         }
     };
 
@@ -103,7 +100,7 @@ export default function DeletePopup({ singleEvent }) {
             {singleEventComponent}
             <BtnCont>
                 <CancelBtn onClick={hidePopup}>Cancel</CancelBtn>
-                <DeleteBtn onClick={handleDelete(singleEvent.id)}>Confirm</DeleteBtn>
+                <DeleteBtn onClick={handleDelete}>Confirm</DeleteBtn>
             </BtnCont>
         </DeleteCont>
     )

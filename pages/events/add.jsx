@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { db, app, storage } from "../../firebase/clientApp";
-import {
-  getEvents,
-  getEvent,
-  addEvent,
-  getAllCategories
-} from "../../server/database";
+import { useState } from "react";
+import { storage } from "../../firebase/clientApp";
+import { getAllCategories } from "../../server/database";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { collection, getDocs, addDoc } from "firebase/firestore";
 // import Event from "../../components/Event";
 // import Image from `next/image`;
-import DeletePopup from "../../components/Organisms/DeletePopup";
-import TimeInput from "../../components/Molecules/TimeInput";
-import NavBar from "../../components/Organisms/NavBar";
 import EventForm from "../../components/Templates/EventForm";
 import EventPreview from "../../components/Templates/EventPreview";
 import axios from "axios";
+import GooglePlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from "react-google-places-autocomplete";
 
 export default function NewEvent({ categoriesList }) {
   const [event, setEvent] = useState({
@@ -64,7 +60,7 @@ export default function NewEvent({ categoriesList }) {
   }
 
   function handleChangeEventLocation(eventLocation) {
-    setEvent({ ...event, eventLocation });
+    setEvent({ ...event, eventLocation: eventLocation?.label });
     return;
   }
 
@@ -122,11 +118,11 @@ export default function NewEvent({ categoriesList }) {
   }
 
   function handleChangeEventCategory(tags) {
-    console.log(...tags)
+    console.log(...tags);
     setEvent({ ...event, eventTags: [...tags] });
   }
 
-  function handleCancel() { }
+  function handleCancel() {}
 
   function handleConfirm() {
     // console.log(event)
@@ -139,13 +135,18 @@ export default function NewEvent({ categoriesList }) {
       eventLocation: event.eventLocation,
       eventName: event.eventName,
       eventContactPhone: event.eventContactPhone,
-      eventTags: event.eventTags
-    }
+      eventTags: event.eventTags,
+    };
 
-    console.log('lul', typeof event.start)
+    geocodeByAddress(postEvent.eventLocation)
+      .then((results) => getLatLng(results[0]))
+      .then(({ lat, lng }) => {
+        postEvent.latitude = lat;
+        postEvent.longitude = lng;
+      });
 
     axios.post("/api/events", postEvent).then((res) => {
-      window.location = `/events/${res.data}`
+      window.location = `/events/${res.data}`;
       console.log("posted successfully", res.data);
     });
   }
