@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import NavBar from '../components/Organisms/NavBar';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Search from '../components/Molecules/Search';
 import Tabs from '../components/Organisms/Tabs';
 import FavCard from '../components/Templates/FavCard';
@@ -13,26 +13,31 @@ import postFavorite from "../utils/postFavorite";
 const FavorPage = styled.div`
     display: flex;
     flex-direction: column;
-background-color: #CDECC2;
+// background-color: #CDECC2;
 height: 100vh;
 width: 100vw;
 margin-bottom: 5%;
 `
 
 const Text = styled.h1`
-
 margin: auto;
 color: #108928;
 justify-content: center;
 align-self: center;
-
 `
 
-
 export default function Favorites({ user }) {
+    const [userFavorites, setUserFavorites] = useState();
+    const [tab, setTab] = useState(0);
 
-    if (user.favorite.event.length > 0 || user.favorite.location.length > 0) {
-        const [userFavorites, setUserFavorites] = useState(user.favorite);
+    useEffect(() => {
+        if (user.favorite.event.length > 0 || user.favorite.location.length > 0) {
+            setUserFavorites(user.favorite)
+        }
+    }, [user])
+
+    if (userFavorites) {
+        // const [userFavorites, setUserFavorites] = useState(user.favorite);
 
         const handleUnfavorite = (type, itemId) => {
             postFavorite(true, type, user.id, itemId).then(() => {
@@ -52,10 +57,7 @@ export default function Favorites({ user }) {
         ))
 
         const allList = locationList.concat(eventList);
-
-
-
-        const [tab, setTab] = useState(0);
+        // const [tab, setTab] = useState(0);
 
         const tabContents = {
             0: { component: allList },
@@ -82,7 +84,6 @@ export default function Favorites({ user }) {
     } else {
         return (
             <>
-
                 <FavorPage>
                     <Text>There are no favorites yet</Text>
                     <NavBar value={3} />
@@ -92,6 +93,7 @@ export default function Favorites({ user }) {
 
     }
 }
+
 export async function getServerSideProps(context) {
     const session = await unstable_getServerSession(context.req, context.res, authOptions)
 
