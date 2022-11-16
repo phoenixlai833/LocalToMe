@@ -13,7 +13,7 @@ import postFavorite from "../utils/postFavorite";
 const FavorPage = styled.div`
     display: flex;
     flex-direction: column;
-// background-color: #CDECC2;
+background-color: #CDECC2;
 height: 100vh;
 width: 100vw;
 `

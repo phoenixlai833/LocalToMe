@@ -21,12 +21,18 @@ align-items: flex-end;
 export default function Profile() {
     const { data: session } = useSession()
     console.log(session.user);
+    const [tab, setTab] = useState(0);
+    const tabList = ["Recent Posts", "Past Posts"]
+
+    const handleChangeTab = (tabId) => {
+        setTab(tabId)
+    };
     if (session) {
         return (
             <>
                 <ProfileSection src={session.user.image} name={session.user.name} email={session.user.email} />
                 <ProfileTab>
-                    <Tabs lefttxt="Recent Posts" righttxt="Past Posts" />
+                    <Tabs tabId={tab} tabList={tabList} onChangeTab={handleChangeTab} />
                 </ProfileTab>
                 <ProfileCard />
                 <NavBar value={4} />
@@ -39,7 +45,7 @@ export default function Profile() {
 
 export async function getServerSideProps(context) {
     const session = await unstable_getServerSession(context.req, context.res, authOptions)
-    
+
     if (!session) {
         return {
             redirect: {
