@@ -2,12 +2,15 @@ import styled from "styled-components";
 import { Colours } from "../../../styles/globals";
 import { useState } from "react";
 import Link from "next/link";
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+// import DeletePopup from "../DeletePopup";
+// import { deleteEvent } from "../../server/database";
 
 const ProfileBlock = styled.div`
   display: grid;
-  grid-template-columns: 35% 55%;
-  gap: 10%;
-  align-items: center;
+  grid-template-columns: 40% 45% 5%;
+  gap: 5%;
+  align-items: start;
   width: 90%;
   margin: 30px;
 `
@@ -58,6 +61,19 @@ const InfoDiv = styled.div`
    width:100%;
 `
 
+const PosAbsoCard = styled.div`
+display: ${(props) => props.show};
+position: absolute;
+right: 100%;
+width: 125px;
+height: 100px;
+border-radius: 15px;
+background-color: white;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+padding: 30%;
+flex-direction: column;
+justify-content: space-around;
+`
 
 export default function ProfileCard({
   past,
@@ -66,8 +82,11 @@ export default function ProfileCard({
   lastEdit = new Date(),
   title = "The HangOut",
   bodyText = "Come to The HangOut where you can hang out and enjoy various games. We are giving away hot meals",
+  onShare,
+  onDelete
 }) {
   const [expanded, setExpanded] = useState(false);
+  const [display, setDisplay] = useState("none");
 
   const onExpand = () => { setExpanded(true) };
   const onClose = () => { setExpanded(false) };
@@ -91,6 +110,30 @@ export default function ProfileCard({
           <ReadMore expanded={expanded} onClick={onClose}>Read Less</ReadMore>
         </InfoDiv>}
       </InfoCont>
+      <div style={{ position: "relative" }}>
+        <PosAbsoCard show={display}>
+          <Link href={`/events/edit/${eventId}`}>
+            <div style={{ display: "flex" }}>
+              <img src="/Edit-icon.svg" alt="Edit Event" />
+              &nbsp;
+              <p style={{ margin: 0 }}>Edit Event</p>
+            </div>
+          </Link>
+          <div style={{ display: "flex" }} onClick={() => onShare(eventId)}>
+            <img src="/Share-icon.svg" alt="Share Event" />
+            &nbsp;
+            <p style={{ margin: 0 }}>Share Event</p>
+          </div>
+          <div style={{ display: "flex" }} onClick={() => onDelete(eventId)}>
+            <img src="/Delete-icon.svg" alt="Delete Event" />
+            &nbsp;
+            <p style={{ color: "red", margin: 0 }} >
+              Delete Event
+            </p>
+          </div>
+        </PosAbsoCard>
+        <MoreVertIcon sx={{ width: 25, height: 25 }} onClick={() => display == "none" ? setDisplay("flex") : setDisplay("none")} />
+      </div>
     </ProfileBlock>
-  </div>
+  </div >
 }
