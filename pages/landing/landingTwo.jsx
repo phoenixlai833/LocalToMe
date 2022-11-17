@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Link from 'next/link';
+import GeneralGreenBtn from '../../components/Atoms/GeneralGreenBtn';
 
 export default function LandingPageTwo() {
 
@@ -36,8 +37,7 @@ export default function LandingPageTwo() {
     align-items: center;
     height: 10vh;
     width: 40vw;
-    margin-top:8%;
-    margin-bottom:2%;
+    margin-top:2%;
 
 div{
     height: 20px;
@@ -50,19 +50,6 @@ div{
 div:nth-child(2){
     background-color: #108928;
 }
-    `
-
-    const Button = styled.button`
-    background-color: #108928;
-    border: none;
-    border-radius: 10px;
-    height: 60px;
-    width: 85vw;
-    color: white;
-    font-size: 20px;
-    &:hover {
-        background-color: #085617;
-      }
     `
 
 
@@ -84,15 +71,17 @@ div:nth-child(2){
             </p>
 
             <Dot>
+                <Link href="/landing/landingOne">
+                    <div></div>
+                </Link>
                 <div></div>
-                <div></div>
-                <div></div>
+                <Link href="/landing/landingThree">
+                    <div></div>
+                </Link>
             </Dot>
 
             <Link href="/landing/landingThree">
-                <Button>
-                    Continue
-                </Button>
+                <GeneralGreenBtn text={"Continue"} h={"4.5em"} />
             </Link>
 
         </LandOne>

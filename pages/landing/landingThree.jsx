@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Link from 'next/link';
+import GeneralGreenBtn from '../../components/Atoms/GeneralGreenBtn';
 
 export default function LandingPageThree() {
 
@@ -29,8 +30,7 @@ export default function LandingPageThree() {
     align-items: center;
     height: 10vh;
     width: 40vw;
-    margin-top:8%;
-    margin-bottom:2%;
+    margin-top: 2%;
 
 div{
     height: 20px;
@@ -72,17 +72,19 @@ div:nth-child(3){
             </p>
 
             <Dot>
-                <div></div>
-                <div></div>
+                <Link href="/landing/landingOne">
+                    <div></div>
+                </Link>
+                <Link href="/landing/landingTwo">
+                    <div></div>
+                </Link>
                 <div></div>
 
 
             </Dot>
 
             <Link href="/auth/signin">
-                <Button>
-                    Get Started
-                </Button>
+                <GeneralGreenBtn text={"Get Started"} h={"4.5em"} />
             </Link>
 
         </LandOne>

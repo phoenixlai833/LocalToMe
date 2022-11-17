@@ -83,7 +83,7 @@ justify-content: space-between;
 
 // this should be homepage, just using for testing right now
 // maybe move some of this to map
-export default function Home({ events, allNews }) {
+export default function Home({ sortedEvents, sortedAllNews }) {
   const { data: session } = useSession()
 
   // const foodBanksComponent = foodBanksList.map((foodbank) => (
@@ -93,7 +93,7 @@ export default function Home({ events, allNews }) {
   //   </li>
   // ));
 
-  const UpcomingEventCards = events.map((e) => {
+  const UpcomingEventCards = sortedEvents.map((e) => {
     // const time = e.start
     // const date = time ? new Date(time * 1000) : new Date(e.eventDate)
     const startDay = new Date(e.start).toLocaleString("default", { dateStyle: "long" })
@@ -175,7 +175,7 @@ export default function Home({ events, allNews }) {
           <p style={{ color: "green" }}>view all</p>
         </Link>
       </div>
-      <AllNews allNews={allNews} />
+      <AllNews allNews={sortedAllNews} />
 
       <FloatingActionButton />
       <div className="TEMPMEDIA">
@@ -191,18 +191,22 @@ export async function getServerSideProps(context) {
 
   const req = await getEvents();
   const events = JSON.parse(JSON.stringify(req));
+  const sortedEvents = events.sort((a, b) => new Date(a.start) - new Date(b.start));
+
 
   const news = await getAllNews();
-  const allNews = JSON.parse(JSON.stringify(news));
-  // console.log(allNews)
+  const allNews = JSON.parse(JSON.stringify(news)); // filter out old events?
+  const sortedAllNews = allNews.sort((a, b) => new Date(b.newsDateCreated) - new Date(a.newsDateCreated));
+
+  // console.log("THIS ONE", sortedAllNews)
 
   if (!session) {
     return {
-      props: { events, allNews }
+      props: { sortedEvents, sortedAllNews }
     }
   }
 
   return {
-    props: { events, allNews, session },
+    props: { sortedEvents, sortedAllNews, session },
   }
 }

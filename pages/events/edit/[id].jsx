@@ -160,6 +160,7 @@ export async function getServerSideProps(context) {
 
   const eventData = await getEvent(context.params.id);
   const defaultEvent = JSON.parse(JSON.stringify(eventData));
+  console.log(defaultEvent)
 
   const categoriesData = await getAllCategories();
   const categoriesList = JSON.parse(JSON.stringify(categoriesData));

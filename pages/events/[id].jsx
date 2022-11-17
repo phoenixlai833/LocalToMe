@@ -221,7 +221,7 @@ export default function Event({ event, user }) {
 
   return (
     <div>
-      <TopBanner text={event.eventName} back={true} />
+      <TopBanner text={event.eventName} back={false} />
 
       <EventImageBlock >
         <EventImage src={event.eventImage} alt={event.eventName} />
