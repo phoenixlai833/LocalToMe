@@ -62,6 +62,7 @@ export default function EventForm({
     setCalendarType(0);
   }
   function handleChangeEventName(eventName) {
+    console.log("eventName", eventName);
     onChangeEventName(eventName);
   }
 
@@ -70,6 +71,7 @@ export default function EventForm({
   }
 
   function handleChangeEventPhoneNumber(eventPhoneNumber) {
+    console.log("eventPhoneNumber", eventPhoneNumber);
     onChangeEventPhoneNumber(eventPhoneNumber);
   }
 
@@ -136,6 +138,7 @@ export default function EventForm({
           value={event.eventPhoneNumber}
           onChange={handleChangeEventPhoneNumber}
           required={true}
+          type="number"
         />
         <b style={{ marginTop: "5%" }}>Location of your Event</b>
         <br></br>

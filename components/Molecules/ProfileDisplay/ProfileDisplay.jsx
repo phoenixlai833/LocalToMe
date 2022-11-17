@@ -12,10 +12,10 @@ font-size: 16px;
 margin: 0;
 `
 
-export default function ProfileDisplay({name='Name', email='emailfornnow@email.com'}) {
+export default function ProfileDisplay({ name = 'Name', email = 'emailfornnow@email.com' }) {
 
     return <div>
-            <AccountTxt>{name}</AccountTxt>
-            <EmailTxt>{email}</EmailTxt>
+        <AccountTxt>{name}</AccountTxt>
+        <EmailTxt>{email}</EmailTxt>
     </div>
 }

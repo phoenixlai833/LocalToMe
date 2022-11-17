@@ -27,7 +27,7 @@ const EventImage = styled.img`
 `;
 
 const EventDescription = styled.div`
-  margin: 30px;
+  margin-left: 8%;
 `;
 
 const ConfirmBtn = styled.button`
@@ -57,6 +57,14 @@ const EditBtn = styled.button`
   height: 40px;
   font-size: 16px;
 `;
+
+const EventUser = styled.div`
+margin-left: 6%;
+`
+
+const EventCat = styled.div`
+margin-left:8%;
+`
 
 export default function EventPreview({
   event,
@@ -101,14 +109,17 @@ export default function EventPreview({
         ]}
         icon={["location_on", "call", "access_time"]}
       />
-      <UserOfPost userImg={session.user.image} name={session.user.name} />
+      <EventUser>
+        <UserOfPost userImg={session.user.image} name={session.user.name} />
+      </EventUser>
       <EventDescription>
+
         <b>About:</b>
         <p style={{ fontSize: "14px" }}>{event.eventContent}</p>
       </EventDescription>
-
-      <EventCategoryTag eventCategories={event.eventTags} selected={true} />
-
+      <EventCat>
+        <EventCategoryTag eventCategories={event.eventTags} selected={true} />
+      </EventCat>
       <EditBtn onClick={handleTogglePreview}>Edit</EditBtn>
       <ConfirmBtn onClick={handleConfirm}>Confirm</ConfirmBtn>
     </div>

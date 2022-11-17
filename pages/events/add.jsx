@@ -202,6 +202,6 @@ export async function getServerSideProps(context) {
   const categoriesList = JSON.parse(JSON.stringify(categoriesData));
 
   return {
-    props: { categoriesList } // will be passed to the page component as props
+    props: { categoriesList, session } // will be passed to the page component as props
   };
 }
