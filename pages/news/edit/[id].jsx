@@ -7,16 +7,8 @@ import NewsForm from "../../../components/Organisms/NewsForm";
 import axios from "axios";
 
 export default function NewNews({ newsItem, categoriesList }) {
-    console.log(newsItem)
-    const [news, setNews] = useState({
-        newsTitle: newsItem.newsTitle,
-        newsCreatorId: newsItem.newsCreatorId,
-        newsAvatar: newsItem.newsAvatar,
-        newDateCreated: newsItem.newsDateCreated,
-        newsContent: newsItem.newsContent,
-        newsImage: newsItem.newsImage,
-        newsTags: newsItem.newsTags,
-    });
+    const [news, setNews] = useState(newsItem);
+    // console.log(news)
     const [imageURL, setImageURL] = useState(newsItem.fileName);
 
     function handleChangeNewsTitle(newsTitle) {
@@ -43,6 +35,7 @@ export default function NewNews({ newsItem, categoriesList }) {
 
     function handleChangeNewsCategory(tags) {
         setNews({ ...news, newsTags: [...tags] });
+        console.log(news);
         return;
     }
 
@@ -52,7 +45,7 @@ export default function NewNews({ newsItem, categoriesList }) {
         const putNews = {
             id: newsItem.id,
             newsTitle: news.newsTitle,
-            newsCreatorId: newsItem.newsCreatorId,
+            // newsCreatorId: newsItem.newsCreatorId,
             newsAvatar: "",
             newsDateCreated: newsItem.newsDateCreated,
             newsContent: news.newsContent,
@@ -86,9 +79,10 @@ export default function NewNews({ newsItem, categoriesList }) {
     );
 }
 
-export async function getServerSideProps({ params }) {
-    const newsData = await getNews(params.id);
+export async function getServerSideProps(context) {
+    const newsData = await getNews(context.params.id);
     const newsItem = JSON.parse(JSON.stringify(newsData));
+    console.log(newsItem)
 
     const categoriesData = await getAllCategories();
     const categoriesList = JSON.parse(JSON.stringify(categoriesData));
