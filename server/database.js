@@ -273,7 +273,13 @@ export async function getUser(id) {
   return user;
 }
 
-
+//edit one user 
+export async function editUser(user) {
+  console.log(user)
+  const userRef = doc(db, "users", user.id);
+  await updateDoc(userRef, user);
+  return user.id;
+}
 
 //add favorite event/location to user
 export async function addFavorite(userId, type, itemId) { //type have to be "event" or "location"
