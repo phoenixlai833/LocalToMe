@@ -11,6 +11,7 @@ import { getEventsWithUser } from "../../server/database";
 import { useSession } from "next-auth/react";
 import { authOptions } from '../api/auth/[...nextauth].js';
 import { unstable_getServerSession } from "next-auth/next";
+import axios from "axios";
 
 const ProfileTab = styled.div`
 display:flex;
@@ -80,6 +81,7 @@ export default function Profile({ sortedEvents }) {
     const [shareUrl, setShareUrl] = useState('');
     const [share, setShare] = useState(false);
     const [copied, setCopied] = useState(false);
+    const [avatar, setAvatar] = useState(session.user.image)
 
     const handleChangeTab = (e) => {
         if (e.target.id) {
@@ -109,6 +111,19 @@ export default function Profile({ sortedEvents }) {
         setShare(true);
     }
 
+    function handleSubmitAvatar(avatarImgPath) {
+        console.log("this is the image path", avatarImgPath);
+        setAvatar(avatarImgPath);
+        setDisplay("none");
+        const putUser = {
+            image: avatarImgPath
+        }
+        console.log(putUser)
+        axios.put(`/api/users/${session.user.id}`, putUser).then((res) => {
+            console.log("edited successfully", res.data);
+        });
+    }
+
     const recentEvents = sortedEvents.filter((e) => new Date(e.end) >= new Date())
         .map((e) => {
             return < ProfileCard key={e.id} eventId={e.id} src={e.eventImage} lastEdit={e.eventUpdateDate} title={e.eventName} bodyText={e.eventContent} onDelete={handleDelete} onShare={handleShare} />
@@ -128,7 +143,7 @@ export default function Profile({ sortedEvents }) {
         return (
             <>
                 < PosAbs show={display}>
-                    <AvatarPopup handleClick={() => setDisplay("none")} imgPath={session.user.image} name={session.user.name}></AvatarPopup>
+                    <AvatarPopup currentUrl={avatar} submitAvatar={handleSubmitAvatar} handleClick={() => setDisplay("none")} imgPath={session.user.image} name={session.user.name}></AvatarPopup>
                 </PosAbs>
                 <PosDeleteConfirm >
                     <DeletePopup showDelete={showDelete} eventId={eventId} hidePopup={() => setShowDelete(false)}></DeletePopup>
@@ -136,7 +151,7 @@ export default function Profile({ sortedEvents }) {
                 <ShareBox>
                     <SharePost shareUrl={shareUrl} share={share} closeShare={handleCloseShare} copied={copied} changeOnCopy={handleOnCopy} />
                 </ShareBox>
-                <ProfileSection src={session.user.image} name={session.user.name} email={session.user.email} handleClick={() => setDisplay("static")} />
+                <ProfileSection src={avatar} name={session.user.name} email={session.user.email} handleClick={() => setDisplay("static")} />
                 <ProfileTab>
                     <Tab onClick={handleChangeTab}>
                         <EventTab id="0" tabId={tab}>

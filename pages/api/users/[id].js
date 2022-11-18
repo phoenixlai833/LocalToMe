@@ -10,6 +10,13 @@ export default async function handler(req, res) {
 
         //user.favorite.events
         //user.favorite.locations
+    } else if (req.method === 'PUT') {
+        // Handle PUT requests
+        const id = req.query.id;
+        const userUpdates = { ...req.body, id: id }
+        // console.log(user)
+        const user = await db.editUser(userUpdates)
+        res.status(200).json(user);
     }
 
 }

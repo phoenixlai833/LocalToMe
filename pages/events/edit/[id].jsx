@@ -104,7 +104,7 @@ export default function EditEvent({ defaultEvent, categoriesList }) {
     const putEvent = {
       id: defaultEvent.id,
       eventContent: event.eventDescription,
-      eventCreatorId: defaultEvent.eventCreatorId,
+      // eventCreatorId: defaultEvent.eventCreatorId,
       start: event.start,
       end: event.end,
       eventImage: event.eventImage,
