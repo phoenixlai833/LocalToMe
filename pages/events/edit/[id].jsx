@@ -176,7 +176,7 @@ export default function EditEvent({ defaultEvent, categoriesList }) {
       </div>
       {eventId && (
         <ToastPopup>
-          <Toast onViewPost={handleViewPost} />
+          <Toast onViewPost={handleViewPost} message="Your changes has been saved!" />
         </ToastPopup>
       )
       }
