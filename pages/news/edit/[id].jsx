@@ -5,11 +5,26 @@ import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import TopBanner from "../../../components/Molecules/TopBanner";
 import NewsForm from "../../../components/Organisms/NewsForm";
 import axios from "axios";
+import Toast from "../../../components/Molecules/Toast/Toast";
+import styled from "styled-components";
+
+
+const ToastPopup = styled.div`
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 100;
+`
 
 export default function NewNews({ newsItem, categoriesList }) {
     const [news, setNews] = useState(newsItem);
-    // console.log(news)
     const [imageURL, setImageURL] = useState(newsItem.fileName);
+    const [newsId, setNewsId] = useState(null);
 
     function handleChangeNewsTitle(newsTitle) {
         setNews({ ...news, newsTitle });
@@ -55,9 +70,14 @@ export default function NewNews({ newsItem, categoriesList }) {
         console.log(putNews)
         axios.put("/api/news", putNews).then((res) => {
             console.log("edited successfully", res.data);
-            window.location = `/community?tabId=1`
+            setNewsId(res.data);
+            // window.location = `/community?tabId=1`
         });
     }
+
+    const handleViewPost = () => {
+        window.location = `/community?tabId=1`
+    };
 
     return (
         <div>
@@ -74,7 +94,11 @@ export default function NewNews({ newsItem, categoriesList }) {
                 categoriesList={categoriesList}
                 onConfirm={handleConfirm}
             />
-
+            {newsId && (
+                <ToastPopup>
+                    <Toast onViewPost={handleViewPost} />
+                </ToastPopup>
+            )}
         </div>
     );
 }
