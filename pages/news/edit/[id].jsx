@@ -96,7 +96,7 @@ export default function NewNews({ newsItem, categoriesList }) {
             />
             {newsId && (
                 <ToastPopup>
-                    <Toast onViewPost={handleViewPost} />
+                    <Toast onViewPost={handleViewPost} message="Your changes has been saved!" />
                 </ToastPopup>
             )}
         </div>
