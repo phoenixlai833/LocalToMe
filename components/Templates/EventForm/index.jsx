@@ -112,7 +112,7 @@ export default function EventForm({
     e.preventDefault();
     onTogglePreview();
   }
-
+  console.log('ok', event)
   return (
     <>
       <TopBanner text={"Plan your Event"} />
@@ -135,7 +135,7 @@ export default function EventForm({
         <br></br>
         <ShortTextInput
           label="Phone Number"
-          value={event.eventPhoneNumber}
+          value={event.eventContactPhone}
           onChange={handleChangeEventPhoneNumber}
           required={true}
           type="number"
@@ -202,7 +202,7 @@ export default function EventForm({
         )}
         <b style={{ marginTop: "5%" }}>Describe your Event*</b>
         <br></br>
-        <LongTextInput mode={mode} placeholder={"Tell us about your event..."} image={image} onChange={handleChangeEventDescription} onChangeImage={handleChangeEventImage}></LongTextInput>
+        <LongTextInput value={event.eventContent} mode={mode} placeholder={"Tell us about your event..."} image={image} onChange={handleChangeEventDescription} onChangeImage={handleChangeEventImage}></LongTextInput>
         {/* <b style={{ marginTop: "5%" }}>Select Event Tags</b> */}
         <br></br>
         <EventCategoryTag eventCategories={categoriesList} exisitingCategories={event.eventTags} changeCategories={handleAddTag} />
