@@ -71,6 +71,7 @@ export default function EventPreview({
   onTogglePreview,
   onCancel,
   onConfirm,
+
 }) {
   const { data: session } = useSession();
 
@@ -94,6 +95,8 @@ export default function EventPreview({
   function handleConfirm() {
     onConfirm(event);
   }
+
+
 
   return (
     <div>

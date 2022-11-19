@@ -9,8 +9,7 @@ const Categories = styled.div`
 `
 
 const Category = styled.div`
-   text-align: center;
-   padding: 10px;
+   display:flex;
    justify-content: center;
    align-items: center;
    background-color: ${props => (props.selected ? '#FFB800' : '#FFEAB4')};
