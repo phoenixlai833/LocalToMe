@@ -2,6 +2,8 @@ import styled from "styled-components"
 import { Switch } from "@mui/material"
 import { Colours } from "../../../styles/globals"
 import { useState } from "react"
+import { Theme } from "../../../styles/globals";
+import ThemeProvider from "@mui/material";
 // import { createMuiTheme } from '@material-ui/core/styles';
 
 const Notif = styled.div`

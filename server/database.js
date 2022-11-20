@@ -166,6 +166,13 @@ export async function getNews(id) {
   const fileUrl = newsSnap.data().newsImage;
   let fileName = decodeURIComponent(fileUrl.split('/').pop().split('?')[0])
   const news = { id, ...newsSnap.data(), fileName };
+  // const newsCreatorSnap = await getDoc(news.newsCreatorId);//should change the eventCreatorId to eventCreatorData
+  // const newsCreator = { id: newsCreatorSnap.id, ...newsCreatorSnap.data() };
+  // const joinedNews = {
+  //   ...news,
+  //   newsCreatorId: newsCreator
+  // }
+  // return joinedNews;
   return news;
 }
 
@@ -266,25 +273,43 @@ export async function getUser(id) {
   return user;
 }
 
-
+//edit one user 
+export async function editUser(user) {
+  console.log(user)
+  const userRef = doc(db, "users", user.id);
+  await updateDoc(userRef, user);
+  return user.id;
+}
 
 //add favorite event/location to user
+// export async function addFavorite(userId, type, itemId) { //type have to be "event" or "location"
+//   const userRef = doc(db, "users", userId);
+//   const userSnap = await getDoc(userRef);
+//   const baseUser = userSnap.data();
+//   const itemRef = doc(db, type, itemId);
+//   baseUser.favorite[type].push(itemRef);
+//   await updateDoc(userRef, baseUser);
+//   return baseUser;
+// }
+
+
+
 export async function addFavorite(userId, type, itemId) { //type have to be "event" or "location"
   const userRef = doc(db, "users", userId);
   const userSnap = await getDoc(userRef);
   const baseUser = userSnap.data();
   const itemRef = doc(db, type, itemId);
-  baseUser.favorite[type].push(itemRef);
+  if (!baseUser.favorite) {
+    baseUser.favorite = {}
+  }
+  if (baseUser.favorite[type]) {
+    baseUser.favorite[type].push(itemRef);
+  } else {
+    baseUser.favorite[type] = [itemRef];
+  }
   await updateDoc(userRef, baseUser);
   return baseUser;
 }
-// addFavorite(1, "event", itemId)
-
-// if (type === "event") {
-//   baseUser.favorite.event.push(itemRef);
-// } else if (type === "foodbank") {
-//   baseUser.favorite.foodbank.push(itemRef);
-// }
 
 
 export async function deleteFavorite(userId, type, itemId) {

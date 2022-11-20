@@ -8,10 +8,26 @@ import { useSession } from "next-auth/react";
 import { authOptions } from '../api/auth/[...nextauth].js';
 import { unstable_getServerSession } from "next-auth/next";
 import axios from "axios";
+import Toast from "../../components/Molecules/Toast/Toast";
+import styled from "styled-components";
+
+
+const ToastPopup = styled.div`
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 100;
+`
 
 export default function NewNews({ categoriesList }) {
     const { data: session } = useSession();
     const userId = session.user.id;
+    const [newsId, setNewsId] = useState(null);
 
     const [news, setNews] = useState({
         newsTitle: "",
@@ -83,9 +99,15 @@ export default function NewNews({ categoriesList }) {
         console.log('buh', postnews.newsDateCreated);
         axios.post("/api/news", postnews).then((res) => {
             console.log("posted successfully", res.data);
-            window.location = `/community?tabId=1`
+            setNewsId(res.data);
+            // window.location = `/community?tabId=1`
         });
     }
+
+
+    const handleViewPost = () => {
+        window.location = `/community?tabId=1`
+    };
 
     return (
         <div>
@@ -101,7 +123,12 @@ export default function NewNews({ categoriesList }) {
                 categoriesList={categoriesList}
                 onConfirm={handleConfirm}
             />
-
+            {newsId && (
+                <ToastPopup>
+                    <Toast onViewPost={handleViewPost} />
+                </ToastPopup>
+            )}
+            
         </div>
     );
 }

@@ -17,6 +17,9 @@ import FloatingActionButton from "../../components/Atoms/FloatButton";
 import styled from 'styled-components';
 import Search from "../../components/Molecules/Search";
 import { getAllNews } from "../../server/database";
+import { useSession, signIn, signOut } from "next-auth/react";
+import { authOptions } from '../api/auth/[...nextauth].js';
+import { unstable_getServerSession } from "next-auth/next";
 
 const searchClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_CLIENT_ID,
@@ -38,11 +41,16 @@ export function EventHits() {
   return <EventsList eventList={hits} />;
 }
 
+
+
+
 export function NewsHits({ allNews }) {
+  const { data: session } = useSession()
+  const sessionEmail = session?.user.email
   const { hits } = useHits();
 
   // return <AllNews allNews={hits} />
-  return <AllNews allNews={allNews} />;
+  return <AllNews allNews={allNews} sessionEmail={sessionEmail} />;
 }
 
 const StyledSearchBox = styled(SearchBox)`
@@ -166,19 +174,29 @@ export default function Community({ allNews, tabId, usersData }) {
 }
 
 export async function getServerSideProps(context) {
+  const session = await unstable_getServerSession(context.req, context.res, authOptions)
   const tabId = context.query.tabId || 0;
-
   const req = await getAllNews();
   const allNews = JSON.parse(JSON.stringify(req))
 
   // const users = await getUsers()
   // const usersData = JSON.parse(JSON.stringify(users));
 
-  return {
-    props: {
-      allNews,
-      tabId,
+  if (!session) {
+    return {
+      props: {
+        allNews,
+        tabId,
+      },
+    }
+  } else {
 
-    },
-  };
+    return {
+      props: {
+        allNews,
+        tabId,
+        session
+      },
+    };
+  }
 }

@@ -92,16 +92,14 @@ position: absolute;
 
 
 
-export default function SharePost({ share, shareUrl, closeShare }) {
+export default function SharePost({ share, shareUrl, closeShare, copied, changeOnCopy }) {
 
-
-    const [copied, setCopied] = useState(false);
+    // const [copied, setCopied] = useState(false);
     // const [showShare, setShowShare] = useState(true);
 
-    const handleOnCopy = () => {
-        setCopied(true);
-    };
-
+    // const handleOnCopy = () => {
+    //     setCopied(true);
+    // };
 
     return (
         <>
@@ -146,7 +144,7 @@ export default function SharePost({ share, shareUrl, closeShare }) {
                         <Button>
                             <CopyToClipboard
                                 text={shareUrl}
-                                onCopy={handleOnCopy}>
+                                onCopy={changeOnCopy}>
                                 {copied ? <span>Copied</span> : <span>Copy</span>}
                             </CopyToClipboard>
                         </Button>

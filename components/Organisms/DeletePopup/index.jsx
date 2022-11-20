@@ -1,28 +1,20 @@
-
 import React, { useState, useEffect } from 'react';
 import styles from './DeletePopup.module.css'
 import Link from 'next/link'
 import { getEvent, deleteEvent } from '../../../server/database';
-
 import styled from 'styled-components';
-
-// const AbsolutePos = styled.div`
-// position: absolute;
-// top: 25vh;
-// left: 20vw;
-// `
 
 const DeleteCont = styled.div`
 background-color: #FFFFFF;
 width: 60vw;
-height: 50vh;
+height: 20vh;
 padding: 2%;
 margin: auto;
 text-align: center;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 border-radius: 15px;
 
-display: flex;
+display: ${(props) => props.show};
 flex-direction: column;
 justify-content: space-around;
 align-items: center;
@@ -72,40 +64,30 @@ margin: 2%
 `
 
 
-export default function DeletePopup({ singleEvent }) {
-    const [event, setEvent] = useState();
-    console.log(singleEvent);
+export default function DeletePopup({ showDelete, eventId, hidePopup }) {
+    const [display, setDisplay] = useState("flex");
+    console.log(eventId);
 
-    const handleDelete = (singleEventId) => async (e) => {
+    const handleDelete = (eventId) => async (e) => {
         {
             e.preventDefault();
-            console.log(singleEventId);
-            deleteEvent(singleEventId);
+            console.log("ACUALLY DELETING", eventId);
+            await deleteEvent(eventId);
+            window.location.reload();
         }
     };
 
-    const hidePopup = (e) => {
-        e.preventDefault();
-        console.log("hide")
-        setPosition("static")
-    }
-
-    const singleEventComponent = (
-        <div>
-            {/* <img width="100" height="100" src={singleEvent.eventImage} alt={singleEvent.eventName} /> */}
-            {/* <p>{singleEvent.eventName}</p> */}
-        </div>
-    )
-
     return (
-        <DeleteCont>
-            <h2 className={styles.h2}>Are you sure you want to delete this posting? This cannot be undone.</h2>
-            {singleEventComponent}
-            <BtnCont>
-                <CancelBtn onClick={hidePopup}>Cancel</CancelBtn>
-                <DeleteBtn onClick={handleDelete(singleEvent.id)}>Confirm</DeleteBtn>
-            </BtnCont>
-        </DeleteCont>
+        <>
+            {showDelete &&
+                <DeleteCont show={display}>
+                    <h2 className={styles.h2}>Are you sure you want to delete this posting? This cannot be undone.</h2>
+                    <BtnCont>
+                        <CancelBtn onClick={hidePopup}>Cancel</CancelBtn>
+                        <DeleteBtn onClick={handleDelete(eventId)}>Confirm</DeleteBtn>
+                    </BtnCont>
+                </DeleteCont>}
+        </>
     )
 }
 

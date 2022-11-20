@@ -6,7 +6,8 @@ const CreateBttn = styled.button`
   background-color: ${(props) => props.inactive || "#108928"};
   border: ${(props) => props.borderstyle || 'none'};
   width: ${(props) => props.width || '100%'};
-  height: 3em;
+  min-height: ${(props) => props.height || "3em"};
+
   color: ${(props) => props.txtcolor || 'white'};
   border-radius: 1em;
   display: flex;
@@ -15,15 +16,19 @@ const CreateBttn = styled.button`
   &:hover {
     background-color: ${(props) => props.active || "#085617"};
   }
+  @media screen and (min-width: 768px) {
+    width: 30em;
+  }
 `;
 
-export default function GeneralGreenBtn({ onClick, text = "Button text", w, borderstyle, inactive, active, txtcolor }) {
+export default function GeneralGreenBtn({ onClick, text = "Button text", w, h, borderstyle, inactive, active, txtcolor }) {
   return <CreateBttn
     onClick={onClick}
     active={active}
     txtcolor={txtcolor}
     inactive={inactive}
     borderstyle={borderstyle}
-    width={w}>
+    width={w}
+    height={h}>
     {text}</CreateBttn>;
 }
