@@ -6,13 +6,10 @@ const PostCreationHeader = styled.h2`
 
 const Cont = styled.div`
 display:flex;
-width: 100vw;
-height: 100vh; 
 justify-content: center;
 flex-direction: column;
 align-items: center;
-background-color: #CDECC2;
-z-index: 0;
+
 `
 
 const CreateBttn = styled.div`
@@ -27,15 +24,18 @@ align-items: center;
 justify-content: center;
 margin: 10px;
 &:hover {
-background-color: ${props => props.active || '#085617' };
+background-color: ${props => props.active || '#085617'};
 }
 `
 const Close = styled.img`
+
 width: 50px;
 height: 50px;
 padding: 10px;
 margin: 10px;
 position: absolute;
+top: 4%;
+left: 4%;
 `
 
 export default function CreationSection() {
@@ -43,7 +43,7 @@ export default function CreationSection() {
     const r = useRouter();
 
     return <div>
-                <Close src="/close.svg" onClick={()=>r.back()}></Close>
+        <Close src="/close.svg" onClick={() => r.back()}></Close>
         <Cont>
             <PostCreationHeader>What do you want to create today?</PostCreationHeader>
             <CreateBttn onClick={() => r.push('../events/add')}>Create an Event</CreateBttn>
