@@ -23,14 +23,6 @@ export default function EditEvent({ defaultEvent, categoriesList }) {
     setIsPreview(!isPreview);
   };
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-
-    axios.post("/api/events", event).then((res) => {
-      console.log("posted successfully", res.data);
-    });
-  };
-
   function handleChangeEventName(eventName) {
     setEvent({ ...event, eventName });
   }

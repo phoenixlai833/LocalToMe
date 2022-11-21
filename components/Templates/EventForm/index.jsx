@@ -8,10 +8,7 @@ import styled from "styled-components";
 import TopBanner from "../../Molecules/TopBanner";
 import GeneralGreenBtn from "../../Atoms/GeneralGreenBtn";
 import EventCategoryTag from "../../Atoms/EventCategoryTag";
-import GooglePlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng,
-} from "react-google-places-autocomplete";
+import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 
 const Form = styled.form`
   width: 80vw;
@@ -105,7 +102,7 @@ export default function EventForm({
     onChangeEventImage(eventImage);
   }
 
-  function handleAddTag(eventTags) {
+  function handleChangeEventTags(eventTags) {
     console.log(eventTags);
     onChangeEventTags(eventTags);
   }
@@ -237,8 +234,8 @@ export default function EventForm({
         <br></br>
         <EventCategoryTag
           eventCategories={categoriesList}
-          exisitingCategories={event.eventTags}
-          changeCategories={handleAddTag}
+          existingCategories={event.eventTags}
+          changeCategories={handleChangeEventTags}
         />
         <br></br>
         <GeneralGreenBtn type="submit" text="Continue" />

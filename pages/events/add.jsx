@@ -8,7 +8,7 @@ import { collection, getDocs, addDoc } from "firebase/firestore";
 import EventForm from "../../components/Templates/EventForm";
 import EventPreview from "../../components/Templates/EventPreview";
 import { useSession } from "next-auth/react";
-import { authOptions } from '../api/auth/[...nextauth].js';
+import { authOptions } from "../api/auth/[...nextauth].js";
 import { unstable_getServerSession } from "next-auth/next";
 import axios from "axios";
 import GooglePlacesAutocomplete, {
@@ -122,15 +122,14 @@ export default function NewEvent({ categoriesList }) {
     setEvent({ ...event, end: new Date(event.end.setHours(hour, minute)) });
   }
 
-  function handleChangeEventCategory(tags) {
-    console.log(...tags);
-    setEvent({ ...event, eventTags: [...tags] });
+  function handleChangeEventTags(tags) {
+    console.log(tags);
+    setEvent({ ...event, eventTags: tags });
   }
 
   function handleCancel() {}
 
   function handleConfirm() {
-    // console.log(event)
     const postEvent = {
       eventContent: event.eventContent,
       eventCreatorId: userId,
@@ -141,8 +140,8 @@ export default function NewEvent({ categoriesList }) {
       eventName: event.eventName,
       eventContactPhone: event.eventContactPhone,
       eventTags: event.eventTags,
-      eventUpdateDate: new Date()
-    }
+      eventUpdateDate: new Date(),
+    };
 
     geocodeByAddress(postEvent.eventLocation)
       .then((results) => getLatLng(results[0]))
@@ -181,7 +180,7 @@ export default function NewEvent({ categoriesList }) {
           onChangeEventStartTime={handleChangeEventStartTime}
           onChangeEventEndDate={handleChangeEventEndDate}
           onChangeEventEndTime={handleChangeEventEndTime}
-          onChangeEventTags={handleChangeEventCategory}
+          onChangeEventTags={handleChangeEventTags}
           categoriesList={categoriesList}
         />
       )}
@@ -193,21 +192,25 @@ export async function getServerSideProps(context) {
   // const eventData = await getEvents();
   // const eventList = JSON.parse(JSON.stringify(eventData));
 
-  const session = await unstable_getServerSession(context.req, context.res, authOptions)
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
 
   if (!session) {
     return {
       redirect: {
-        destination: '/auth/signin',
+        destination: "/auth/signin",
         permanent: false,
       },
-    }
+    };
   }
 
   const categoriesData = await getAllCategories();
   const categoriesList = JSON.parse(JSON.stringify(categoriesData));
 
   return {
-    props: { categoriesList } // will be passed to the page component as props
+    props: { categoriesList, session }, // will be passed to the page component as props
   };
 }

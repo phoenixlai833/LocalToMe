@@ -196,7 +196,7 @@ export default function Event({ event, user }) {
     setShare(true);
   }
 
-  const ifFavorite = user?.favorite.event.filter((singleEvent) => singleEvent.id === event.id).length > 0 ? true : false;
+  const ifFavorite = user?.favorite?.event.find((singleEvent) => singleEvent.id === event.id);
   const [favorite, setFavorite] = useState(ifFavorite);
 
 
