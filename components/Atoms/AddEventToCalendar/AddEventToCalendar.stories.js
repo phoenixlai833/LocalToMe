@@ -2,7 +2,7 @@ import AddEventToCalendar from ".";
 
 
 export default {
-    title: 'AddEventToCalendar',
+    title: 'Atoms/AddEventToCalendar',
     component: AddEventToCalendar,
 };
 

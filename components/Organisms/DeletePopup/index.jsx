@@ -1,70 +1,72 @@
 import React, { useState, useEffect } from 'react';
-import styles from './DeletePopup.module.css'
 import Link from 'next/link'
 import { getEvent, deleteEvent } from '../../../server/database';
 import styled from 'styled-components';
 
 const DeleteCont = styled.div`
-background-color: #FFFFFF;
-width: 60vw;
-height: 20vh;
-padding: 2%;
-margin: auto;
-text-align: center;
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-border-radius: 15px;
+  position:fixed;
+  top:40%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  width: 35vw;
+  height: 25vh;
+  padding: 2%;
+  margin: auto;
+  text-align: center;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
 
-display: ${(props) => props.show};
-flex-direction: column;
-justify-content: space-around;
-align-items: center;
-min-height: 210px;
-min-width: 320px;
-
-`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 210px;
+  min-width: 320px;
+`;
 const BtnCont = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: space-around;
-align-items: center;
-margin-bottom: 5%%;
-`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 5%;
+`;
 
 const DeleteBtn = styled.button`
-background: #E24949;
-border-radius: 13px;
-height: 30px;
-width: 137px;
-left: 170px;
-top: 138px;
+  background: #e24949;
+  border-radius: 15px;
+  height: 44px;
+  width: 137px;
 
-font-size: 14px;
-line-height: 17px;
-text-align: center;
-border: 0px;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  border: 0px;
 
-color: #FFFFFF;
-margin: 2%;
+  color: #ffffff;
+  margin: 2%;
 `
 const CancelBtn = styled.button`
-background: #FFFFF;
-border: 2px solid #535353;
-border-radius: 13px;
-height: 30px;
-width: 137px;
-left: 170px;
-top: 138px;
+  background-color: #FFFFFF;
+  border: 2px solid #535353;
+  border-radius: 15px;
+  height: 44px;
+  width: 137px;
 
-font-size: 14px;
-line-height: 17px;
-text-align: center;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
 
-color: #535353;
-margin: 2%
-`
+  color: #535353;
+  margin: 2%;
+`;
 
 
-export default function DeletePopup({ showDelete, eventId, hidePopup }) {
+export default function DeletePopup({
+    showDelete,
+    eventId,
+    hidePopup
+}) {
     const [display, setDisplay] = useState("flex");
     console.log(eventId);
 
@@ -81,7 +83,7 @@ export default function DeletePopup({ showDelete, eventId, hidePopup }) {
         <>
             {showDelete &&
                 <DeleteCont show={display}>
-                    <h2 className={styles.h2}>Are you sure you want to delete this posting? This cannot be undone.</h2>
+                    <h2 style={{paddingLeft: "10%", paddingRight: "10%"}}>Are you sure you want to delete this posting? This cannot be undone.</h2>
                     <BtnCont>
                         <CancelBtn onClick={hidePopup}>Cancel</CancelBtn>
                         <DeleteBtn onClick={handleDelete(eventId)}>Confirm</DeleteBtn>
