@@ -62,6 +62,39 @@ const CancelBtn = styled.button`
 `;
 
 
+<<<<<<< HEAD
+export default function DeletePopup({ eventId, hidePopup }) {
+
+    const handleDelete = (e) => {
+        {
+            e.preventDefault();
+            deleteEvent(eventId);
+        }
+    };
+
+    // const hidePopup = (e) => {
+    //     e.preventDefault();
+    //     console.log("hide")
+    //     setPosition("static")
+    // }
+
+    const singleEventComponent = (
+        <div>
+            {/* <img width="100" height="100" src={singleEvent.eventImage} alt={singleEvent.eventName} /> */}
+            {/* <p>{singleEvent.eventName}</p> */}
+        </div>
+    )
+
+    return (
+        <DeleteCont>
+            <h2 className={styles.h2}>Are you sure you want to delete this posting? This cannot be undone.</h2>
+            {singleEventComponent}
+            <BtnCont>
+                <CancelBtn onClick={hidePopup}>Cancel</CancelBtn>
+                <DeleteBtn onClick={handleDelete}>Confirm</DeleteBtn>
+            </BtnCont>
+        </DeleteCont>
+=======
 export default function DeletePopup({
     showDelete,
     eventId,
@@ -90,6 +123,7 @@ export default function DeletePopup({
                     </BtnCont>
                 </DeleteCont>}
         </>
+>>>>>>> develop
     )
 }
 

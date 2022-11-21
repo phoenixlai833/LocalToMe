@@ -1,5 +1,13 @@
-import { db } from '../firebase/clientApp';
-import { collection, getDocs, getDoc, addDoc, deleteDoc, doc, updateDoc } from 'firebase/firestore';
+import { db } from "../firebase/clientApp";
+import {
+  collection,
+  getDocs,
+  getDoc,
+  addDoc,
+  deleteDoc,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 import { getStorage, ref, deleteObject } from "firebase/storage";
 
 // food banks
@@ -46,13 +54,15 @@ export async function getEventsWithUser(userEmail) {
   let events = eventSnap.docs.map(async (doc) => {
     let id = doc.id;
     let data = doc.data();
-    const eventCreatorSnap = await getDoc(data.eventCreatorId)
-    const eventCreator = { id: eventCreatorSnap.id, ...eventCreatorSnap.data() };
+    const eventCreatorSnap = await getDoc(data.eventCreatorId);
+    const eventCreator = {
+      id: eventCreatorSnap.id,
+      ...eventCreatorSnap.data(),
+    };
     return { id, ...data, eventCreatorId: eventCreator };
-  })
-  events = await Promise.all(events)
-  events = events.filter((e) => e.eventCreatorId.email == userEmail)
-  // console.log(events)
+  });
+  events = await Promise.all(events);
+  events = events.filter((e) => e.eventCreatorId.email == userEmail);
   return events;
 }
 
@@ -61,37 +71,36 @@ export async function getEvent(id) {
   const eventRef = doc(db, "event", id);
   const eventSnap = await getDoc(eventRef);
   const fileUrl = eventSnap.data().eventImage;
-  let fileName = decodeURIComponent(fileUrl.split('/').pop().split('?')[0])
+  let fileName = decodeURIComponent(fileUrl.split("/").pop().split("?")[0]);
   const event = { id, ...eventSnap.data(), fileName };
-  const eventCreatorSnap = await getDoc(event.eventCreatorId);//should change the eventCreatorId to eventCreatorData
+  const eventCreatorSnap = await getDoc(event.eventCreatorId); //should change the eventCreatorId to eventCreatorData
   const eventCreator = { id: eventCreatorSnap.id, ...eventCreatorSnap.data() };
   const joinedEvent = {
     ...event,
-    eventCreatorId: eventCreator
-  }
+    eventCreatorId: eventCreator,
+  };
   return joinedEvent;
-  // console.log('what is', event, eventCreator)
 }
 // joinedEvent:
 // { "id": "8sahmToVxgeRbkqaMIq5",
-//  "eventContent": "For the month of October,Community Taps + Pizza will be donating $1 from each Fernie beer poured and $2 from every Manchester Pizza sold to the Greater Vancouver Food Bank!", 
-//  "eventDate": "2022-11-02T18:00:00.000Z", 
+//  "eventContent": "For the month of October,Community Taps + Pizza will be donating $1 from each Fernie beer poured and $2 from every Manchester Pizza sold to the Greater Vancouver Food Bank!",
+//  "eventDate": "2022-11-02T18:00:00.000Z",
 //  "eventTags": [{ "categoryName": "Fundraiser", "id": "D1m7ubq7VZyQFbFAfisa" }],
-// "eventLocation": "1191 Commercial Drive, Vancouver, BC, Canada", 
-// "eventName": "Brewery of the Month & Feature Pizza", 
-// "eventImage": "https://firebasestorage.googleapis.com/v0/b/localtome-f84e5.appspot.com/o/community.png?alt=media&token=73b82442-d216-47d6-a512-d1d39cc36fb1", 
-// "eventCreatorId": 
-// { "id": "TYCuxDAHWBS0zuQZSmRb", 
-// "emailVerified": null, 
-// "image": "https://avatars.githubusercontent.com/u/41124039?v=4", 
-// "email": "phoenixlai833@gmail.com", 
-// "name": "Phoenix Lai" } 
+// "eventLocation": "1191 Commercial Drive, Vancouver, BC, Canada",
+// "eventName": "Brewery of the Month & Feature Pizza",
+// "eventImage": "https://firebasestorage.googleapis.com/v0/b/localtome-f84e5.appspot.com/o/community.png?alt=media&token=73b82442-d216-47d6-a512-d1d39cc36fb1",
+// "eventCreatorId":
+// { "id": "TYCuxDAHWBS0zuQZSmRb",
+// "emailVerified": null,
+// "image": "https://avatars.githubusercontent.com/u/41124039?v=4",
+// "email": "phoenixlai833@gmail.com",
+// "name": "Phoenix Lai" }
 // }
 
 export async function addEvent(event) {
   const eventCollection = collection(db, "event");
   const userRef = doc(db, "users", event.eventCreatorId);
-  event = { ...event, eventCreatorId: userRef }
+  event = { ...event, eventCreatorId: userRef };
   const docRef = await addDoc(eventCollection, event);
   return docRef;
 }
@@ -105,11 +114,11 @@ export async function editEvent(event) {
 export async function deleteEvent(id) {
   const eventCollection = doc(db, "event", id);
   const eventSnap = await getDoc(eventCollection);
-  const fileUrl = eventSnap.data().eventImage
+  const fileUrl = eventSnap.data().eventImage;
   const storage = getStorage();
   const fileRef = ref(storage, fileUrl);
-  const fileName = decodeURIComponent(fileUrl.split('/').pop().split('?')[0])
-  console.log(fileName)
+  const fileName = decodeURIComponent(fileUrl.split("/").pop().split("?")[0]);
+  console.log(fileName);
   if (fileName !== "foodBankImageTest.jpg") {
     deleteObject(fileRef);
     await deleteDoc(doc(db, "event", id));
@@ -134,37 +143,27 @@ export async function getAllCategories() {
 
 // _________________________________________________________________________
 // all the news
-// export async function getAllNews() {
-//   const newsCollection = collection(db, "news");
-//   const newsSnap = await getDocs(newsCollection);
-//   const news = newsSnap.docs.map((doc) => {
-//     let id = doc.id;
-//     let data = doc.data();
-//     return { id, ...data };
-//   });
-//   return news;
-// }
-
 export async function getAllNews() {
   const newsCollection = collection(db, "news");
   const newsSnap = await getDocs(newsCollection);
-  const news = await Promise.all(newsSnap.docs.map(async (doc) => {
-    let id = doc.id;
-    let data = doc.data();
-    let userSnap = await getDoc(data.newsCreatorId);
-    let user = userSnap.data();
-    return { id, ...data, newsCreatorId: user };
-  }));
+  const news = await Promise.all(
+    newsSnap.docs.map(async (doc) => {
+      let id = doc.id;
+      let data = doc.data();
+      let userSnap = await getDoc(data.newsCreatorId);
+      let user = userSnap.data();
+      return { id, ...data, newsCreatorId: user };
+    })
+  );
   return news;
 }
-
 
 //one news item
 export async function getNews(id) {
   const newsRef = doc(db, "news", id);
   const newsSnap = await getDoc(newsRef);
   const fileUrl = newsSnap.data().newsImage;
-  let fileName = decodeURIComponent(fileUrl.split('/').pop().split('?')[0])
+  let fileName = decodeURIComponent(fileUrl.split("/").pop().split("?")[0]);
   const news = { id, ...newsSnap.data(), fileName };
   // const newsCreatorSnap = await getDoc(news.newsCreatorId);//should change the eventCreatorId to eventCreatorData
   // const newsCreator = { id: newsCreatorSnap.id, ...newsCreatorSnap.data() };
@@ -176,11 +175,10 @@ export async function getNews(id) {
   return news;
 }
 
-
 export async function addNews(news) {
   const newsCollection = collection(db, "news");
   const userRef = doc(db, "users", news.newsCreatorId);
-  news = { ...news, newsCreatorId: userRef }
+  news = { ...news, newsCreatorId: userRef };
   const docRef = await addDoc(newsCollection, news);
   return docRef.id;
 }
@@ -194,21 +192,18 @@ export async function editNews(news) {
 export async function deleteNews(id) {
   const newsCollection = doc(db, "news", id);
   const newsSnap = await getDoc(newsCollection);
-  const fileUrl = newsSnap.data().newsImage
+  const fileUrl = newsSnap.data().newsImage;
   if (fileUrl) {
     const storage = getStorage();
     const fileRef = ref(storage, fileUrl);
     deleteObject(fileRef);
   }
   await deleteDoc(doc(db, "news", id));
-
 }
 
 export async function getNewsCategories() {
   return;
 }
-
-
 
 //get all the pantries
 export async function getPantries() {
@@ -234,7 +229,6 @@ export async function getFridges() {
   return fridges;
 }
 
-
 //get all the users:
 export async function getUsers() {
   const userCol = collection(db, "users");
@@ -252,18 +246,26 @@ export async function getUser(id) {
   const userRef = doc(db, "users", id);
   const userSnap = await getDoc(userRef);
   const baseUser = userSnap.data();
-  baseUser.favorite.event = await Promise.all(baseUser.favorite.event.map(async (eventRef) => {
-    const eventObj = await getEvent(eventRef.id);
-    return eventObj
-  }))
-
-  baseUser.favorite.location = await Promise.all(baseUser.favorite.location.map(async (locationRef) => {
-    const locationObj = await getFoodBank(locationRef.id);
-    // const locationObjSnap = await getDoc(locationRef);
-    // const locationObj = locationObjSnap.data();
-    return { id: locationObj.id, ...locationObj }
-  }))
-
+  if (baseUser.favorite) {
+    if (baseUser.favorite.event) {
+      baseUser.favorite.event = await Promise.all(
+        baseUser.favorite.event.map(async (eventRef) => {
+          const eventObj = await getEvent(eventRef.id);
+          return eventObj;
+        })
+      );
+    }
+    if (baseUser.favorite.location) {
+      baseUser.favorite.location = await Promise.all(
+        baseUser.favorite.location.map(async (locationRef) => {
+          const locationObj = await getFoodBank(locationRef.id);
+          // const locationObjSnap = await getDoc(locationRef);
+          // const locationObj = locationObjSnap.data();
+          return locationObj;
+        })
+      );
+    }
+  }
   // baseUser.favorite.foodbank = await Promise.all(baseUser.favorite.foodbank.map(async (locationRef) => {
   //   const locationObjSnap = await getDoc(locationRef);
   //   const locationObj = locationObjSnap.data();
@@ -311,20 +313,13 @@ export async function addFavorite(userId, type, itemId) { //type have to be "eve
   return baseUser;
 }
 
-
 export async function deleteFavorite(userId, type, itemId) {
   const userRef = doc(db, "users", userId);
   const userSnap = await getDoc(userRef);
   const baseUser = userSnap.data();
-  baseUser.favorite[type] = baseUser.favorite[type].filter(item => item.id != itemId);
+  baseUser.favorite[type] = baseUser.favorite[type].filter(
+    (item) => item.id != itemId
+  );
   await updateDoc(userRef, baseUser);
   return baseUser;
 }
-
-
-
-// if (type === "event") {
-//   baseUser.favorite.event.filter(item => item.id != itemId);
-// } else if (type === "foodbank") {
-//   baseUser.favorite.foodbank.filter(item => item.id != itemId);
-// }
