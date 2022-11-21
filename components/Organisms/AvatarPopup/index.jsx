@@ -155,8 +155,10 @@ export default function AvatarPopup({ currentUrl, submitAvatar, imgPath = "/Avat
     return (
         <>
             <SelectionCont>
-                <div style={{ marginLeft: "5%", width: "5vw" }} onClick={handleClick}>
-                    <Image src={"/close.svg"} width={"100%"} height={"100%"}></Image>
+                <div style={{display:"flex", width:"95%", flexDirection:"row-reverse"}}>
+                    <div style={{ marginLeft: "5%", width: "5vw" }} onClick={handleClick}>
+                        <Image src={"/close.svg"} width={"100%"} height={"100%"}></Image>
+                    </div>
                 </div>
 
                 <TopSec>

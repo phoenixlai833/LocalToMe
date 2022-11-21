@@ -7,8 +7,6 @@ import { Colours } from "../../../styles/globals";
 import { ThemeProvider } from '@mui/material';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import Icon from '@mui/material';
-// Placeholder Icons
 import NavBarIcons from '../../Atoms/NavIcons';
 
 const NavBar = styled(BottomNavigation)`
@@ -52,7 +50,6 @@ export default function LabelBottomNavigation({
   value = 0,
 }) {
   const r = useRouter();
-  // let [navValue, setNavValue] = useState(value);
   const onHome = () => {
     r.push("/");
   }
