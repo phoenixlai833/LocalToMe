@@ -16,7 +16,7 @@ const Input = styled.input`
     width: 100%;
 `
 
-export default function ShortTextInput({ label, required = false, placeholder, value, onChange }) {
+export default function ShortTextInput({ label, required = false, placeholder, value, onChange, type, pattern, maxlength }) {
 
     function handleChange(e) {
         onChange(e.target.value);
@@ -25,7 +25,7 @@ export default function ShortTextInput({ label, required = false, placeholder, v
     return (
         <Container>
             <Label>{label}{required && "*"}</Label>
-            <Input placeholder={placeholder} value={value} onChange={handleChange} required />
+            <Input placeholder={placeholder} value={value} onChange={handleChange} type={type} pattern={pattern} maxlength={maxlength} required />
         </Container>
     )
 }

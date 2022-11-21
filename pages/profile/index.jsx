@@ -4,12 +4,14 @@ import styled from "styled-components";
 import { useState } from "react";
 import FloatingActionButton from '../../components/Atoms/FloatButton';
 import AvatarPopup from "../../components/Organisms/AvatarPopup";
-// import Tabs from "../../components/Organisms/Tabs";
 import ProfileCard from "../../components/Organisms/ProfileCard/ProfileCard";
+import SharePost from "../../components/Molecules/SharePost";
+import DeletePopup from "../../components/Organisms/DeletePopup";
 import { getEventsWithUser } from "../../server/database";
 import { useSession } from "next-auth/react";
 import { authOptions } from '../api/auth/[...nextauth].js';
 import { unstable_getServerSession } from "next-auth/next";
+import axios from "axios";
 
 const ProfileTab = styled.div`
 display:flex;
@@ -55,25 +57,31 @@ top: 7%;
 z-index: 2;
 `
 
-export default function Profile({ events }) {
+
+const PosDeleteConfirm = styled.div`
+position: absolute;
+left: 20vw;
+top: 40vh;
+z-index: 4;
+`
+
+const ShareBox = styled.div`
+position: absolute;
+left: 25%;
+top: 25%;
+z-index: 3;
+`
+
+export default function Profile({ sortedEvents }) {
     const { data: session } = useSession();
     const [tab, setTab] = useState(0);
-    const [display, setdisplay] = useState("none");
-
-    const recentEvents = events.filter((e) => new Date(e.end) > new Date())
-        .map((e) => {
-            return < ProfileCard key={e.id} eventId={e.id} src={e.eventImage} lastEdit={e.eventUpdateDate} title={e.eventName} bodyText={e.eventContent} />
-        })
-
-    const pastEvents = events.filter((e) => new Date(e.end) <= new Date())
-        .map((e) => {
-            return < ProfileCard key={e.id} past={true} eventId={e.id} src={e.eventImage} lastEdit={e.eventUpdateDate} title={e.eventName} bodyText={e.eventContent} />
-        })
-
-    const tabContents = {
-        0: { component: recentEvents },
-        1: { component: pastEvents },
-    };
+    const [display, setDisplay] = useState("none");
+    const [eventId, setEventId] = useState("");
+    const [showDelete, setShowDelete] = useState(false);
+    const [shareUrl, setShareUrl] = useState('');
+    const [share, setShare] = useState(false);
+    const [copied, setCopied] = useState(false);
+    const [avatar, setAvatar] = useState(session.user.image)
 
     const handleChangeTab = (e) => {
         if (e.target.id) {
@@ -81,33 +89,81 @@ export default function Profile({ events }) {
         }
     };
 
-    function showMascots() {
-        setdisplay("static");
+    function handleDelete(eventId) {
+        console.log("delete", eventId)
+        setEventId(eventId)
+        setShowDelete(true)
         return;
     }
 
-    function hideMascots() {
-        setdisplay("none");
+    const handleOnCopy = () => {
+        setCopied(true);
+    };
+
+    const handleCloseShare = () => {
+        setShare(false);
+        setCopied(false);
     }
+
+    function handleShare(eventId) {
+        // console.log("share", eventId)
+        setShareUrl(`${window.location.origin}/events/${eventId}`);
+        setShare(true);
+    }
+
+    function handleSubmitAvatar(avatarImgPath) {
+        console.log("this is the image path", avatarImgPath);
+        setAvatar(avatarImgPath);
+        setDisplay("none");
+        const putUser = {
+            image: avatarImgPath
+        }
+        console.log(putUser)
+        axios.put(`/api/users/${session.user.id}`, putUser).then((res) => {
+            console.log("edited successfully", res.data);
+        });
+    }
+
+    const recentEvents = sortedEvents.filter((e) => new Date(e.end) >= new Date())
+        .map((e) => {
+            return < ProfileCard key={e.id} eventId={e.id} src={e.eventImage} lastEdit={e.eventUpdateDate} title={e.eventName} bodyText={e.eventContent} onDelete={handleDelete} onShare={handleShare} />
+        })
+
+    const pastEvents = sortedEvents.filter((e) => new Date(e.end) < new Date())
+        .map((e) => {
+            return < ProfileCard key={e.id} past={true} eventId={e.id} src={e.eventImage} lastEdit={e.eventUpdateDate} title={e.eventName} bodyText={e.eventContent} onDelete={handleDelete} onShare={handleShare} />
+        })
+
+    const tabContents = {
+        0: { component: recentEvents },
+        1: { component: pastEvents },
+    };
 
     if (session) {
         return (
             <>
                 < PosAbs show={display}>
-                    <AvatarPopup handleClick={hideMascots} imgPath={session.user.image} name={session.user.name}></AvatarPopup>
+                    <AvatarPopup currentUrl={avatar} submitAvatar={handleSubmitAvatar} handleClick={() => setDisplay("none")} imgPath={session.user.image} name={session.user.name}></AvatarPopup>
                 </PosAbs>
-                <ProfileSection src={session.user.image} name={session.user.name} email={session.user.email} handleClick={showMascots} />
+                <PosDeleteConfirm >
+                    <DeletePopup showDelete={showDelete} eventId={eventId} hidePopup={() => setShowDelete(false)}></DeletePopup>
+                </PosDeleteConfirm>
+                <ShareBox>
+                    <SharePost shareUrl={shareUrl} share={share} closeShare={handleCloseShare} copied={copied} changeOnCopy={handleOnCopy} />
+                </ShareBox>
+                <ProfileSection src={avatar} name={session.user.name} email={session.user.email} handleClick={() => setDisplay("static")} />
                 <ProfileTab>
                     <Tab onClick={handleChangeTab}>
                         <EventTab id="0" tabId={tab}>
-                            Recent Posts
+                            Recent Events
                         </EventTab>
                         <NewTab id="1" tabId={tab}>
-                            Past Posts
+                            Past Events
                         </NewTab>
                     </Tab>
                 </ProfileTab>
                 {tabContents[tab].component}
+                <div style={{ marginBottom: "10vh" }}></div>
                 <NavBar value={4} />
                 <FloatingActionButton />
 
@@ -130,11 +186,13 @@ export async function getServerSideProps(context) {
 
     const eventsData = await getEventsWithUser(session.user.email);
     const events = JSON.parse(JSON.stringify(eventsData));
+    const sortedEvents = events.sort((a, b) => new Date(a.start) - new Date(b.start));
+
     // console.log(events)
 
     return {
         props: {
-            session, events
+            session, sortedEvents
         },
     }
 }

@@ -24,20 +24,6 @@ flex-direction: column;
 justify-content: center;
 `
 
-const Button = styled.button`
-background-color: #108928;
-border: none;
-border-radius: 10px;
-height: 60px;
-width: 85vw;
-color: white;
-font-size: 20px;
-margin-bottom: 5%;
-&:hover {
-    background-color: #085617;
-  }
-`
-
 const SplashLogo = styled.div`
 display: flex;
 justify-content: center;
@@ -65,7 +51,6 @@ gap: 20px;
 export default function Signout() {
     const r = useRouter();
 
-
     return (
         <>
             <Layout>
@@ -81,16 +66,12 @@ export default function Signout() {
                         txtcolor={'#108928'}
                         inactive={'white'}
                         borderstyle={' 3px solid #108928 '}
-                        text='Back'>
-                    </GeneralGreenBtn>
+                        text='Back' />
+
                     <br />
                     <GeneralGreenBtn
                         text='Sign out'
-                        onClick={() => signOut({ callbackUrl: "/" })}>
-                    </GeneralGreenBtn>
-                    {/* <Button onClick={() => signOut({ callbackUrl: "/" })}>
-                        Sign out
-                    </Button> */}
+                        onClick={() => signOut({ callbackUrl: "/" })} />
                 </Center>
             </Layout>
         </>

@@ -31,6 +31,7 @@ import FoodBankMapPin from "../components/Atoms/FoodBankMapPin";
 import Filters from "../components/Atoms/Filters";
 import NavBar from "../components/Organisms/NavBar";
 import Search from "../components/Molecules/Search";
+import { motion } from "framer-motion";
 
 const searchClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_CLIENT_ID,

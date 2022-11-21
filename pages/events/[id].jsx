@@ -74,11 +74,6 @@ const ExtraSpace = styled.div`
   height: 50px;
 `;
 
-const AbsPos = styled.div`
-position: absolute;
-top: 25vh;
-left: 20vw;
-`
 
 const Sharebox = styled.div`
 position: fixed;
@@ -87,19 +82,22 @@ left: 50%;
 transform: translate(-50%, -50%);
 `
 const DeleteCont = styled.div`
+  position:fixed;
+  top:40%;
+  left:50%;
+  transform: translate(-50%, -50%);
   background-color: #ffffff;
-  width: 60vw;
-  height: 30vh;
+  width: 35vw;
+  height: 25vh;
   padding: 2%;
   margin: auto;
-  font-family: "Rubik", sans-serif;
   text-align: center;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
 
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   min-height: 210px;
   min-width: 320px;
@@ -109,16 +107,14 @@ const BtnCont = styled.div`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  margin-bottom: 5%%;
+  margin-bottom: 5%;
 `;
 
 const DeleteBtn = styled.button`
   background: #e24949;
-  border-radius: 13px;
-  height: 30px;
+  border-radius: 15px;
+  height: 44px;
   width: 137px;
-  left: 170px;
-  top: 138px;
 
   font-size: 14px;
   line-height: 17px;
@@ -129,13 +125,11 @@ const DeleteBtn = styled.button`
   margin: 2%;
 `
 const CancelBtn = styled.button`
-  background: #FFFFF;
+  background-color: #FFFFFF;
   border: 2px solid #535353;
-  border-radius: 13px;
-  height: 30px;
+  border-radius: 15px;
+  height: 44px;
   width: 137px;
-  left: 170px;
-  top: 138px;
 
   font-size: 14px;
   line-height: 17px;
@@ -144,10 +138,12 @@ const CancelBtn = styled.button`
   color: #535353;
   margin: 2%;
 `;
-
-
+const EventCat = styled.div`
+margin-left:8%;
+`
 
 export default function Event({ event, user }) {
+
   const { data: session } = useSession()
 
   const [navValue, setNavValue] = useState(1);
@@ -220,7 +216,7 @@ export default function Event({ event, user }) {
 
   return (
     <div>
-      <TopBanner text={event.eventName} back={true} />
+      <TopBanner text={event.eventName} back={false} />
 
       <EventImageBlock >
         <EventImage src={event.eventImage} alt={event.eventName} />
@@ -245,21 +241,39 @@ export default function Event({ event, user }) {
       >
         <UserOfPost userImg={event.eventCreatorId.image} name={event.eventCreatorId.name} />
         <div>
-          <Link href={`/events/edit/${event.id}`}>
+            <Link href={`/events/edit/${event.id}`}>
+              <div style={{ display: "flex" }}>
+                <img src="/Edit-icon.svg" alt="Edit Event" />
+                &nbsp;
+                <p>Edit Event</p>
+              </div>
+            </Link>
             <div style={{ display: "flex" }}>
-              <img src="/Edit-icon.svg" alt="Edit Event" />
+              <img src="/Delete-icon.svg" alt="Delete Event" onClick={onDelete} />
               &nbsp;
-              <p>Edit Event</p>
+              <p style={{ color: "red" }} onClick={onDelete}>
+                Delete Event
+              </p>
             </div>
-          </Link>
-          <div style={{ display: "flex" }}>
-            <img src="/Delete-icon.svg" alt="Delete Event" onClick={onDelete} />
-            &nbsp;
-            <p style={{ color: "red" }} onClick={onDelete}>
-              Delete Event
-            </p>
           </div>
-        </div>
+        {event.eventCreatorId.email === session?.user.email && (
+          <div>
+            <Link href={`/events/edit/${event.id}`}>
+              <div style={{ display: "flex" }}>
+                <img src="/Edit-icon.svg" alt="Edit Event" />
+                &nbsp;
+                <p>Edit Event</p>
+              </div>
+            </Link>
+            <div style={{ display: "flex" }}>
+              <img src="/Delete-icon.svg" alt="Delete Event" onClick={onDelete} />
+              &nbsp;
+              <p style={{ color: "red" }} onClick={onDelete}>
+                Delete Event
+              </p>
+            </div>
+          </div>
+        )}
       </div>
 
 
@@ -267,26 +281,23 @@ export default function Event({ event, user }) {
         <b>About:</b>
         <p style={{ fontSize: '14px' }}>{event.eventContent}</p>
       </EventDescription>
-
-      <EventCategoryTag eventCategories={event.eventTags} selected={true} />
-
+      <EventCat>
+        <EventCategoryTag eventCategories={event.eventTags} selected={true} />
+      </EventCat>
       <GetDirectionGreenBtn address={event.eventLocation} onMap={false} />
 
       <ExtraSpace></ExtraSpace>
 
       {confirmDelete && (
-        <AbsPos>
-          {/* <DeleteCont>
-            <h2 styles={{ paddingRight: "10%" }}>Are you sure you want to delete this posting? This cannot be undone.</h2>
+          <DeleteCont>
+            <h2 style={{ paddingRight: "10%", paddingLeft: "10%" }}>Are you sure you want to delete this posting? This cannot be undone.</h2>
             <BtnCont>
               <CancelBtn onClick={hidePopup}>Cancel</CancelBtn>
               <a href={`/community`}>
                 <DeleteBtn onClick={handleDelete(event.id)}>Confirm</DeleteBtn>
               </a>
             </BtnCont>
-          </DeleteCont> */}
-          <DeletePopup eventId={event.id} hidePopup={hidePopup} />
-        </AbsPos>
+          </DeleteCont>
       )}
 
 

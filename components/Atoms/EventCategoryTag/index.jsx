@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 
 const Categories = styled.div`
    display:flex;
-   margin: 20px 8% 20px 8%;
+   flex-wrap: wrap;
+   margin: 20px 0;
 `
 
 const Category = styled.div`
@@ -18,6 +19,7 @@ const Category = styled.div`
    height: 40px;
    border-radius: 35px;
    margin-right: 10px;
+   margin-bottom: 10px;
    &:hover{
       background-color: #FFB800;
    }

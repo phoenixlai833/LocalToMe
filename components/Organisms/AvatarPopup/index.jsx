@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import GeneralGreenBtn from "../../Atoms/GeneralGreenBtn";
+import { storage } from "../../../firebase/clientApp";
+import { getStorage, ref, deleteObject, getDownloadURL, uploadBytes } from "firebase/storage";
+
 import Image from "next/image";
 import { useState } from "react";
 import { Colours } from "../../../styles/globals";
@@ -51,13 +54,13 @@ justify-content: center;
 padding: 5% 0 0 3%;
 `
 
-const UploadImg = styled.div`
+const UploadImg = styled.label`
 border-radius: 50%;
 background-image: url("AvatarChoices/importAvatar.png");
 background-position: center; 
 background-repeat: no-repeat; 
 background-size: 8vw; 
-background-color: white;
+background-color: ${props => props.uploadSelected ? "#FFB800" : "white"};
 border: 3px solid ${Colours.primary};
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 width: 12vw;
@@ -78,8 +81,11 @@ height: 12vw;
 margin: 0 6% 10% 3%;
 `
 
-export default function AvatarPopup({ handleSubmit, imgPath = "Mascot/Chou_Hype.svg", name = "Slayerina", handleClick }) {
-    const [selected, setSelected] = useState(false);
+const Input = styled.input``;
+
+export default function AvatarPopup({ currentUrl, submitAvatar, imgPath = "/AvatarChoices/Chou_Hype.png", name = "Slayerina", handleClick }) {
+    const [testAvatar, setTestAvatar] = useState(imgPath)
+    const [upSelected, setUpSelected] = useState(false);
 
     const mascotList = [
         "/AvatarChoices/Chou_Confused.png",
@@ -92,33 +98,83 @@ export default function AvatarPopup({ handleSubmit, imgPath = "Mascot/Chou_Hype.
         "/AvatarChoices/Chou_Sus.png"
     ]
 
-    const mascots = mascotList.map((m) => <MascotItem key={m} mascot={m} selected={selected}></MascotItem>)
+    const [mascots, setMascots] = useState(
+        mascotList.map((m) => <MascotItem key={m} mascot={m} selected={false} onClick={() => selectMascot(m)}></MascotItem>)
+    )
 
-    const hidePopup = (e) => {
-        e.preventDefault();
-        console.log("hide")
-        setPosition("static")
+    function selectMascot(clickedMascot) {
+        // console.log(clickedMascot)
+        setUpSelected(false);
+        setTestAvatar(clickedMascot);
+        setMascots(
+            mascotList.map((m) => {
+                if (clickedMascot == m) {
+                    console.log("this is clicked", clickedMascot)
+                    return <MascotItem key={m} mascot={m} selected={true} onClick={() => selectMascot(m)}></MascotItem>
+                } else {
+                    console.log("not the ones")
+                    return <MascotItem key={m} mascot={m} selected={false} onClick={() => selectMascot(m)}></MascotItem>
+                }
+            })
+        )
+        return;
     }
 
+    function handleClickUpload() {
+        setUpSelected(true);
+        setMascots(mascotList.map((m) => <MascotItem key={m} mascot={m} selected={false} onClick={() => selectMascot(m)}></MascotItem>))
+    }
+
+    async function handleChangeImage(e) {
+        console.log(e)
+        if (e.target.files.length !== 0) {
+            const img = e.target.files[0];
+            const imgRef = ref(storage, img.name);
+            await uploadBytes(imgRef, img);
+            const newImgRef = await getDownloadURL(imgRef);
+            console.log(newImgRef);
+            setTestAvatar(newImgRef)
+        }
+
+        // const storage = getStorage();
+        // const img = e.target.files[0];
+        // const imgRef = ref(storage, img.name);
+        // const newImgRef = await getDownloadURL(imgRef).then(() => {
+        //     console.log("dont do anything")
+        //     // setTestAvatar(newImgRef);
+        // }
+        // ).catch(async () => {
+        //     console.log("delete current and add new image")
+        //     const oldImgRef = ref(storage, testAvatar);
+        //     deleteObject(oldImgRef);
+        //     await uploadBytes(imgRef, img);
+        // })
+        // setTestAvatar(newImgRef);
+    }
 
     return (
         <>
             <SelectionCont>
-                <div style={{ marginLeft: "5%", width: "5vw" }} onClick={handleClick}>
-                    <Image src={"/close.svg"} width={"100%"} height={"100%"}></Image>
+                <div style={{display:"flex", width:"95%", flexDirection:"row-reverse"}}>
+                    <div style={{ marginLeft: "5%", width: "5vw" }} onClick={handleClick}>
+                        <Image src={"/close.svg"} width={"100%"} height={"100%"}></Image>
+                    </div>
                 </div>
 
                 <TopSec>
-                    <YourAvatar currentAvatar={imgPath} ></YourAvatar>
+                    <YourAvatar currentAvatar={testAvatar} ></YourAvatar>
                     <h3>{name}</h3>
                 </TopSec>
                 <Divider></Divider>
                 <BottomSec>
                     <MascotSec>
-                        <UploadImg></UploadImg>
+                        <input type="file" onChange={handleChangeImage} id="actual-btn" hidden />
+                        <UploadImg htmlFor="actual-btn" uploadSelected={upSelected} onClick={handleClickUpload}>
+                        </UploadImg>
+
                         {mascots}
                     </MascotSec>
-                    <GeneralGreenBtn onClick={handleSubmit} text={"Save Profile Picture"} />
+                    <GeneralGreenBtn onClick={() => submitAvatar(testAvatar)} text={"Save Profile Picture"} />
                 </BottomSec>
             </SelectionCont>
         </>

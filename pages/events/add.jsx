@@ -11,10 +11,22 @@ import { useSession } from "next-auth/react";
 import { authOptions } from "../api/auth/[...nextauth].js";
 import { unstable_getServerSession } from "next-auth/next";
 import axios from "axios";
-import GooglePlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng,
-} from "react-google-places-autocomplete";
+import Toast from "../../components/Molecules/Toast/Toast";
+import styled from "styled-components";
+
+
+const ToastPopup = styled.div`
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 100;
+`
+
 
 export default function NewEvent({ categoriesList }) {
   const { data: session } = useSession();
@@ -36,6 +48,7 @@ export default function NewEvent({ categoriesList }) {
   const [isPreview, setIsPreview] = useState(false);
   const [imageURL, setImageURL] = useState(null);
   const [navValue, setNavValue] = useState(1);
+  const [eventId, setEventId] = useState(null);
 
   const handleTogglePreview = () => {
     setIsPreview(!isPreview);
@@ -152,39 +165,53 @@ export default function NewEvent({ categoriesList }) {
 
     axios.post("/api/events", postEvent).then((res) => {
       window.location = `/events/${res.data}`;
+      setEventId(res.data)
       console.log("posted successfully", res.data);
     });
   }
 
+  const handleViewPost = () => {
+    console.log("viewid", eventId)
+    window.location = `/events/${eventId}`;
+  };
+
   return (
-    <div>
-      {isPreview ? (
-        <EventPreview
-          event={event}
-          onTogglePreview={handleTogglePreview}
-          onCancel={handleCancel}
-          onConfirm={handleConfirm}
-        />
-      ) : (
-        <EventForm
-          event={event}
-          onTogglePreview={handleTogglePreview}
-          onChangeEventName={handleChangeEventName}
-          onChangeEventCreator={handleChangeEventCreator}
-          onChangeEventPhoneNumber={handleChangeEventPhoneNumber}
-          onChangeEventLocation={handleChangeEventLocation}
-          onChangeEventDescription={handleChangeEventContent}
-          image={imageURL}
-          onChangeEventImage={handleChangeEventImage}
-          onChangeEventStartDate={handleChangeEventStartDate}
-          onChangeEventStartTime={handleChangeEventStartTime}
-          onChangeEventEndDate={handleChangeEventEndDate}
-          onChangeEventEndTime={handleChangeEventEndTime}
-          onChangeEventTags={handleChangeEventTags}
-          categoriesList={categoriesList}
-        />
+    <>
+      <div>
+        {isPreview ? (
+          <EventPreview
+            event={event}
+            onTogglePreview={handleTogglePreview}
+            onCancel={handleCancel}
+            onConfirm={handleConfirm}
+
+          />
+        ) : (
+          <EventForm
+            event={event}
+            onTogglePreview={handleTogglePreview}
+            onChangeEventName={handleChangeEventName}
+            onChangeEventCreator={handleChangeEventCreator}
+            onChangeEventPhoneNumber={handleChangeEventPhoneNumber}
+            onChangeEventLocation={handleChangeEventLocation}
+            onChangeEventDescription={handleChangeEventContent}
+            image={imageURL}
+            onChangeEventImage={handleChangeEventImage}
+            onChangeEventStartDate={handleChangeEventStartDate}
+            onChangeEventStartTime={handleChangeEventStartTime}
+            onChangeEventEndDate={handleChangeEventEndDate}
+            onChangeEventEndTime={handleChangeEventEndTime}
+            onChangeEventTags={handleChangeEventTags}
+            categoriesList={categoriesList}
+          />
+        )}
+      </div>
+      {eventId && (
+        <ToastPopup>
+          <Toast onViewPost={handleViewPost} />
+        </ToastPopup>
       )}
-    </div>
+    </>
   );
 }
 
@@ -211,6 +238,6 @@ export async function getServerSideProps(context) {
   const categoriesList = JSON.parse(JSON.stringify(categoriesData));
 
   return {
-    props: { categoriesList, session }, // will be passed to the page component as props
+    props: { categoriesList, session } // will be passed to the page component as props
   };
 }

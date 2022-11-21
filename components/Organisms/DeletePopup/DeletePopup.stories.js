@@ -10,5 +10,5 @@ const oneEvent = {
     eventName: "WHAT THE FUCK"
 }
 
-export const Default = (args) => <DeletePopup singleEvent={oneEvent} />
+export const Default = (args) => <DeletePopup singleEvent={oneEvent} showDelete={true} />
 export const Error = (args) => <DeletePopup />

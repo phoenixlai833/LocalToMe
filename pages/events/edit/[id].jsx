@@ -11,6 +11,20 @@ import { collection, getDocs, addDoc } from "firebase/firestore";
 import EventForm from "../../../components/Templates/EventForm";
 import EventPreview from "../../../components/Templates/EventPreview";
 import axios from "axios";
+import styled from "styled-components";
+import Toast from "../../../components/Molecules/Toast/Toast";
+
+const ToastPopup = styled.div`
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 100;
+`
 
 export default function EditEvent({ defaultEvent, categoriesList }) {
   // const [event, setEvent] = useState(defaultEvent);
@@ -18,7 +32,7 @@ export default function EditEvent({ defaultEvent, categoriesList }) {
   const [imageURL, setImageURL] = useState(defaultEvent.fileName);
 
   const [isPreview, setIsPreview] = useState(false);
-
+  const [eventId, setEventId] = useState(null);
   const handleTogglePreview = () => {
     setIsPreview(!isPreview);
   };
@@ -96,7 +110,7 @@ export default function EditEvent({ defaultEvent, categoriesList }) {
     const putEvent = {
       id: defaultEvent.id,
       eventContent: event.eventDescription,
-      eventCreatorId: defaultEvent.eventCreatorId,
+      // eventCreatorId: defaultEvent.eventCreatorId,
       start: event.start,
       end: event.end,
       eventImage: event.eventImage,
@@ -110,41 +124,55 @@ export default function EditEvent({ defaultEvent, categoriesList }) {
     // console.log('lul', typeof event.start)
 
     axios.put("/api/events", putEvent).then((res) => {
-      window.location = `/events/${res.data}`
+      // window.location = `/events/${res.data}`
+      setEventId(res.data)
       console.log("edited successfully", res.data);
     });
   }
 
+  const handleViewPost = () => {
+    console.log("viewid", eventId)
+    window.location = `/events/${eventId}`;
+  };
+
   return (
-    <div>
-      {isPreview ? (
-        <EventPreview
-          event={event}
-          onTogglePreview={handleTogglePreview}
-          onCancel={handleCancel}
-          onConfirm={handleConfirm}
-        />
-      ) : (
-        <EventForm
-          mode={"edit"}
-          onTogglePreview={handleTogglePreview}
-          event={event}
-          onChangeEventName={handleChangeEventName}
-          onChangeEventCreator={handleChangeEventCreator}
-          onChangeEventPhoneNumber={handleChangeEventPhoneNumber}
-          onChangeEventLocation={handleChangeEventLocation}
-          onChangeEventDescription={handleChangeEventContent}
-          image={imageURL}
-          onChangeEventImage={handleChangeEventImage}
-          onChangeEventStartDate={handleChangeEventStartDate}
-          onChangeEventStartTime={handleChangeEventStartTime}
-          onChangeEventEndDate={handleChangeEventEndDate}
-          onChangeEventEndTime={handleChangeEventEndTime}
-          onChangeEventTags={handleChangeEventCategory}
-          categoriesList={categoriesList}
-        />
-      )}
-    </div>
+    <>
+      <div>
+        {isPreview ? (
+          <EventPreview
+            event={event}
+            onTogglePreview={handleTogglePreview}
+            onCancel={handleCancel}
+            onConfirm={handleConfirm}
+          />
+        ) : (
+          <EventForm
+            mode={"edit"}
+            onTogglePreview={handleTogglePreview}
+            event={event}
+            onChangeEventName={handleChangeEventName}
+            onChangeEventCreator={handleChangeEventCreator}
+            onChangeEventPhoneNumber={handleChangeEventPhoneNumber}
+            onChangeEventLocation={handleChangeEventLocation}
+            onChangeEventDescription={handleChangeEventContent}
+            image={imageURL}
+            onChangeEventImage={handleChangeEventImage}
+            onChangeEventStartDate={handleChangeEventStartDate}
+            onChangeEventStartTime={handleChangeEventStartTime}
+            onChangeEventEndDate={handleChangeEventEndDate}
+            onChangeEventEndTime={handleChangeEventEndTime}
+            onChangeEventTags={handleChangeEventCategory}
+            categoriesList={categoriesList}
+          />
+        )}
+      </div>
+      {eventId && (
+        <ToastPopup>
+          <Toast onViewPost={handleViewPost} message="Your changes has been saved!" />
+        </ToastPopup>
+      )
+      }
+    </>
   );
 }
 
@@ -152,6 +180,7 @@ export async function getServerSideProps(context) {
 
   const eventData = await getEvent(context.params.id);
   const defaultEvent = JSON.parse(JSON.stringify(eventData));
+  console.log(defaultEvent)
 
   const categoriesData = await getAllCategories();
   const categoriesList = JSON.parse(JSON.stringify(categoriesData));

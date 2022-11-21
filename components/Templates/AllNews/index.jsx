@@ -196,7 +196,7 @@ const CancelBtn = styled.button`
   color: #535353;
   margin: 2%;
 `;
-export default function AllNews({ allNews }) {
+export default function AllNews({ allNews, sessionEmail }) {
   const [showMore, setShowMore] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const router = useRouter();
@@ -274,20 +274,22 @@ export default function AllNews({ allNews }) {
             </TextDiv>
           </NewsCont>
 
-          <Func>
-            <Link href={`/news/edit/${news.id}`}>
-              <EditNews>
-                <img src="/Edit-icon.svg" alt="Edit News" />
+          {sessionEmail === news.newsCreatorId.email && (
+            <Func>
+              <Link href={`/news/edit/${news.id}`}>
+                <EditNews>
+                  <img src="/Edit-icon.svg" alt="Edit News" />
+                  &nbsp;
+                  <p>Edit News</p>
+                </EditNews>
+              </Link>
+              <DeleteNews>
+                <img src="/Delete-icon.svg" alt="Delete News" />
                 &nbsp;
-                <p>Edit News</p>
-              </EditNews>
-            </Link>
-            <DeleteNews>
-              <img src="/Delete-icon.svg" alt="Delete News" />
-              &nbsp;
-              <p onClick={handlePopup(news.id)}>Delete News</p>
-            </DeleteNews>
-          </Func>
+                <p onClick={handlePopup(news.id)}>Delete News</p>
+              </DeleteNews>
+            </Func>
+          )}
 
           {confirmDelete && popUpId == news.id && (
             <AbsPos>

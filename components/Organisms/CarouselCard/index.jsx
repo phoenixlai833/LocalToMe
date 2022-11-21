@@ -12,9 +12,12 @@ const ImageContainer = styled.div`
     border-radius: 15px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     width: 300px;
-    // min-width: 250px;
     height: 250px;
     padding: 15px 15px 20px;
+    @media (max-width: 767px) {
+        width:250px;
+        height:200px;
+    }
 `;
 
 const TextContainer = styled.div`
@@ -23,14 +26,14 @@ const TextContainer = styled.div`
     line-height: 1.5;
     color:white;
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 600;
     justify-self: flex-end;
     align-items: flex-start;
     z-index: 1;
     position: relative;
     padding: 0px 0px 0px;
     white-space: pre-wrap;  
-
+    gap:5px;
 `
 const Time = styled.p`
     color:#F2DE29;
