@@ -1,7 +1,7 @@
 import FloatingActionButton from ".";
 
 export default {
-   title: 'Atoms/FloatingActionButton',
+   title: 'Atoms/FloatButton',
    component: FloatingActionButton,
  };
 

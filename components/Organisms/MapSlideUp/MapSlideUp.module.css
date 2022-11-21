@@ -51,7 +51,7 @@
   -webkit-animation: slide-in 0.5s forwards;
 }
 
-.slide-out {
+.slideout {
   animation: slide-out 0.55s forwards;
   -webkit-animation: slide-out 0.5s forwards;
 }
@@ -109,7 +109,7 @@
     -webkit-animation: slide-in 0.5s forwards;
   }
 
-  .slide-out {
+  .slideout {
     animation: slide-out 0.5s forwards;
     -webkit-animation: slide-out 0.5s forwards;
   }

@@ -7,28 +7,15 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 
 const AppDiv = styled(AppBar)`
-  // background-color:white;
-  // color:${Colours.primary};
-  // z-index:100;
-  // max-width:100vw;
-  // @media (max-width: 767px) {
-  //   display:none;
+  @media (max-width: 767px) {
+    display:none;
 }
 `
 
 const NavButton = styled(IconButton)`
-  // display:flex;
-  // flex-direction:column;
-  // color:${Colours.primary};
-  // font-size:12px;
-  // border-radius:0;
-  // padding:18px 30px;
-  // max-width:90px;
 `
 
 const NavIcons = styled(NavBarIcons)`
-  // width:50px;
-  // height:50px;
 `
 
 const Logo = styled.img`
@@ -57,53 +44,53 @@ export default function TopNavigation({
   }
   return (
     <ThemeProvider theme={Theme}>
-    <AppDiv position="fixed" sx={{backgroundColor:"white", color:Colours.primary, maxWidth:"100vw" }}>
-      <Container maxWidth="false">
-        <Toolbar disableGutters>
-          <Container sx={{ display: "flex", justifyContent: "flex-start" }}>
-            <Logo src="/localtomelogo.svg" alt="Local To Me logo" aria/>
-            {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}> */}
-            <Typography
-              variant="h4"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                fontWeight: 900,
-                display:"flex",
-                alignItems:"center",
-              }}
-            >
-              LocalToMe
-            </Typography>
-          </Container>
-          {/* </Box> */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex', justifyContent: "flex-end" } }}>
-            <NavButton onClick={onHome} sx={{display:'flex', flexDirection:'column', borderRadius:"0", padding:"18px 30px", maxWidth:"90px", fontSize:"12px"}}>
-              <NavIcons icon="Home" />
-              Home
-            </NavButton>
-            <NavButton onClick={onCommunity} sx={{display:'flex', flexDirection:'column', borderRadius:"0", padding:"18px 30px", maxWidth:"90px", fontSize:"12px"}}>
-              <NavIcons icon="Community" />
-              Community
-            </NavButton>
-            <NavButton onClick={onMap} sx={{display:'flex', flexDirection:'column', borderRadius:"0", padding:"18px 30px", maxWidth:"90px", fontSize:"12px"}}>
-              <NavIcons icon="Map" />
-              Map
-            </NavButton>
-            <NavButton onClick={onFavourites} sx={{display:'flex', flexDirection:'column', borderRadius:"0", padding:"18px 30px", maxWidth:"90px", fontSize:"12px"}}>
-              <NavIcons icon="Favourite" />
-              Favourites
-            </NavButton>
-            <NavButton onClick={onProfile} sx={{display:'flex', flexDirection:'column', borderRadius:"0", padding:"18px 30px", maxWidth:"90px", fontSize:"12px"}}>
-              <NavIcons icon="Profile" />
-              Profile
-            </NavButton>
-
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppDiv>
+      <AppDiv position="fixed" sx={{ backgroundColor: "white", color: Colours.primary, maxWidth: "100vw" }}>
+        <Container maxWidth="false">
+          <Toolbar disableGutters>
+            <Container sx={{ display: "flex", justifyContent: "flex-start" }}>
+              <Logo src="/localtomelogo.svg" alt="Local To Me logo" aria />
+              {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}> */}
+              <Typography
+                variant="h4"
+                noWrap
+                component="a"
+                href="/"
+                sx={{
+                  fontWeight: 700,
+                  display: "flex",
+                  alignItems: "center",
+                  fontFamily: "Fredoka",
+                }}
+              >
+                LocalToMe
+              </Typography>
+            </Container>
+            {/* </Box> */}
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex', justifyContent: "flex-end" } }}>
+              <NavButton onClick={onHome} sx={{ display: 'flex', flexDirection: 'column', borderRadius: "0", padding: "18px 30px", maxWidth: "90px", fontSize: "12px" }}>
+                <NavIcons icon="Home" />
+                Home
+              </NavButton>
+              <NavButton onClick={onCommunity} sx={{ display: 'flex', flexDirection: 'column', borderRadius: "0", padding: "18px 30px", maxWidth: "90px", fontSize: "12px" }}>
+                <NavIcons icon="Community" />
+                Community
+              </NavButton>
+              <NavButton onClick={onMap} sx={{ display: 'flex', flexDirection: 'column', borderRadius: "0", padding: "18px 30px", maxWidth: "90px", fontSize: "12px" }}>
+                <NavIcons icon="Map" />
+                Map
+              </NavButton>
+              <NavButton onClick={onFavourites} sx={{ display: 'flex', flexDirection: 'column', borderRadius: "0", padding: "18px 30px", maxWidth: "90px", fontSize: "12px" }}>
+                <NavIcons icon="Favourite" />
+                Favourites
+              </NavButton>
+              <NavButton onClick={onProfile} sx={{ display: 'flex', flexDirection: 'column', borderRadius: "0", padding: "18px 30px", maxWidth: "90px", fontSize: "12px" }}>
+                <NavIcons icon="Profile" />
+                Profile
+              </NavButton>
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppDiv>
     </ThemeProvider>
   );
 }         
