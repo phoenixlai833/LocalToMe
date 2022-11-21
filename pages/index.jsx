@@ -17,6 +17,8 @@ import AllNews from "../components/Templates/AllNews";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { authOptions } from './api/auth/[...nextauth].js';
 import { unstable_getServerSession } from "next-auth/next";
+import Loading from "../components/Molecules/LoadingAnimation/LoadingAnimation";
+
 
 const SearchBar = styled.div`
 height: 5vh;
@@ -129,6 +131,8 @@ export default function Home({ sortedEvents, sortedAllNews }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <TopNavigation />
+      {/* <Loading/> */}
+      <FloatingActionButton />
 
       <div style={{ padding: "8% 5% 5% 5%" }}>
 
@@ -176,8 +180,6 @@ export default function Home({ sortedEvents, sortedAllNews }) {
         </Link>
       </div>
       <AllNews allNews={sortedAllNews} />
-
-      <FloatingActionButton />
       <div className="TEMPMEDIA">
         <NavBar value={0} />
       </div>
