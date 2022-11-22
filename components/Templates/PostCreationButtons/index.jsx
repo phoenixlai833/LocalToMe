@@ -6,13 +6,19 @@ const PostCreationHeader = styled.h2`
 
 const Cont = styled.div`
 display:flex;
-width: 100vw;
-height: 100vh; 
 justify-content: center;
 flex-direction: column;
 align-items: center;
-background-color: #CDECC2;
-z-index: 0;
+margin: 30vh 0 0 0;
+
+`
+
+const AddPost = styled.div`
+@media (min-width: 768px) {
+    position: relative;
+    border: 1px solid #ffffff;
+    height: 100vh;
+    width: 100vw;
 `
 
 const CreateBttn = styled.div`
@@ -27,7 +33,7 @@ align-items: center;
 justify-content: center;
 margin: 10px;
 &:hover {
-background-color: ${props => props.active || '#085617' };
+background-color: ${props => props.active || '#085617'};
 }
 `
 const Close = styled.img`
@@ -36,18 +42,25 @@ height: 50px;
 padding: 10px;
 margin: 10px;
 position: absolute;
+top: 5%;
+right: 4%;
+@media (min-width: 768px) {
+
+    top: 5%;
+    right: 5%;
+}
 `
 
 export default function CreationSection() {
 
     const r = useRouter();
 
-    return <div>
-                <Close src="/close.svg" onClick={()=>r.back()}></Close>
+    return <AddPost>
+        <Close src="/close.svg" onClick={() => r.back()}></Close>
         <Cont>
             <PostCreationHeader>What do you want to create today?</PostCreationHeader>
             <CreateBttn onClick={() => r.push('../events/add')}>Create an Event</CreateBttn>
             <CreateBttn onClick={() => r.push('../news/add')}>Create a News</CreateBttn>
         </Cont>
-    </div>
+    </AddPost>
 }

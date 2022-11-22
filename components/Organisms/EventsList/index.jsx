@@ -9,7 +9,10 @@ const EventBlock = styled.div`
   gap: 10%;
   align-items: center;
   width: 90%;
-  margin: 20px;
+  margin: 25px;
+  @media (min-width: 768px) {
+    grid-template-columns: 50% 50%;
+  }
 `;
 
 const EventDateAndImage = styled.div`
@@ -36,21 +39,26 @@ const EventDate = styled.div`
   font-weight: 600;
   border-radius: 10px;
   text-align: center;
-  left: 4%;
-  margin: 3%;
+  // left: 4%;
+  // margin: 3%;
   justify-content: center;
   align-items: center;
   @media (min-width: 768px) {
     width: 60px;
     height: 60px;
     font-size: 22px;
-    left: 1%;
+    // left: 1%;
     margin: 2%;
+  }
+  @media (max-width: 768px) {
+      left: 4%;
+  margin: 3%;
   }
 `;
 
 const EventInfo = styled.div`
   height: 200px;
+  padding-right:2vw;
 `;
 
 const EventTime = styled.div`

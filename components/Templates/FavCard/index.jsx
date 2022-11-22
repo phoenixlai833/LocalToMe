@@ -14,28 +14,36 @@ const FavoriteBox = styled.div`
 position: relative;
 display: grid;
 grid-template-columns: 40% 50%;
-gap: 5%;
+gap: 10px;
 margin: 1rem;
 width:85vw;
 height: 150px;
 box-sizing: border-box;
 margin:1rem auto;
 @media (min-width: 768px) {
-    width: 40vw;
+    width: 50vw;
 
 }
 `
 
 const FavImg = styled.div`
+width:150px;
+height: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: auto;
     border-radius: 20px;
 box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25);
+@media (min-width: 768px) {
+  width:200px;
+
+
 `
 
 const InfoBox = styled.div`
+
+padding-left: 1rem;
 display: flex;
 flex-direction: column;
 margin-left: 2rem;
