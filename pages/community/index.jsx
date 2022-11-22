@@ -86,7 +86,7 @@ const NewTab = styled.p`
 `;
 
 const TopBar = styled.div`
-  @media (max-width: 767px) {
+  @media (max-width: 768px) {
     display:none;
 }
 `
@@ -102,8 +102,9 @@ const ComBox = styled.div`
 @media (min-width: 768px) {
 border: 1px solid #ffffff;
 margin-top:9vh;
-margin-left: 13vw;
-margin-right: 13vw;
+margin-left: 18vw;
+margin-right: 18vw;
+min-height: 91vh;
 border-radius: 15px;
    box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
 
@@ -132,33 +133,33 @@ export default function Community({ allNews, tabId, usersData }) {
         <TopNavigation />
       </TopBar>
       <ComBox>
-      <InstantSearch
-        indexName={tabContents[tab].searchIndex}
-        searchClient={searchClient}
-      >
+        <InstantSearch
+          indexName={tabContents[tab].searchIndex}
+          searchClient={searchClient}
+        >
 
-        <CustomSearch />
+          <CustomSearch />
 
-        <Tab onClick={handleChangeTab}>
-          <EventTab id="0" tabId={tab}>
-            Events
-          </EventTab>
-          <NewTab id="1" tabId={tab}>
-            News
-          </NewTab>
-        </Tab>
+          <Tab onClick={handleChangeTab}>
+            <EventTab id="0" tabId={tab}>
+              Events
+            </EventTab>
+            <NewTab id="1" tabId={tab}>
+              News
+            </NewTab>
+          </Tab>
 
-        {tab === 0 ? (
-          <Heading>Recent Events</Heading>
-        ) : (
-          <Heading>Recent News</Heading>
-        )}
-        {tabContents[tab].component}
-      </InstantSearch>
+          {tab === 0 ? (
+            <Heading>Recent Events</Heading>
+          ) : (
+            <Heading>Recent News</Heading>
+          )}
+          {tabContents[tab].component}
+        </InstantSearch>
       </ComBox>
       <FloatingActionButton />
       <Btmbar>
-      <NavBar value={1} />
+        <NavBar value={1} />
       </Btmbar>
     </>
   );

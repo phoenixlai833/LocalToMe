@@ -16,7 +16,6 @@ margin: 22vh 0 0 0;
 
 `
 
-
 const AddPost = styled.div`
 overflow: hidden;
 @media (min-width: 768px) {

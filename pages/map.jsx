@@ -31,6 +31,7 @@ import FoodBankMapPin from "../components/Atoms/FoodBankMapPin";
 import Filters from "../components/Atoms/Filters";
 import NavBar from "../components/Organisms/NavBar";
 import Search from "../components/Molecules/Search";
+import TopNavigation from "../components/Organisms/NavBarTop";
 import { motion } from "framer-motion";
 
 const searchClient = algoliasearch(
@@ -78,10 +79,10 @@ const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_REACT_APP_MAPBOX_TOKEN; // Set your
 
 const SearchArea = styled.div`
   position: absolute;
-  top: 0;
+  top: 100px;
   right: 3%;
   padding: 2%;
-  width: 30vw;
+  width: 40vw;
   @media (max-width: 767px) {
     width: 90vw;
     top: 0;
@@ -120,6 +121,12 @@ const FilterListContainer = styled.div`
   }
 `;
 
+const TopBar = styled.div`
+  @media (max-width: 767px) {
+    display:none;
+}
+`
+
 export default function FoodBankMap({ foodBanksList, eventList }) {
   const [viewport, setViewport] = useState({
     latitude: 49.24357,
@@ -132,10 +139,13 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
   const [userLocation, setUserLocation] = useState({});
   const mapRef = useRef();
 
-  const filterFoodBanks = () => {};
+  const filterFoodBanks = () => { };
 
   return (
     <InstantSearch indexName="prod_FOODBANKS" searchClient={searchClient}>
+      <TopBar>
+        <TopNavigation />
+      </TopBar>
       <div className="mapboxgl-canvas">
         <ReactMapGL
           ref={mapRef}
@@ -162,7 +172,7 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
               });
             }}
           />
-          <NavigationControl position="top-right" />
+          <NavigationControl position="top-right" style={{ marginTop: "80px" }} />
           {/* <ScaleControl position="top-right" /> */}
 
           <Index indexName="prod_EVENTS">
@@ -217,7 +227,9 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
             </FilterbtnSection>
           </FilterListContainer>
         </SearchArea>
-        <NavBar value={2} />
+        <div className="TEMPMEDIA">
+          <NavBar value={2} />
+        </div>
       </div>
     </InstantSearch>
   );
@@ -243,3 +255,4 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
 //     props: { foodBanksList, eventList, pantriesList, fridgesList }, // will be passed to the page component as props
 //   };
 // }
+

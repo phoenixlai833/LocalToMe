@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 
 const AppDiv = styled(AppBar)`
-  @media (max-width: 767px) {
+  @media (max-width: 768px) {
     display:none;
 }
 `
@@ -22,6 +22,7 @@ const Logo = styled.img`
   width:50px;
   height:50px;
 `
+
 export default function TopNavigation({
   value = 0,
 }) {

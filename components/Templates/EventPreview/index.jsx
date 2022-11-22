@@ -59,7 +59,7 @@ const EditBtn = styled.button`
 `;
 
 const EventUser = styled.div`
-margin-left: 6%;
+margin-left: 5%;
 `
 
 const EventCat = styled.div`

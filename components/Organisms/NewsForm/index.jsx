@@ -13,6 +13,9 @@ const Form = styled.form`
   * {
     width: 100%;
   }
+  @media (min-width: 768px) {
+    width: 70%;  
+  }
 `;
 
 const LayoutTime = styled.div`

@@ -15,7 +15,7 @@ const Category = styled.div`
    background-color: ${props => (props.selected ? '#FFB800' : '#FFEAB4')};
    // background-color: #FFB800;
    border: none;
-   width: 100px;
+   width: 90px;
    height: 40px;
    border-radius: 35px;
    margin-right: 10px;

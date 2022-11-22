@@ -15,7 +15,6 @@ const ProfileBlock = styled.div`
   margin: 30px;
 `
 
-
 const Image = styled.img`
   position: relative;
   width: 100%;
@@ -73,6 +72,10 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 padding: 30%;
 flex-direction: column;
 justify-content: space-around;
+@media (min-width: 768px) {
+  width: 150px;
+  padding: 30% 0 30% 50%;
+}
 `
 
 export default function ProfileCard({

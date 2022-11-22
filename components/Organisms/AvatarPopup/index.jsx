@@ -15,6 +15,10 @@ border-radius: 3vw;
 padding-top: 5%;
 // display: flex;
 // flex-direction: column;
+@media (min-width: 768px) {
+    width: 350px;
+    border-radius: 15px;
+}
 `
 const TopSec = styled.div`
 display: flex;
@@ -29,6 +33,14 @@ align-items: center;
 padding: 5%;
 `
 
+const ImgCont = styled.div`
+marginLeft: 5%;
+width: 5vw;
+@media (min-width: 768px) {
+    width: 25px;
+}
+`
+
 const YourAvatar = styled.div`
 border-radius: 50%;
 background-image: ${(props) => `url(${props.currentAvatar})`};
@@ -38,6 +50,10 @@ background-size: cover;
 background-color: #D9D9D9;
 width: 18vw;
 height: 18vw; 
+@media (min-width: 768px) {
+    width: 100px;
+    height: 100px;
+}
 `
 
 const Divider = styled.div`
@@ -66,6 +82,11 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 width: 12vw;
 height: 12vw; 
 margin: 0 6% 10% 3%;
+@media (min-width: 768px) {
+    background-size: 50px; 
+    width: 70px;
+    height: 70px;
+}
 `
 
 const MascotItem = styled.div`
@@ -79,6 +100,10 @@ background-color: ${props => props.selected ? "#FFB800" : "#D9D9D9"};
 width: 12vw;
 height: 12vw; 
 margin: 0 6% 10% 3%;
+@media (min-width: 768px) {
+    width: 70px;
+    height: 70px;
+}
 `
 
 const Input = styled.input``;
@@ -155,10 +180,10 @@ export default function AvatarPopup({ currentUrl, submitAvatar, imgPath = "/Avat
     return (
         <>
             <SelectionCont>
-                <div style={{display:"flex", width:"95%", flexDirection:"row-reverse"}}>
-                    <div style={{ marginLeft: "5%", width: "5vw" }} onClick={handleClick}>
+                <div style={{ display: "flex", width: "95%", flexDirection: "row-reverse" }}>
+                    <ImgCont onClick={handleClick}>
                         <Image src={"/close.svg"} width={"100%"} height={"100%"}></Image>
-                    </div>
+                    </ImgCont>
                 </div>
 
                 <TopSec>

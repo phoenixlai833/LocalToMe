@@ -85,6 +85,5 @@ export default function DeletePopup({
                     </BtnCont>
                 </DeleteCont>}
         </>
-
     )
 }
