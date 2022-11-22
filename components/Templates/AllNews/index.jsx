@@ -12,8 +12,7 @@ import axios from "axios";
 
 const NewsList = styled.div`
   position: relative;
-  width: 100%;
-  margin: 0;
+
 `
 
 const NewsCont = styled.div`
@@ -22,6 +21,9 @@ const NewsCont = styled.div`
   display: flex;
   width: 90vw;
   gap: 10px;
+  @media (min-width: 768px) {
+    width: 50vw;
+  }
 `;
 
 const Divider = styled.div`
@@ -31,17 +33,26 @@ const Divider = styled.div`
   height: 90%;
   align-self: center;
   border-radius: 10px;
+  @media (min-width: 768px) {
+    display: none;
+  }
 `;
+
 const LeftCont = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  @media (min-width: 768px) {
+    margin-left: 3em;
+    margin-right: 1em;
+  }
 `;
 const TextDiv = styled.div`
   display: flex;
   flex-direction: column;
-  width: 80%;
+
 `;
+
 const InfoDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -80,14 +91,18 @@ const Tag = styled.div`
 const ImageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   background-image: url(${(props) => props.src});
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 15px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  min-height: 20vh;
+  width:75vw;
+  height: 25vh;
+  @media (min-width: 768px) {
+    width: 55vw;
+    height: 33vh;
+  }
 `;
 
 const Content = styled.div`

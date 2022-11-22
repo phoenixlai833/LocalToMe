@@ -83,13 +83,14 @@ export default function DeletePopup({
         <>
             {showDelete &&
                 <DeleteCont show={display}>
-                    <h2 style={{paddingLeft: "10%", paddingRight: "10%"}}>Are you sure you want to delete this posting? This cannot be undone.</h2>
+                    <h2 style={{ paddingLeft: "10%", paddingRight: "10%" }}>Are you sure you want to delete this posting? This cannot be undone.</h2>
                     <BtnCont>
                         <CancelBtn onClick={hidePopup}>Cancel</CancelBtn>
                         <DeleteBtn onClick={handleDelete(eventId)}>Confirm</DeleteBtn>
                     </BtnCont>
                 </DeleteCont>}
         </>
+
     )
 }
 

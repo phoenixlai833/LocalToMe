@@ -54,74 +54,75 @@ border-radius: 15px;
 `
 
 export default function Favorites({ user }) {
-    const [userFavorites, setUserFavorites] = useState();
-    const [tab, setTab] = useState(0);
+  const [userFavorites, setUserFavorites] = useState();
+  const [tab, setTab] = useState(0);
 
-    useEffect(() => {
-        if (!user.favorite) {
-            user.favorite = {};
-        }
-        user.favorite.event = user.favorite.event || [];
-        user.favorite.location = user.favorite.location || [];
-        setUserFavorites(user.favorite);
-    }, [user]);
+  useEffect(() => {
+    if (!user.favorite) {
+      user.favorite = {};
+    }
+    user.favorite.event = user.favorite.event || [];
+    user.favorite.location = user.favorite.location || [];
+    setUserFavorites(user.favorite);
+  }, [user]);
 
-    if (userFavorites) {
-        const handleUnfavorite = (type, itemId) => {
-            postFavorite(true, type, user.id, itemId).then(() => {
-                const newUserFavorites = { ...userFavorites };
-                newUserFavorites[type] = userFavorites[type].filter(
-                    (item) => item.id !== itemId
-                );
-                setUserFavorites(newUserFavorites);
-            });
-        };
+  if (userFavorites) {
+    const handleUnfavorite = (type, itemId) => {
+      postFavorite(true, type, user.id, itemId).then(() => {
+        const newUserFavorites = { ...userFavorites };
+        newUserFavorites[type] = userFavorites[type].filter(
+          (item) => item.id !== itemId
+        );
+        setUserFavorites(newUserFavorites);
+      });
+    };
 
-        const eventList = userFavorites.event.map((singleEvent) => (
-            <FavCard
-                key={singleEvent.id}
-                id={singleEvent.id}
-                type="event"
-                href={`/events/${singleEvent.id}`}
-                img={singleEvent.eventImage}
-                txt="Event"
-                title={singleEvent.eventName}
-                location={singleEvent.eventLocation}
-                onUnfavorite={handleUnfavorite}
-                backgroundColor="#FFB800"
-                txtColor="#000000"
-            />
-        ));
+    const eventList = userFavorites.event.map((singleEvent) => (
+      <FavCard
+        key={singleEvent.id}
+        id={singleEvent.id}
+        type="event"
+        href={`/events/${singleEvent.id}`}
+        img={singleEvent.eventImage}
+        txt="Event"
+        title={singleEvent.eventName}
+        location={singleEvent.eventLocation}
+        onUnfavorite={handleUnfavorite}
+        backgroundColor="#FFB800"
+        txtColor="#000000"
+      />
+    ));
 
-        const locationList = userFavorites.location.map((singleLocation) => (
-            <FavCard
-                key={singleLocation.id}
-                id={singleLocation.id}
-                type="location"
-                href={`/foodBank/${singleLocation.id}`}
-                img={singleLocation.foodBank_Image}
-                txt="Food Bank"
-                title={singleLocation.program_name}
-                location={singleLocation.location_address}
-                onUnfavorite={handleUnfavorite}
-                backgroundColor="#108928"
-                txtColor="#FFFFFF"
-            />
-        ));
+    const locationList = userFavorites.location.map((singleLocation) => (
+      <FavCard
+        key={singleLocation.id}
+        id={singleLocation.id}
+        type="location"
+        href={`/foodBank/${singleLocation.id}`}
+        img={singleLocation.foodBank_Image}
+        txt="Food Bank"
+        title={singleLocation.program_name}
+        location={singleLocation.location_address}
+        onUnfavorite={handleUnfavorite}
+        backgroundColor="#108928"
+        txtColor="#FFFFFF"
+      />
+    ));
 
-        const allList = locationList.concat(eventList);
-        const tabContents = {
-            0: {
-                component: allList,
-                alt: <>You have no favorite events or locations.</>,
-            },
-            1: { component: locationList, alt: <>You have no favorite locations.</> },
-            2: { component: eventList, alt: <>You have no favorite events.</> },
-        };
-        const tabList = ["All", "Locations", "Events"];
-        const handleChangeTab = (tabId) => {
-            setTab(tabId);
-        };
+    const allList = locationList.concat(eventList);
+
+    const tabContents = {
+      0: {
+        component: allList,
+        alt: <>You have no favorite events or locations.</>,
+      },
+      1: { component: locationList, alt: <>You have no favorite locations.</> },
+      2: { component: eventList, alt: <>You have no favorite events.</> },
+    };
+    const tabList = ["All", "Locations", "Events"];
+    const handleChangeTab = (tabId) => {
+      setTab(tabId);
+    };
 
         return (
             <>
@@ -149,30 +150,30 @@ export default function Favorites({ user }) {
 }
 
 export async function getServerSideProps(context) {
-    const session = await unstable_getServerSession(
-        context.req,
-        context.res,
-        authOptions
-    );
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
 
-    if (!session) {
-        return {
-            redirect: {
-                destination: "/auth/signin",
-                permanent: false,
-            },
-        };
-    } else {
-        const users = await getUsers();
-        const userId = users.find((user) => user.email === session.user.email).id;
-        const userData = await getUser(userId);
-        const user = JSON.parse(JSON.stringify(userData));
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth/signin",
+        permanent: false,
+      },
+    };
+  } else {
+    const users = await getUsers();
+    const userId = users.find((user) => user.email === session.user.email).id;
+    const userData = await getUser(userId);
+    const user = JSON.parse(JSON.stringify(userData));
 
-        return {
-            props: {
-                session,
-                user,
-            },
-        };
-    }
+    return {
+      props: {
+        session,
+        user,
+      },
+    };
+  }
 }

@@ -1,9 +1,8 @@
-import '../styles/globals.css'
-import Head from 'next/head'
-import 'react-time-picker/dist/TimePicker.css'
-import 'react-clock/dist/Clock.css'
-import { SessionProvider } from "next-auth/react"
-
+import "../styles/globals.css";
+import Head from "next/head";
+import "react-time-picker/dist/TimePicker.css";
+import "react-clock/dist/Clock.css";
+import { SessionProvider } from "next-auth/react";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return <>
@@ -18,4 +17,4 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   </>
 }
 
-export default MyApp
+export default MyApp;

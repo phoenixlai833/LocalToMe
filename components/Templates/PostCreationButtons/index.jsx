@@ -9,7 +9,16 @@ display:flex;
 justify-content: center;
 flex-direction: column;
 align-items: center;
+margin: 30vh 0 0 0;
 
+`
+
+const AddPost = styled.div`
+@media (min-width: 768px) {
+    position: relative;
+    border: 1px solid #ffffff;
+    height: 100vh;
+    width: 100vw;
 `
 
 const CreateBttn = styled.div`
@@ -28,26 +37,30 @@ background-color: ${props => props.active || '#085617'};
 }
 `
 const Close = styled.img`
-
 width: 50px;
 height: 50px;
 padding: 10px;
 margin: 10px;
 position: absolute;
-top: 4%;
-left: 4%;
+top: 5%;
+right: 4%;
+@media (min-width: 768px) {
+
+    top: 5%;
+    right: 5%;
+}
 `
 
 export default function CreationSection() {
 
     const r = useRouter();
 
-    return <div>
+    return <AddPost>
         <Close src="/close.svg" onClick={() => r.back()}></Close>
         <Cont>
             <PostCreationHeader>What do you want to create today?</PostCreationHeader>
             <CreateBttn onClick={() => r.push('../events/add')}>Create an Event</CreateBttn>
             <CreateBttn onClick={() => r.push('../news/add')}>Create a News</CreateBttn>
         </Cont>
-    </div>
+    </AddPost>
 }
