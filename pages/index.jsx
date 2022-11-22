@@ -131,8 +131,8 @@ export default function Home({ sortedEvents, sortedAllNews }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <TopNavigation />
-      {/* <Loading/> */}
       <FloatingActionButton />
+      {/* <Loading/> */}
 
       <div style={{ padding: "8% 5% 5% 5%" }}>
 
@@ -164,7 +164,6 @@ export default function Home({ sortedEvents, sortedAllNews }) {
             <p style={{ color: "green" }}>view all</p>
           </Link>
         </div>
-
         <UpcomingEventsContainer>
           <EventListContainer>
             <ul style={{ display: "flex", listStyle: "none", padding: "0" }}>

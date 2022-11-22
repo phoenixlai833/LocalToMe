@@ -35,6 +35,7 @@ gap:${props => props.gap || "0px"};
 export const Colours = {
   primary: "#108928",
   secondary: "#085617",
+  tertiary: "#CDECC2",
   background: "#FFFFFF",
   foreground: "#000000"
 }
