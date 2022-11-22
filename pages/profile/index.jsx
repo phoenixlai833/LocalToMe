@@ -14,7 +14,7 @@ import { unstable_getServerSession } from "next-auth/next";
 import axios from "axios";
 import TopNavigation from "../../components/Organisms/NavBarTop";
 
-const MainCont = styled.div`
+export const MainCont = styled.div`
 @media (min-width: 767px) {
 display:flex;
 justify-content: center;
@@ -25,9 +25,10 @@ height: 100vh;
 }
 `
 
-const WhiteCont = styled.div`
+export const WhiteCont = styled.div`
 @media (min-width: 767px) {
-   margin-top:64px;
+    width: 1000px;
+   margin-top: 64px;
     height: 150vh;
    box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
 }

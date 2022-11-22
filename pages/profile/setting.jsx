@@ -12,6 +12,9 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { authOptions } from '../api/auth/[...nextauth].js';
 import { unstable_getServerSession } from "next-auth/next";
 import Link from 'next/link';
+import TopNavigation from '../../components/Organisms/NavBarTop';
+import { MainCont } from '.';
+import { WhiteCont } from '.';
 
 export const ProfileDisplayCont = styled.div`
 display: flex;
@@ -23,7 +26,16 @@ width:100%;
 height: 100%;
 max-height: 200%;
 `
-
+const TopBar = styled.div`
+  @media (max-width: 767px) {
+    display:none;
+}
+`
+export const WhiteSecondCont = styled(WhiteCont)`
+@media (min-width: 767px) {
+    margin-top: 80px;
+}
+`
 export default function Setting() {
     const { data: session } = useSession()
     console.log(session.user);
@@ -32,22 +44,29 @@ export default function Setting() {
     if (session) {
         return (
             <>
-                <TopBanner text='Settings'></TopBanner>
-                <div>
-                    <ProfileDisplayCont>
-                        <ProfileDisplay name={session.user.name} email={session.user.email} />
-                        <AccountSection onRoute={() => r.push('./editaccount')} />
-                        <ThemeSection />
-                        <NotificationSection />
-                        <PrivacySection></PrivacySection>
-                    </ProfileDisplayCont>
+                <TopBar>
+                    <TopNavigation />
+                </TopBar>
+                <MainCont>
+                    <WhiteSecondCont>
+                        <TopBanner text='Settings'></TopBanner>
+                        <div>
+                            <ProfileDisplayCont>
+                                <ProfileDisplay name={session.user.name} email={session.user.email} />
+                                <AccountSection onRoute={() => r.push('./editaccount')} />
+                                <ThemeSection />
+                                <NotificationSection />
+                                <PrivacySection></PrivacySection>
+                            </ProfileDisplayCont>
 
-                    <FlexBox style={{ alignSelf: "center", marginTop: "5%" }}>
-                        {/* <Link href={"/auth/signout"}> */}
-                        <GeneralGreenBtn w={'25%'} text='Log out' onClick={() => r.push('/auth/signout')}></GeneralGreenBtn>
-                        {/* </Link> */}
-                    </FlexBox>
-                </div>
+                            <FlexBox style={{ alignSelf: "center", marginTop: "5%" }}>
+                                {/* <Link href={"/auth/signout"}> */}
+                                <GeneralGreenBtn w={'25%'} text='Log out' onClick={() => r.push('/auth/signout')}></GeneralGreenBtn>
+                                {/* </Link> */}
+                            </FlexBox>
+                        </div>
+                    </WhiteSecondCont>
+                </MainCont>
             </>
         )
     }
