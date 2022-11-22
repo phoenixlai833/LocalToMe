@@ -18,27 +18,30 @@ export const MainCont = styled.div`
 @media (min-width: 767px) {
 display:flex;
 justify-content: center;
-align-items: flex-start;
-flex-direction: row;
-width: 100vw;
-height: 100vh;
+// align-items: flex-start;
+flex-direction: column;
+// width: 100vw;
+// height: 100vh;
 }
 `
 
-export const WhiteCont = styled.div`
-@media (min-width: 767px) {
-    width: 1000px;
-   margin-top: 64px;
-    height: 150vh;
-   box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
-}
-`
+// export const WhiteCont = styled.div`
+// @media (min-width: 768px) {
+//     width: 1000px;
+//    margin-top: 64px;
+//     height: 150vh;
+//    box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
+// }
+// `
 const ProfileTab = styled.div`
 display:flex;
 height: 170px;
 width: 100%
 justify-content: flex-end;
 align-items: flex-end;
+@media (min-width: 768px) {
+    height: 130px;
+}
 `
 
 const Tab = styled.div`
@@ -57,13 +60,13 @@ const EventTab = styled.p`
   text-underline-offset: 12px;
   font-size: 18px;
   margin-top: 8px;
-  @media (min-width: 767px) {
+  @media (min-width: 768px) {
     font-size: 20px;
 }
 `;
 
 const TopBar = styled.div`
-  @media (max-width: 767px) {
+  @media (max-width: 768px) {
     display:none;
 }
 `
@@ -76,7 +79,7 @@ const NewTab = styled.p`
   text-underline-offset: 12px;
   font-size: 18px;
   margin-top: 8px;
-  @media (min-width: 767px) {
+  @media (min-width: 768px) {
     font-size: 20px;
 }
 `;
@@ -87,8 +90,11 @@ position: absolute;
 left: 20%;
 top: 7%;
 z-index: 2;
+@media (min-width: 768px) {
+left: 30vw;
+top: 15%;
+}
 `
-
 
 const PosDeleteConfirm = styled.div`
 position: absolute;
@@ -99,9 +105,22 @@ z-index: 4;
 
 const ShareBox = styled.div`
 position: absolute;
-left: 25%;
-top: 25%;
+left: 20vw;
+top: 30vh;
 z-index: 3;
+@media (min-width: 768px) {
+    left: 35vw;
+}
+`
+
+const DesktopBox = styled.div`
+@media (min-width: 768px) {
+margin-top:8vh;
+margin-left: 18vw;
+margin-right: 18vw;
+// min-height: 92vh;
+box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
+}
 `
 
 export default function Profile({ sortedEvents }) {
@@ -174,6 +193,9 @@ export default function Profile({ sortedEvents }) {
     if (session) {
         return (
             <>
+                <TopBar>
+                    <TopNavigation />
+                </TopBar>
                 < PosAbs show={display}>
                     <AvatarPopup currentUrl={avatar} submitAvatar={handleSubmitAvatar} handleClick={() => setDisplay("none")} imgPath={session.user.image} name={session.user.name}></AvatarPopup>
                 </PosAbs>
@@ -183,11 +205,8 @@ export default function Profile({ sortedEvents }) {
                 <ShareBox>
                     <SharePost shareUrl={shareUrl} share={share} closeShare={handleCloseShare} copied={copied} changeOnCopy={handleOnCopy} />
                 </ShareBox>
-                <TopBar>
-                    <TopNavigation value={5}/>
-                </TopBar>
-                <MainCont>
-                    <WhiteCont>
+                <DesktopBox>
+                    <MainCont>
                         <ProfileSection src={avatar} name={session.user.name} email={session.user.email} handleClick={() => setDisplay("static")} />
                         <ProfileTab>
                             <Tab onClick={handleChangeTab}>
@@ -199,11 +218,13 @@ export default function Profile({ sortedEvents }) {
                                 </NewTab>
                             </Tab>
                         </ProfileTab>
-                    </WhiteCont>
-                </MainCont>
-                {tabContents[tab].component}
-                <div style={{ marginBottom: "10vh" }}></div>
-                <NavBar value={4} />
+                        {tabContents[tab].component}
+                        <div style={{ marginBottom: "10vh" }}></div>
+                    </MainCont>
+                </DesktopBox>
+                <div className="TEMPMEDIA">
+                    <NavBar value={4} />
+                </div>
                 <FloatingActionButton />
 
             </>

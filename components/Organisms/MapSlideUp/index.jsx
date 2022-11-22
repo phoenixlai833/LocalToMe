@@ -16,7 +16,7 @@ width: 10px;
 height: 20vh;
 border: none;
 border-radius: 12px;
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     width: 20vw;
     height: 13px;
 }
@@ -29,7 +29,7 @@ height: 100vh;
 display: flex;
 justify-content: flex-end;
 align-items: center;
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     justify-content: center;
     align-items: center;
     width: 100vw;
@@ -41,8 +41,14 @@ width: 100vw;
 height: 0.5vh;
 background-color: gray;
 opacity: 20%;
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     width: 100vw;
+}
+`
+
+const Spacer = styled.div`
+@media (min-width: 768px) {
+    padding-top: 80px
 }
 `
 
@@ -77,7 +83,7 @@ export default function MapSlideUp({ foodBanks }) {
         latitude: 49.281867,
         location_address: '302 Columbia St, Vancouver, BC',
         geom: [49.281867, -123.102196],
-        foodBank_Image: 'https://firebasestorage.googleapis.com/v0/b/localtome-f84e5.appspot.com/o/foodBankImageTest.jpg?alt=media&token=37d44b9b-ac9d-48d7-8556-693c9a002fb0',
+        foodBank_Image: 'https://firebasestorage.googleapis.com/v0/b/localtome-f84e5.appspot.com/o/foodbank-default.png?alt=media&token=26ff4954-3761-47dd-aaed-ea0d039fb5b2',
         takeout_available: 'Yes',
         longitude: -123.102196,
         requires_referral: 'No',
@@ -93,6 +99,7 @@ export default function MapSlideUp({ foodBanks }) {
             <ElementsPos>
                 <div className={`${styles.background} + ${showing ? styles.slidein : styles.slideout}`}>
                     <ul className={styles.noSpace}>
+                        <Spacer></Spacer>
                         {foodBankComponent}
                     </ul>
                     <ButtonArea>

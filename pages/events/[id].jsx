@@ -21,7 +21,7 @@ import axios from "axios";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { authOptions } from '../api/auth/[...nextauth].js';
 import { unstable_getServerSession } from "next-auth/next";
-
+import TopNavigation from "../../components/Organisms/NavBarTop";
 
 
 const EventImageBlock = styled.div`
@@ -64,10 +64,12 @@ const EventDescription = styled.div`
    align-items:left;
    box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
    max-width:85vw;
-   min-width:85vw;
+  //  min-width:85vw;
    flex-direction:column;
    margin: 15px auto;
-
+   @media (min-width: 768px) {
+    max-width: 55vw;
+ }
 `;
 
 const ExtraSpace = styled.div`
@@ -138,8 +140,25 @@ const CancelBtn = styled.button`
   color: #535353;
   margin: 2%;
 `;
+
 const EventCat = styled.div`
 margin-left:8%;
+`
+
+const TopBar = styled.div`
+  @media (max-width: 767px) {
+    display:none;
+}
+`
+
+export const DesktopBox = styled.div`
+@media (min-width: 768px) {
+margin-top:8vh;
+margin-left: 18vw;
+margin-right: 18vw;
+// min-height: 92vh;
+box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
+}
 `
 
 export default function Event({ event, user }) {
@@ -216,47 +235,34 @@ export default function Event({ event, user }) {
 
   return (
     <div>
-      <TopBanner text={event.eventName} back={false} />
+      <TopBar>
+        <TopNavigation />
+      </TopBar>
+      <DesktopBox>
+        <TopBanner text={event.eventName} back={false} />
 
-      <EventImageBlock >
-        <EventImage src={event.eventImage} alt={event.eventName} />
-        <FunctionsBox>
-          <img src="../calenderIcon.png" alt="calendar icon" />
-          <img src="../shareLinkIcons.png" alt="calendar icon" onClick={onShare} />
-          <FavoriteBtn favorite={favorite} onClick={handleOnClick} />
-        </FunctionsBox>
-      </EventImageBlock>
+        <EventImageBlock >
+          <EventImage src={event.eventImage} alt={event.eventName} />
+          <FunctionsBox>
+            <img src="../calenderIcon.png" alt="calendar icon" />
+            <img src="../shareLinkIcons.png" alt="calendar icon" onClick={onShare} />
+            <FavoriteBtn favorite={favorite} onClick={handleOnClick} />
+          </FunctionsBox>
+        </EventImageBlock>
 
-      <TextBubble
-        text={[event.eventLocation, event.eventContactPhone, dateAndTime]}
-        icon={["location_on", "call", "access_time"]}
-      />
+        <TextBubble
+          text={[event.eventLocation, event.eventContactPhone, dateAndTime]}
+          icon={["location_on", "call", "access_time"]}
+        />
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          margin: "0 5%",
-        }}
-      >
-        <UserOfPost userImg={event.eventCreatorId.image} name={event.eventCreatorId.name} />
-        <div>
-            <Link href={`/events/edit/${event.id}`}>
-              <div style={{ display: "flex" }}>
-                <img src="/Edit-icon.svg" alt="Edit Event" />
-                &nbsp;
-                <p>Edit Event</p>
-              </div>
-            </Link>
-            <div style={{ display: "flex" }}>
-              <img src="/Delete-icon.svg" alt="Delete Event" onClick={onDelete} />
-              &nbsp;
-              <p style={{ color: "red" }} onClick={onDelete}>
-                Delete Event
-              </p>
-            </div>
-          </div>
-        {event.eventCreatorId.email === session?.user.email && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            margin: "0 5%",
+          }}
+        >
+          <UserOfPost userImg={event.eventCreatorId.image} name={event.eventCreatorId.name} />
           <div>
             <Link href={`/events/edit/${event.id}`}>
               <div style={{ display: "flex" }}>
@@ -273,22 +279,39 @@ export default function Event({ event, user }) {
               </p>
             </div>
           </div>
-        )}
-      </div>
+          {event.eventCreatorId.email === session?.user.email && (
+            <div>
+              <Link href={`/events/edit/${event.id}`}>
+                <div style={{ display: "flex" }}>
+                  <img src="/Edit-icon.svg" alt="Edit Event" />
+                  &nbsp;
+                  <p>Edit Event</p>
+                </div>
+              </Link>
+              <div style={{ display: "flex" }}>
+                <img src="/Delete-icon.svg" alt="Delete Event" onClick={onDelete} />
+                &nbsp;
+                <p style={{ color: "red" }} onClick={onDelete}>
+                  Delete Event
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
 
 
-      <EventDescription>
-        <b>About:</b>
-        <p style={{ fontSize: '14px' }}>{event.eventContent}</p>
-      </EventDescription>
-      <EventCat>
-        <EventCategoryTag eventCategories={event.eventTags} selected={true} />
-      </EventCat>
-      <GetDirectionGreenBtn address={event.eventLocation} onMap={false} />
+        <EventDescription>
+          <b>About:</b>
+          <p style={{ fontSize: '14px' }}>{event.eventContent}</p>
+        </EventDescription>
+        <EventCat>
+          <EventCategoryTag eventCategories={event.eventTags} selected={true} />
+        </EventCat>
+        <GetDirectionGreenBtn address={event.eventLocation} onMap={false} />
 
-      <ExtraSpace></ExtraSpace>
+        <ExtraSpace></ExtraSpace>
 
-      {confirmDelete && (
+        {confirmDelete && (
           <DeleteCont>
             <h2 style={{ paddingRight: "10%", paddingLeft: "10%" }}>Are you sure you want to delete this posting? This cannot be undone.</h2>
             <BtnCont>
@@ -298,17 +321,18 @@ export default function Event({ event, user }) {
               </a>
             </BtnCont>
           </DeleteCont>
-      )}
-
+        )}
+      </DesktopBox>
 
       <Sharebox>
         <SharePost shareUrl={shareUrl} share={share} closeShare={() => { setShare(false) }} />
       </Sharebox>
 
-
-      <NavBar value={navValue} onChange={(event, newValue) => {
-        setNavValue(newValue);
-      }} />
+      <div className="TEMPMEDIA">
+        <NavBar value={navValue} onChange={(event, newValue) => {
+          setNavValue(newValue);
+        }} />
+      </div>
     </div >
   )
 }

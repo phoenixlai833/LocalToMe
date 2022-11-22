@@ -43,11 +43,11 @@ const Text = styled.h1`
 const FavBox = styled.div`
 
 @media (min-width: 768px) {
-
 border: 1px solid #ffffff;
 margin-top:9vh;
-margin-left: 13vw;
-margin-right: 13vw;
+margin-left: 18vw;
+margin-right: 18vw;
+min-height: 91vh;
 border-radius: 15px;
    box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
 }
@@ -124,29 +124,29 @@ export default function Favorites({ user }) {
       setTab(tabId);
     };
 
-        return (
-            <>
-                <TopBar>
-                    <TopNavigation />
-                </TopBar>
-                <FavBox>
-                    <Search />
-                    <Tabs tabId={tab} onChangeTab={handleChangeTab} tabList={tabList} />
-                    <FavorPage>
-                        {console.log("hi", tab, tabContents[tab].component)}
-                        {tabContents[tab].component.length > 0
-                            ? tabContents[tab].component
-                            : <Text>{tabContents[tab].alt}</Text>}
+    return (
+      <>
+        <TopBar>
+          <TopNavigation />
+        </TopBar>
+        <FavBox>
+          <Search onSearch={() => console.log("nothing")} />
+          <Tabs tabId={tab} onChangeTab={handleChangeTab} tabList={tabList} />
+          <FavorPage>
+            {console.log("hi", tab, tabContents[tab].component)}
+            {tabContents[tab].component.length > 0
+              ? tabContents[tab].component
+              : <Text>{tabContents[tab].alt}</Text>}
 
-                    </FavorPage>
-                </FavBox>
-                <Btmbar>
-                    <NavBar value={3} />
-                </Btmbar>
+          </FavorPage>
+        </FavBox>
+        <Btmbar>
+          <NavBar value={3} />
+        </Btmbar>
 
-            </>
-        );
-    }
+      </>
+    );
+  }
 }
 
 export async function getServerSideProps(context) {

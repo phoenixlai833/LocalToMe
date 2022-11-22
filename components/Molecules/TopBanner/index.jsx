@@ -16,6 +16,7 @@ const Banner = styled.div`
    text-align:center;
    position:sticky;
    font-Size:12px;
+   // padding-top: 20px;
    @media (min-width: 767px) {
     padding-left: 25px;
     height: 100px;

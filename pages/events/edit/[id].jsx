@@ -13,6 +13,8 @@ import EventPreview from "../../../components/Templates/EventPreview";
 import axios from "axios";
 import styled from "styled-components";
 import Toast from "../../../components/Molecules/Toast/Toast";
+import TopNavigation from "../../../components/Organisms/NavBarTop";
+import NavBar from "../../../components/Organisms/NavBar";
 
 const ToastPopup = styled.div`
 position: fixed;
@@ -24,6 +26,22 @@ display: flex;
 justify-content: center;
 align-items: center;
 z-index: 100;
+`
+
+const TopBar = styled.div`
+  @media (max-width: 767px) {
+    display:none;
+}
+`
+
+const DesktopBox = styled.div`
+@media (min-width: 768px) {
+margin-top:8vh;
+margin-left: 18vw;
+margin-right: 18vw;
+// min-height: 92vh;
+box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
+}
 `
 
 export default function EditEvent({ defaultEvent, categoriesList }) {
@@ -137,7 +155,10 @@ export default function EditEvent({ defaultEvent, categoriesList }) {
 
   return (
     <>
-      <div>
+      <TopBar>
+        <TopNavigation />
+      </TopBar>
+      <DesktopBox>
         {isPreview ? (
           <EventPreview
             event={event}
@@ -165,13 +186,17 @@ export default function EditEvent({ defaultEvent, categoriesList }) {
             categoriesList={categoriesList}
           />
         )}
-      </div>
+        <div style={{ paddingBottom: "10vh" }}></div>
+      </DesktopBox>
       {eventId && (
         <ToastPopup>
           <Toast onViewPost={handleViewPost} message="Your changes has been saved!" />
         </ToastPopup>
       )
       }
+      <div className="TEMPMEDIA">
+        <NavBar value={1} />
+      </div>
     </>
   );
 }

@@ -29,8 +29,9 @@ background-color: #D7EED2;
 height: 150px;
 width: 100vw;
 align-items: center;
-@media (min-width: 767px) {
-    width: 1000px;
+
+@media (min-width: 768px) {
+    width: 100%;
 }
 `
 
@@ -45,9 +46,9 @@ position: absolute;
 @media (min-width: 767px) {
     width: 380px;
     top: 180px;
-    right: 760px;
+    left: 32%;
     align-items: flex-start;
-    justify-content: center;
+    // justify-content: center;
     flex-wrap: wrap;
 
 }
@@ -64,8 +65,9 @@ padding: 10px;
 margin: 10px;
 position: absolute;
 right: 0px;
+z-index: 100;
 @media (min-width: 767px) {
-right: 224px;
+right: 18%;
 top: 87px;
 }
 `
@@ -101,11 +103,12 @@ export default function ProfileSection({ src = 'https://placekitten.com/500', na
         <SettingIcon src="/cog.svg" onClick={() => r.push('/profile/setting')} />
         <ProfileBanner />
         <AvatarCont>
+
             <ProfileAvatar
                 src={src}
                 sx={{ width: 120, height: 120 }} />
             <h3 style={{ margin: 0 }}>{name}</h3>
-            <p style={{ margin: -1}}>{email}</p>
+            <p style={{ margin: -1 }}>{email}</p>
             <EditProfile><AddIcon sx={{ width: 25, height: 25 }} onClick={handleClick} /></EditProfile>
         </AvatarCont>
     </div>

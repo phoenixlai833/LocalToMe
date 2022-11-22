@@ -20,9 +20,14 @@ height: 300px;
 transition: all 1s ease-in-out;
 @media (min-width: 768px) {
     position:absolute;
+    top: 600px;
 height: 700px;
 width: 700px;
-object-position: 0px 430px;
+width: auto;
+// height: auto;
+// max-width: 700px;
+// max-height: 700px;
+// object-position: 0px 300px;
 bottom: 0;
 margin-right: 6rem;
 }

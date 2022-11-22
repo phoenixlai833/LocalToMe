@@ -17,7 +17,7 @@ const CreateBttn = styled.button`
     background-color: ${(props) => props.active || "#085617"};
   }
   @media screen and (min-width: 768px) {
-    width: 30em;
+    width: 23em;
   }
 `;
 

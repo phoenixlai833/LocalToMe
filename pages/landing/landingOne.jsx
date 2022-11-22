@@ -52,6 +52,7 @@ div:nth-child(1){
 }
     `
 
+
     // const Button = styled.button`
     // background-color: #108928;
     // border: none;
@@ -93,9 +94,13 @@ div:nth-child(1){
                     </Link>
 
                 </Dot>
+
                 <Link href="/landing/landingTwo">
+
                     <GeneralGreenBtn text={"Continue"} h={"4.5em"} />
+
                 </Link>
+
             </LandOne>
         </>
     )

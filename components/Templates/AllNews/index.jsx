@@ -142,8 +142,6 @@ const EditNews = styled.div`
 `;
 const DeleteNews = styled.div`
   display: flex;
-  p {
-  }
 `;
 
 const Func = styled.div`
