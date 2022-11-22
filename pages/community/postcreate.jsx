@@ -2,7 +2,6 @@ import CreationSection from "../../components/Templates/PostCreationButtons"
 import styled from "styled-components"
 
 const AddNewPost = styled.div`
-
 background-color: #CDECC2;
 width: 100vw;
 height: 100vh; 
@@ -12,10 +11,8 @@ height: 100vh;
     align-items: center;
 @media (min-width: 768px) {
     position:relative;
-
 `
 const Image = styled.img`
-
 margin-right: 3rem;
 margin-top: 20px;
 width: 300px;
@@ -25,10 +22,13 @@ transition: all 1s ease-in-out;
     position:absolute;
 height: 700px;
 width: 700px;
+width: auto;
+// height: auto;
+// max-width: 700px;
+// max-height: 700px;
 object-position: 0px 430px;
 bottom: 0;
 margin-right: 6rem;
-
 }
 `
 
