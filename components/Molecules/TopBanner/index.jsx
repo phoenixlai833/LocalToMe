@@ -16,11 +16,18 @@ const Banner = styled.div`
    text-align:center;
    position:sticky;
    font-Size:12px;
+   @media (min-width: 767px) {
+    padding-left: 25px;
+    height: 100px;
+   }
 `
 
 const Back = styled(Icon)`
 padding-left:8px;
    width:40px;
+   @media (min-width: 767px) {
+      display:none;
+   }
   
 `
 export default function TopBanner({
