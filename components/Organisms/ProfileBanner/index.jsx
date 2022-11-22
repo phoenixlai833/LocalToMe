@@ -44,7 +44,7 @@ height: 55px;
 position: absolute;
 @media (min-width: 767px) {
     width: 380px;
-    top: 120px;
+    top: 180px;
     right: 760px;
     align-items: flex-start;
     justify-content: center;
@@ -66,6 +66,7 @@ position: absolute;
 right: 0px;
 @media (min-width: 767px) {
 right: 224px;
+top: 87px;
 }
 `
 
