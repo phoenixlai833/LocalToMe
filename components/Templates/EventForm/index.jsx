@@ -153,8 +153,8 @@ export default function EventForm({
             isClearable: true,
             required: true,
             styles: {
-              input: (base) => ({...base }),
-              control: (base) => ({ ...base  }),
+              input: (base) => ({ ...base }),
+              control: (base) => ({ ...base }),
             },
           }}
         />
@@ -226,17 +226,7 @@ export default function EventForm({
         )}
         <b style={{ marginTop: "5%" }}>Describe your Event*</b>
         <br></br>
-<<<<<<< HEAD
-        <LongTextInput
-          mode={mode}
-          placeholder={"Tell us about your event..."}
-          image={image}
-          onChange={handleChangeEventDescription}
-          onChangeImage={handleChangeEventImage}
-        ></LongTextInput>
-=======
         <LongTextInput value={event.eventContent} mode={mode} placeholder={"Tell us about your event..."} image={image} onChange={handleChangeEventDescription} onChangeImage={handleChangeEventImage}></LongTextInput>
->>>>>>> develop
         {/* <b style={{ marginTop: "5%" }}>Select Event Tags</b> */}
         <br></br>
         <EventCategoryTag

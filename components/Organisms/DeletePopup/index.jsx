@@ -16,7 +16,6 @@ const DeleteCont = styled.div`
   text-align: center;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -37,12 +36,10 @@ const DeleteBtn = styled.button`
   border-radius: 15px;
   height: 44px;
   width: 137px;
-
   font-size: 14px;
   line-height: 17px;
   text-align: center;
   border: 0px;
-
   color: #ffffff;
   margin: 2%;
 `
@@ -52,49 +49,14 @@ const CancelBtn = styled.button`
   border-radius: 15px;
   height: 44px;
   width: 137px;
-
   font-size: 14px;
   line-height: 17px;
   text-align: center;
-
   color: #535353;
   margin: 2%;
 `;
 
 
-<<<<<<< HEAD
-export default function DeletePopup({ eventId, hidePopup }) {
-
-    const handleDelete = (e) => {
-        {
-            e.preventDefault();
-            deleteEvent(eventId);
-        }
-    };
-
-    // const hidePopup = (e) => {
-    //     e.preventDefault();
-    //     console.log("hide")
-    //     setPosition("static")
-    // }
-
-    const singleEventComponent = (
-        <div>
-            {/* <img width="100" height="100" src={singleEvent.eventImage} alt={singleEvent.eventName} /> */}
-            {/* <p>{singleEvent.eventName}</p> */}
-        </div>
-    )
-
-    return (
-        <DeleteCont>
-            <h2 className={styles.h2}>Are you sure you want to delete this posting? This cannot be undone.</h2>
-            {singleEventComponent}
-            <BtnCont>
-                <CancelBtn onClick={hidePopup}>Cancel</CancelBtn>
-                <DeleteBtn onClick={handleDelete}>Confirm</DeleteBtn>
-            </BtnCont>
-        </DeleteCont>
-=======
 export default function DeletePopup({
     showDelete,
     eventId,
@@ -116,14 +78,13 @@ export default function DeletePopup({
         <>
             {showDelete &&
                 <DeleteCont show={display}>
-                    <h2 style={{paddingLeft: "10%", paddingRight: "10%"}}>Are you sure you want to delete this posting? This cannot be undone.</h2>
+                    <h2 style={{ paddingLeft: "10%", paddingRight: "10%" }}>Are you sure you want to delete this posting? This cannot be undone.</h2>
                     <BtnCont>
                         <CancelBtn onClick={hidePopup}>Cancel</CancelBtn>
                         <DeleteBtn onClick={handleDelete(eventId)}>Confirm</DeleteBtn>
                     </BtnCont>
                 </DeleteCont>}
         </>
->>>>>>> develop
+
     )
 }
-

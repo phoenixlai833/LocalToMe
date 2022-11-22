@@ -8,14 +8,28 @@ import { getUser, getUsers } from "../server/database";
 import { authOptions } from "./api/auth/[...nextauth].js";
 import { unstable_getServerSession } from "next-auth/next";
 import postFavorite from "../utils/postFavorite";
+import TopNavigation from "../components/Organisms/NavBarTop";
+
+
+const TopBar = styled.div`
+  @media (max-width: 767px) {
+    display:none;
+}
+
+`
+const Btmbar = styled.div`
+margin-top: 5rem;
+    @media (min-width: 768px) {
+        display:none;
+    }
+    `
 
 const FavorPage = styled.div`
   display: flex;
   flex-direction: column;
-  // background-color: #CDECC2;
-  height: 100vh;
-  width: 100vw;
   margin-bottom: 5%;
+
+
 `;
 
 const Text = styled.h1`
@@ -24,6 +38,20 @@ const Text = styled.h1`
   justify-content: center;
   align-self: center;
 `;
+
+
+const FavBox = styled.div`
+
+@media (min-width: 768px) {
+
+border: 1px solid #ffffff;
+margin-top:9vh;
+margin-left: 13vw;
+margin-right: 13vw;
+border-radius: 15px;
+   box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
+}
+`
 
 export default function Favorites({ user }) {
   const [userFavorites, setUserFavorites] = useState();
@@ -96,20 +124,29 @@ export default function Favorites({ user }) {
       setTab(tabId);
     };
 
-    return (
-      <>
-        <Search />
-        <Tabs tabId={tab} onChangeTab={handleChangeTab} tabList={tabList} />
-        <FavorPage>
-          {console.log("hi", tab, tabContents[tab].component)}
-          {tabContents[tab].component.length > 0
-            ? tabContents[tab].component
-            : tabContents[tab].alt}
-          <NavBar value={3} />
-        </FavorPage>
-      </>
-    );
-  }
+        return (
+            <>
+                <TopBar>
+                    <TopNavigation />
+                </TopBar>
+                <FavBox>
+                    <Search />
+                    <Tabs tabId={tab} onChangeTab={handleChangeTab} tabList={tabList} />
+                    <FavorPage>
+                        {console.log("hi", tab, tabContents[tab].component)}
+                        {tabContents[tab].component.length > 0
+                            ? tabContents[tab].component
+                            : <Text>{tabContents[tab].alt}</Text>}
+
+                    </FavorPage>
+                </FavBox>
+                <Btmbar>
+                    <NavBar value={3} />
+                </Btmbar>
+
+            </>
+        );
+    }
 }
 
 export async function getServerSideProps(context) {

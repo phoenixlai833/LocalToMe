@@ -13,6 +13,23 @@ import { authOptions } from '../api/auth/[...nextauth].js';
 import { unstable_getServerSession } from "next-auth/next";
 import axios from "axios";
 
+const MainCont = styled.div`
+@media (min-width: 767px) {
+display:flex;
+justify-content: center;
+align-items: flex-start;
+flex-direction: row;
+width: 100vw;
+height: 100vh;
+}
+`
+
+const WhiteCont = styled.div`
+@media (min-width: 767px) {
+    height: 150vh;
+   box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
+}
+`
 const ProfileTab = styled.div`
 display:flex;
 height: 170px;
@@ -37,6 +54,9 @@ const EventTab = styled.p`
   text-underline-offset: 12px;
   font-size: 18px;
   margin-top: 8px;
+  @media (min-width: 767px) {
+    font-size: 20px;
+}
 `;
 
 const NewTab = styled.p`
@@ -47,6 +67,9 @@ const NewTab = styled.p`
   text-underline-offset: 12px;
   font-size: 18px;
   margin-top: 8px;
+  @media (min-width: 767px) {
+    font-size: 20px;
+}
 `;
 
 const PosAbs = styled.div`
@@ -151,17 +174,22 @@ export default function Profile({ sortedEvents }) {
                 <ShareBox>
                     <SharePost shareUrl={shareUrl} share={share} closeShare={handleCloseShare} copied={copied} changeOnCopy={handleOnCopy} />
                 </ShareBox>
-                <ProfileSection src={avatar} name={session.user.name} email={session.user.email} handleClick={() => setDisplay("static")} />
-                <ProfileTab>
-                    <Tab onClick={handleChangeTab}>
-                        <EventTab id="0" tabId={tab}>
-                            Recent Events
-                        </EventTab>
-                        <NewTab id="1" tabId={tab}>
-                            Past Events
-                        </NewTab>
-                    </Tab>
-                </ProfileTab>
+
+                <MainCont>
+                    <WhiteCont>
+                        <ProfileSection src={avatar} name={session.user.name} email={session.user.email} handleClick={() => setDisplay("static")} />
+                        <ProfileTab>
+                            <Tab onClick={handleChangeTab}>
+                                <EventTab id="0" tabId={tab}>
+                                    Recent Posts
+                                </EventTab>
+                                <NewTab id="1" tabId={tab}>
+                                    Past Posts
+                                </NewTab>
+                            </Tab>
+                        </ProfileTab>
+                    </WhiteCont>
+                </MainCont>
                 {tabContents[tab].component}
                 <div style={{ marginBottom: "10vh" }}></div>
                 <NavBar value={4} />
