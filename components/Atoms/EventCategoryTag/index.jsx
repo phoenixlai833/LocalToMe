@@ -25,12 +25,10 @@ const Category = styled.div`
    }
 `
 
-export default function EventCategoryTag({ eventCategories, exisitingCategories = [], changeCategories, selected }) {
-   const [tagList, setTagList] = useState(exisitingCategories);
+export default function EventCategoryTag({ eventCategories, existingCategories = [], changeCategories, selected }) {
+   const [tagList, setTagList] = useState(existingCategories);
    const [categories, setCategories] = useState(eventCategories);
-   // const [newCategories, setNewCategories] = useState(categories);
 
-   // loop through event catrgories and add selected true to the same ones
    function updateCategories(tl) {
       const newCategories = eventCategories.map((c) => {
          if (tl.length !== 0) {
@@ -39,16 +37,13 @@ export default function EventCategoryTag({ eventCategories, exisitingCategories 
                   c = { ...c, selected: true }
                   return c;
                } else {
-                  // c = { ...c, selected: false } 
                   return c;
                }
             })
          }
          return c;
       })
-      // console.log(updatedCategories)
       setCategories(newCategories);
-      // setNewCategories(newCategories);
       return newCategories;
    }
 
@@ -56,12 +51,10 @@ export default function EventCategoryTag({ eventCategories, exisitingCategories 
       updateCategories(tagList);
       changeCategories ? changeCategories(tagList) : null;
       console.log(tagList)
-      // console.log(categories)
    }, [tagList]);
 
    // onclick of button, toggle selected and toggle add to taglist
    function AddTagToList(c) {
-      // console.log(tagList)
       if (tagList.length == 0) {
          tagList.push({ ...c, selected: true });
       } else {
@@ -70,24 +63,15 @@ export default function EventCategoryTag({ eventCategories, exisitingCategories 
             const addTl = [...tagList, c]
             console.log(addTl)
             setTagList(addTl)
-            // updateCategories(newTl);
-            // console.log(tagList)
          }
          else {
-            // console.log(index)
             const id = tagList.splice(index, 1)[0].id;
             const removeTl = tagList.filter((t) => {
                return t.id !== id
             })
-            // console.log(removeTl)
             setTagList(removeTl)
-            // updateCategories(newTl);
          }
-         // setBtn(false)
       }
-      // console.log(tagList);
-      // updateCategories();
-      // console.log(categories)
    }
 
    return (
@@ -98,17 +82,3 @@ export default function EventCategoryTag({ eventCategories, exisitingCategories 
       </Categories>
    )
 }
-
-// export default function EventCategoryTag({ eventCategories }) {
-
-//    return (
-//       <Categories>
-//          {eventCategories.map((c) => (
-//             <Category key={c} id={c}>{c}</Category>
-//          ))}
-//       </Categories>
-
-//    )
-// }
-
-

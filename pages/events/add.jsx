@@ -5,13 +5,10 @@ import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { collection, getDocs, addDoc } from "firebase/firestore";
 // import Event from "../../components/Event";
 // import Image from `next/image`;
-import DeletePopup from "../../components/Organisms/DeletePopup";
-import TimeInput from "../../components/Molecules/TimeInput";
-import NavBar from "../../components/Organisms/NavBar";
 import EventForm from "../../components/Templates/EventForm";
 import EventPreview from "../../components/Templates/EventPreview";
 import { useSession } from "next-auth/react";
-import { authOptions } from '../api/auth/[...nextauth].js';
+import { authOptions } from "../api/auth/[...nextauth].js";
 import { unstable_getServerSession } from "next-auth/next";
 import axios from "axios";
 import Toast from "../../components/Molecules/Toast/Toast";
@@ -81,7 +78,7 @@ export default function NewEvent({ categoriesList }) {
   }
 
   function handleChangeEventLocation(eventLocation) {
-    setEvent({ ...event, eventLocation });
+    setEvent({ ...event, eventLocation: eventLocation?.label });
     return;
   }
 
@@ -138,15 +135,14 @@ export default function NewEvent({ categoriesList }) {
     setEvent({ ...event, end: new Date(event.end.setHours(hour, minute)) });
   }
 
-  function handleChangeEventCategory(tags) {
-    console.log(...tags)
-    setEvent({ ...event, eventTags: [...tags] });
+  function handleChangeEventTags(tags) {
+    console.log(tags);
+    setEvent({ ...event, eventTags: tags });
   }
 
-  function handleCancel() { }
+  function handleCancel() {}
 
   function handleConfirm() {
-    // console.log(event)
     const postEvent = {
       eventContent: event.eventContent,
       eventCreatorId: userId,
@@ -157,13 +153,18 @@ export default function NewEvent({ categoriesList }) {
       eventName: event.eventName,
       eventContactPhone: event.eventContactPhone,
       eventTags: event.eventTags,
-      eventUpdateDate: new Date()
-    }
+      eventUpdateDate: new Date(),
+    };
 
-    console.log('lul', typeof event.start)
+    geocodeByAddress(postEvent.eventLocation)
+      .then((results) => getLatLng(results[0]))
+      .then(({ lat, lng }) => {
+        postEvent.latitude = lat;
+        postEvent.longitude = lng;
+      });
 
     axios.post("/api/events", postEvent).then((res) => {
-      // window.location = `/events/${res.data}`
+      window.location = `/events/${res.data}`;
       setEventId(res.data)
       console.log("posted successfully", res.data);
     });
@@ -200,7 +201,7 @@ export default function NewEvent({ categoriesList }) {
             onChangeEventStartTime={handleChangeEventStartTime}
             onChangeEventEndDate={handleChangeEventEndDate}
             onChangeEventEndTime={handleChangeEventEndTime}
-            onChangeEventTags={handleChangeEventCategory}
+            onChangeEventTags={handleChangeEventTags}
             categoriesList={categoriesList}
           />
         )}
@@ -218,15 +219,19 @@ export async function getServerSideProps(context) {
   // const eventData = await getEvents();
   // const eventList = JSON.parse(JSON.stringify(eventData));
 
-  const session = await unstable_getServerSession(context.req, context.res, authOptions)
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
 
   if (!session) {
     return {
       redirect: {
-        destination: '/auth/signin',
+        destination: "/auth/signin",
         permanent: false,
       },
-    }
+    };
   }
 
   const categoriesData = await getAllCategories();

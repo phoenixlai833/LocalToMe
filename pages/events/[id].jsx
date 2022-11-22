@@ -12,6 +12,7 @@ import UserOfPost from '../../components/Molecules/UserOfPost';
 import EventCategoryTag from "../../components/Atoms/EventCategoryTag";
 import Link from "next/link";
 import SharePost from "../../components/Molecules/SharePost";
+import DeletePopup from "../../components/Organisms/DeletePopup";
 import { collection, query, where } from "firebase/firestore";
 import { Colours } from "../../styles/globals";
 // import { Colours } from "../../../styles/globals";
@@ -191,7 +192,7 @@ export default function Event({ event, user }) {
     setShare(true);
   }
 
-  const ifFavorite = user?.favorite.event.filter((singleEvent) => singleEvent.id === event.id).length > 0 ? true : false;
+  const ifFavorite = user?.favorite?.event.find((singleEvent) => singleEvent.id === event.id);
   const [favorite, setFavorite] = useState(ifFavorite);
 
 

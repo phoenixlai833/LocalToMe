@@ -8,6 +8,7 @@ import styled from "styled-components";
 import TopBanner from "../../Molecules/TopBanner";
 import GeneralGreenBtn from "../../Atoms/GeneralGreenBtn";
 import EventCategoryTag from "../../Atoms/EventCategoryTag";
+import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 
 const Form = styled.form`
   width: 80vw;
@@ -49,7 +50,7 @@ export default function EventForm({
   image,
   onChangeEventImage,
   onChangeEventTags,
-  categoriesList
+  categoriesList,
 }) {
   const [calendarType, setCalendarType] = useState(1);
   // console.log(categoriesList)
@@ -103,8 +104,8 @@ export default function EventForm({
     onChangeEventImage(eventImage);
   }
 
-  function handleAddTag(eventTags) {
-    console.log(eventTags)
+  function handleChangeEventTags(eventTags) {
+    console.log(eventTags);
     onChangeEventTags(eventTags);
   }
 
@@ -142,7 +143,22 @@ export default function EventForm({
         />
         <b style={{ marginTop: "5%" }}>Location of your Event</b>
         <br></br>
-        <ShortTextInput label="Location" value={event.eventLocation} onChange={handleChangeEventLocation} required={true} />
+        <GooglePlacesAutocomplete
+          apiKey="AIzaSyAUs6s26xUAKwIvhRKEtPP5S3GbWAfWkfY"
+          apiOptions={{ language: "en", region: "ca" }}
+          selectProps={{
+            clearValue: true,
+            onChange: handleChangeEventLocation,
+            placeholder: "",
+            isClearable: true,
+            required: true,
+            styles: {
+              input: (base) => ({...base }),
+              control: (base) => ({ ...base  }),
+            },
+          }}
+        />
+        {/* <ShortTextInput label="Location" value={event.eventLocation} onChange={handleChangeEventLocation} required={true} /> */}
         <b style={{ marginTop: "5%" }}>Date & Time of your Event</b>
         <br></br>
         <LayoutTime>
@@ -175,7 +191,11 @@ export default function EventForm({
           <TimeInput
             label="Start Time"
             required={true}
-            time={event.start.toLocaleString("default", { hour: "2-digit", minute: "2-digit", hour12: false })}
+            time={event.start.toLocaleString("default", {
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: false,
+            })}
             onChangeTime={handleChangeEventStartTime}
           />
           <To>
@@ -183,14 +203,18 @@ export default function EventForm({
           </To>
           <TimeInput
             label="End Time"
-            time={event.end.toLocaleString("default", { hour: "2-digit", minute: "2-digit", hour12: false })}
+            time={event.end.toLocaleString("default", {
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: false,
+            })}
             onChangeTime={handleChangeEventEndTime}
           />
         </LayoutTime>
         {calendarType ? (
           <DateCalendar
             date={event.start}
-            minDate={new Date}
+            minDate={new Date()}
             onChangeDate={handleChangeEventStartDate}
           />
         ) : (
@@ -202,10 +226,24 @@ export default function EventForm({
         )}
         <b style={{ marginTop: "5%" }}>Describe your Event*</b>
         <br></br>
+<<<<<<< HEAD
+        <LongTextInput
+          mode={mode}
+          placeholder={"Tell us about your event..."}
+          image={image}
+          onChange={handleChangeEventDescription}
+          onChangeImage={handleChangeEventImage}
+        ></LongTextInput>
+=======
         <LongTextInput value={event.eventContent} mode={mode} placeholder={"Tell us about your event..."} image={image} onChange={handleChangeEventDescription} onChangeImage={handleChangeEventImage}></LongTextInput>
+>>>>>>> develop
         {/* <b style={{ marginTop: "5%" }}>Select Event Tags</b> */}
         <br></br>
-        <EventCategoryTag eventCategories={categoriesList} exisitingCategories={event.eventTags} changeCategories={handleAddTag} />
+        <EventCategoryTag
+          eventCategories={categoriesList}
+          existingCategories={event.eventTags}
+          changeCategories={handleChangeEventTags}
+        />
         <br></br>
         <GeneralGreenBtn type="submit" text="Continue" />
       </Form>
