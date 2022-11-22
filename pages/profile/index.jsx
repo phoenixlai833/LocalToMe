@@ -12,6 +12,7 @@ import { useSession } from "next-auth/react";
 import { authOptions } from '../api/auth/[...nextauth].js';
 import { unstable_getServerSession } from "next-auth/next";
 import axios from "axios";
+import TopNavigation from "../../components/Organisms/NavBarTop";
 
 const MainCont = styled.div`
 @media (min-width: 767px) {
@@ -26,6 +27,7 @@ height: 100vh;
 
 const WhiteCont = styled.div`
 @media (min-width: 767px) {
+   margin-top:64px;
     height: 150vh;
    box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
 }
@@ -58,6 +60,12 @@ const EventTab = styled.p`
     font-size: 20px;
 }
 `;
+
+const TopBar = styled.div`
+  @media (max-width: 767px) {
+    display:none;
+}
+`
 
 const NewTab = styled.p`
   cursor: pointer;
@@ -174,7 +182,9 @@ export default function Profile({ sortedEvents }) {
                 <ShareBox>
                     <SharePost shareUrl={shareUrl} share={share} closeShare={handleCloseShare} copied={copied} changeOnCopy={handleOnCopy} />
                 </ShareBox>
-
+                <TopBar>
+                    <TopNavigation value={5}/>
+                </TopBar>
                 <MainCont>
                     <WhiteCont>
                         <ProfileSection src={avatar} name={session.user.name} email={session.user.email} handleClick={() => setDisplay("static")} />
