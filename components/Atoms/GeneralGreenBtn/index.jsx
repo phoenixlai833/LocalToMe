@@ -16,9 +16,9 @@ const CreateBttn = styled.button`
   &:hover {
     background-color: ${(props) => props.active || "#085617"};
   }
-  @media screen and (min-width: 768px) {
-    width: 23em;
-  }
+  // @media screen and (min-width: 768px) {
+  //   width: 23em;
+  // }
 `;
 
 export default function GeneralGreenBtn({ onClick, text = "Button text", w, h, borderstyle, inactive, active, txtcolor }) {

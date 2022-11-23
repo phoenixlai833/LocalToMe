@@ -263,22 +263,6 @@ export default function Event({ event, user }) {
           }}
         >
           <UserOfPost userImg={event.eventCreatorId.image} name={event.eventCreatorId.name} />
-          <div>
-            <Link href={`/events/edit/${event.id}`}>
-              <div style={{ display: "flex" }}>
-                <img src="/Edit-icon.svg" alt="Edit Event" />
-                &nbsp;
-                <p>Edit Event</p>
-              </div>
-            </Link>
-            <div style={{ display: "flex" }}>
-              <img src="/Delete-icon.svg" alt="Delete Event" onClick={onDelete} />
-              &nbsp;
-              <p style={{ color: "red" }} onClick={onDelete}>
-                Delete Event
-              </p>
-            </div>
-          </div>
           {event.eventCreatorId.email === session?.user.email && (
             <div>
               <Link href={`/events/edit/${event.id}`}>
