@@ -13,6 +13,7 @@ import EventPreview from "../../../components/Templates/EventPreview";
 import axios from "axios";
 import styled from "styled-components";
 import Toast from "../../../components/Molecules/Toast/Toast";
+import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
 import TopNavigation from "../../../components/Organisms/NavBarTop";
 import NavBar from "../../../components/Organisms/NavBar";
 
@@ -138,7 +139,12 @@ export default function EditEvent({ defaultEvent, categoriesList }) {
       eventTags: event.eventTags,
       eventUpdateDate: new Date()
     }
-
+    geocodeByAddress(putEvent.eventLocation)
+    .then((results) => getLatLng(results[0]))
+    .then(({ lat, lng }) => {
+      putEvent.latitude = lat;
+      putEvent.longitude = lng;
+    });
     // console.log('lul', typeof event.start)
 
     axios.put("/api/events", putEvent).then((res) => {
