@@ -157,7 +157,7 @@ export default function NewEvent({ categoriesList }) {
     setEvent({ ...event, eventTags: tags });
   }
 
-  function handleCancel() {}
+  function handleCancel() { }
 
   function handleConfirm() {
     const postEvent = {
@@ -181,12 +181,11 @@ export default function NewEvent({ categoriesList }) {
       })
       .then(() => {
         axios.post("/api/events", postEvent).then((res) => {
-          window.location = `/events/${res.data}`;
           setEventId(res.data);
           console.log("posted successfully", res.data);
         });
       });
-  }
+  } s
 
   const handleViewPost = () => {
     console.log("viewid", eventId);
@@ -196,7 +195,7 @@ export default function NewEvent({ categoriesList }) {
   return (
     <>
       <TopBar>
-        <TopNavigation value={1}/>
+        <TopNavigation value={1} />
       </TopBar>
       <DesktopBox>
         {isPreview ? (
