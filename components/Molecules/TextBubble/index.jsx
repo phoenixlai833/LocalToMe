@@ -9,11 +9,13 @@ const BubbleCont = styled.div`
    border-radius:15px;
    align-items:left;
    box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
-   max-width:85vw;
-   min-width:85vw;
+   max-width: 85vw;
+   // min-width:85vw;
    flex-direction:column;
    margin: 15px auto;
-
+   @media (min-width: 768px) {
+      max-width: 55vw;
+   }
 `
 
 const BubbleDiv = styled.div`

@@ -52,6 +52,16 @@ div:nth-child(1){
 }
     `
 
+    const BtnCont = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    @media(min-width: 768px) {
+        width: 30em; 
+    }
+`
+
     // const Button = styled.button`
     // background-color: #108928;
     // border: none;
@@ -82,20 +92,25 @@ div:nth-child(1){
                 <p>
                     From the comfort of your phone, you can find thousands of available food assistance near you.
                 </p>
+                <BtnCont>
+                    <Dot>
+                        <div></div>
+                        <Link href="/landing/landingTwo">
+                            <div></div>
+                        </Link>
+                        <Link href="/landing/landingThree">
+                            <div></div>
+                        </Link>
 
-                <Dot>
-                    <div></div>
+                    </Dot>
+
                     <Link href="/landing/landingTwo">
-                        <div></div>
-                    </Link>
-                    <Link href="/landing/landingThree">
-                        <div></div>
+
+                        <GeneralGreenBtn text={"Continue"} h={"4.5em"} />
+
                     </Link>
 
-                </Dot>
-                <Link href="/landing/landingTwo">
-                    <GeneralGreenBtn text={"Continue"} h={"4.5em"} />
-                </Link>
+                </BtnCont>
             </LandOne>
         </>
     )

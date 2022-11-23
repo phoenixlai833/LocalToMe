@@ -52,6 +52,15 @@ div:nth-child(2){
 }
     `
 
+    const BtnCont = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    @media(min-width: 768px) {
+        width: 30em;
+    }
+`
 
     return (
         <LandOne>
@@ -70,20 +79,21 @@ div:nth-child(2){
                 Spread the joy by hosting events or joining an event hosted by those who want to help the  community.
             </p>
 
-            <Dot>
-                <Link href="/landing/landingOne">
+            <BtnCont>
+                <Dot>
+                    <Link href="/landing/landingOne">
+                        <div></div>
+                    </Link>
                     <div></div>
-                </Link>
-                <div></div>
+                    <Link href="/landing/landingThree">
+                        <div></div>
+                    </Link>
+                </Dot>
+
                 <Link href="/landing/landingThree">
-                    <div></div>
+                    <GeneralGreenBtn text={"Continue"} h={"4.5em"} />
                 </Link>
-            </Dot>
-
-            <Link href="/landing/landingThree">
-                <GeneralGreenBtn text={"Continue"} h={"4.5em"} />
-            </Link>
-
+            </BtnCont>
         </LandOne>
     )
 }

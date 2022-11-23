@@ -9,23 +9,13 @@ const Form = styled.form`
   margin: 5vw 10vw;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  * {
-    width: 100%;
+  align-items: left;
+//   * {
+//     width: 100%;
+//   }
+  @media (min-width: 768px) {
+    width: 70%;  
   }
-`;
-
-const LayoutTime = styled.div`
-  display: flex;
-  margin-bottom: 5%;
-`;
-
-const To = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 15%;
-  margin-left: 5%;
 `;
 
 export default function NewsForm({

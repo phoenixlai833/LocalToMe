@@ -14,6 +14,9 @@ import axios from "axios";
 import Toast from "../../components/Molecules/Toast/Toast";
 import styled from "styled-components";
 import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
+import TopNavigation from "../../components/Organisms/NavBarTop";
+import NavBar from "../../components/Organisms/NavBar";
+
 
 const ToastPopup = styled.div`
 position: fixed;
@@ -27,6 +30,21 @@ align-items: center;
 z-index: 100;
 `
 
+const TopBar = styled.div`
+  @media (max-width: 767px) {
+    display:none;
+}
+`
+
+const DesktopBox = styled.div`
+@media (min-width: 768px) {
+margin-top:8vh;
+margin-left: 18vw;
+margin-right: 18vw;
+// min-height: 92vh;
+box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
+}
+`
 
 export default function NewEvent({ categoriesList }) {
   const { data: session } = useSession();
@@ -34,7 +52,7 @@ export default function NewEvent({ categoriesList }) {
   const [event, setEvent] = useState({
     eventName: "",
     eventImage:
-      "https://firebasestorage.googleapis.com/v0/b/localtome-f84e5.appspot.com/o/foodBankImageTest.jpg?alt=media&token=37d44b9b-ac9d-48d7-8556-693c9a002fb0",
+      "https://firebasestorage.googleapis.com/v0/b/localtome-f84e5.appspot.com/o/event-default.png?alt=media&token=e7bcc856-028b-4ae1-95fc-9e47f3b09fa5",
     eventContent: "",
     eventCreatorId: userId,
     start: new Date(),
@@ -140,7 +158,7 @@ export default function NewEvent({ categoriesList }) {
     setEvent({ ...event, eventTags: tags });
   }
 
-  function handleCancel() {}
+  function handleCancel() { }
 
   function handleConfirm() {
     const postEvent = {
@@ -177,7 +195,10 @@ export default function NewEvent({ categoriesList }) {
 
   return (
     <>
-      <div>
+      <TopBar>
+        <TopNavigation />
+      </TopBar>
+      <DesktopBox>
         {isPreview ? (
           <EventPreview
             event={event}
@@ -205,12 +226,16 @@ export default function NewEvent({ categoriesList }) {
             categoriesList={categoriesList}
           />
         )}
-      </div>
+        <div style={{ paddingBottom: "8vh" }}></div>
+      </DesktopBox>
       {eventId && (
         <ToastPopup>
           <Toast onViewPost={handleViewPost} />
         </ToastPopup>
       )}
+      <div className="TEMPMEDIA">
+        <NavBar value={1} />
+      </div>
     </>
   );
 }

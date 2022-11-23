@@ -8,22 +8,57 @@ import { getUser, getUsers } from "../server/database";
 import { authOptions } from "./api/auth/[...nextauth].js";
 import { unstable_getServerSession } from "next-auth/next";
 import postFavorite from "../utils/postFavorite";
+import TopNavigation from "../components/Organisms/NavBarTop";
+
+
+const TopBar = styled.div`
+  @media (max-width: 767px) {
+    display:none;
+}
+
+`
+const Btmbar = styled.div`
+margin-top: 5rem;
+    @media (min-width: 768px) {
+        display:none;
+    }
+    `
 
 const FavorPage = styled.div`
   display: flex;
   flex-direction: column;
-  // background-color: #CDECC2;
-  height: 100vh;
-  width: 100vw;
   margin-bottom: 5%;
+
+
 `;
 
 const Text = styled.h1`
-  margin: auto;
+  margin: 0 20%;
   color: #108928;
-  justify-content: center;
-  align-self: center;
+  text-align: center;
 `;
+
+
+const FavBox = styled.div`
+
+@media (min-width: 768px) {
+border: 1px solid #ffffff;
+margin-top:9vh;
+margin-left: 18vw;
+margin-right: 18vw;
+min-height: 91vh;
+border-radius: 15px;
+   box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
+}
+`
+
+const SadChou = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+height: 70vh;
+`
 
 export default function Favorites({ user }) {
   const [userFavorites, setUserFavorites] = useState();
@@ -86,10 +121,12 @@ export default function Favorites({ user }) {
     const tabContents = {
       0: {
         component: allList,
-        alt: <>You have no favorite events or locations.</>,
+        // alt: <>You have no favorite events or locations.</>,
+        alt: <SadChou><img src="../../Mascot/MascotBroken.png" style={{ width: "200px" }} /><br /><Text>Sad... no favorite events or locations.</Text></SadChou>,
+
       },
-      1: { component: locationList, alt: <>You have no favorite locations.</> },
-      2: { component: eventList, alt: <>You have no favorite events.</> },
+      1: { component: locationList, alt: <SadChou><img src="../../Mascot/MascotBroken.png" style={{ width: "200px" }} /><br /><Text>Sad... please like some locations.</Text></SadChou> },
+      2: { component: eventList, alt: <SadChou><img src="../../Mascot/MascotBroken.png" style={{ width: "200px" }} /><br /><Text>Sad... please like some events.</Text></SadChou> },
     };
     const tabList = ["All", "Locations", "Events"];
     const handleChangeTab = (tabId) => {
@@ -98,15 +135,24 @@ export default function Favorites({ user }) {
 
     return (
       <>
-        <Search />
-        <Tabs tabId={tab} onChangeTab={handleChangeTab} tabList={tabList} />
-        <FavorPage>
-          {console.log("hi", tab, tabContents[tab].component)}
-          {tabContents[tab].component.length > 0
-            ? tabContents[tab].component
-            : tabContents[tab].alt}
+        <TopBar>
+          <TopNavigation />
+        </TopBar>
+        <FavBox>
+          <Search onSearch={() => console.log("nothing")} />
+          <Tabs tabId={tab} onChangeTab={handleChangeTab} tabList={tabList} />
+          <FavorPage>
+            {console.log("hi", tab, tabContents[tab].component)}
+            {tabContents[tab].component.length > 0
+              ? tabContents[tab].component
+              : tabContents[tab].alt}
+
+          </FavorPage>
+        </FavBox>
+        <Btmbar>
           <NavBar value={3} />
-        </FavorPage>
+        </Btmbar>
+
       </>
     );
   }

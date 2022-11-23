@@ -16,7 +16,6 @@ const DeleteCont = styled.div`
   text-align: center;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -37,12 +36,10 @@ const DeleteBtn = styled.button`
   border-radius: 15px;
   height: 44px;
   width: 137px;
-
   font-size: 14px;
   line-height: 17px;
   text-align: center;
   border: 0px;
-
   color: #ffffff;
   margin: 2%;
 `;
@@ -52,11 +49,9 @@ const CancelBtn = styled.button`
   border-radius: 15px;
   height: 44px;
   width: 137px;
-
   font-size: 14px;
   line-height: 17px;
   text-align: center;
-
   color: #535353;
   margin: 2%;
 `;

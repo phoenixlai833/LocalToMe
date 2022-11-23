@@ -1,6 +1,4 @@
 import EventsList from "../../components/Organisms/EventsList";
-// import Newss from "../../components/Newss";
-
 import { useEffect, useState } from "react";
 import AllNews from "../../components/Templates/AllNews";
 import algoliasearch from "algoliasearch/lite";
@@ -20,6 +18,7 @@ import { getAllNews } from "../../server/database";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { authOptions } from "../api/auth/[...nextauth].js";
 import { unstable_getServerSession } from "next-auth/next";
+import TopNavigation from '../../components/Organisms/NavBarTop';
 
 const searchClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_CLIENT_ID,
@@ -62,45 +61,6 @@ export function NewsHits() {
   );
 }
 
-const StyledSearchBox = styled(SearchBox)`
-  form {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  input {
-    position: relative;
-    background-color: #e4e4e4;
-    width: 90%;
-    height: 45px;
-    margin: 20px;
-    border-radius: 13px;
-    border: none;
-    font-size: 20px;
-    padding-left: 10%;
-    // padding-right: 10%;
-  }
-
-  .ais-SearchBox-submit {
-    position: absolute;
-    left: 5%;
-    height: 45px;
-    width: 45px;
-    border-color: transparent;
-    background-color: transparent;
-  }
-
-  .ais-SearchBox-submitIcon {
-    width: 20px;
-    height: 20px;
-    fill: #108928;
-  }
-  .ais-SearchBox-reset {
-    display: none;
-  }
-`;
 
 const Heading = styled.p`
   margin: 1em;
@@ -136,7 +96,34 @@ const NewTab = styled.p`
   margin-top: 8px;
 `;
 
-export default function Community({ tabId, usersData }) {
+const TopBar = styled.div`
+  @media (max-width: 768px) {
+    display:none;
+}
+`
+
+const Btmbar = styled.div`
+margin-top: 5rem;
+    @media (min-width: 768px) {
+        display:none;
+    }
+    `
+
+const ComBox = styled.div`
+@media (min-width: 768px) {
+border: 1px solid #ffffff;
+margin-top:9vh;
+margin-left: 18vw;
+margin-right: 18vw;
+min-height: 91vh;
+border-radius: 15px;
+   box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
+
+}
+`
+
+
+export default function Community({ allNews, tabId, usersData }) {
   const [tab, setTab] = useState(tabId);
   // const [isAdd, setIsAdd] = useState(false);
 
@@ -153,32 +140,38 @@ export default function Community({ tabId, usersData }) {
 
   return (
     <>
-      <InstantSearch
-        indexName={tabContents[tab].searchIndex}
-        searchClient={searchClient}
-      >
-        {/* <Search /> */}
-        <CustomSearch />
-        {/* <Hits /> */}
-        {/* <StyledSearchBox /> */}
-        <Tab onClick={handleChangeTab}>
-          <EventTab id="0" tabId={tab}>
-            Events
-          </EventTab>
-          <NewTab id="1" tabId={tab}>
-            News
-          </NewTab>
-        </Tab>
+      <TopBar>
+        <TopNavigation />
+      </TopBar>
+      <ComBox>
+        <InstantSearch
+          indexName={tabContents[tab].searchIndex}
+          searchClient={searchClient}
+        >
 
-        {tab === 0 ? (
-          <Heading>Recent Events</Heading>
-        ) : (
-          <Heading>Recent News</Heading>
-        )}
-        {tabContents[tab].component}
-      </InstantSearch>
+          <CustomSearch />
+
+          <Tab onClick={handleChangeTab}>
+            <EventTab id="0" tabId={tab}>
+              Events
+            </EventTab>
+            <NewTab id="1" tabId={tab}>
+              News
+            </NewTab>
+          </Tab>
+
+          {tab === 0 ? (
+            <Heading>Recent Events</Heading>
+          ) : (
+            <Heading>Recent News</Heading>
+          )}
+          {tabContents[tab].component}
+        </InstantSearch>
+      </ComBox>
       <FloatingActionButton />
-      <NavBar value={1} />
+      <Btmbar>
+        <NavBar value={1} />
+      </Btmbar>
     </>
   );
 }
