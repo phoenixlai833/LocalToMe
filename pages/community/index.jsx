@@ -40,26 +40,26 @@ export function EventHits() {
   return <EventsList eventList={hits} />;
 }
 
-// export function NewsHits({ allNews }) {
-//   const { data: session } = useSession()
-//   const sessionEmail = session?.user.email
-//   const { hits } = useHits();
-
-//   // return <AllNews allNews={hits} />
-//   return <AllNews allNews={allNews} sessionEmail={sessionEmail} />;
-// }
-
-export function NewsHits() {
-  const { data: session } = useSession();
-  const sessionEmail = session?.user.email;
+export function NewsHits({ allNews }) {
+  const { data: session } = useSession()
+  const sessionEmail = session?.user.email
   const { hits } = useHits();
-  console.log("what", hits);
-  return (
-    <Index indexName="prod_NEWS">
-      <AllNews allNews={hits} sessionEmail={sessionEmail} />
-    </Index>
-  );
+
+  // return <AllNews allNews={hits} />
+  return <AllNews allNews={allNews} sessionEmail={sessionEmail} />;
 }
+
+// export function NewsHits() {
+//   const { data: session } = useSession();
+//   const sessionEmail = session?.user.email;
+//   const { hits } = useHits();
+//   console.log("what", hits);
+//   return (
+//     <Index indexName="prod_NEWS">
+//       <AllNews allNews={hits} sessionEmail={sessionEmail} />
+//     </Index>
+//   );
+// }
 
 
 const Heading = styled.p`
@@ -112,7 +112,7 @@ margin-top: 5rem;
 const ComBox = styled.div`
 @media (min-width: 768px) {
 border: 1px solid #ffffff;
-margin-top: 12vh;
+margin-top: 9vh;
 margin-left: 18vw;
 margin-right: 18vw;
 min-height: 91vh;
@@ -129,7 +129,7 @@ export default function Community({ allNews, tabId, usersData }) {
 
   const tabContents = {
     0: { component: <EventHits />, searchIndex: "prod_EVENTS" },
-    1: { component: <NewsHits />, searchIndex: "prod_NEWS" },
+    1: { component: <NewsHits allNews={allNews} />, searchIndex: "prod_NEWS" },
   };
 
   const handleChangeTab = (e) => {
@@ -141,7 +141,7 @@ export default function Community({ allNews, tabId, usersData }) {
   return (
     <>
       <TopBar>
-        <TopNavigation value={1}/>
+        <TopNavigation value={1} />
       </TopBar>
       <ComBox>
         <InstantSearch
@@ -183,8 +183,8 @@ export async function getServerSideProps(context) {
     authOptions
   );
   const tabId = context.query.tabId || 0;
-  // const req = await getAllNews();
-  // const allNews = JSON.parse(JSON.stringify(req))
+  const req = await getAllNews();
+  const allNews = JSON.parse(JSON.stringify(req))
 
   // const users = await getUsers()
   // const usersData = JSON.parse(JSON.stringify(users));
@@ -192,14 +192,14 @@ export async function getServerSideProps(context) {
   if (!session) {
     return {
       props: {
-        // allNews,
+        allNews,
         tabId,
       },
     };
   } else {
     return {
       props: {
-        // allNews,
+        allNews,
         tabId,
         session,
       },
