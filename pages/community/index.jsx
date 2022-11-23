@@ -1,22 +1,22 @@
-
 import EventsList from "../../components/Organisms/EventsList";
 import { useEffect, useState } from "react";
 import AllNews from "../../components/Templates/AllNews";
 import algoliasearch from "algoliasearch/lite";
 import {
+  Index,
   InstantSearch,
   SearchBox,
   useHits,
   useSearchBox,
 } from "react-instantsearch-hooks-web";
 import { getEvents } from "../../server/database";
-import NavBar from '../../components/Organisms/NavBar';
+import NavBar from "../../components/Organisms/NavBar";
 import FloatingActionButton from "../../components/Atoms/FloatButton";
-import styled from 'styled-components';
+import styled from "styled-components";
 import Search from "../../components/Molecules/Search";
 import { getAllNews } from "../../server/database";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { authOptions } from '../api/auth/[...nextauth].js';
+import { authOptions } from "../api/auth/[...nextauth].js";
 import { unstable_getServerSession } from "next-auth/next";
 import TopNavigation from '../../components/Organisms/NavBarTop';
 
@@ -40,14 +40,25 @@ export function EventHits() {
   return <EventsList eventList={hits} />;
 }
 
+// export function NewsHits({ allNews }) {
+//   const { data: session } = useSession()
+//   const sessionEmail = session?.user.email
+//   const { hits } = useHits();
 
-export function NewsHits({ allNews }) {
-  const { data: session } = useSession()
-  const sessionEmail = session?.user.email
+//   // return <AllNews allNews={hits} />
+//   return <AllNews allNews={allNews} sessionEmail={sessionEmail} />;
+// }
+
+export function NewsHits() {
+  const { data: session } = useSession();
+  const sessionEmail = session?.user.email;
   const { hits } = useHits();
-
-  // return <AllNews allNews={hits} />
-  return <AllNews allNews={allNews} sessionEmail={sessionEmail} />;
+  console.log("what", hits);
+  return (
+    <Index indexName="prod_NEWS">
+      <AllNews allNews={hits} sessionEmail={sessionEmail} />
+    </Index>
+  );
 }
 
 
@@ -101,7 +112,7 @@ margin-top: 5rem;
 const ComBox = styled.div`
 @media (min-width: 768px) {
 border: 1px solid #ffffff;
-margin-top:9vh;
+margin-top: 12vh;
 margin-left: 18vw;
 margin-right: 18vw;
 min-height: 91vh;
@@ -118,7 +129,7 @@ export default function Community({ allNews, tabId, usersData }) {
 
   const tabContents = {
     0: { component: <EventHits />, searchIndex: "prod_EVENTS" },
-    1: { component: <NewsHits allNews={allNews} />, searchIndex: "prod_NEWS" },
+    1: { component: <NewsHits />, searchIndex: "prod_NEWS" },
   };
 
   const handleChangeTab = (e) => {
@@ -166,10 +177,14 @@ export default function Community({ allNews, tabId, usersData }) {
 }
 
 export async function getServerSideProps(context) {
-  const session = await unstable_getServerSession(context.req, context.res, authOptions)
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
   const tabId = context.query.tabId || 0;
-  const req = await getAllNews();
-  const allNews = JSON.parse(JSON.stringify(req))
+  // const req = await getAllNews();
+  // const allNews = JSON.parse(JSON.stringify(req))
 
   // const users = await getUsers()
   // const usersData = JSON.parse(JSON.stringify(users));
@@ -177,17 +192,16 @@ export async function getServerSideProps(context) {
   if (!session) {
     return {
       props: {
-        allNews,
+        // allNews,
         tabId,
       },
-    }
+    };
   } else {
-
     return {
       props: {
-        allNews,
+        // allNews,
         tabId,
-        session
+        session,
       },
     };
   }
