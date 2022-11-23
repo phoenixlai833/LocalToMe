@@ -40,21 +40,24 @@ export function EventHits() {
   if (hits[0]?.eventCreatorId) return <EventsList eventList={hits} />;
 }
 
-// export function NewsHits({ allNews }) {
-//   const { data: session } = useSession()
-//   const sessionEmail = session?.user.email
-//   const { hits } = useHits();
-
-//   // return <AllNews allNews={hits} />
-//   return <AllNews allNews={allNews} sessionEmail={sessionEmail} />;
-// }
-
-export function NewsHits() {
-  const { data: session } = useSession();
-  const sessionEmail = session?.user.email;
+export function NewsHits({ allNews }) {
+  const { data: session } = useSession()
+  const sessionEmail = session?.user.email
   const { hits } = useHits();
   if (hits[0]?.newsCreatorId) return <AllNews allNews={hits} sessionEmail={sessionEmail} />
 }
+
+// export function NewsHits() {
+//   const { data: session } = useSession();
+//   const sessionEmail = session?.user.email;
+//   const { hits } = useHits();
+//   console.log("what", hits);
+//   return (
+//     <Index indexName="prod_NEWS">
+//       <AllNews allNews={hits} sessionEmail={sessionEmail} />
+//     </Index>
+//   );
+// }
 
 
 const Heading = styled.p`
@@ -107,7 +110,7 @@ margin-top: 5rem;
 const ComBox = styled.div`
 @media (min-width: 768px) {
 border: 1px solid #ffffff;
-margin-top:9vh;
+margin-top: 9vh;
 margin-left: 18vw;
 margin-right: 18vw;
 min-height: 91vh;
@@ -118,7 +121,7 @@ border-radius: 15px;
 `
 
 
-export default function Community({ allNews, tabId, usersData }) {
+export default function Community({ tabId, usersData }) {
   const [tab, setTab] = useState(tabId);
   // const [isAdd, setIsAdd] = useState(false);
 
@@ -136,7 +139,7 @@ export default function Community({ allNews, tabId, usersData }) {
   return (
     <>
       <TopBar>
-        <TopNavigation />
+        <TopNavigation value={1} />
       </TopBar>
       <ComBox>
         <InstantSearch

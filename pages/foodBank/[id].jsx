@@ -82,6 +82,7 @@ export default function FoodBank({ d, user }) {
     const [shareUrl, setShareUrl] = useState('');
     const [share, setShare] = useState(false);
     const [navValue, setNavValue] = useState(2);
+    const [copied, setCopied] = useState(false);
     const router = useRouter()
 
     var locationInfo = [];
@@ -103,6 +104,15 @@ export default function FoodBank({ d, user }) {
     function onShare() {
         setShareUrl(window.location);
         setShare(true);
+    }
+
+    const handleOnCopy = () => {
+        setCopied(true);
+    };
+
+    const handleCloseShare = () => {
+        setShare(false);
+        setCopied(false);
     }
 
     const ifFavorite = user?.favorite?.location.filter((singleLocation) => singleLocation.id === d.id).length > 0 ? true : false;
@@ -131,7 +141,7 @@ export default function FoodBank({ d, user }) {
     return (
         <Wrapper direction="column" gap="10px" sx={{ alignItems: "normal" }}>
             <TopBar>
-                <TopNavigation />
+                <TopNavigation value={1} />
             </TopBar>
             <DesktopBox>
                 {/* can place d.program_name with d.organization_name */}
@@ -162,7 +172,8 @@ export default function FoodBank({ d, user }) {
                 <FlexBox pd="50px" />
             </DesktopBox>
             <Sharebox>
-                <SharePost shareUrl={shareUrl} share={share} closeShare={() => { setShare(false) }} />
+                {/* <SharePost shareUrl={shareUrl} share={share} closeShare={() => { setShare(false) }} /> */}
+                <SharePost shareUrl={shareUrl} share={share} closeShare={handleCloseShare} copied={copied} changeOnCopy={handleOnCopy} />
             </Sharebox>
             <div className="TEMPMEDIA">
                 <NavBar value={2} />

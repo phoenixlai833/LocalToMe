@@ -144,7 +144,7 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
   return (
     <InstantSearch indexName="prod_FOODBANKS" searchClient={searchClient}>
       <TopBar>
-        <TopNavigation />
+        <TopNavigation value={2} />
       </TopBar>
       <div className="mapboxgl-canvas">
         <ReactMapGL
@@ -227,7 +227,7 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
             </FilterbtnSection>
           </FilterListContainer>
         </SearchArea>
-        <div className="TEMPMEDIA">
+        <div class="smallDisplayNone">
           <NavBar value={2} />
         </div>
       </div>
