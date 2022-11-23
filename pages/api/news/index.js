@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import * as db from "../../../server/database";
 import { unstable_getServerSession } from "next-auth/next";
-import { authOptions } from "./auth/[...nextauth]";
+import { authOptions } from "../auth/[...nextauth]";
 import algoliasearch from "algoliasearch";
 const client = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_CLIENT_ID,
