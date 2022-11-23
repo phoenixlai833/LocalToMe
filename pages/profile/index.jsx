@@ -118,7 +118,7 @@ const DesktopBox = styled.div`
 margin-top:8vh;
 margin-left: 18vw;
 margin-right: 18vw;
-// min-height: 92vh;
+min-height: 92vh;
 box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
 }
 `

@@ -17,6 +17,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { authOptions } from '../api/auth/[...nextauth].js';
 import { unstable_getServerSession } from "next-auth/next";
 import { getUsers, getUser } from "../../server/database";
+import { useRouter } from 'next/router';
 import TopNavigation from '../../components/Organisms/NavBarTop';
 
 
@@ -81,6 +82,8 @@ export default function FoodBank({ d, user }) {
     const [shareUrl, setShareUrl] = useState('');
     const [share, setShare] = useState(false);
     const [navValue, setNavValue] = useState(2);
+    const router = useRouter()
+
     var locationInfo = [];
     var locationIcons = [];
     var signUp = [];
@@ -102,8 +105,7 @@ export default function FoodBank({ d, user }) {
         setShare(true);
     }
 
-
-    const ifFavorite = user.favorite.location.filter((singleLocation) => singleLocation.id === d.id).length > 0 ? true : false;
+    const ifFavorite = user?.favorite?.location.filter((singleLocation) => singleLocation.id === d.id).length > 0 ? true : false;
     const [favorite, setFavorite] = useState(ifFavorite);
 
 
@@ -173,12 +175,23 @@ export async function getServerSideProps(context) {
     const session = await unstable_getServerSession(context.req, context.res, authOptions)
 
     const req = await getFoodBank(context.params.id)
-
     const d = JSON.parse(JSON.stringify(req));
-    const users = await getUsers();
-    const userId = users.filter((user) => user.email === session.user.email)[0].id;
-    const userData = await getUser(userId);
-    const user = JSON.parse(JSON.stringify(userData));
+
+    if (session) {
+        const users = await getUsers();
+        const userId = users.filter((user) => user.email === session.user.email)[0].id;
+        const userData = await getUser(userId);
+        const user = JSON.parse(JSON.stringify(userData));
+
+
+        return {
+            props: { d, session, user },
+        }
+    } else {
+        return {
+            props: { d },
+        };
+    }
     // const data = [oneFoodBankObj._document.data.value.mapValue.fields]
 
     // // set all foodbank data in firestore
@@ -192,14 +205,5 @@ export async function getServerSideProps(context) {
     //     await addFoodBank(fbWImage);
     // })
 
-    if (!session) {
-        return {
-            props: { d },
-        };
-    }
 
-
-    return {
-        props: { d, session, user },
-    }
 }
