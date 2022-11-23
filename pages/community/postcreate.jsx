@@ -11,7 +11,9 @@ height: 100vh;
     align-items: center;
 @media (min-width: 768px) {
     position:relative;
+    overflow: hidden;
 `
+
 const Image = styled.img`
 margin-right: 3rem;
 margin-top: 20px;
