@@ -16,7 +16,7 @@ const TopBar = styled.div`
 
 const DesktopBox = styled.div`
 @media (min-width: 768px) {
-margin-top:8vh;
+margin-top: 12vh;
 margin-left: 18vw;
 margin-right: 18vw;
 min-height: 92vh;

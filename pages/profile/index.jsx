@@ -36,7 +36,7 @@ flex-direction: column;
 const ProfileTab = styled.div`
 display:flex;
 height: 170px;
-width: 100%
+width: 100%;
 justify-content: flex-end;
 align-items: flex-end;
 @media (min-width: 768px) {
