@@ -69,7 +69,7 @@ export default function EditEvent({ defaultEvent, categoriesList }) {
   }
 
   function handleChangeEventLocation(eventLocation) {
-    setEvent({ ...event, eventLocation });
+    setEvent({ ...event, eventLocation: eventLocation?.label });
     return;
   }
 

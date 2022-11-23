@@ -31,6 +31,12 @@ justify-content: space-between;
     width: 40vw;
 }
 `
+const FoodBankNameLink = styled.p`
+color: black;
+:hover {
+    color: #108928;
+}
+`;
 
 export default function MapSlideItem({ fb }) {
 
@@ -39,9 +45,11 @@ export default function MapSlideItem({ fb }) {
             <ItemCard>
                 <ImageContainer src={fb.foodBank_Image} ></ImageContainer>
                 <FbInfo>
-                    <Link href={`/foodBank/${fb.objectID}`}>
-                        <a>{fb.program_name}</a>
-                    </Link>
+                    <FoodBankNameLink>
+                        <Link href={`/foodBank/${fb.objectID}`}>
+                            <a>{fb.program_name}</a>
+                        </Link>
+                    </FoodBankNameLink>
                     <div>
                         <b>2 miles away</b>
                         <p>{fb.location_address}</p>

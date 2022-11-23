@@ -187,7 +187,7 @@ export default function Home({ sortedEvents, sortedAllNews }) {
           <p style={{ color: "green" }}>view all</p>
         </Link>
       </div>
-      <AllNews allNews={sortedAllNews} sessionEmail={session.user.email} />
+      <AllNews allNews={sortedAllNews} sessionEmail={session ? session.user.email : null} />
       <div className="TEMPMEDIA">
         <NavBar value={0} />
       </div>

@@ -4,6 +4,7 @@ const Container = styled.div`
     border: 1px solid #555555;
     border-radius: 0.6em;
     padding: 0.4em 0.6em;
+    width: 100%;
 `
 
 const Label = styled.p`

@@ -44,20 +44,15 @@ div:nth-child(3){
     background-color: #108928;
 }
     `
-
-    const Button = styled.button`
-    background-color: #108928;
-    border: none;
-    border-radius: 10px;
-    height: 60px;
-    width: 85vw;
-    color: white;
-    font-size: 20px;
-    &:hover {
-        background-color: #085617;
-      }
-    `
-
+    const BtnCont = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    @media(min-width: 768px) {
+    width: 30em;
+    }
+`
 
     return (
         <LandOne>
@@ -71,22 +66,21 @@ div:nth-child(3){
                 Be updated on News & Resources from different Food Banks and stay informed.
             </p>
 
-            <Dot>
-                <Link href="/landing/landingOne">
+            <BtnCont>
+                <Dot>
+                    <Link href="/landing/landingOne">
+                        <div></div>
+                    </Link>
+                    <Link href="/landing/landingTwo">
+                        <div></div>
+                    </Link>
                     <div></div>
+                </Dot>
+
+                <Link href="/auth/signin">
+                    <GeneralGreenBtn text={"Get Started"} h={"4.5em"} />
                 </Link>
-                <Link href="/landing/landingTwo">
-                    <div></div>
-                </Link>
-                <div></div>
-
-
-            </Dot>
-
-            <Link href="/auth/signin">
-                <GeneralGreenBtn text={"Get Started"} h={"4.5em"} />
-            </Link>
-
+            </BtnCont>
         </LandOne>
     )
 }

@@ -5,14 +5,15 @@ import GetDirectionGreenBtn from "../../Atoms/GetDirectionGreenBtn";
 import styled from "styled-components";
 
 const FoodBankNameLink = styled.p`
+color: #108928;
 :hover {
-    color: rgb(49, 143, 237);
+    color: black;
     text - decoration: underline;
 }
 `;
 
 const Readmore = styled.span`
-    color: rgb(49, 143, 237);
+    color: #108928;
 `
 
 const MarkerBtn = styled.button`
@@ -24,6 +25,22 @@ const MarkerBtn = styled.button`
     height: 28px;
     }
 `
+
+const PopupCont = styled.div`
+padding: 2%;
+`
+
+const TopSec = styled.div`
+background-color: #CDECC2;
+background-image: url("../../Mascot/MascotFallen.png");
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+// width: 100%;
+height: 100px;
+display: flex; 
+`
+
 
 export default function FoodBankMapPin({ foodBanksList }) {
 
@@ -49,28 +66,30 @@ export default function FoodBankMapPin({ foodBanksList }) {
 
             {foodBanksList.map((item) => {
                 if (item.latitude && item.longitude) {
-                return (
-                    <Marker
-                        key={item.id}
-                        latitude={item.latitude}
-                        longitude={item.longitude}
-                        color="red"
-                    >
-                        <MarkerBtn
-                            onClick={(e) => {
-                                e.preventDefault();
-                                setSelectedFoodbank(item);
-                            }}
+                    return (
+                        <Marker
+                            key={item.id}
+                            latitude={item.latitude}
+                            longitude={item.longitude}
+                            color="red"
                         >
-                            <img src="./Food_Bank_Map_Pin.svg" alt="foodbank pin" />
-                        </MarkerBtn>
-                    </Marker>
-                )}
+                            <MarkerBtn
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setSelectedFoodbank(item);
+                                }}
+                            >
+                                <img src="./Food_Bank_Map_Pin.svg" alt="foodbank pin" />
+                            </MarkerBtn>
+                        </Marker>
+                    )
+                }
             }
             )}
 
             {selectedFoodbank && (
                 <Popup
+
                     latitude={selectedFoodbank.latitude}
                     longitude={selectedFoodbank.longitude}
                     anchor="top"
@@ -79,42 +98,50 @@ export default function FoodBankMapPin({ foodBanksList }) {
                         setSelectedFoodbank(null);
                     }}
                 >
-                    <div>
+                    <PopupCont >
+                        <TopSec></TopSec>
                         <FoodBankNameLink>
                             <Link href={`/foodBank/${selectedFoodbank.objectID}`}>
                                 <h2>{selectedFoodbank.program_name}</h2>
-
                             </Link>
                         </FoodBankNameLink>
-                        <p>
-                            <b>Location:</b>
-                            {selectedFoodbank.location_address && selectedFoodbank.location_address}
-                        </p>
-
-                        <p>
-                            <b>Organization Name:</b>
-                            {selectedFoodbank.organization_name && selectedFoodbank.organization_name}
-                        </p>
-                        <p>
-                            <b>Email:</b>
-                            {selectedFoodbank.signup_email && selectedFoodbank.signup_email}
-                        </p>
-                        <p>
-                            <b>Population served:</b>
-                            {selectedFoodbank.program_population_served && selectedFoodbank.program_population_served}
-                        </p>
-                        <p>
-                            <b>Description:</b>
-                            {selectedFoodbank.description && selectedFoodbank.description.slice(0, 45)}
-                            <Readmore>
-                                <Link href={`/foodBank/${selectedFoodbank.id}`}>
-                                    ...Read More
-                                </Link>
-                            </Readmore>
-                        </p>
+                        {selectedFoodbank.location_address &&
+                            <p>
+                                <b>Location</b>
+                                <br></br>
+                                {selectedFoodbank.location_address}
+                            </p>}
+                        {selectedFoodbank.organization_name &&
+                            <p>
+                                <b>Organization Name</b>
+                                <br></br>
+                                {selectedFoodbank.organization_name}
+                            </p>}
+                        {selectedFoodbank.signup_email &&
+                            <p>
+                                <b>Email</b>
+                                <br></br>
+                                {selectedFoodbank.signup_email}
+                            </p>}
+                        {selectedFoodbank.program_population_served &&
+                            <p>
+                                <b>Population served</b>
+                                <br></br>
+                                {selectedFoodbank.program_population_served}
+                            </p>}
+                        {selectedFoodbank.description &&
+                            <p>
+                                <b>Description</b>
+                                <br></br>
+                                {selectedFoodbank.description.slice(0, 45)}
+                                <Readmore>
+                                    <Link href={`/foodBank/${selectedFoodbank.id}`}>
+                                        ...Read More
+                                    </Link>
+                                </Readmore>
+                            </p>}
                         <GetDirectionGreenBtn address={selectedFoodbank.location_address} onMap={true} />
-
-                    </div>
+                    </PopupCont>
 
                 </Popup>
             )}

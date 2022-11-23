@@ -3,7 +3,9 @@ import { Marker, Popup } from "react-map-gl";
 import GetDirectionGreenBtn from "../GetDirectionGreenBtn";
 import styled from "styled-components";
 
-
+const FridgeName = styled.p`
+color: black;
+`
 
 const MarkerBtn = styled.button`
     background-color: transparent;
@@ -13,6 +15,21 @@ const MarkerBtn = styled.button`
     width: 20px;
     height: 28px;
 }
+`
+
+const PopupCont = styled.div`
+padding: 2%;
+`
+
+const TopSec = styled.div`
+background-color: #CDECC2;
+background-image: url("../../Mascot/MascotFallen.png");
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+// width: 100%;
+height: 100px;
+display: flex; 
 `
 
 export default function FridgeMapPin({ fridges }) {
@@ -73,21 +90,24 @@ export default function FridgeMapPin({ fridges }) {
                     }}
 
                 >
-                    <div>
-                        <p>
+                    <PopupCont>
+                        <TopSec></TopSec>
+                        <FridgeName>
                             <h2>{selectedFridge.name}</h2>
-                        </p>
-                        <p>
-                            <b>Location:</b>
-                            {selectedFridge.location && selectedFridge.location}
-                        </p>
-                        <p>
-                            <b>Description:</b>
-                            {selectedFridge.description && selectedFridge.description}
-                        </p>
+                        </FridgeName>
+                        {selectedFridge.location &&
+                            <p >
+                                <b>Location:</b>
+                                {selectedFridge.location}
+                            </p>}
+                        {selectedFridge.description &&
+                            <p>
+                                <b>Description:</b>
+                                {selectedFridge.description}
+                            </p>}
 
                         <GetDirectionGreenBtn address={selectedFridge.location} onMap={true} />
-                    </div>
+                    </PopupCont>
 
                 </Popup>
 
