@@ -169,6 +169,7 @@ export default function Event({ event, user }) {
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [shareUrl, setShareUrl] = useState('');
   const [share, setShare] = useState(false);
+  const [copied, setCopied] = useState(false);
   const router = useRouter()
 
   const startDay = new Date(event.start).toLocaleString("default", { dateStyle: "long" })
@@ -211,9 +212,17 @@ export default function Event({ event, user }) {
     setShare(true);
   }
 
+  const handleCloseShare = () => {
+    setShare(false);
+    setCopied(false);
+  }
+
   const ifFavorite = user?.favorite?.event.find((singleEvent) => singleEvent.id === event.id);
   const [favorite, setFavorite] = useState(ifFavorite);
 
+  const handleOnCopy = () => {
+    setCopied(true);
+  };
 
   function handleOnClick() {
     if (!session) {
@@ -309,7 +318,8 @@ export default function Event({ event, user }) {
       </DesktopBox>
 
       <Sharebox>
-        <SharePost shareUrl={shareUrl} share={share} closeShare={() => { setShare(false) }} />
+        {/* <SharePost shareUrl={shareUrl} share={share} closeShare={() => { setShare(false) }} /> */}
+        <SharePost shareUrl={shareUrl} share={share} closeShare={handleCloseShare} copied={copied} changeOnCopy={handleOnCopy} />
       </Sharebox>
 
       <div className="TEMPMEDIA">
