@@ -37,7 +37,7 @@ function CustomSearch() {
 export function EventHits() {
   const { hits } = useHits();
 
-  return <EventsList eventList={hits} />;
+  if (hits[0]?.eventCreatorId) return <EventsList eventList={hits} />;
 }
 
 // export function NewsHits({ allNews }) {
@@ -53,12 +53,7 @@ export function NewsHits() {
   const { data: session } = useSession();
   const sessionEmail = session?.user.email;
   const { hits } = useHits();
-  console.log("what", hits);
-  return (
-    <Index indexName="prod_NEWS">
-      <AllNews allNews={hits} sessionEmail={sessionEmail} />
-    </Index>
-  );
+  if (hits[0]?.newsCreatorId) return <AllNews allNews={hits} sessionEmail={sessionEmail} />
 }
 
 

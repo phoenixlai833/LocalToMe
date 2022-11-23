@@ -214,7 +214,7 @@ export default function Profile({ sortedEvents }) {
                                     Recent Posts
                                 </EventTab>
                                 <NewTab id="1" tabId={tab}>
-                                    Past Posts
+                                    Past Events
                                 </NewTab>
                             </Tab>
                         </ProfileTab>
