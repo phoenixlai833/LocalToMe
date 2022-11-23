@@ -2,7 +2,13 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { getEvent, deleteEvent } from "../../../server/database";
 import styled from "styled-components";
+import algoliasearch from "algoliasearch";
+const client = algoliasearch(
+  process.env.NEXT_PUBLIC_ALGOLIA_CLIENT_ID,
+  process.env.NEXT_PUBLIC_ALGOLIA_API_KEY_ADMIN
+);
 
+const index = client.initIndex("prod_EVENTS");
 const DeleteCont = styled.div`
   position: fixed;
   top: 40%;
@@ -64,6 +70,7 @@ export default function DeletePopup({ showDelete, eventId, hidePopup }) {
     e.preventDefault();
     console.log("ACUALLY DELETING", eventId);
     await deleteEvent(eventId);
+    index.deleteEvent(eventId).wait();
     window.location.reload();
   };
 

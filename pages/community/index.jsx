@@ -37,16 +37,14 @@ function CustomSearch() {
 export function EventHits() {
   const { hits } = useHits();
 
-  return <EventsList eventList={hits} />;
+  if (hits[0]?.eventCreatorId) return <EventsList eventList={hits} />;
 }
 
 export function NewsHits({ allNews }) {
   const { data: session } = useSession()
   const sessionEmail = session?.user.email
   const { hits } = useHits();
-
-  // return <AllNews allNews={hits} />
-  return <AllNews allNews={allNews} sessionEmail={sessionEmail} />;
+  if (hits[0]?.newsCreatorId) return <AllNews allNews={hits} sessionEmail={sessionEmail} />
 }
 
 // export function NewsHits() {
@@ -123,13 +121,13 @@ border-radius: 15px;
 `
 
 
-export default function Community({ allNews, tabId, usersData }) {
+export default function Community({ tabId, usersData }) {
   const [tab, setTab] = useState(tabId);
   // const [isAdd, setIsAdd] = useState(false);
 
   const tabContents = {
     0: { component: <EventHits />, searchIndex: "prod_EVENTS" },
-    1: { component: <NewsHits allNews={allNews} />, searchIndex: "prod_NEWS" },
+    1: { component: <NewsHits />, searchIndex: "prod_NEWS" },
   };
 
   const handleChangeTab = (e) => {
@@ -183,8 +181,8 @@ export async function getServerSideProps(context) {
     authOptions
   );
   const tabId = context.query.tabId || 0;
-  const req = await getAllNews();
-  const allNews = JSON.parse(JSON.stringify(req))
+  // const req = await getAllNews();
+  // const allNews = JSON.parse(JSON.stringify(req))
 
   // const users = await getUsers()
   // const usersData = JSON.parse(JSON.stringify(users));
@@ -192,14 +190,14 @@ export async function getServerSideProps(context) {
   if (!session) {
     return {
       props: {
-        allNews,
+        // allNews,
         tabId,
       },
     };
   } else {
     return {
       props: {
-        allNews,
+        // allNews,
         tabId,
         session,
       },
