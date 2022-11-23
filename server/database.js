@@ -197,6 +197,7 @@ export async function editNews(news) {
 }
 
 export async function deleteNews(id) {
+  const index = client.initIndex("prod_NEWS");
   const newsCollection = doc(db, "news", id);
   const newsSnap = await getDoc(newsCollection);
   const fileUrl = newsSnap.data().newsImage;
@@ -206,6 +207,7 @@ export async function deleteNews(id) {
     deleteObject(fileRef);
   }
   await deleteDoc(doc(db, "news", id));
+  index.deleteObject(id).wait();
 }
 
 export async function getNewsCategories() {
