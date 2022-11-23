@@ -112,7 +112,7 @@ margin-top: 5rem;
 const ComBox = styled.div`
 @media (min-width: 768px) {
 border: 1px solid #ffffff;
-margin-top:9vh;
+margin-top: 12vh;
 margin-left: 18vw;
 margin-right: 18vw;
 min-height: 91vh;
