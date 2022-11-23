@@ -135,7 +135,7 @@ export default function FoodBankMapPin({ foodBanksList }) {
                                 <br></br>
                                 {selectedFoodbank.description.slice(0, 45)}
                                 <Readmore>
-                                    <Link href={`/foodBank/${selectedFoodbank.id}`}>
+                                    <Link href={`/foodBank/${selectedFoodbank.objectID}`}>
                                         ...Read More
                                     </Link>
                                 </Readmore>

@@ -13,7 +13,7 @@ color: #108928;
 `
 
 const Readmore = styled.span`
-    color: rgb(49, 143, 237);
+color: #108928;
 `
 
 const MarkerBtn = styled.button`
@@ -32,7 +32,7 @@ padding: 2%;
 
 const TopSec = styled.div`
 background-color: #CDECC2;
-background-image: url("../../Mascot/MascotEvent.png");
+background-image: url("../../Mascot/mascotEvent.png");
 background-size: cover;
 background-position: center;
 background-repeat: no-repeat;
