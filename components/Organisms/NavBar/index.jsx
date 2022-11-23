@@ -18,8 +18,8 @@ const NavBar = styled(BottomNavigation)`
   color:#535353;
   box-shadow: 0px -2px 8px rgba(0, 0, 0, 0.25);
   z-index:100;
-  // @media (min-width: 768px) {
-  //   display:none;
+  @media (min-width: 767px) {
+    display:none;
 }
 `
 const NavBarAction = styled(BottomNavigationAction)`

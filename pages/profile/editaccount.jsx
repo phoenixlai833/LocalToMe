@@ -33,7 +33,7 @@ export default function EditAccount() {
     if (session) {
         return <div>
             <TopBar>
-                <TopNavigation />
+                <TopNavigation value={4} />
             </TopBar>
             <DesktopBox>
                 <TopBanner text='Account'></TopBanner>
@@ -44,9 +44,7 @@ export default function EditAccount() {
                     {/* {session.user.image ? <p>Signed in with {session.user.image.split(".")[1].split("user")[0]}.</p> : null} */}
                 </Wrapper>
             </DesktopBox>
-            <div className="TEMPMEDIA">
-                <NavBar value={4} />
-            </div>
+            <NavBar value={4} />
         </div>
     }
 }

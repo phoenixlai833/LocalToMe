@@ -69,23 +69,23 @@ export default function TopNavigation({
             {/* </Box> */}
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex', justifyContent: "flex-end" } }}>
               <NavButton onClick={onHome} sx={{ display: 'flex', flexDirection: 'column', borderRadius: "0", padding: "18px 30px", maxWidth: "90px", fontSize: "12px" }}>
-                <NavIcons icon="Home" />
+                {value === 0 ? <NavIcons icon="Home" active={true} /> : <NavIcons icon="Home" />}
                 Home
               </NavButton>
               <NavButton onClick={onCommunity} sx={{ display: 'flex', flexDirection: 'column', borderRadius: "0", padding: "18px 30px", maxWidth: "90px", fontSize: "12px" }}>
-                <NavIcons icon="Community" />
+                {value === 1 ? <NavIcons icon="Community" active={true} /> : <NavIcons icon="Community" />}
                 Community
               </NavButton>
               <NavButton onClick={onMap} sx={{ display: 'flex', flexDirection: 'column', borderRadius: "0", padding: "18px 30px", maxWidth: "90px", fontSize: "12px" }}>
-                <NavIcons icon="Map" />
+                {value === 2 ? <NavIcons icon="Map" active={true} /> : <NavIcons icon="Map" />}
                 Map
               </NavButton>
               <NavButton onClick={onFavourites} sx={{ display: 'flex', flexDirection: 'column', borderRadius: "0", padding: "18px 30px", maxWidth: "90px", fontSize: "12px" }}>
-                <NavIcons icon="Favourite" />
+                {value === 3 ? <NavIcons icon="Favourite" active={true} /> : <NavIcons icon="Favourite" />}
                 Favourites
               </NavButton>
               <NavButton onClick={onProfile} sx={{ display: 'flex', flexDirection: 'column', borderRadius: "0", padding: "18px 30px", maxWidth: "90px", fontSize: "12px" }}>
-                <NavIcons icon="Profile" />
+                {value === 4 ? <NavIcons icon="Profile" active={true} /> : <NavIcons icon="Profile" />}
                 Profile
               </NavButton>
             </Box>
