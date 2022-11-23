@@ -156,7 +156,7 @@ export default function EditEvent({ defaultEvent, categoriesList }) {
   return (
     <>
       <TopBar>
-        <TopNavigation />
+        <TopNavigation value={1} />
       </TopBar>
       <DesktopBox>
         {isPreview ? (
@@ -194,9 +194,7 @@ export default function EditEvent({ defaultEvent, categoriesList }) {
         </ToastPopup>
       )
       }
-      <div className="TEMPMEDIA">
-        <NavBar value={1} />
-      </div>
+      <NavBar value={1} />
     </>
   );
 }

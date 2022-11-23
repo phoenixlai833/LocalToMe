@@ -130,7 +130,7 @@ export default function Community({ allNews, tabId, usersData }) {
   return (
     <>
       <TopBar>
-        <TopNavigation />
+        <TopNavigation value={1}/>
       </TopBar>
       <ComBox>
         <InstantSearch

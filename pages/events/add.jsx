@@ -195,7 +195,7 @@ export default function NewEvent({ categoriesList }) {
   return (
     <>
       <TopBar>
-        <TopNavigation />
+        <TopNavigation value={1}/>
       </TopBar>
       <DesktopBox>
         {isPreview ? (
