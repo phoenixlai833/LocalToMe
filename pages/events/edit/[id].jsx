@@ -4,30 +4,55 @@ import {
   getEvents,
   getEvent,
   addEvent,
-  getEventCategories,
+  getAllCategories,
 } from "../../../server/database";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { collection, getDocs, addDoc } from "firebase/firestore";
-import EventForm from "../../../components/EventForm";
-import EventPreview from "../../../components/EventPreview";
+import EventForm from "../../../components/Templates/EventForm";
+import EventPreview from "../../../components/Templates/EventPreview";
 import axios from "axios";
+import styled from "styled-components";
+import Toast from "../../../components/Molecules/Toast/Toast";
+import TopNavigation from "../../../components/Organisms/NavBarTop";
+import NavBar from "../../../components/Organisms/NavBar";
 
-export default function EditEvent({ defaultEvent, eventCategories }) {
-  const [event, setEvent] = useState(defaultEvent);
+const ToastPopup = styled.div`
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 100;
+`
+
+const TopBar = styled.div`
+  @media (max-width: 767px) {
+    display:none;
+}
+`
+
+const DesktopBox = styled.div`
+@media (min-width: 768px) {
+margin-top:8vh;
+margin-left: 18vw;
+margin-right: 18vw;
+// min-height: 92vh;
+box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
+}
+`
+
+export default function EditEvent({ defaultEvent, categoriesList }) {
+  // const [event, setEvent] = useState(defaultEvent);
+  const [event, setEvent] = useState({ ...defaultEvent, start: new Date(defaultEvent.start), end: new Date(defaultEvent.end) });
+  const [imageURL, setImageURL] = useState(defaultEvent.fileName);
 
   const [isPreview, setIsPreview] = useState(false);
-  const [navValue, setNavValue] = useState(1);
-
+  const [eventId, setEventId] = useState(null);
   const handleTogglePreview = () => {
     setIsPreview(!isPreview);
-  };
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-
-    axios.post("/api/events", event).then((res) => {
-      console.log("posted successfully", res.data);
-    });
   };
 
   function handleChangeEventName(eventName) {
@@ -38,30 +63,27 @@ export default function EditEvent({ defaultEvent, eventCategories }) {
     // setEventCreator()
     return;
   }
-
-  function handleChangeEventLocation(eventLocation) {
-    setEvent({ ...event, eventLocation });
+  function handleChangeEventPhoneNumber(eventContactPhone) {
+    setEvent({ ...event, eventContactPhone });
     return;
   }
 
-  function handleChangeEventDescription(e) {
-    setEvent({ ...event, eventContent: e.target.value });
+  function handleChangeEventLocation(eventLocation) {
+    setEvent({ ...event, eventLocation: eventLocation?.label });
+    return;
   }
 
-
-  // const onFileChange = async (e) => {
-  //   const file = e.target.files[0];
-  //   const fileRef = ref(storage, file.name);
-  //   // await fileRef.put(file);
-  //   await uploadBytes(fileRef, file);
-  //   setEventImage(await getDownloadURL(fileRef));
-  // };
+  function handleChangeEventContent(eventContent) {
+    setEvent({ ...event, eventContent });
+  }
 
   async function handleChangeEventImage(img) {
     const imgRef = ref(storage, img.name);
     await uploadBytes(imgRef, img);
-    const newImgRef = await getDownloadURL(imgRef)
-    setEvent({ ...event, eventImage: newImgRef });
+    const eventImgRef = await getDownloadURL(imgRef);
+    setEvent({ ...event, eventImage: eventImgRef });
+    // console.log(img.name);
+    setImageURL(img.name);
   }
 
   function handleChangeEventStartDate(date) {
@@ -96,50 +118,99 @@ export default function EditEvent({ defaultEvent, eventCategories }) {
     setEvent({ ...event, end: new Date(event.end.setHours(hour, minute)) });
   }
 
-  function handleChangeEventCategory(e) {
-    setEvent({ ...event, eventTags: [...eventTags, e.target.id] });
+  function handleChangeEventCategory(tags) {
+    setEvent({ ...event, eventTags: [...tags] });
   }
 
-  function handleCancel() {}
+  function handleCancel() { }
 
-  function handleConfirm() {}
+  function handleConfirm() {
+    const putEvent = {
+      id: defaultEvent.id,
+      eventContent: event.eventDescription,
+      // eventCreatorId: defaultEvent.eventCreatorId,
+      start: event.start,
+      end: event.end,
+      eventImage: event.eventImage,
+      eventLocation: event.eventLocation,
+      eventName: event.eventName,
+      eventContactPhone: event.eventContactPhone,
+      eventTags: event.eventTags,
+      eventUpdateDate: new Date()
+    }
+
+    // console.log('lul', typeof event.start)
+
+    axios.put("/api/events", putEvent).then((res) => {
+      // window.location = `/events/${res.data}`
+      setEventId(res.data)
+      console.log("edited successfully", res.data);
+    });
+  }
+
+  const handleViewPost = () => {
+    console.log("viewid", eventId)
+    window.location = `/events/${eventId}`;
+  };
 
   return (
-    <div>
-      {isPreview ? (
-        <EventPreview
-          onTogglePreview={handleTogglePreview}
-          onCancel={handleCancel}
-          onConfirm={handleConfirm}
-        />
-      ) : (
-        <EventForm
-          onTogglePreview={handleTogglePreview}
-          event={event}
-          onChangeEventName={handleChangeEventName}
-          onChangeEventCreator={handleChangeEventCreator}
-          onChangeEventLocation={handleChangeEventLocation}
-          onChangeEventDescription={handleChangeEventDescription}
-          onChangeEventImage={handleChangeEventImage}
-          onChangeEventStartDate={handleChangeEventStartDate}
-          onChangeEventStartTime={handleChangeEventStartTime}
-          onChangeEventEndDate={handleChangeEventEndDate}
-          onChangeEventEndTime={handleChangeEventEndTime}
-          onChangeEventCategory={handleChangeEventCategory}
-        />
-      )}
-    </div>
+    <>
+      <TopBar>
+        <TopNavigation />
+      </TopBar>
+      <DesktopBox>
+        {isPreview ? (
+          <EventPreview
+            event={event}
+            onTogglePreview={handleTogglePreview}
+            onCancel={handleCancel}
+            onConfirm={handleConfirm}
+          />
+        ) : (
+          <EventForm
+            mode={"edit"}
+            onTogglePreview={handleTogglePreview}
+            event={event}
+            onChangeEventName={handleChangeEventName}
+            onChangeEventCreator={handleChangeEventCreator}
+            onChangeEventPhoneNumber={handleChangeEventPhoneNumber}
+            onChangeEventLocation={handleChangeEventLocation}
+            onChangeEventDescription={handleChangeEventContent}
+            image={imageURL}
+            onChangeEventImage={handleChangeEventImage}
+            onChangeEventStartDate={handleChangeEventStartDate}
+            onChangeEventStartTime={handleChangeEventStartTime}
+            onChangeEventEndDate={handleChangeEventEndDate}
+            onChangeEventEndTime={handleChangeEventEndTime}
+            onChangeEventTags={handleChangeEventCategory}
+            categoriesList={categoriesList}
+          />
+        )}
+        <div style={{ paddingBottom: "10vh" }}></div>
+      </DesktopBox>
+      {eventId && (
+        <ToastPopup>
+          <Toast onViewPost={handleViewPost} message="Your changes has been saved!" />
+        </ToastPopup>
+      )
+      }
+      <div className="TEMPMEDIA">
+        <NavBar value={1} />
+      </div>
+    </>
   );
 }
 
 export async function getServerSideProps(context) {
+
   const eventData = await getEvent(context.params.id);
   const defaultEvent = JSON.parse(JSON.stringify(eventData));
+  console.log(defaultEvent)
 
-  const eventCategoriesData = await getEventCategories();
-  const eventCategories = JSON.parse(JSON.stringify(eventCategoriesData));
+  const categoriesData = await getAllCategories();
+  const categoriesList = JSON.parse(JSON.stringify(categoriesData));
 
   return {
-    props: { defaultEvent, eventCategories }, // will be passed to the page component as props
+    props: { defaultEvent, categoriesList }, // will be passed to the page component as props
   };
 }

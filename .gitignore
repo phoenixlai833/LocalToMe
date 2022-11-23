@@ -35,3 +35,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+.datab
+data
+
+searchTest.jsx
+oliwer.js
+oliwer.jsx

@@ -1,29 +1,59 @@
 import React, { useEffect, useState } from "react";
 import { db, app, storage } from "../../firebase/clientApp";
-import {
-  getEvents,
-  getEvent,
-  addEvent,
-  getEventCategories,
-} from "../../server/database";
+import { getAllCategories } from "../../server/database";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { collection, getDocs, addDoc } from "firebase/firestore";
 // import Event from "../../components/Event";
 // import Image from `next/image`;
-import DeletePopup from "../../components/DeletePopup";
-import TimeInput from "../../components/TimeInput";
-import NavBar from "../../components/NavBar";
-import EventForm from "../../components/EventForm";
-import EventPreview from "../../components/EventPreview";
+import EventForm from "../../components/Templates/EventForm";
+import EventPreview from "../../components/Templates/EventPreview";
+import { useSession } from "next-auth/react";
+import { authOptions } from "../api/auth/[...nextauth].js";
+import { unstable_getServerSession } from "next-auth/next";
 import axios from "axios";
+import Toast from "../../components/Molecules/Toast/Toast";
+import styled from "styled-components";
+import TopNavigation from "../../components/Organisms/NavBarTop";
+import NavBar from "../../components/Organisms/NavBar";
 
-export default function NewEvent({ eventList, eventCategories }) {
+
+const ToastPopup = styled.div`
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 100;
+`
+
+const TopBar = styled.div`
+  @media (max-width: 767px) {
+    display:none;
+}
+`
+
+const DesktopBox = styled.div`
+@media (min-width: 768px) {
+margin-top:8vh;
+margin-left: 18vw;
+margin-right: 18vw;
+// min-height: 92vh;
+box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
+}
+`
+
+export default function NewEvent({ categoriesList }) {
+  const { data: session } = useSession();
+  const userId = session.user.id;
   const [event, setEvent] = useState({
     eventName: "",
     eventImage:
-      "https://firebasestorage.googleapis.com/v0/b/localtome-f84e5.appspot.com/o/foodBankImageTest.jpg?alt=media&token=37d44b9b-ac9d-48d7-8556-693c9a002fb0",
+      "https://firebasestorage.googleapis.com/v0/b/localtome-f84e5.appspot.com/o/event-default.png?alt=media&token=e7bcc856-028b-4ae1-95fc-9e47f3b09fa5",
     eventContent: "",
-    eventCreatorId: 1,
+    eventCreatorId: userId,
     start: new Date(),
     end: new Date(),
     eventLocation: "",
@@ -33,7 +63,9 @@ export default function NewEvent({ eventList, eventCategories }) {
   });
 
   const [isPreview, setIsPreview] = useState(false);
+  const [imageURL, setImageURL] = useState(null);
   const [navValue, setNavValue] = useState(1);
+  const [eventId, setEventId] = useState(null);
 
   const handleTogglePreview = () => {
     setIsPreview(!isPreview);
@@ -49,6 +81,7 @@ export default function NewEvent({ eventList, eventCategories }) {
 
   function handleChangeEventName(eventName) {
     setEvent({ ...event, eventName });
+    return;
   }
 
   function handleChangeEventCreator() {
@@ -56,13 +89,18 @@ export default function NewEvent({ eventList, eventCategories }) {
     return;
   }
 
-  function handleChangeEventLocation(eventLocation) {
-    setEvent({ ...event, eventLocation });
+  function handleChangeEventPhoneNumber(eventContactPhone) {
+    setEvent({ ...event, eventContactPhone });
     return;
   }
 
-  function handleChangeEventDescription(eventDescription) {
-    setEvent({ ...event, eventDescription });
+  function handleChangeEventLocation(eventLocation) {
+    setEvent({ ...event, eventLocation: eventLocation?.label });
+    return;
+  }
+
+  function handleChangeEventContent(eventContent) {
+    setEvent({ ...event, eventContent });
   }
 
   // const onFileChange = async (e) => {
@@ -78,6 +116,8 @@ export default function NewEvent({ eventList, eventCategories }) {
     await uploadBytes(imgRef, img);
     const newImgRef = await getDownloadURL(imgRef);
     setEvent({ ...event, eventImage: newImgRef });
+    // console.log(img.name);
+    setImageURL(img.name);
   }
 
   function handleChangeEventStartDate(date) {
@@ -112,65 +152,116 @@ export default function NewEvent({ eventList, eventCategories }) {
     setEvent({ ...event, end: new Date(event.end.setHours(hour, minute)) });
   }
 
-  function handleChangeEventCategory(e) {
-    setEvent({ ...event, eventTags: [...eventTags, e.target.id] });
+  function handleChangeEventTags(tags) {
+    console.log(tags);
+    setEvent({ ...event, eventTags: tags });
   }
 
-  function handleCancel() {}
+  function handleCancel() { }
 
-  function handleConfirm(event) {
+  function handleConfirm() {
     const postEvent = {
-      eventContent: event.eventDescription,
-      eventCreatorId: 1,
-      eventDate: event.start,
+      eventContent: event.eventContent,
+      eventCreatorId: userId,
+      start: event.start,
+      end: event.end,
       eventImage: event.eventImage,
       eventLocation: event.eventLocation,
       eventName: event.eventName,
-    }
+      eventContactPhone: event.eventContactPhone,
+      eventTags: event.eventTags,
+      eventUpdateDate: new Date(),
+    };
+
+    geocodeByAddress(postEvent.eventLocation)
+      .then((results) => getLatLng(results[0]))
+      .then(({ lat, lng }) => {
+        postEvent.latitude = lat;
+        postEvent.longitude = lng;
+      });
 
     axios.post("/api/events", postEvent).then((res) => {
-      window.location = `/events/${res.data}`
+      window.location = `/events/${res.data}`;
+      setEventId(res.data)
       console.log("posted successfully", res.data);
     });
   }
 
+  const handleViewPost = () => {
+    console.log("viewid", eventId)
+    window.location = `/events/${eventId}`;
+  };
+
   return (
-    <div>
-      {isPreview ? (
-        <EventPreview
-          event={event}
-          onTogglePreview={handleTogglePreview}
-          onCancel={handleCancel}
-          onConfirm={handleConfirm}
-        />
-      ) : (
-        <EventForm
-          event={event}
-          onTogglePreview={handleTogglePreview}
-          onChangeEventName={handleChangeEventName}
-          onChangeEventCreator={handleChangeEventCreator}
-          onChangeEventLocation={handleChangeEventLocation}
-          onChangeEventDescription={handleChangeEventDescription}
-          onChangeEventImage={handleChangeEventImage}
-          onChangeEventStartDate={handleChangeEventStartDate}
-          onChangeEventStartTime={handleChangeEventStartTime}
-          onChangeEventEndDate={handleChangeEventEndDate}
-          onChangeEventEndTime={handleChangeEventEndTime}
-          onChangeEventCategory={handleChangeEventCategory}
-        />
+    <>
+      <TopBar>
+        <TopNavigation />
+      </TopBar>
+      <DesktopBox>
+        {isPreview ? (
+          <EventPreview
+            event={event}
+            onTogglePreview={handleTogglePreview}
+            onCancel={handleCancel}
+            onConfirm={handleConfirm}
+
+          />
+        ) : (
+          <EventForm
+            event={event}
+            onTogglePreview={handleTogglePreview}
+            onChangeEventName={handleChangeEventName}
+            onChangeEventCreator={handleChangeEventCreator}
+            onChangeEventPhoneNumber={handleChangeEventPhoneNumber}
+            onChangeEventLocation={handleChangeEventLocation}
+            onChangeEventDescription={handleChangeEventContent}
+            image={imageURL}
+            onChangeEventImage={handleChangeEventImage}
+            onChangeEventStartDate={handleChangeEventStartDate}
+            onChangeEventStartTime={handleChangeEventStartTime}
+            onChangeEventEndDate={handleChangeEventEndDate}
+            onChangeEventEndTime={handleChangeEventEndTime}
+            onChangeEventTags={handleChangeEventTags}
+            categoriesList={categoriesList}
+          />
+        )}
+        <div style={{ paddingBottom: "8vh" }}></div>
+      </DesktopBox>
+      {eventId && (
+        <ToastPopup>
+          <Toast onViewPost={handleViewPost} />
+        </ToastPopup>
       )}
-    </div>
+      <div className="TEMPMEDIA">
+        <NavBar value={1} />
+      </div>
+    </>
   );
 }
 
 export async function getServerSideProps(context) {
-  const eventData = await getEvents();
-  const eventList = JSON.parse(JSON.stringify(eventData));
+  // const eventData = await getEvents();
+  // const eventList = JSON.parse(JSON.stringify(eventData));
 
-  const eventCategoriesData = await getEventCategories();
-  const eventCategories = JSON.parse(JSON.stringify(eventCategoriesData));
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth/signin",
+        permanent: false,
+      },
+    };
+  }
+
+  const categoriesData = await getAllCategories();
+  const categoriesList = JSON.parse(JSON.stringify(categoriesData));
 
   return {
-    props: { eventList, eventCategories }, // will be passed to the page component as props
+    props: { categoriesList, session } // will be passed to the page component as props
   };
 }
