@@ -43,7 +43,7 @@ const TopBar = styled.div`
 
 const DesktopBox = styled.div`
 @media (min-width: 768px) {
-margin-top: 12vh;
+margin-top: 8vh;
 margin-left: 18vw;
 margin-right: 18vw;
 min-height: 92vh;
@@ -60,7 +60,7 @@ export default function Setting() {
         return (
             <>
                 <TopBar>
-                    <TopNavigation />
+                    <TopNavigation value={4} />
                 </TopBar>
 
                 <DesktopBox>
@@ -82,7 +82,6 @@ export default function Setting() {
                     </div>
                     <div style={{ padding: "5%" }}></div>
                 </DesktopBox>
-
                 <div className="TEMPMEDIA">
                     <NavBar value={4} />
                 </div>

@@ -16,7 +16,7 @@ const TopBar = styled.div`
 
 const DesktopBox = styled.div`
 @media (min-width: 768px) {
-margin-top: 12vh;
+margin-top: 8vh;
 margin-left: 18vw;
 margin-right: 18vw;
 min-height: 92vh;
@@ -33,7 +33,7 @@ export default function EditAccount() {
     if (session) {
         return <div>
             <TopBar>
-                <TopNavigation />
+                <TopNavigation value={4} />
             </TopBar>
             <DesktopBox>
                 <TopBanner text='Account'></TopBanner>

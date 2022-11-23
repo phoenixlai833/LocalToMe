@@ -13,7 +13,6 @@ justify-content: center;
 flex-direction: column;
 align-items: center;
 margin: 22vh 0 0 0;
-
 `
 
 const AddPost = styled.div`

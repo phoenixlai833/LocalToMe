@@ -130,7 +130,7 @@ export default function NewNews({ categoriesList }) {
     return (
         <div>
             <TopBar>
-                <TopNavigation />
+                <TopNavigation value={1}/>
             </TopBar>
             <DesktopBox>
                 <TopBanner text={"Create a News"} />
@@ -152,7 +152,7 @@ export default function NewNews({ categoriesList }) {
                     <Toast onViewPost={handleViewPost} />
                 </ToastPopup>
             )}
-            <div className="TEMPMEDIA">
+            <div className="smallDisplayNone">
                 <NavBar value={1} />
             </div>
         </div>

@@ -17,34 +17,33 @@ import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
 import TopNavigation from "../../components/Organisms/NavBarTop";
 import NavBar from "../../components/Organisms/NavBar";
 
-
 const ToastPopup = styled.div`
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-display: flex;
-justify-content: center;
-align-items: center;
-z-index: 100;
-`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+`;
 
 const TopBar = styled.div`
   @media (max-width: 767px) {
-    display:none;
-}
-`
+    display: none;
+  }
+`;
 
 const DesktopBox = styled.div`
-@media (min-width: 768px) {
-margin-top:8vh;
-margin-left: 18vw;
-margin-right: 18vw;
-// min-height: 92vh;
-box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
-}
-`
+  @media (min-width: 768px) {
+    margin-top: 8vh;
+    margin-left: 18vw;
+    margin-right: 18vw;
+    // min-height: 92vh;
+    box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
+  }
+`;
 
 export default function NewEvent({ categoriesList }) {
   const { data: session } = useSession();
@@ -52,7 +51,7 @@ export default function NewEvent({ categoriesList }) {
   const [event, setEvent] = useState({
     eventName: "",
     eventImage:
-      "https://firebasestorage.googleapis.com/v0/b/localtome-f84e5.appspot.com/o/event-default.png?alt=media&token=e7bcc856-028b-4ae1-95fc-9e47f3b09fa5",
+      "https://firebasestorage.googleapis.com/v0/b/localtome-f84e5.appspot.com/o/event-default.png?alt=media&token=148aee95-6aad-43b4-98bf-b460325f05b0",
     eventContent: "",
     eventCreatorId: userId,
     start: new Date(),
@@ -179,24 +178,25 @@ export default function NewEvent({ categoriesList }) {
       .then(({ lat, lng }) => {
         postEvent.latitude = lat;
         postEvent.longitude = lng;
+      })
+      .then(() => {
+        axios.post("/api/events", postEvent).then((res) => {
+          window.location = `/events/${res.data}`;
+          setEventId(res.data);
+          console.log("posted successfully", res.data);
+        });
       });
-
-    axios.post("/api/events", postEvent).then((res) => {
-      window.location = `/events/${res.data}`;
-      setEventId(res.data)
-      console.log("posted successfully", res.data);
-    });
   }
 
   const handleViewPost = () => {
-    console.log("viewid", eventId)
+    console.log("viewid", eventId);
     window.location = `/events/${eventId}`;
   };
 
   return (
     <>
       <TopBar>
-        <TopNavigation />
+        <TopNavigation value={1} />
       </TopBar>
       <DesktopBox>
         {isPreview ? (
@@ -205,7 +205,6 @@ export default function NewEvent({ categoriesList }) {
             onTogglePreview={handleTogglePreview}
             onCancel={handleCancel}
             onConfirm={handleConfirm}
-
           />
         ) : (
           <EventForm
@@ -263,6 +262,6 @@ export async function getServerSideProps(context) {
   const categoriesList = JSON.parse(JSON.stringify(categoriesData));
 
   return {
-    props: { categoriesList, session } // will be passed to the page component as props
+    props: { categoriesList, session }, // will be passed to the page component as props
   };
 }

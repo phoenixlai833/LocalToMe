@@ -131,7 +131,7 @@
       transform: translateY(-100%);
     }
     100% {
-      transform: translateY(25%);
+      transform: translateY(-30%);
     }
   }
 
@@ -140,7 +140,7 @@
       -webkit-transform: translateY(-100%);
     }
     100% {
-      -webkit-transform: translateY(25%);
+      -webkit-transform: translateY(-30%);
     }
   }
 }

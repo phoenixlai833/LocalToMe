@@ -138,12 +138,12 @@ export default function Home({ sortedEvents, sortedAllNews }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <TopBar>
-        <TopNavigation />
+        <TopNavigation value={0} />
       </TopBar>
       <FloatingActionButton />
       {/* <Loading/> */}
 
-      <div style={{ padding: "10% 5% 5% 5%" }}>
+      <div style={{ padding: "10% 5% 5% 5%", overflowX: "hidden" }}>
 
         <FirstSection>
           <div>
@@ -188,10 +188,10 @@ export default function Home({ sortedEvents, sortedAllNews }) {
         </Link>
       </div>
       <AllNews allNews={sortedAllNews} sessionEmail={session ? session.user.email : null} />
-      <div className="TEMPMEDIA">
+      <div class="smallDisplayNone">
         <NavBar value={0} />
       </div>
-      {/* <NavBar value={0} /> */}
+
     </div >
   );
 }
