@@ -100,7 +100,7 @@ export default function NewNews({ newsItem, categoriesList }) {
     return (
         <div>
             <TopBar>
-                <TopNavigation />
+                <TopNavigation value={1}/>
             </TopBar>
             <DesktopBox>
                 <TopBanner text={"Edit News"} />

@@ -136,7 +136,7 @@ export default function Favorites({ user }) {
     return (
       <>
         <TopBar>
-          <TopNavigation />
+          <TopNavigation value={3}/>
         </TopBar>
         <FavBox>
           <Search onSearch={() => console.log("nothing")} />

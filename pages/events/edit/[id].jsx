@@ -127,7 +127,7 @@ export default function EditEvent({ defaultEvent, categoriesList }) {
     setEvent({ ...event, eventTags: [...tags] });
   }
 
-  function handleCancel() {}
+  function handleCancel() { }
 
   function handleConfirm() {
     const putEvent = {
@@ -166,7 +166,7 @@ export default function EditEvent({ defaultEvent, categoriesList }) {
   return (
     <>
       <TopBar>
-        <TopNavigation />
+        <TopNavigation value={1} />
       </TopBar>
       <DesktopBox>
         {isPreview ? (
@@ -205,10 +205,12 @@ export default function EditEvent({ defaultEvent, categoriesList }) {
             message="Your changes has been saved!"
           />
         </ToastPopup>
+
+
       )}
-      <div className="TEMPMEDIA">
-        <NavBar value={1} />
-      </div>
+      <NavBar value={1} />
+
+
     </>
   );
 }
