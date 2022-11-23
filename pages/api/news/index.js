@@ -21,7 +21,8 @@ export default async function handler(req, res) {
     }
 
     const newsId = await db.addNews(req.body);
-    const news = await db.getNews(newsId);
+    const allNews = await db.getAllNews();
+    const news = allNews.find(n => n.id == newsId);
     index.saveObject({ ...news, objectID: news.id }).wait();
     res.status(200).json(newsId);
   } else if (req.method === "PUT") {
