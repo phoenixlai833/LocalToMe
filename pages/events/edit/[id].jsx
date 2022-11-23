@@ -13,6 +13,7 @@ import EventPreview from "../../../components/Templates/EventPreview";
 import axios from "axios";
 import styled from "styled-components";
 import Toast from "../../../components/Molecules/Toast/Toast";
+import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
 
 const ToastPopup = styled.div`
 position: fixed;
@@ -51,7 +52,7 @@ export default function EditEvent({ defaultEvent, categoriesList }) {
   }
 
   function handleChangeEventLocation(eventLocation) {
-    setEvent({ ...event, eventLocation });
+    setEvent({ ...event, eventLocation: eventLocation?.label });
     return;
   }
 
