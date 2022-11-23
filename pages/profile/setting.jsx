@@ -60,7 +60,7 @@ export default function Setting() {
         return (
             <>
                 <TopBar>
-                    <TopNavigation value={4}/>
+                    <TopNavigation value={4} />
                 </TopBar>
 
                 <DesktopBox>
@@ -82,8 +82,9 @@ export default function Setting() {
                     </div>
                     <div style={{ padding: "5%" }}></div>
                 </DesktopBox>
-
-                <NavBar value={4} />
+                <div className="TEMPMEDIA">
+                    <NavBar value={4} />
+                </div>
             </>
         )
     }

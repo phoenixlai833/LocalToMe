@@ -51,7 +51,7 @@ export default function NewEvent({ categoriesList }) {
   const [event, setEvent] = useState({
     eventName: "",
     eventImage:
-      "https://firebasestorage.googleapis.com/v0/b/localtome-f84e5.appspot.com/o/event-default.png?alt=media&token=e7bcc856-028b-4ae1-95fc-9e47f3b09fa5",
+      "https://firebasestorage.googleapis.com/v0/b/localtome-f84e5.appspot.com/o/event-default.png?alt=media&token=148aee95-6aad-43b4-98bf-b460325f05b0",
     eventContent: "",
     eventCreatorId: userId,
     start: new Date(),
@@ -157,7 +157,7 @@ export default function NewEvent({ categoriesList }) {
     setEvent({ ...event, eventTags: tags });
   }
 
-  function handleCancel() {}
+  function handleCancel() { }
 
   function handleConfirm() {
     const postEvent = {
@@ -196,7 +196,7 @@ export default function NewEvent({ categoriesList }) {
   return (
     <>
       <TopBar>
-        <TopNavigation value={1}/>
+        <TopNavigation value={1} />
       </TopBar>
       <DesktopBox>
         {isPreview ? (

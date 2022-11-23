@@ -44,7 +44,9 @@ export default function EditAccount() {
                     {/* {session.user.image ? <p>Signed in with {session.user.image.split(".")[1].split("user")[0]}.</p> : null} */}
                 </Wrapper>
             </DesktopBox>
-            <NavBar value={4} />
+            <div className="TEMPMEDIA">
+                <NavBar value={4} />
+            </div>
         </div>
     }
 }
