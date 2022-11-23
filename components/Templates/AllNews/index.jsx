@@ -157,18 +157,22 @@ const AbsPos = styled.div`
 `;
 
 const DeleteCont = styled.div`
+  position:fixed;
+  top:40%;
+  left:50%;
+  transform: translate(-50%, -50%);
   background-color: #ffffff;
-  width: 50vw;
+  width: 35vw;
   height: 25vh;
   padding: 2%;
   margin: auto;
-  font-family: "Rubik", sans-serif;
   text-align: center;
-  box-shadow: 2px 2px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
+
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   min-height: 210px;
   min-width: 320px;
@@ -178,34 +182,34 @@ const BtnCont = styled.div`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  margin-bottom: 5%%;
+  margin-bottom: 5%;
 `;
 
 const DeleteBtn = styled.button`
   background: #e24949;
-  border-radius: 13px;
-  height: 30px;
+  border-radius: 15px;
+  height: 44px;
   width: 137px;
-  left: 170px;
-  top: 138px;
+
   font-size: 14px;
   line-height: 17px;
   text-align: center;
   border: 0px;
+
   color: #ffffff;
   margin: 2%;
-`;
+`
 const CancelBtn = styled.button`
-  background: #FFFFF;
+  background-color: #FFFFFF;
   border: 2px solid #535353;
-  border-radius: 13px;
-  height: 30px;
+  border-radius: 15px;
+  height: 44px;
   width: 137px;
-  left: 170px;
-  top: 138px;
+
   font-size: 14px;
   line-height: 17px;
   text-align: center;
+
   color: #535353;
   margin: 2%;
 `;

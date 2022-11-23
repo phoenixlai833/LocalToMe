@@ -140,7 +140,7 @@ export default function FoodBank({ d, user }) {
     return (
         <Wrapper direction="column" gap="10px" sx={{ alignItems: "normal" }}>
             <TopBar>
-                <TopNavigation />
+                <TopNavigation value={1}/>
             </TopBar>
             <DesktopBox>
                 {/* can place d.program_name with d.organization_name */}

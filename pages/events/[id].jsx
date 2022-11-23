@@ -245,7 +245,7 @@ export default function Event({ event, user }) {
   return (
     <div>
       <TopBar>
-        <TopNavigation />
+        <TopNavigation value={1}/>
       </TopBar>
       <DesktopBox>
         <TopBanner text={event.eventName} back={false} />
@@ -322,11 +322,7 @@ export default function Event({ event, user }) {
         <SharePost shareUrl={shareUrl} share={share} closeShare={handleCloseShare} copied={copied} changeOnCopy={handleOnCopy} />
       </Sharebox>
 
-      <div className="TEMPMEDIA">
-        <NavBar value={navValue} onChange={(event, newValue) => {
-          setNavValue(newValue);
-        }} />
-      </div>
+        <NavBar value={1}/>
     </div >
   )
 }
