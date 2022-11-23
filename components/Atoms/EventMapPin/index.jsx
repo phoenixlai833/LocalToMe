@@ -5,14 +5,15 @@ import GetDirectionGreenBtn from "../GetDirectionGreenBtn";
 import styled from "styled-components";
 
 const EventNameLink = styled.p`
- :hover {
-    color: rgb(49, 143, 237);
-    text-decoration: underline;
+color: #108928;
+:hover {
+    color: black;
+    text - decoration: underline;
 }
 `
 
 const Readmore = styled.span`
-    color: rgb(49, 143, 237);
+color: #108928;
 `
 
 const MarkerBtn = styled.button`
@@ -25,19 +26,43 @@ const MarkerBtn = styled.button`
 }
 `
 
+const PopupCont = styled.div`
+padding: 2%;
+`
+
+const TopSec = styled.div`
+background-color: #CDECC2;
+background-image: url("../../Mascot/mascotEvent.png");
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+// width: 100%;
+height: 100px;
+display: flex; 
+`
+
 export default function EventMapPin({ events }) {
-
     const [selectedEvent, setSelectedEvent] = useState(null);
-    console.log(selectedEvent)
 
-    let eventTime;
-    let eventDate;
+    let eventDateTime;
 
     if (selectedEvent) {
-        const time = selectedEvent.eventDate.seconds
-        const date = new Date(time * 1000)
-        eventTime = date.toLocaleString().split(',')[1]
-        eventDate = date.toLocaleString("default", { month: "long", day: "2-digit", year: "numeric" })
+        const dtStart = new Date(selectedEvent.start)
+        const dtEnd = new Date(selectedEvent.start)
+        const startDay = dtStart.toLocaleString("default", { dateStyle: "long" })
+        const startTime = dtStart.toLocaleString("default", { timeStyle: "short" })
+        const endDay = dtEnd.toLocaleString("default", { dateStyle: "long" })
+        const endTime = dtEnd.toLocaleString("default", { timeStyle: "short" })
+        const sDay = startDay.split(" ")[1].split("").splice(0, 2).join("");
+        const sMonth = startDay.split(" ")[0];
+        const eDay = endDay.split(" ")[1].split("").splice(0, 2).join("");
+        const eMonth = endDay.split(" ")[0];
+        // let eventDateTime;
+        if (startDay == endDay) {
+            startTime == endTime ? eventDateTime = `${sMonth} ${sDay}, ${startTime}` : eventTime = `${sMonth} ${sDay}, ${startTime} - ${endTime}`;
+        } else {
+            eventDateTime = `${sMonth} ${sDay}, ${startTime} - ${eMonth} ${eDay}, ${endTime}`
+        }
     }
 
 
@@ -54,7 +79,7 @@ export default function EventMapPin({ events }) {
         };
     }, []);
 
-    console.log(selectedEvent)
+    console.log(eventDateTime)
 
     return (
         <div>
@@ -95,42 +120,51 @@ export default function EventMapPin({ events }) {
                     }}
 
                 >
-                    <div>
+                    <PopupCont >
+                        <TopSec></TopSec>
                         <EventNameLink>
                             <Link href={`/events/${selectedEvent.id}`} >
                                 <h2>{selectedEvent.eventName}</h2>
                             </Link>
                         </EventNameLink>
-                        <p>
-                            <b>Location:</b>
-                            {selectedEvent.eventLocation && selectedEvent.eventLocation}
-                        </p>
-                        {eventDate && eventTime && (
+                        {selectedEvent.eventLocation &&
                             <p>
-                                <b>Date:</b>
-                                {eventDate}, {eventTime}
+                                <b>Location</b>
+                                <br />
+                                {selectedEvent.eventLocation}
+                            </p>}
+                        {eventDateTime &&
+                            <p>
+                                <b>Date</b>
+                                <br />
+                                {eventDateTime}
                             </p>
-                        )}
-                        <p>
-                            <b>Contact:</b>
-                            {selectedEvent.eventContactPhone && selectedEvent.eventContactPhone}
-                        </p>
-                        <p>
-                            <b>Email:</b>
-                            {selectedEvent.eventContactEmail && selectedEvent.eventContactEmail}
-                        </p>
-                        <p>
-                            <b>Description:</b>
-                            {selectedEvent.eventContent && selectedEvent.eventContent.slice(0, 50)}
-                            <Readmore>
-                                <Link href={`/events/${selectedEvent.id}`}>
-                                    ...Read More
-                                </Link>
-                            </Readmore>
-                        </p>
+                        }
+                        {selectedEvent.eventContactPhone &&
+                            <p>
+                                <b>Contact</b>
+                                <br />
+                                {selectedEvent.eventContactPhone}
+                            </p>}
+                        {selectedEvent.eventContactEmail &&
+                            <p>
+                                <b>Email:</b>
+                                <br />
+                                {selectedEvent.eventContactEmail}
+                            </p>}
+                        {selectedEvent.eventContent &&
+                            <p>
+                                <b>Description:</b>
+                                {selectedEvent.eventContent.slice(0, 50)}
+                                <Readmore>
+                                    <Link href={`/events/${selectedEvent.id}`}>
+                                        ...Read More
+                                    </Link>
+                                </Readmore>
+                            </p>}
 
                         <GetDirectionGreenBtn address={selectedEvent.eventLocation} onMap={true} />
-                    </div>
+                    </PopupCont>
 
                 </Popup>
 

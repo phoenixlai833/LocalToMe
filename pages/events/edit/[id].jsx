@@ -13,22 +13,45 @@ import EventPreview from "../../../components/Templates/EventPreview";
 import axios from "axios";
 import styled from "styled-components";
 import Toast from "../../../components/Molecules/Toast/Toast";
+import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
+import TopNavigation from "../../../components/Organisms/NavBarTop";
+import NavBar from "../../../components/Organisms/NavBar";
 
 const ToastPopup = styled.div`
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-display: flex;
-justify-content: center;
-align-items: center;
-z-index: 100;
-`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+`;
+
+const TopBar = styled.div`
+  @media (max-width: 767px) {
+    display: none;
+  }
+`;
+
+const DesktopBox = styled.div`
+  @media (min-width: 768px) {
+    margin-top: 8vh;
+    margin-left: 18vw;
+    margin-right: 18vw;
+    // min-height: 92vh;
+    box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
+  }
+`;
 
 export default function EditEvent({ defaultEvent, categoriesList }) {
   // const [event, setEvent] = useState(defaultEvent);
-  const [event, setEvent] = useState({ ...defaultEvent, start: new Date(defaultEvent.start), end: new Date(defaultEvent.end) });
+  const [event, setEvent] = useState({
+    ...defaultEvent,
+    start: new Date(defaultEvent.start),
+    end: new Date(defaultEvent.end),
+  });
   const [imageURL, setImageURL] = useState(defaultEvent.fileName);
 
   const [isPreview, setIsPreview] = useState(false);
@@ -51,7 +74,7 @@ export default function EditEvent({ defaultEvent, categoriesList }) {
   }
 
   function handleChangeEventLocation(eventLocation) {
-    setEvent({ ...event, eventLocation });
+    setEvent({ ...event, eventLocation: eventLocation?.label });
     return;
   }
 
@@ -104,7 +127,7 @@ export default function EditEvent({ defaultEvent, categoriesList }) {
     setEvent({ ...event, eventTags: [...tags] });
   }
 
-  function handleCancel() { }
+  function handleCancel() {}
 
   function handleConfirm() {
     const putEvent = {
@@ -118,26 +141,34 @@ export default function EditEvent({ defaultEvent, categoriesList }) {
       eventName: event.eventName,
       eventContactPhone: event.eventContactPhone,
       eventTags: event.eventTags,
-      eventUpdateDate: new Date()
-    }
-
-    // console.log('lul', typeof event.start)
-
-    axios.put("/api/events", putEvent).then((res) => {
-      // window.location = `/events/${res.data}`
-      setEventId(res.data)
-      console.log("edited successfully", res.data);
-    });
+      eventUpdateDate: new Date(),
+    };
+    geocodeByAddress(putEvent.eventLocation)
+      .then((results) => getLatLng(results[0]))
+      .then(({ lat, lng }) => {
+        putEvent.latitude = lat;
+        putEvent.longitude = lng;
+      })
+      .then(() => {
+        axios.put("/api/events", putEvent).then((res) => {
+          window.location = `/events/${res.data}`;
+          setEventId(res.data);
+          console.log("edited successfully", res.data);
+        });
+      });
   }
 
   const handleViewPost = () => {
-    console.log("viewid", eventId)
+    console.log("viewid", eventId);
     window.location = `/events/${eventId}`;
   };
 
   return (
     <>
-      <div>
+      <TopBar>
+        <TopNavigation />
+      </TopBar>
+      <DesktopBox>
         {isPreview ? (
           <EventPreview
             event={event}
@@ -165,22 +196,27 @@ export default function EditEvent({ defaultEvent, categoriesList }) {
             categoriesList={categoriesList}
           />
         )}
-      </div>
+        <div style={{ paddingBottom: "10vh" }}></div>
+      </DesktopBox>
       {eventId && (
         <ToastPopup>
-          <Toast onViewPost={handleViewPost} message="Your changes has been saved!" />
+          <Toast
+            onViewPost={handleViewPost}
+            message="Your changes has been saved!"
+          />
         </ToastPopup>
-      )
-      }
+      )}
+      <div className="TEMPMEDIA">
+        <NavBar value={1} />
+      </div>
     </>
   );
 }
 
 export async function getServerSideProps(context) {
-
   const eventData = await getEvent(context.params.id);
   const defaultEvent = JSON.parse(JSON.stringify(eventData));
-  console.log(defaultEvent)
+  console.log(defaultEvent);
 
   const categoriesData = await getAllCategories();
   const categoriesList = JSON.parse(JSON.stringify(categoriesData));

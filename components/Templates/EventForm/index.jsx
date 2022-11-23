@@ -15,9 +15,12 @@ const Form = styled.form`
   margin: 5vw 10vw;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  * {
-    width: 100%;
+  align-items: left;
+  // * {
+  //   width: 100%;
+  // }
+  @media (min-width: 768px) {
+    width: 70%;  
   }
 `;
 
@@ -31,7 +34,7 @@ const To = styled.div`
   justify-content: center;
   align-items: center;
   width: 15%;
-  margin-left: 5%;
+  margin: 0 5%;
 `;
 
 export default function EventForm({

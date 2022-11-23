@@ -11,6 +11,7 @@ import NavBarIcons from '../../Atoms/NavIcons';
 
 const NavBar = styled(BottomNavigation)`
   width:100vw;
+  height: 72px;
   position:fixed;
   display:flex;
   bottom:0;

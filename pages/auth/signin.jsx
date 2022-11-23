@@ -3,7 +3,30 @@ import GeneralGreenBtn from '../../components/Atoms/GeneralGreenBtn';
 import styled from 'styled-components';
 import Link from 'next/link';
 
-const Layout = styled.div`
+const Container = styled.div`
+display: flex;
+`
+
+const LayoutLeft = styled.div`
+@media(min-width: 768px) {
+    background: #CDECC2;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+`
+
+const LeftChou = styled.img`
+display: none;
+@media(min-width: 768px) {
+    display: flex;
+    width: 100%;
+}
+`
+
+const LayoutRight = styled.div`
 display: flex;
 flex-direction: column;
 justify-content: space-evenly;
@@ -11,9 +34,10 @@ align-items: center;
 height: 100vh;
 width: 100vw;
 padding:5% 5% 3% 5%;
+margin:0 10%
 h1{s
-@media(max-width: 768px) {
-    margin:0 10%
+@media(min-width: 768px) {
+    width: 50vw;
 }
 `
 const Center = styled.div`
@@ -22,7 +46,7 @@ flex-direction: column;
 justify-content: center;
 width: 100%;
 @media(min-width: 768px) {
-    width: auto;
+    width: 30em;
 }
 `
 
@@ -43,34 +67,41 @@ export default function Signin({ providers }) {
 
     return (
         <>
-            <Layout>
-                <SplashLogo>
-                    <img src="../../Splash.png" />
-                </SplashLogo>
-                <Center>
+            <Container>
+                <LayoutLeft>
+                    {/* <LeftChou> */}
+                    <LeftChou src="../../Mascot/MascotSignin.png" />
+                    {/* </LeftChou> */}
+                </LayoutLeft>
+                <LayoutRight>
+                    <SplashLogo>
+                        <img src="../../Splash.png" />
+                    </SplashLogo>
+                    <Center>
 
-                    < LoginText>Login with</LoginText>
-                    {Object.values(providers).map((provider) => (
-                        <div key={provider.name}>
-                            <GeneralGreenBtn text={provider.name} h={"4.5em"} onClick={() => signIn(provider.id, { callbackUrl: "/" })} />
-                            <br></br>
-                            {/* <Button onClick={() => signIn(provider.id, { callbackUrl: "/" })}>
+                        < LoginText>Login with</LoginText>
+                        {Object.values(providers).map((provider) => (
+                            <div key={provider.name}>
+                                <GeneralGreenBtn text={provider.name} h={"4.5em"} onClick={() => signIn(provider.id, { callbackUrl: "/" })} />
+                                <br></br>
+                                {/* <Button onClick={() => signIn(provider.id, { callbackUrl: "/" })}>
                                 {provider.name}
                             </Button> */}
-                        </div>
-                    ))}
-                    <Link href="/">
-                        <p style={{ alignSelf: "center" }}>Continue as a guest</p>
-                    </Link>
-                </Center>
-            </Layout>
+                            </div>
+                        ))}
+                        <Link href="/">
+                            <p style={{ alignSelf: "center" }}>Continue as a guest</p>
+                        </Link>
+                    </Center>
+                </LayoutRight>
+            </Container>
         </>
     )
 }
 
 export async function getServerSideProps(context) {
-  const providers = await getProviders();
-  return {
-    props: { providers },
-  };
+    const providers = await getProviders();
+    return {
+        props: { providers },
+    };
 }

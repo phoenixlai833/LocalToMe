@@ -40,7 +40,7 @@ const ConfirmBtn = styled.button`
   background-color: #108928;
   font-size: 16px;
   margin: 10px auto;
-  width: 70%;
+  width: 85%;
   height: 40px;
 `;
 
@@ -53,13 +53,14 @@ const EditBtn = styled.button`
   color: #108928;
   background-color: white;
   margin: 5px auto;
-  width: 70%;
+  width: 85%;
   height: 40px;
   font-size: 16px;
 `;
 
 const EventUser = styled.div`
-margin-left: 6%;
+margin: 0 4%;
+// width: 85%;
 `
 
 const EventCat = styled.div`

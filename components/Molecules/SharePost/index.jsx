@@ -25,20 +25,20 @@ position: relative;
 box-sizing: border-box;
 display:inline-block;
 background-color: #ffffff;
-// width:60vw;
+width: 60vw;
 // height: 30vh;
 border-radius: 20px;
-padding: 10px;
+padding: 10%;
 box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 @media (min-width: 767px) {
-    width: 50vh;
+    width: 30vw;
 }
 `
 
 
 const ShareIcons = styled.div`
 display: flex;
-justify-content: space-between;
+justify-content: space-around;
 margin:3%;
 `
 const Copybox = styled.div`

@@ -10,6 +10,8 @@ import { unstable_getServerSession } from "next-auth/next";
 import axios from "axios";
 import Toast from "../../components/Molecules/Toast/Toast";
 import styled from "styled-components";
+import TopNavigation from "../../components/Organisms/NavBarTop";
+import NavBar from "../../components/Organisms/NavBar";
 
 
 const ToastPopup = styled.div`
@@ -22,6 +24,22 @@ display: flex;
 justify-content: center;
 align-items: center;
 z-index: 100;
+`
+
+const TopBar = styled.div`
+  @media (max-width: 767px) {
+    display:none;
+}
+`
+
+const DesktopBox = styled.div`
+@media (min-width: 768px) {
+margin-top:8vh;
+margin-left: 18vw;
+margin-right: 18vw;
+// min-height: 92vh;
+box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
+}
 `
 
 export default function NewNews({ categoriesList }) {
@@ -111,24 +129,32 @@ export default function NewNews({ categoriesList }) {
 
     return (
         <div>
-            <TopBanner text={"Create a News"} />
-            <NewsForm
-                news={news}
-                onChangeNewsTitle={handleChangeNewsTitle}
-                onChangeNewsCreator={handleChangeNewsCreator}
-                onChangeNewsContent={handleChangeNewsContent}
-                image={imageURL}
-                onChangeNewsImage={handleChangeNewsImage}
-                onChangeNewsTags={handleChangeNewsCategory}
-                categoriesList={categoriesList}
-                onConfirm={handleConfirm}
-            />
+            <TopBar>
+                <TopNavigation />
+            </TopBar>
+            <DesktopBox>
+                <TopBanner text={"Create a News"} />
+                <NewsForm
+                    news={news}
+                    onChangeNewsTitle={handleChangeNewsTitle}
+                    onChangeNewsCreator={handleChangeNewsCreator}
+                    onChangeNewsContent={handleChangeNewsContent}
+                    image={imageURL}
+                    onChangeNewsImage={handleChangeNewsImage}
+                    onChangeNewsTags={handleChangeNewsCategory}
+                    categoriesList={categoriesList}
+                    onConfirm={handleConfirm}
+                />
+                <div style={{ paddingBottom: "8vh" }}></div>
+            </DesktopBox>
             {newsId && (
                 <ToastPopup>
                     <Toast onViewPost={handleViewPost} />
                 </ToastPopup>
             )}
-            
+            <div className="TEMPMEDIA">
+                <NavBar value={1} />
+            </div>
         </div>
     );
 }
