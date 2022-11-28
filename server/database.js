@@ -9,6 +9,11 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { getStorage, ref, deleteObject } from "firebase/storage";
+import algoliasearch from "algoliasearch";
+const client = algoliasearch(
+  process.env.NEXT_PUBLIC_ALGOLIA_CLIENT_ID,
+  process.env.NEXT_PUBLIC_ALGOLIA_API_KEY_ADMIN
+);
 
 // food banks
 export async function getFoodBanks() {
@@ -112,6 +117,7 @@ export async function editEvent(event) {
 }
 
 export async function deleteEvent(id) {
+  const index = client.initIndex("prod_EVENTS");
   const eventCollection = doc(db, "event", id);
   const eventSnap = await getDoc(eventCollection);
   const fileUrl = eventSnap.data().eventImage;
@@ -119,12 +125,13 @@ export async function deleteEvent(id) {
   const fileRef = ref(storage, fileUrl);
   const fileName = decodeURIComponent(fileUrl.split("/").pop().split("?")[0]);
   console.log(fileName);
-  if (fileName !== "foodBankImageTest.jpg") {
+  if (fileName !== "event-default.png") {
     deleteObject(fileRef);
     await deleteDoc(doc(db, "event", id));
     return;
   }
   await deleteDoc(doc(db, "event", id));
+  index.deleteObject(id).wait();
 }
 
 // _________________________________________________________________________
@@ -190,6 +197,7 @@ export async function editNews(news) {
 }
 
 export async function deleteNews(id) {
+  const index = client.initIndex("prod_NEWS");
   const newsCollection = doc(db, "news", id);
   const newsSnap = await getDoc(newsCollection);
   const fileUrl = newsSnap.data().newsImage;
@@ -199,6 +207,7 @@ export async function deleteNews(id) {
     deleteObject(fileRef);
   }
   await deleteDoc(doc(db, "news", id));
+  index.deleteObject(id).wait();
 }
 
 export async function getNewsCategories() {

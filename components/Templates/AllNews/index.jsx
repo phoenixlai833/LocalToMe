@@ -100,7 +100,7 @@ const ImageContainer = styled.div`
   width:75vw;
   height: 25vh;
   @media (min-width: 768px) {
-    width: 55vw;
+    width: 45vw;
     height: 33vh;
   }
 `;

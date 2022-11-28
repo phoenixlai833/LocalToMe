@@ -22,7 +22,7 @@ height: 300px;
 transition: all 1s ease-in-out;
 @media (min-width: 768px) {
     position:absolute;
-    top: 350px;
+    top: 600px;
 height: 700px;
 width: 700px;
 width: auto;
