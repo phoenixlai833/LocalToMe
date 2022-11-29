@@ -44,16 +44,11 @@ const FourNum = styled.img`
     left: 13%;
 
     @media (max-width: 900px) {
-        // display: flex;
-        // justify-content: center;
-        // align-item: center;
-        // margin: 0 auto;
         width: 50%;
         left:26%;
         top: 10%;
     }
     
-        
     `
 
 const BearImage = styled.img`
