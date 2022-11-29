@@ -87,7 +87,10 @@ export default function FourOhFour() {
                 <h1>
                     Hmm... we seem to have lost our way!
                 </h1>
-                <h3>Let's go home. It's dangerous to wander around! Your dad is probably worriedly waiting in the kitchen...</h3>
+                <h3>
+                    Let's go home. It's dangerous to wander around! Your dad is probably worriedly waiting in the kitchen...
+
+                </h3>
             </Text>
             <Btn onClick={handleFourOFour}>Take Me Home</Btn>
         </FourOhFourPage>
