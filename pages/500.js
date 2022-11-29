@@ -88,7 +88,7 @@ export default function FourOhFour() {
                     Hmm... we seem to have lost our way!
                 </h1>
                 <h3>
-                    Let's go home. It's dangerous to wander around! Your dad is probably worriedly waiting in the kitchen...
+                    Let us go home. It is dangerous to wander around! Your dad is probably worriedly waiting in the kitchen...
 
                 </h3>
             </Text>
