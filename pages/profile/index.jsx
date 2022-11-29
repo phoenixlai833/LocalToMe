@@ -36,7 +36,7 @@ flex-direction: column;
 const ProfileTab = styled.div`
 display:flex;
 height: 170px;
-width: 100%
+width: 100%;
 justify-content: flex-end;
 align-items: flex-end;
 @media (min-width: 768px) {
@@ -194,7 +194,7 @@ export default function Profile({ sortedEvents }) {
         return (
             <>
                 <TopBar>
-                    <TopNavigation value={4}/>
+                    <TopNavigation value={4} />
                 </TopBar>
                 < PosAbs show={display}>
                     <AvatarPopup currentUrl={avatar} submitAvatar={handleSubmitAvatar} handleClick={() => setDisplay("none")} imgPath={session.user.image} name={session.user.name}></AvatarPopup>
@@ -214,7 +214,7 @@ export default function Profile({ sortedEvents }) {
                                     Recent Posts
                                 </EventTab>
                                 <NewTab id="1" tabId={tab}>
-                                    Past Posts
+                                    Past Events
                                 </NewTab>
                             </Tab>
                         </ProfileTab>
@@ -222,7 +222,9 @@ export default function Profile({ sortedEvents }) {
                         <div style={{ marginBottom: "10vh" }}></div>
                     </MainCont>
                 </DesktopBox>
-                <NavBar value={4} />
+                <div class="smallDisplayNone">
+                    <NavBar value={4} />
+                </div>
                 <FloatingActionButton />
 
             </>

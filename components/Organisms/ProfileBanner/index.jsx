@@ -46,7 +46,7 @@ position: absolute;
 @media (min-width: 767px) {
     width: 380px;
     top: 180px;
-    left: 32%;
+    left: 20%;
     align-items: flex-start;
     // justify-content: center;
     flex-wrap: wrap;

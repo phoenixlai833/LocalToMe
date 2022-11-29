@@ -86,4 +86,7 @@ a {
   .TEMPMEDIA {
     display: none;
   }
+  .smallDisplayNone {
+    display: none;
+  }
 }

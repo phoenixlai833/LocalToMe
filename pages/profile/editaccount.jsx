@@ -16,7 +16,7 @@ const TopBar = styled.div`
 
 const DesktopBox = styled.div`
 @media (min-width: 768px) {
-margin-top:8vh;
+margin-top: 8vh;
 margin-left: 18vw;
 margin-right: 18vw;
 min-height: 92vh;
@@ -44,7 +44,9 @@ export default function EditAccount() {
                     {/* {session.user.image ? <p>Signed in with {session.user.image.split(".")[1].split("user")[0]}.</p> : null} */}
                 </Wrapper>
             </DesktopBox>
-            <NavBar value={4} />
+            <div className="TEMPMEDIA">
+                <NavBar value={4} />
+            </div>
         </div>
     }
 }

@@ -100,7 +100,7 @@ const ImageContainer = styled.div`
   width:75vw;
   height: 25vh;
   @media (min-width: 768px) {
-    width: 55vw;
+    width: 45vw;
     height: 33vh;
   }
 `;
@@ -291,7 +291,7 @@ export default function AllNews({ allNews, sessionEmail }) {
             </TextDiv>
           </NewsCont>
 
-          {sessionEmail === news.newsCreatorId.email && (
+          {sessionEmail == news.newsCreatorId.email && (
             <Func>
               <Link href={`/news/edit/${news.id}`}>
                 <EditNews>

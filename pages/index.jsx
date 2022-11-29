@@ -138,7 +138,7 @@ export default function Home({ sortedEvents, sortedAllNews }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <TopBar>
-        <TopNavigation value={0}/>
+        <TopNavigation value={0} />
       </TopBar>
       <FloatingActionButton />
       {/* <Loading/> */}
@@ -188,7 +188,9 @@ export default function Home({ sortedEvents, sortedAllNews }) {
         </Link>
       </div>
       <AllNews allNews={sortedAllNews} sessionEmail={session ? session.user.email : null} />
-      <NavBar value={0} />
+      <div class="smallDisplayNone">
+        <NavBar value={0} />
+      </div>
 
     </div >
   );
@@ -196,7 +198,6 @@ export default function Home({ sortedEvents, sortedAllNews }) {
 
 export async function getServerSideProps(context) {
   const session = await unstable_getServerSession(context.req, context.res, authOptions)
-
   const req = await getEvents();
   const events = JSON.parse(JSON.stringify(req));
   const sortedEvents = events.sort((a, b) => new Date(a.start) - new Date(b.start));

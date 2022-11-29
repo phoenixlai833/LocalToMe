@@ -208,7 +208,9 @@ export default function EditEvent({ defaultEvent, categoriesList }) {
 
 
       )}
-      <NavBar value={1} />
+      <div className="TEMPMEDIA">
+        <NavBar value={1} />
+      </div>
 
 
     </>

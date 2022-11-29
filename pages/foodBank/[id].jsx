@@ -82,8 +82,9 @@ export default function FoodBank({ d, user }) {
     const [shareUrl, setShareUrl] = useState('');
     const [share, setShare] = useState(false);
     const [navValue, setNavValue] = useState(2);
-    const router = useRouter()
     const [copied, setCopied] = useState(false);
+    const router = useRouter()
+
 
     var locationInfo = [];
     var locationIcons = [];

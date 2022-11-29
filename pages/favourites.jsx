@@ -43,7 +43,7 @@ const FavBox = styled.div`
 
 @media (min-width: 768px) {
 border: 1px solid #ffffff;
-margin-top:9vh;
+margin-top: 9vh;
 margin-left: 18vw;
 margin-right: 18vw;
 min-height: 91vh;
@@ -136,7 +136,7 @@ export default function Favorites({ user }) {
     return (
       <>
         <TopBar>
-          <TopNavigation value={3}/>
+          <TopNavigation value={3} />
         </TopBar>
         <FavBox>
           <Search onSearch={() => console.log("nothing")} />
