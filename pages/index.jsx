@@ -188,7 +188,7 @@ export default function Home({ sortedEvents, sortedAllNews }) {
         </Link>
       </div>
       <AllNews allNews={sortedAllNews} sessionEmail={session ? session.user.email : null} />
-      <div class="smallDisplayNone">
+      <div className="smallDisplayNone">
         <NavBar value={0} />
       </div>
 

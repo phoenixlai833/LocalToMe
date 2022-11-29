@@ -9,7 +9,6 @@ import { Wrapper, Container, FlexBox } from '../../styles/globals';
 import { Filter, EventFilter } from '../../components/Atoms/Filters';
 import GetDirectionGreenBtn from '../../components/Atoms/GetDirectionGreenBtn';
 import styled from 'styled-components';
-import { FunctionsBox } from '../events/[id]';
 import SharePost from "../../components/Molecules/SharePost";
 import FavoriteBtn from "../../components/Atoms/FavoriteBtn";
 import axios from "axios";
@@ -77,7 +76,26 @@ box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
 }
 `
 
+const FunctionsBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: absolute;
+  background-color: RGBA(255, 255, 255, 0.9);
+  width: 40px;
+  height: 75px;
+  position: absolute;
+  right: 3%;
+  bottom: 10%;
+  border-radius: 20px;
+  padding: 8px;
+  box-shadow: 1px 4px 4px 2px rgba(0, 0, 0, 0.25);
+`;
+
 export default function FoodBank({ d, user }) {
+    console.log("d", d)
+
+
     const { data: session } = useSession()
     const [shareUrl, setShareUrl] = useState('');
     const [share, setShare] = useState(false);
@@ -150,8 +168,6 @@ export default function FoodBank({ d, user }) {
                 <EventImageBlock >
                     <EventImage src={d.foodBank_Image} alt={d.program_name} />
                     <FunctionsBox>
-                        <AddEventToCalendar event={d} />
-                        {/* <img src="../calenderIcon.png" alt="calendar icon" /> */}
                         <img src="../shareLinkIcons.png" alt="calendar icon" onClick={onShare} />
                         <FavoriteBtn favorite={favorite} onClick={handleOnClick} />
                     </FunctionsBox>

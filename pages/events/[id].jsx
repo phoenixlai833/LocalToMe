@@ -52,7 +52,7 @@ export const FunctionsBox = styled.div`
   bottom: 10%;
   border-radius: 20px;
   padding: 8px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 1px 4px 4px 2px rgba(0, 0, 0, 0.25);
 `;
 
 const EventDescription = styled.div`
@@ -254,7 +254,6 @@ export default function Event({ event, user }) {
           <EventImage src={event.eventImage} alt={event.eventName} />
           <FunctionsBox>
             <AddEventToCalendar event={event} />
-            {/* <img src="../calenderIcon.png" alt="calendar icon" /> */}
             <img src="../shareLinkIcons.png" alt="calendar icon" onClick={onShare} />
             <FavoriteBtn favorite={favorite} onClick={handleOnClick} />
           </FunctionsBox>
@@ -337,6 +336,9 @@ export async function getServerSideProps(context) {
   const req = await getEvent(context.params.id);
   const event = JSON.parse(JSON.stringify(req));
 
+
+
+
   if (!session) {
     return {
       props: { event },
@@ -354,3 +356,13 @@ export async function getServerSideProps(context) {
 
   }
 }
+
+
+    // if (!event) {
+  //   return {
+  //     redirect: {
+  //       destination: "/404",
+  //       permanent: false,
+  //     },
+  //   };
+  // } 
