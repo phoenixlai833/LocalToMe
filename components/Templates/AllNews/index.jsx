@@ -291,7 +291,7 @@ export default function AllNews({ allNews, sessionEmail }) {
             </TextDiv>
           </NewsCont>
 
-          {sessionEmail === news.newsCreatorId.email && (
+          {sessionEmail == news.newsCreatorId.email && (
             <Func>
               <Link href={`/news/edit/${news.id}`}>
                 <EditNews>

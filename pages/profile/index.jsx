@@ -222,7 +222,7 @@ export default function Profile({ sortedEvents }) {
                         <div style={{ marginBottom: "10vh" }}></div>
                     </MainCont>
                 </DesktopBox>
-                <div class="smallDisplayNone">
+                <div className="smallDisplayNone">
                     <NavBar value={4} />
                 </div>
                 <FloatingActionButton />

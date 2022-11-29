@@ -227,7 +227,7 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
             </FilterbtnSection>
           </FilterListContainer>
         </SearchArea>
-        <div class="smallDisplayNone">
+        <div className="smallDisplayNone">
           <NavBar value={2} />
         </div>
       </div>

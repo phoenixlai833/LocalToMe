@@ -22,7 +22,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { authOptions } from '../api/auth/[...nextauth].js';
 import { unstable_getServerSession } from "next-auth/next";
 import TopNavigation from "../../components/Organisms/NavBarTop";
-
+import AddEventToCalendar from "../../components/Atoms/AddEventToCalendar";
 
 const EventImageBlock = styled.div`
   position: relative;
@@ -52,11 +52,10 @@ export const FunctionsBox = styled.div`
   bottom: 10%;
   border-radius: 20px;
   padding: 8px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 1px 4px 4px 2px rgba(0, 0, 0, 0.25);
 `;
 
 const EventDescription = styled.div`
-
   background:${Colours.background};
    display:flex;
    padding:12px 20px;
@@ -163,6 +162,7 @@ box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
 
 export default function Event({ event, user }) {
 
+
   const { data: session } = useSession()
 
   const [navValue, setNavValue] = useState(1);
@@ -182,7 +182,6 @@ export default function Event({ event, user }) {
   } else {
     eventTime = `${startDay} at ${startTime} - ${endDay} at ${endTime}`
   }
-
 
 
   const dateAndTime = eventTime;
@@ -245,7 +244,7 @@ export default function Event({ event, user }) {
   return (
     <div>
       <TopBar>
-        <TopNavigation value={1}/>
+        <TopNavigation />
       </TopBar>
       <DesktopBox>
         <TopBanner text={event.eventName} back={false} />
@@ -253,7 +252,7 @@ export default function Event({ event, user }) {
         <EventImageBlock >
           <EventImage src={event.eventImage} alt={event.eventName} />
           <FunctionsBox>
-            <img src="../calenderIcon.png" alt="calendar icon" />
+            <AddEventToCalendar event={event} />
             <img src="../shareLinkIcons.png" alt="calendar icon" onClick={onShare} />
             <FavoriteBtn favorite={favorite} onClick={handleOnClick} />
           </FunctionsBox>
@@ -322,7 +321,11 @@ export default function Event({ event, user }) {
         <SharePost shareUrl={shareUrl} share={share} closeShare={handleCloseShare} copied={copied} changeOnCopy={handleOnCopy} />
       </Sharebox>
 
-        <NavBar value={1}/>
+      <div className="TEMPMEDIA">
+        <NavBar value={navValue} onChange={(event, newValue) => {
+          setNavValue(newValue);
+        }} />
+      </div>
     </div >
   )
 }
@@ -331,6 +334,9 @@ export async function getServerSideProps(context) {
   const session = await unstable_getServerSession(context.req, context.res, authOptions)
   const req = await getEvent(context.params.id);
   const event = JSON.parse(JSON.stringify(req));
+
+
+
 
   if (!session) {
     return {
@@ -349,3 +355,13 @@ export async function getServerSideProps(context) {
 
   }
 }
+
+
+    // if (!event) {
+  //   return {
+  //     redirect: {
+  //       destination: "/404",
+  //       permanent: false,
+  //     },
+  //   };
+  // } 

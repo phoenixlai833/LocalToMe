@@ -188,7 +188,7 @@ export default function Home({ sortedEvents, sortedAllNews }) {
         </Link>
       </div>
       <AllNews allNews={sortedAllNews} sessionEmail={session ? session.user.email : null} />
-      <div class="smallDisplayNone">
+      <div className="smallDisplayNone">
         <NavBar value={0} />
       </div>
 
@@ -198,7 +198,6 @@ export default function Home({ sortedEvents, sortedAllNews }) {
 
 export async function getServerSideProps(context) {
   const session = await unstable_getServerSession(context.req, context.res, authOptions)
-
   const req = await getEvents();
   const events = JSON.parse(JSON.stringify(req));
   const sortedEvents = events.sort((a, b) => new Date(a.start) - new Date(b.start));
