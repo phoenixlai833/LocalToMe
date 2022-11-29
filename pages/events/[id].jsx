@@ -22,7 +22,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { authOptions } from '../api/auth/[...nextauth].js';
 import { unstable_getServerSession } from "next-auth/next";
 import TopNavigation from "../../components/Organisms/NavBarTop";
-
+import AddEventToCalendar from "../../components/Atoms/AddEventToCalendar";
 
 const EventImageBlock = styled.div`
   position: relative;
@@ -163,6 +163,7 @@ box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
 
 export default function Event({ event, user }) {
 
+
   const { data: session } = useSession()
 
   const [navValue, setNavValue] = useState(1);
@@ -182,7 +183,6 @@ export default function Event({ event, user }) {
   } else {
     eventTime = `${startDay} at ${startTime} - ${endDay} at ${endTime}`
   }
-
 
 
   const dateAndTime = eventTime;
@@ -253,7 +253,8 @@ export default function Event({ event, user }) {
         <EventImageBlock >
           <EventImage src={event.eventImage} alt={event.eventName} />
           <FunctionsBox>
-            <img src="../calenderIcon.png" alt="calendar icon" />
+            <AddEventToCalendar event={event} />
+            {/* <img src="../calenderIcon.png" alt="calendar icon" /> */}
             <img src="../shareLinkIcons.png" alt="calendar icon" onClick={onShare} />
             <FavoriteBtn favorite={favorite} onClick={handleOnClick} />
           </FunctionsBox>

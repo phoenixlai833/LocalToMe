@@ -1,87 +1,47 @@
-import React from 'react';
-import AddToCalendar from 'react-add-to-calendar';
+import React from "react";
+import { useEffect, useState } from "react";
+import { atcb_action, atcb_init } from "add-to-calendar-button";
+import 'add-to-calendar-button/assets/css/atcb.css';
+import styled from 'styled-components';
 
-export default function AddEventToCalendar() {
+const Button = styled.img`
+background-color: transparent;
+border: none;
+cursor: pointer;
+`
 
-    const event = {
-        title: 'My Event',
-        description: 'This is the event description',
-        location: 'Portland, OR',
-        startTime: '2016-09-16T20:15:00-04:00',
-        endTime: '2016-09-16T21:45:00-04:00'
+export default function MyComponent({ event }) {
+
+    useEffect(() => { atcb_init() }, []);
+    const startDate = new Date(event?.start).toLocaleDateString('ja-JP').replaceAll('/', '-');
+    const startTime = new Date(event?.start).toLocaleTimeString('ja-JP', { hour12: false });
+    const endDate = event?.end ? new Date(event?.end).toLocaleDateString('ja-JP').replaceAll('/', '-') : startDate;
+    const endTime = event?.end ? new Date(event?.end).toLocaleTimeString('ja-JP', { hour12: false }) : startTime;
+
+
+    const config = {
+        name: event.eventName,
+        startDate,
+        endDate,
+        startTime,
+        endTime,
+        location: event.eventLocation,
+        options: ["Apple", "Google", "Yahoo"],
+        timeZone: "America/Vancouver",
+        trigger: "click",
+        iCalFileName: "Reminder-Event",
     };
 
-    let items = [
-        { apple: 'Apple Calendar' },
-        { google: 'Google' },
-        { yahoo: 'Yahoo' },
-        { outlook: 'Outlook' },
-        { outlookcom: 'Outlook.com' },
-    ];
-
-    const icon = { 'fa-light fa-calendar': 'left' };
+    const handleOnclick = () => {
+        console.log('it ok')
+        atcb_action(config);
+    }
 
     return (
         <>
-
-            <AddToCalendar event={event} buttonTemplate={icon} buttonLabel="Add to calendar" listItems={items} />
+            {/* <Button onClick={handleOnclick}> */}
+            <Button src="../calenderIcon.png" alt="calendar icon" onClick={handleOnclick} />
+            {/* </Button> */}
         </>
     );
-
-
 }
-
-
-
-
-
-//==================================================================================================
-// import React from 'react'; 
-// import AddToCalendar from 'react-add-to-calendar';
-//  class Example extends React.Component {
-//      static displayName = 'Example'; 
-//      state = { event: 
-//         { title: 'Sample Event', 
-//         description: 'This is the sample event provided as an example only', 
-//         location: 'Portland, OR', 
-//         startTime: '2016-09-16T20:15:00-04:00', 
-//         endTime: '2016-09-16T21:45:00-04:00' } 
-//     }; 
-    
-//     render() { return <AddToCalendar event={this.state.event} />; }; 
-// }
-
-//way2
-//================================================================================
-
-// import React from "react";
-// import { atcb_init } from "add-to-calendar-button";
-// import 'add-to-calendar-button/assets/css/atcb.css';
-
-// export default function MyComponent() {
-//     React.useEffect(() => { atcb_init() }, []);
-//     return (
-//         <div className="atcb">
-//             {'{'}
-//             "name":"Add the title of your event",
-//             "description":"A nice description does not hurt",
-//             "startDate":"2022-02-21",
-//             "endDate":"2022-03-24",
-//             "startTime":"10:13",
-//             "endTime":"17:57",
-//             "location":"Somewhere over the rainbow",
-//             "label":"Add to Calendar",
-//             "options":[
-//             "Apple",
-//             "Google",
-//             "iCal",
-//             "Microsoft365",
-//             "Outlook.com",
-//             "Yahoo"
-//             ],
-//             "timeZone":"Europe/Berlin",
-//             "iCalFileName":"Reminder-Event"
-//             {'}'}
-//         </div>
-//     );
-// }

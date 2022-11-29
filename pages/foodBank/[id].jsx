@@ -19,7 +19,7 @@ import { unstable_getServerSession } from "next-auth/next";
 import { getUsers, getUser } from "../../server/database";
 import { useRouter } from 'next/router';
 import TopNavigation from '../../components/Organisms/NavBarTop';
-
+import AddEventToCalendar from '../../components/Atoms/AddEventToCalendar';
 
 
 const EventImageBlock = styled.div`
@@ -83,6 +83,7 @@ export default function FoodBank({ d, user }) {
     const [share, setShare] = useState(false);
     const [navValue, setNavValue] = useState(2);
     const router = useRouter()
+    const [copied, setCopied] = useState(false);
 
     var locationInfo = [];
     var locationIcons = [];
@@ -140,7 +141,7 @@ export default function FoodBank({ d, user }) {
     return (
         <Wrapper direction="column" gap="10px" sx={{ alignItems: "normal" }}>
             <TopBar>
-                <TopNavigation value={1}/>
+                <TopNavigation value={1} />
             </TopBar>
             <DesktopBox>
                 {/* can place d.program_name with d.organization_name */}
@@ -148,7 +149,8 @@ export default function FoodBank({ d, user }) {
                 <EventImageBlock >
                     <EventImage src={d.foodBank_Image} alt={d.program_name} />
                     <FunctionsBox>
-                        <img src="../calenderIcon.png" alt="calendar icon" />
+                        <AddEventToCalendar event={d} />
+                        {/* <img src="../calenderIcon.png" alt="calendar icon" /> */}
                         <img src="../shareLinkIcons.png" alt="calendar icon" onClick={onShare} />
                         <FavoriteBtn favorite={favorite} onClick={handleOnClick} />
                     </FunctionsBox>
