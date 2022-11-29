@@ -56,7 +56,6 @@ export const FunctionsBox = styled.div`
 `;
 
 const EventDescription = styled.div`
-
   background:${Colours.background};
    display:flex;
    padding:12px 20px;

@@ -93,8 +93,6 @@ const FunctionsBox = styled.div`
 `;
 
 export default function FoodBank({ d, user }) {
-    console.log("d", d)
-
 
     const { data: session } = useSession()
     const [shareUrl, setShareUrl] = useState('');
