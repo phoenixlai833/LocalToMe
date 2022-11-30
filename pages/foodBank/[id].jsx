@@ -134,7 +134,7 @@ export default function FoodBank({ d, user }) {
         setCopied(false);
     }
 
-    const ifFavorite = user?.favorite?.location.filter((singleLocation) => singleLocation.id === d.id).length > 0 ? true : false;
+    const ifFavorite = user?.favorite?.location?.filter((singleLocation) => singleLocation.id === d.id).length > 0 ? true : false;
     const [favorite, setFavorite] = useState(ifFavorite);
 
 
