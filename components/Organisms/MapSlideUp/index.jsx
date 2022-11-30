@@ -19,21 +19,21 @@ border-radius: 12px;
 @media (max-width: 768px) {
     width: 20vw;
     height: 13px;
+    margin: 5%;
 }
 `;
 
 const ButtonArea = styled.div`
-background-color: white;
 width: 10vw;
 height: 100vh; 
 display: flex;
-justify-content: center;
+justify-content: flex-end;
 align-items: center;
 @media (max-width: 768px) {
     justify-content: center;
     align-items: center;
     width: 100vw;
-    height: 500px;
+    height: 50px;
 }
 `
 

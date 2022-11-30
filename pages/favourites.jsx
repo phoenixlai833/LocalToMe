@@ -71,6 +71,8 @@ export default function Favorites({ user }) {
     user.favorite.event = user.favorite.event || [];
     user.favorite.location = user.favorite.location || [];
     setUserFavorites(user.favorite);
+    document.body.style.overflow = 'auto';
+
   }, [user]);
 
   if (userFavorites) {

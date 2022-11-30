@@ -6,12 +6,11 @@
   height: 100vh;
   background: white;
   border-radius: 0 30px 30px 0;
-  /* overflow-y: scroll; */
   padding: 5%;
   transform: translateX(-85%);
   -webkit-transform: translateX(-85%);
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -96,7 +95,7 @@
     height: 50vh;
     background: white;
     border-radius: 30px 30px 0 0;
-    overflow-y: scroll;
+    /* overflow: hidden; */
     padding: 5%;
     transform: translateY(25%);
     -webkit-transform: translateY(25%);

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ReactMapGL, {
   GeolocateControl,
   NavigationControl,
@@ -135,6 +135,10 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
     height: "100vh",
     zoom: 11,
   });
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+  }, [])
 
   const [userLocation, setUserLocation] = useState({});
   const mapRef = useRef();
