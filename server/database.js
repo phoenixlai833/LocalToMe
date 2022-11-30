@@ -126,9 +126,7 @@ export async function deleteEvent(id) {
   const fileName = decodeURIComponent(fileUrl.split("/").pop().split("?")[0]);
   console.log(fileName);
   if (fileName !== "event-default.png") {
-    deleteObject(fileRef);
-    await deleteDoc(doc(db, "event", id));
-    return;
+    await deleteObject(fileRef);
   }
   await deleteDoc(doc(db, "event", id));
   index.deleteObject(id).wait();
@@ -200,12 +198,11 @@ export async function deleteNews(id) {
   const index = client.initIndex("prod_NEWS");
   const newsCollection = doc(db, "news", id);
   const newsSnap = await getDoc(newsCollection);
-  // console.log(newsSnap)
-  if (newsSnap.data().newsImage) {
-    const fileUrl = newsSnap.data().newsImage;
+  const fileUrl = newsSnap.data().newsImage;
+  if (fileUrl !== "") {
     const storage = getStorage();
     const fileRef = ref(storage, fileUrl);
-    deleteObject(fileRef);
+    await deleteObject(fileRef);
   }
   await deleteDoc(doc(db, "news", id));
   index.deleteObject(id).wait();
