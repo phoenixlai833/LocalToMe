@@ -4,6 +4,34 @@ import GeneralGreenBtn from '../../components/Atoms/GeneralGreenBtn';
 
 export default function LandingPageOne() {
 
+    const Container = styled.div`
+    @media(min-width: 768px) {
+        // background-color: #CDECC2;
+        height: 100vh;
+        width: 100vw;
+    }
+    `
+
+    //     const LandOne = styled.div`
+    //     display: flex;
+    //     flex-direction: column;
+    //     justify-content: center;
+    //     align-items: center;
+    //     background-color: white;
+    //     height: 50vh;
+    //     width: 50vw;
+    //     padding:5% 5% 3% 5%;
+    //     text-align: center;
+    //     h1{
+    //   @media(max-width: 768px) {
+    //         margin:0 10%
+    //     }
+    //     @media(max-width: 768px) {
+    //         height: 100vh;
+    //         width: 100vw;
+
+    //         }
+    //     `
 
     const LandOne = styled.div`
     display: flex;
@@ -14,10 +42,11 @@ export default function LandingPageOne() {
     width: 100vw;
     padding:5% 5% 3% 5%;
     text-align: center;
-    h1{
   @media(max-width: 768px) {
+    h1{
         margin:0 10%
     }
+}
     `
 
     const Skip = styled.div`
@@ -78,40 +107,42 @@ div:nth-child(1){
 
     return (
         <>
-            <LandOne>
-                <Skip>
-                    <Link href="/auth/signin">
-                        Skip
-                    </Link>
-                </Skip>
-                <MascotImg src="../../Mascot/mascotPin.png" />
+            <Container>
+                <LandOne>
+                    <Skip>
+                        <Link href="/auth/signin">
+                            Skip
+                        </Link>
+                    </Skip>
+                    <MascotImg src="../../Mascot/mascotPin.png" />
 
-                <h1>
-                    Find Food Resources Near You
-                </h1>
-                <p>
-                    From the comfort of your phone, you can find thousands of available food assistance near you.
-                </p>
-                <BtnCont>
-                    <Dot>
-                        <div></div>
+                    <h1>
+                        Find Food Resources Near You
+                    </h1>
+                    <p>
+                        From the comfort of your phone, you can find thousands of available food assistance near you.
+                    </p>
+                    <BtnCont>
+                        <Dot>
+                            <div></div>
+                            <Link href="/landing/landingTwo">
+                                <div></div>
+                            </Link>
+                            <Link href="/landing/landingThree">
+                                <div></div>
+                            </Link>
+
+                        </Dot>
+
                         <Link href="/landing/landingTwo">
-                            <div></div>
+
+                            <GeneralGreenBtn text={"Continue"} h={"4.5em"} />
+
                         </Link>
-                        <Link href="/landing/landingThree">
-                            <div></div>
-                        </Link>
 
-                    </Dot>
-
-                    <Link href="/landing/landingTwo">
-
-                        <GeneralGreenBtn text={"Continue"} h={"4.5em"} />
-
-                    </Link>
-
-                </BtnCont>
-            </LandOne>
+                    </BtnCont>
+                </LandOne>
+            </Container>
         </>
     )
 }

@@ -11,9 +11,9 @@ left: 0;
 `;
 
 const SlideBtn = styled.button`
-background-color: gray;
+background-color: #108928;
 width: 10px;
-height: 20vh;
+height: 10vh;
 border: none;
 border-radius: 12px;
 @media (max-width: 768px) {
@@ -27,12 +27,13 @@ background-color: white;
 width: 10vw;
 height: 100vh; 
 display: flex;
-justify-content: flex-end;
+justify-content: center;
 align-items: center;
 @media (max-width: 768px) {
     justify-content: center;
     align-items: center;
     width: 100vw;
+    height: 500px;
 }
 `
 

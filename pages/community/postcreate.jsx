@@ -5,10 +5,11 @@ const AddNewPost = styled.div`
 background-color: #CDECC2;
 width: 100vw;
 height: 100vh; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+overflow: hidden;
 @media (min-width: 768px) {
     position:relative;
     overflow: hidden;
@@ -42,8 +43,6 @@ position: absolute;
 `
 
 export default function PostCreation() {
-
-
     return <AddNewPost>
         <Btn>
             <CreationSection />
