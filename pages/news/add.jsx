@@ -118,7 +118,7 @@ export default function NewNews({ categoriesList }) {
         axios.post("/api/news", postnews).then((res) => {
             console.log("posted successfully", res.data);
             setNewsId(res.data);
-            // window.location = `/community?tabId=1`
+           
         });
     }
 
