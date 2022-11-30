@@ -154,6 +154,7 @@ const AbsPos = styled.div`
   position: absolute;
   top: 10vh;
   left: 20vw;
+  z-index: 1000;
 `;
 
 const DeleteCont = styled.div`
@@ -221,7 +222,8 @@ export default function AllNews({ allNews, sessionEmail }) {
 
   const handleDelete = (singleEventId) => async (e) => {
     e.preventDefault();
-    deleteNews(singleEventId);
+    console.log(singleEventId)
+    await deleteNews(singleEventId);
     window.location.reload();
     // router.push("/community");
   };
