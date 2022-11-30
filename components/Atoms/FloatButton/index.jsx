@@ -8,8 +8,8 @@ import { useRouter } from 'next/router';
 
 const FloatButton = styled(Fab)`
 position:fixed;
-display:flex;
-top: 80vh;
+// display:flex;
+bottom: 15vh;
 left:90vw;
 background-color:${Colours.primary};
 color:${Colours.background};
@@ -18,6 +18,7 @@ color:${Colours.background};
 }
 @media (max-width: 767px) {
     left:80vw;
+
 }
 `
 export default function FloatingActionButton({
