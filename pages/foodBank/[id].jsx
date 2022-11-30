@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getFoodBank, addFoodBank } from '../../server/database';
 import NavBar from '../../components/Organisms/NavBar';
 import TopBanner from '../../components/Molecules/TopBanner';
@@ -19,7 +19,6 @@ import { getUsers, getUser } from "../../server/database";
 import { useRouter } from 'next/router';
 import TopNavigation from '../../components/Organisms/NavBarTop';
 import AddEventToCalendar from '../../components/Atoms/AddEventToCalendar';
-
 
 const EventImageBlock = styled.div`
     position: relative;
@@ -101,6 +100,9 @@ export default function FoodBank({ d, user }) {
     const [copied, setCopied] = useState(false);
     const router = useRouter()
 
+    useEffect(() => {
+        document.body.style.overflow = 'auto';
+    }, [])
 
     var locationInfo = [];
     var locationIcons = [];
@@ -158,7 +160,7 @@ export default function FoodBank({ d, user }) {
     return (
         <Wrapper direction="column" gap="10px" sx={{ alignItems: "normal" }}>
             <TopBar>
-                <TopNavigation value={1} />
+                <TopNavigation value={2} />
             </TopBar>
             <DesktopBox>
                 {/* can place d.program_name with d.organization_name */}

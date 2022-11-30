@@ -222,7 +222,8 @@ export default function AllNews({ allNews, sessionEmail }) {
   const handleDelete = (singleEventId) => async (e) => {
     e.preventDefault();
     deleteNews(singleEventId);
-    router.push("/community");
+    window.location.reload();
+    // router.push("/community");
   };
 
   const handlePopup = (id) => (e) => {
