@@ -14,10 +14,11 @@ export default function LandingPageTwo() {
     width: 100vw;
     padding:5% 5% 3% 5%;
     text-align: center;
-    h1{
   @media(max-width: 768px) {
+    h1{
         margin:0 10%
     }
+}
     `
     const Skip = styled.div`
     position: absolute;

@@ -111,18 +111,6 @@ export default function FoodBankMapPin({ foodBanksList }) {
                                 <br></br>
                                 {selectedFoodbank.location_address}
                             </p>}
-                        {selectedFoodbank.organization_name &&
-                            <p>
-                                <b>Organization Name</b>
-                                <br></br>
-                                {selectedFoodbank.organization_name}
-                            </p>}
-                        {selectedFoodbank.signup_email &&
-                            <p>
-                                <b>Email</b>
-                                <br></br>
-                                {selectedFoodbank.signup_email}
-                            </p>}
                         {selectedFoodbank.program_population_served &&
                             <p>
                                 <b>Population served</b>

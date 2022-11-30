@@ -267,6 +267,7 @@ export default function Event({ event, user }) {
           style={{
             display: "flex",
             justifyContent: "space-between",
+            alignItems: "center",
             margin: "0 5%",
           }}
         >
@@ -277,7 +278,7 @@ export default function Event({ event, user }) {
                 <div style={{ display: "flex" }}>
                   <img src="/Edit-icon.svg" alt="Edit Event" />
                   &nbsp;
-                  <p>Edit Event</p>
+                  <p style={{ margin: "0%" }}>Edit Event</p>
                 </div>
               </Link>
               <div style={{ display: "flex" }}>
