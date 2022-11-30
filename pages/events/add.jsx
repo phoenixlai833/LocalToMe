@@ -164,7 +164,7 @@ export default function NewEvent({ categoriesList }) {
       eventContent: event.eventContent,
       eventCreatorId: userId,
       start: event.start,
-      end: event.end,
+      end: event.end > event.start ? event.end : event.start,
       eventImage: event.eventImage,
       eventLocation: event.eventLocation,
       eventName: event.eventName,
