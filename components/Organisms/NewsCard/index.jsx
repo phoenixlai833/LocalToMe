@@ -24,6 +24,8 @@ const TextDiv = styled.div`
 // Placeholder text 
 const Text = styled.p`
    line-height:normal;
+   // width:100%;
+   // overflow-wrap: break-word;
 `
 const ImageContainer = styled.div`
    display: flex;

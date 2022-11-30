@@ -10,6 +10,7 @@ import UserOfPost from "/components/Molecules/UserOfPost";
 import EventCategoryTag from "/components/Atoms/EventCategoryTag";
 import styled from "styled-components";
 import { useSession } from "next-auth/react";
+import { flexbox } from "@mui/system";
 
 const EventImageBlock = styled.div`
   position: relative;
@@ -28,6 +29,7 @@ const EventImage = styled.img`
 
 const EventDescription = styled.div`
   margin-left: 8%;
+  width: 85%;
 `;
 
 const ConfirmBtn = styled.button`
@@ -119,7 +121,7 @@ export default function EventPreview({
       <EventDescription>
 
         <b>About:</b>
-        <p style={{ fontSize: "14px" }}>{event.eventContent}</p>
+        <p style={{ fontSize: "14px", overflowWrap: "break-word" }}>{event.eventContent}</p>
       </EventDescription>
       <EventCat>
         <EventCategoryTag eventCategories={event.eventTags} selected={true} />

@@ -132,7 +132,7 @@ export default function EditEvent({ defaultEvent, categoriesList }) {
   function handleConfirm() {
     const putEvent = {
       id: defaultEvent.id,
-      eventContent: event.eventDescription,
+      eventContent: event.eventContent,
       // eventCreatorId: defaultEvent.eventCreatorId,
       start: event.start,
       end: event.end,

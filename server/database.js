@@ -200,8 +200,9 @@ export async function deleteNews(id) {
   const index = client.initIndex("prod_NEWS");
   const newsCollection = doc(db, "news", id);
   const newsSnap = await getDoc(newsCollection);
-  const fileUrl = newsSnap.data().newsImage;
-  if (fileUrl) {
+  // console.log(newsSnap)
+  if (newsSnap.data().newsImage) {
+    const fileUrl = newsSnap.data().newsImage;
     const storage = getStorage();
     const fileRef = ref(storage, fileUrl);
     deleteObject(fileRef);

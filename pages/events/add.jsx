@@ -188,7 +188,7 @@ export default function NewEvent({ categoriesList }) {
           console.log("posted successfully", res.data);
         });
       });
-  } 
+  }
 
   const handleViewPost = () => {
     console.log("viewid", eventId);

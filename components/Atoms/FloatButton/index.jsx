@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 const FloatButton = styled(Fab)`
 position:fixed;
 display:flex;
-top:80vh;
+top: 80vh;
 left:90vw;
 background-color:${Colours.primary};
 color:${Colours.background};
@@ -29,9 +29,9 @@ export default function FloatingActionButton({
     // const onPress = () => {r.push('/events/add')}
     return (
         <ThemeProvider theme={Theme}>
-        <FloatButton aria-label="add" size="large" onClick={onPress}>
-            <AddIcon />
-        </FloatButton>
+            <FloatButton aria-label="add" size="large" onClick={onPress}>
+                <AddIcon />
+            </FloatButton>
         </ThemeProvider>
     )
 }

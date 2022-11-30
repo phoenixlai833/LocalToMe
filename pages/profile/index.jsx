@@ -1,7 +1,7 @@
 import ProfileSection from "../../components/Organisms/ProfileBanner"
 import NavBar from '../../components/Organisms/NavBar';
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FloatingActionButton from '../../components/Atoms/FloatButton';
 import AvatarPopup from "../../components/Organisms/AvatarPopup";
 import ProfileCard from "../../components/Organisms/ProfileCard/ProfileCard";
@@ -91,7 +91,9 @@ left: 20%;
 top: 7%;
 z-index: 2;
 @media (min-width: 768px) {
-left: 30vw;
+width: 62vw;
+justify-content: center;
+align-items: center;
 top: 15%;
 }
 `
@@ -133,6 +135,10 @@ export default function Profile({ sortedEvents }) {
     const [share, setShare] = useState(false);
     const [copied, setCopied] = useState(false);
     const [avatar, setAvatar] = useState(session.user.image)
+
+    useEffect(() => {
+        document.body.style.overflow = 'auto';
+    }, [])
 
     const handleChangeTab = (e) => {
         if (e.target.id) {
@@ -207,11 +213,11 @@ export default function Profile({ sortedEvents }) {
                 </ShareBox>
                 <DesktopBox>
                     <MainCont>
-                        <ProfileSection src={avatar} name={session.user.name} email={session.user.email} handleClick={() => setDisplay("static")} />
+                        <ProfileSection src={avatar} name={session.user.name} email={session.user.email} handleClick={() => setDisplay("flex")} />
                         <ProfileTab>
                             <Tab onClick={handleChangeTab}>
                                 <EventTab id="0" tabId={tab}>
-                                    Recent Posts
+                                    Recent Events
                                 </EventTab>
                                 <NewTab id="1" tabId={tab}>
                                     Past Events

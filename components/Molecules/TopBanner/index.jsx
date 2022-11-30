@@ -16,8 +16,8 @@ const Banner = styled.div`
    text-align:center;
    position:sticky;
    font-Size:12px;
-   // padding-top: 20px;
-   height: 100px;
+   padding: 2% 0;
+   // height: 125px;
    @media (min-width: 767px) {
     padding-left: 25px;
     height: 100px;
@@ -41,7 +41,7 @@ export default function TopBanner({
 
    return <Banner>
       {back === true ? <Back fontSize={'large'} onClick={() => r.back()}>arrow_back</Back> : <div></div>}
-      <AppText txt={text}></AppText>
+      <div style={{ width: "60vw" }}><AppText txt={text}></AppText></div>
       {<div></div>}
    </Banner>
 }

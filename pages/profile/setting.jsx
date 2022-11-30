@@ -13,6 +13,7 @@ import { authOptions } from '../api/auth/[...nextauth].js';
 import { unstable_getServerSession } from "next-auth/next";
 import TopNavigation from '../../components/Organisms/NavBarTop';
 import NavBar from '../../components/Organisms/NavBar';
+import { useEffect } from 'react';
 
 export const ProfileDisplayCont = styled.div`
 display: flex;
@@ -56,6 +57,10 @@ export default function Setting() {
     console.log(session.user);
     const r = useRouter();
 
+    useEffect(() => {
+        document.body.style.overflow = 'auto';
+    }, [])
+
     if (session) {
         return (
             <>
@@ -80,7 +85,7 @@ export default function Setting() {
                             {/* </Link> */}
                         </FlexBox>
                     </div>
-                    <div style={{ padding: "5%" }}></div>
+                    <div style={{ padding: "10%" }}></div>
                 </DesktopBox>
                 <div className="TEMPMEDIA">
                     <NavBar value={4} />

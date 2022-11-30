@@ -140,18 +140,6 @@ export default function EventMapPin({ events }) {
                                 {eventDateTime}
                             </p>
                         }
-                        {selectedEvent.eventContactPhone &&
-                            <p>
-                                <b>Contact</b>
-                                <br />
-                                {selectedEvent.eventContactPhone}
-                            </p>}
-                        {selectedEvent.eventContactEmail &&
-                            <p>
-                                <b>Email:</b>
-                                <br />
-                                {selectedEvent.eventContactEmail}
-                            </p>}
                         {selectedEvent.eventContent &&
                             <p>
                                 <b>Description:</b>

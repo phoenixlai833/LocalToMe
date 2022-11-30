@@ -125,6 +125,10 @@ export default function Community({ tabId, usersData }) {
   const [tab, setTab] = useState(tabId);
   // const [isAdd, setIsAdd] = useState(false);
 
+  useEffect(() => {
+    document.body.style.overflow = 'auto';
+  }, [])
+
   const tabContents = {
     0: { component: <EventHits />, searchIndex: "prod_EVENTS" },
     1: { component: <NewsHits />, searchIndex: "prod_NEWS" },

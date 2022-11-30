@@ -1,6 +1,6 @@
 // import SingleEvent from "../../components/SingleEvent";
 import { getEvent, deleteEvent, getUser, getUsers } from "../../server/database";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from 'next/router';
 import React from "react";
 import styled from "styled-components";
@@ -162,6 +162,9 @@ box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
 
 export default function Event({ event, user }) {
 
+  useEffect(() => {
+    document.body.style.overflow = 'auto';
+  }, [])
 
   const { data: session } = useSession()
 
@@ -194,7 +197,8 @@ export default function Event({ event, user }) {
     {
       e.preventDefault();
       deleteEvent(singleEventId);
-      router.push("/community");
+      router.back();
+      // router.push("/community");
     }
   };
 
@@ -244,7 +248,7 @@ export default function Event({ event, user }) {
   return (
     <div>
       <TopBar>
-        <TopNavigation />
+        <TopNavigation value={1}/>
       </TopBar>
       <DesktopBox>
         <TopBanner text={event.eventName} back={false} />
@@ -267,6 +271,7 @@ export default function Event({ event, user }) {
           style={{
             display: "flex",
             justifyContent: "space-between",
+            alignItems: "center",
             margin: "0 5%",
           }}
         >
@@ -277,7 +282,7 @@ export default function Event({ event, user }) {
                 <div style={{ display: "flex" }}>
                   <img src="/Edit-icon.svg" alt="Edit Event" />
                   &nbsp;
-                  <p>Edit Event</p>
+                  <p style={{ margin: "0%" }}>Edit Event</p>
                 </div>
               </Link>
               <div style={{ display: "flex" }}>
@@ -294,7 +299,7 @@ export default function Event({ event, user }) {
 
         <EventDescription>
           <b>About:</b>
-          <p style={{ fontSize: '14px' }}>{event.eventContent}</p>
+          <p style={{ fontSize: '14px', overflowWrap: "break-word" }}>{event.eventContent}</p>
         </EventDescription>
         <EventCat>
           <EventCategoryTag eventCategories={event.eventTags} selected={true} />
