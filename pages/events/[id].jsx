@@ -196,9 +196,8 @@ export default function Event({ event, user }) {
   const handleDelete = (singleEventId) => async (e) => {
     {
       e.preventDefault();
-      deleteEvent(singleEventId);
-      router.back();
-      // router.push("/community");
+      await deleteEvent(singleEventId);
+      router.push("/community");
     }
   };
 
@@ -248,7 +247,7 @@ export default function Event({ event, user }) {
   return (
     <div>
       <TopBar>
-        <TopNavigation value={1}/>
+        <TopNavigation value={1} />
       </TopBar>
       <DesktopBox>
         <TopBanner text={event.eventName} back={false} />
