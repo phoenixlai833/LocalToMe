@@ -75,6 +75,9 @@ export async function getEventsWithUser(userEmail) {
 export async function getEvent(id) {
   const eventRef = doc(db, "event", id);
   const eventSnap = await getDoc(eventRef);
+  if (!eventSnap.data()) {
+    return undefined
+  }
   const fileUrl = eventSnap.data().eventImage;
   let fileName = decodeURIComponent(fileUrl.split("/").pop().split("?")[0]);
   const event = { id, ...eventSnap.data(), fileName };
@@ -255,22 +258,22 @@ export async function getUser(id) {
   const baseUser = userSnap.data();
   if (baseUser.favorite) {
     if (baseUser.favorite.event) {
-      baseUser.favorite.event = await Promise.all(
+      baseUser.favorite.event = (await Promise.all(
         baseUser.favorite.event.map(async (eventRef) => {
           const eventObj = await getEvent(eventRef.id);
           return eventObj;
         })
-      );
+      )).filter((event) => event !== undefined);
     }
     if (baseUser.favorite.location) {
-      baseUser.favorite.location = await Promise.all(
+      baseUser.favorite.location = (await Promise.all(
         baseUser.favorite.location.map(async (locationRef) => {
           const locationObj = await getFoodBank(locationRef.id);
           // const locationObjSnap = await getDoc(locationRef);
           // const locationObj = locationObjSnap.data();
           return locationObj;
         })
-      );
+      )).filter((location) => location !== undefined);
     }
   }
   // baseUser.favorite.foodbank = await Promise.all(baseUser.favorite.foodbank.map(async (locationRef) => {
