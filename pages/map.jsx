@@ -92,6 +92,7 @@ const SearchArea = styled.div`
     flex-direction: column;
     align-items: center;
   }
+  filter: drop-shadow(1px 4px 1px rgba(0, 0, 0, 0.15));
 `;
 
 const FilterbtnSection = styled.div`
