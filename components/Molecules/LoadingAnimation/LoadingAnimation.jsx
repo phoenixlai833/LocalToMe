@@ -2,33 +2,41 @@ import { useEffect, useState } from 'react';
 import Lottie from "lottie-react";
 import loading from '../../../public/loading.json'
 import { useRouter } from 'next/router'
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const fadeOut = keyframes`
+0% {opacity: 1;}
+100% {opacity: 0;}
+`
 
 const AnimationDiv = styled.div`
+position: absolute;
+top: 0;
+left: 0;
+z-index: 1000;
 display: flex;
 width: 100vw;
 height: 100vh;
 background-color: white;
 justify-content: center;
 align-items: center;
+animation: ${fadeOut} 1s linear 1.5s;
 `
 
-export default function Loading(){
+export default function Loading({ sec }) {
 
-    const r = useRouter();
+  const r = useRouter();
 
+  const [load, setLoad] = useState(true);
 
-    const [load, setLoad] = useState(true);
+  useEffect(() => { setTimeout(() => { setLoad(false) }, sec); }, []);
 
-    useEffect(()=>{setTimeout(()=>{setLoad(false)}, 4000);}, []);
+  if (load) {
+    return <AnimationDiv>
+      <Lottie style={{ width: 300, height: 300 }} animationData={loading} loop={false} />
+    </AnimationDiv>
+  }
 
-    if(load){
-      return <AnimationDiv>
-        <Lottie style={{width: 300, height:300}} animationData={loading} loop={false}/>
-        </AnimationDiv>
-    }
-
-    return<>
-   <p>Loading Complete</p>
-    </>
+  //  <p>Loading Complete</p>
+  //   </>
 }

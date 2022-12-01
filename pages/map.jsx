@@ -33,6 +33,7 @@ import NavBar from "../components/Organisms/NavBar";
 import Search from "../components/Molecules/Search";
 import TopNavigation from "../components/Organisms/NavBarTop";
 import { motion } from "framer-motion";
+import Loading from "../components/Molecules/LoadingAnimation/LoadingAnimation";
 
 const searchClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_CLIENT_ID,
@@ -48,17 +49,17 @@ function CustomSearch() {
   return <Search onSearch={handleSearch} />;
 }
 
-function FoodBankSlideUpHits() {
-  const { hits } = useHits();
+// function FoodBankSlideUpHits() {
+//   const { hits } = useHits();
 
-  return <MapSlideUp foodBanks={hits} />;
-}
+//   return <MapSlideUp foodBanks={hits} show={showing} />;
+// }
 
-function FoodBankPinHits() {
-  const { hits } = useHits();
+// function FoodBankPinHits() {
+//   const { hits } = useHits();
 
-  return <FoodBankMapPin foodBanksList={hits} />;
-}
+//   return <FoodBankMapPin foodBanksList={hits} hideSlider={setShowing(false)}/>;
+// }
 
 function EventMapPinHits() {
   const { hits } = useHits();
@@ -156,8 +157,23 @@ export default function FoodBankMap() {
     setIsFoodBankFilter(false);
   };
 
+  let [showing, setShowing] = useState(true);
+  function FoodBankSlideUpHits() {
+    const { hits } = useHits();
+
+    return <MapSlideUp foodBanks={hits} show={showing} hideSlider={() => setShowing(false)} showSlider={() => setShowing(true)} />;
+  }
+
+  function FoodBankPinHits() {
+    const { hits } = useHits();
+
+    return <FoodBankMapPin foodBanksList={hits} hideSlider={() => setShowing(false)} />;
+  }
+
+
   return (
     <InstantSearch indexName="prod_FOODBANKS" searchClient={searchClient}>
+      <Loading sec={2000} />
       <TopBar>
         <TopNavigation value={2} />
       </TopBar>
