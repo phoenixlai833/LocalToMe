@@ -257,9 +257,9 @@ export default function FoodBankMap() {
         </ReactMapGL>
 
         {/* <div className="animate__slideInLeft"><MapSlideUp foodBanks={hits} /></div> */}
-        {/* <div className="animate__slideInLeft"> */}
+        <div className="animate__slideInLeft">
           <FoodBankSlideUpHits />
-        {/* </div> */}
+        </div>
 
         <SearchArea>
           <CustomSearch />
