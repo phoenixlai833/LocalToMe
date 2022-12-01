@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-// import { useHits, InstantSearch } from "react-instantsearch-hooks-web";
 import styled from "styled-components";
 
 const EventBlock = styled.div`
@@ -100,7 +99,6 @@ export default function EventsList({ eventList }) {
           <EventDateAndImage>
             <EventImage src={event.eventImage} alt={event.eventName} />
             <EventDate>
-              {console.log(event.id, event.start)}
               {new Date(event.start).toLocaleString("default", {
                 month: "short",
               })}{" "}

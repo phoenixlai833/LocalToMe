@@ -129,7 +129,7 @@ const ReadMoreBtn = styled.button`
   position: absolute;
   bottom: 0;
   right: 0;
-  margin: -10px;
+  margin: -10px 12px;
   &:hover {
     filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.15));
   }
@@ -148,7 +148,7 @@ const DeleteNews = styled.div`
 const Func = styled.div`
   position: absolute;
   top: 0;
-  right: 13vw;
+  right: 6vw;
 `;
 
 const AbsPos = styled.div`
@@ -216,6 +216,9 @@ const CancelBtn = styled.button`
   margin: 2%;
 `;
 export default function AllNews({ allNews, sessionEmail }) {
+  const [allNewsList, setAllNews] = useState(allNews.sort(
+    (a, b) => new Date(b.newsDateCreated) - new Date(a.newsDateCreated)
+  ));
   const [showMore, setShowMore] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const router = useRouter();
@@ -225,7 +228,9 @@ export default function AllNews({ allNews, sessionEmail }) {
     e.preventDefault();
     console.log(singleEventId);
     await deleteNews(singleEventId);
-    window.location.reload();
+    // window.location.reload();
+    setConfirmDelete(false);
+    setAllNews([...allNewsList].filter((news) => news.id !== singleEventId));
     // router.push("/community");
   };
 
@@ -238,12 +243,9 @@ export default function AllNews({ allNews, sessionEmail }) {
   function hidePopup() {
     setConfirmDelete(false);
   }
-  allNews = allNews.sort(
-    (a, b) => new Date(b.newsDateCreated) - new Date(a.newsDateCreated)
-  );
   return (
     <>
-      {allNews.map((news) => (
+      {allNewsList.map((news) => (
         // let user;
         // axios.get(`/api/users/${news.newsCreatorId}`);
         // return (
@@ -277,7 +279,7 @@ export default function AllNews({ allNews, sessionEmail }) {
               />
 
               <Content>
-                <p>
+                <p style={{ overflowWrap: "break-word", width: "85%" }}>
                   {!showMore && news.newsContent?.length > 100
                     ? news.newsContent.substring(0, 100) + "..."
                     : news.newsContent}

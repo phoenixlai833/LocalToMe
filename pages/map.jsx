@@ -23,6 +23,7 @@ import {
   useHits,
   useSearchBox,
   Index,
+  Configure
 } from "react-instantsearch-hooks-web";
 import styled from "styled-components";
 import MapSlideUp from "../components/Organisms/MapSlideUp";
@@ -32,7 +33,6 @@ import Filters from "../components/Atoms/Filters";
 import NavBar from "../components/Organisms/NavBar";
 import Search from "../components/Molecules/Search";
 import TopNavigation from "../components/Organisms/NavBarTop";
-import { motion } from "framer-motion";
 import Loading from "../components/Molecules/LoadingAnimation/LoadingAnimation";
 
 const searchClient = algoliasearch(
@@ -46,7 +46,7 @@ function CustomSearch() {
   function handleSearch(input) {
     refine(input);
   }
-  return <Search onSearch={handleSearch} />;
+  return <Search onSearch={handleSearch}></Search>;
 }
 
 // function FoodBankSlideUpHits() {
@@ -147,33 +147,51 @@ export default function FoodBankMap() {
 
   const [isFoodBankFilter, setIsFoodBankFilter] = useState(false);
   const [isEventFilter, setIsEventFilter] = useState(false);
+  const [isFridgeFilter, setIsFridgeFilter] = useState(false);
+  const [isPantryFilter, setIsPantryFilter] = useState(false);
 
   const filterFoodBanks = () => {
     setIsFoodBankFilter(!isFoodBankFilter);
     setIsEventFilter(false);
+    setIsPantryFilter(false);
+    setIsFridgeFilter(false);
   };
 
   const filterEvents = () => {
     setIsEventFilter(!isEventFilter);
     setIsFoodBankFilter(false);
+    setIsPantryFilter(false);
+    setIsFridgeFilter(false);
+  };
+  const filterPantries = () => {
+    setIsPantryFilter(!isPantryFilter);
+    setIsFoodBankFilter(false);
+    setIsEventFilter(false);
+    setIsFridgeFilter(false);
+  };
+  const filterFridges = () => {
+    setIsFridgeFilter(!isFridgeFilter);
+    setIsFoodBankFilter(false);
+    setIsEventFilter(false);
+    setIsPantryFilter(false);
   };
 
   let [showing, setShowing] = useState(true);
   function FoodBankSlideUpHits() {
     const { hits } = useHits();
-
+    
     return <MapSlideUp foodBanks={hits} show={showing} hideSlider={() => setShowing(false)} showSlider={() => setShowing(true)} />;
   }
 
   function FoodBankPinHits() {
     const { hits } = useHits();
-
     return <FoodBankMapPin foodBanksList={hits} hideSlider={() => setShowing(false)} />;
   }
 
 
   return (
     <InstantSearch indexName="prod_FOODBANKS" searchClient={searchClient}>
+      <Configure hitsPerPage={1000} />
       <Loading sec={2000} />
       <TopBar>
         <TopNavigation value={2} />
@@ -210,25 +228,25 @@ export default function FoodBankMap() {
           {/* <ScaleControl position="top-right" /> */}
 
 
-          {!isFoodBankFilter && (
+          {!isFoodBankFilter && !isFridgeFilter && !isPantryFilter && (
             <Index indexName="prod_EVENTS">
               <EventMapPinHits />
             </Index>
           )}
 
-          {!isEventFilter && (
+          {!isEventFilter && !isFridgeFilter && !isPantryFilter && (
             <Index indexName="prod_FOODBANKS">
               <FoodBankPinHits />
             </Index>
           )}
 
-          {!isFoodBankFilter && !isEventFilter && (
+          {!isFoodBankFilter && !isEventFilter && !isFridgeFilter && (
             <Index indexName="prod_PANTRIES">
               <PantryMapPinHits />
             </Index>
           )}
 
-          {!isFoodBankFilter && !isEventFilter && (
+          {!isFoodBankFilter && !isEventFilter && !isPantryFilter && (
             <Index indexName="prod_FRIDGES">
               <FridgeMapPinHits />
             </Index>
@@ -262,12 +280,32 @@ export default function FoodBankMap() {
                   <Filters
                     isFilter={isEventFilter}
                     tag={"Events"}
-                    color={isEventFilter ? "#1CAE33" : "#FFFFFF"}
+                    color={isEventFilter ? "#FFB800" : "#FFFFFF"}
                     icon={"event"}
                     txtcolor={isEventFilter ? "#FFFFFF" : "#000000"}
                     onPress={filterEvents}
                   />
                 </li>
+                <li>
+                  <Filters
+                    isFilter={isFridgeFilter}
+                    tag={"Fridges"}
+                    color={isFridgeFilter ? "#7F28C3" : "#FFFFFF"}
+                    icon={"kitchen"}
+                    txtcolor={isFridgeFilter ? "#FFFFFF" : "#000000"}
+                    onPress={filterFridges}
+                  />
+                </li>
+                {/* <li>
+                  <Filters
+                    isFilter={isPantryFilter}
+                    tag={"Food Pantry"}
+                    color={isPantryFilter ? "#E6005A" : "#FFFFFF"}
+                    icon={"takeout_dining"}
+                    txtcolor={isPantryFilter ? "#FFFFFF" : "#000000"}
+                    onPress={filterPantries}
+                  />
+                </li> */}
                 {/* <li><Filters tag={"Open Now"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} /></li>
                             <li><Filters tag={"Less than 1km"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} /></li> */}
               </ul>

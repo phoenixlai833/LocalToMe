@@ -3,6 +3,7 @@ import { Marker, Popup } from "react-map-gl";
 import Link from "next/link";
 import GetDirectionGreenBtn from "../GetDirectionGreenBtn";
 import styled from "styled-components";
+import FavoriteBtn from "../FavoriteBtn";
 
 const EventNameLink = styled.p`
 color: #108928;
@@ -29,7 +30,25 @@ const MarkerBtn = styled.button`
 const PopupCont = styled.div`
 padding: 2%;
 `
-
+const ImageSection = styled.div`
+width:100%;
+height:100px;
+`
+const FavouriteButton = styled.div`
+position:absolute;
+border-radius:50%;
+background: rgba(255,255,255,0.9);
+display:flex;
+align-items:center;
+justify-content:center;
+width:32px;
+height:32px;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+margin-top:60px;
+margin-left:175px;
+`
+const Favourite = styled(FavoriteBtn)`
+`
 const TopSec = styled.div`
 background-color: #CDECC2;
 background-image: url("../../Mascot/mascotEvent.png");
@@ -43,7 +62,7 @@ display: flex;
 
 export default function EventMapPin({ events }) {
     const [selectedEvent, setSelectedEvent] = useState(null);
-
+    const [favorite, setFavorite] = useState(false);
     let eventDateTime;
 
     if (selectedEvent) {
@@ -79,7 +98,7 @@ export default function EventMapPin({ events }) {
         };
     }, []);
 
-    console.log(eventDateTime)
+    // console.log(eventDateTime)
 
     return (
         <div>
@@ -121,8 +140,13 @@ export default function EventMapPin({ events }) {
 
                 >
                     <PopupCont >
-                        <TopSec></TopSec>
-                        <EventNameLink style={{cursor:"pointer"}}>
+                        <ImageSection>
+                            {/* <FavouriteButton>
+                                <Favourite favorite={favorite} onClick={()=>setFavorite(!favorite)}/>
+                            </FavouriteButton> */}
+                            <TopSec></TopSec>
+                        </ImageSection>
+                        <EventNameLink style={{ cursor: "pointer" }}>
                             <Link href={`/events/${selectedEvent.id}`} >
                                 <h2>{selectedEvent.eventName}</h2>
                             </Link>

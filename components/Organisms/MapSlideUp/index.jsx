@@ -8,6 +8,7 @@ const ElementsPos = styled.div`
 position: absolute;
 top: 0;
 left: 0;
+pointer-events:none;
 `;
 
 const SlideBtn = styled.button`
@@ -61,7 +62,7 @@ export default function MapSlideUp({ foodBanks, show, hideSlider, showSlider }) 
 
     const foodBankComponent = foodBanks.map((foodBank) => {
         const fb = { foodBank }.foodBank;
-        console.log(fb);
+        // console.log(fb);
         return (
             < li key={fb.id} className={styles.card} >
                 <MapSlideItem fb={fb} />
