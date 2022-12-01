@@ -100,8 +100,10 @@ export default function LandingPageTwo() {
             transition={{
               duration: .8,
               ease: "easeInOut",
-              delay: .05,
-            }}>
+              delay: .01,
+            }}
+            style={{ width: "100%", justifyContent: "center", alignItems: "center", display: "flex", flexDirection: "column" }}>
+
             <Dot>
               <div onClick={() => Router.push("/landing/landingOne")} style={{ cursor: "pointer" }}></div>
               <div></div>

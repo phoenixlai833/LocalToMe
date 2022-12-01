@@ -33,7 +33,6 @@ import Filters from "../components/Atoms/Filters";
 import NavBar from "../components/Organisms/NavBar";
 import Search from "../components/Molecules/Search";
 import TopNavigation from "../components/Organisms/NavBarTop";
-import { motion } from "framer-motion";
 import Loading from "../components/Molecules/LoadingAnimation/LoadingAnimation";
 
 const searchClient = algoliasearch(
@@ -180,7 +179,7 @@ export default function FoodBankMap() {
   let [showing, setShowing] = useState(true);
   function FoodBankSlideUpHits() {
     const { hits } = useHits();
-
+    
     return <MapSlideUp foodBanks={hits} show={showing} hideSlider={() => setShowing(false)} showSlider={() => setShowing(true)} />;
   }
 
@@ -252,11 +251,6 @@ export default function FoodBankMap() {
               <FridgeMapPinHits />
             </Index>
           )}
-          {/* {isFridgeFilter && (
-            <Index indexName="prod_FRIDGES">
-              <FridgeMapPinHits />
-            </Index>
-          )} */}
 
           {/* <EventMapPin events={eventList} /> */}
           {/* <FoodBankMapPin foodBanksList={foodBanksList} /> */}
@@ -307,7 +301,7 @@ export default function FoodBankMap() {
                     isFilter={isPantryFilter}
                     tag={"Food Pantry"}
                     color={isPantryFilter ? "#E6005A" : "#FFFFFF"}
-                    icon={"event"}
+                    icon={"takeout_dining"}
                     txtcolor={isPantryFilter ? "#FFFFFF" : "#000000"}
                     onPress={filterPantries}
                   />
