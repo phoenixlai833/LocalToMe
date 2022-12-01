@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 
 const AppDiv = styled(AppBar)`
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     display:none;
 }
 `
@@ -49,7 +49,7 @@ export default function TopNavigation({
         <Container maxWidth="false">
           <Toolbar disableGutters>
             <Container sx={{ display: "flex", justifyContent: "flex-start" }}>
-              <Logo src="/localtomelogo.svg" alt="Local To Me logo" aria />
+              <Logo src="/localtomelogo.svg" alt="Local To Me logo" aria style={{cursor:"pointer"}} onClick={()=>r.push('/')}/>
               {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}> */}
               <Typography
                 variant="h4"

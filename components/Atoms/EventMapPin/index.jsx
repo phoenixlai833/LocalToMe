@@ -122,7 +122,7 @@ export default function EventMapPin({ events }) {
                 >
                     <PopupCont >
                         <TopSec></TopSec>
-                        <EventNameLink>
+                        <EventNameLink style={{cursor:"pointer"}}>
                             <Link href={`/events/${selectedEvent.id}`} >
                                 <h2>{selectedEvent.eventName}</h2>
                             </Link>

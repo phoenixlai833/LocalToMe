@@ -90,7 +90,7 @@ export default function Signin({ providers }) {
                             </div>
                         ))}
                         <Link href="/">
-                            <p style={{ alignSelf: "center" }}>Continue as a guest</p>
+                            <p style={{ alignSelf: "center", cursor: "pointer" }}>Continue as a guest</p>
                         </Link>
                     </Center>
                 </LayoutRight>

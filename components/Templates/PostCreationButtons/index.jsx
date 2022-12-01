@@ -34,6 +34,7 @@ flex-direction: row;
 align-items: center;
 justify-content: center;
 margin: 10px;
+cursor: pointer;
 &:hover {
 background-color: ${props => props.active || '#085617'};
 }
@@ -50,9 +51,13 @@ margin: 10px;
 position: absolute;
 top: 4%;
 right: 4%;
+cursor: pointer;
 @media (min-width: 768px) {
     top: 4%;
     right: 5%;
+}
+&:hover {
+    filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.3));
 }
 `
 

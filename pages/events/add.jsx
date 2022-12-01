@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Router from "next/router";
 import { db, app, storage } from "../../firebase/clientApp";
 import { getAllCategories } from "../../server/database";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
@@ -189,7 +190,7 @@ export default function NewEvent({ categoriesList }) {
 
   const handleViewPost = () => {
     console.log("viewid", eventId);
-    window.location = `/events/${eventId}`;
+    Router.push(`/events/${eventId}`);
   };
 
   return (
