@@ -81,8 +81,8 @@ export default function FourOhFour() {
     }
     return (
         <FourOhFourPage>
-            <FourNum src='500.png' alt="500 Img" />
-            <BearImage src='404bear.png' alt="404 Img" />
+            <FourNum src='/500.png' alt="500 Img" />
+            <BearImage src='/404bear.png' alt="404 Img" />
             <Text>
                 <h1>
                     Hmm... we seem to have lost our way!
