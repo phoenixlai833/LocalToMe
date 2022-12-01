@@ -127,10 +127,10 @@ export async function deleteEvent(id) {
   const storage = getStorage();
   const fileRef = ref(storage, fileUrl);
   const fileName = decodeURIComponent(fileUrl.split("/home").pop().split("?")[0]);
-  console.log(fileName);
-  if (fileName !== "event-default.png") {
-    await deleteObject(fileRef);
-  }
+  // console.log(fileName);
+  // if (fileName !== "event-default.png") {
+  //   await deleteObject(fileRef);
+  // }
   await deleteDoc(doc(db, "event", id));
   index.deleteObject(id).wait();
 }

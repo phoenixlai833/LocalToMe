@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 
 const FloatButton = styled(Fab)`
 position:fixed;
-display:flex;
+// display:flex;
 bottom: 15vh;
 left:90vw;
 background-color:${Colours.primary};
