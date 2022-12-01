@@ -21,14 +21,16 @@ export default async function handler(req, res) {
     }
 
     const newsId = await db.addNews(req.body);
-    const allNews = await db.getAllNews();
-    const news = allNews.find(n => n.id == newsId);
+    const news = await db.getNews(newsId);
+    // const news = allNews.find(n => n.id == newsId);
     index.saveObject({ ...news, objectID: news.id }).wait();
     res.status(200).json(newsId);
   } else if (req.method === "PUT") {
     // Handle PUT requests
     console.log(req.body);
     const newsId = await db.editNews(req.body);
+    const news = await db.getNews(newsId);
+    index.partialUpdateObject({ ...news, objectID: news.id }).wait()
     res.status(200).json(newsId);
   } else if (req.method === "DELETE") {
     // Handle DELETE requests
