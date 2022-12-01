@@ -64,9 +64,9 @@ export default function LandingPageThree() {
 
       <BtnCont>
         <Dot>
-          <div onClick={() => Router.push("/landing/landingOne")}></div>
+          <div onClick={() => Router.push("/landing/landingOne")} style={{cursor:"pointer"}}></div>
 
-          <div onClick={() => Router.push("/landing/landingTwo")}></div>
+          <div onClick={() => Router.push("/landing/landingTwo")} style={{cursor:"pointer"}}></div>
 
           <div></div>
         </Dot>

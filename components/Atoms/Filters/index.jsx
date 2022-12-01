@@ -17,7 +17,7 @@ const FilterCont = styled.div`
    font-size:12px;
    border: ${props => props.border || "0px"};
    // margin:2% auto;
-
+   cursor:pointer;
 `
 
 

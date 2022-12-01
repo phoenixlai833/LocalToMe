@@ -24,6 +24,7 @@ export default function LandingPageTwo() {
     right: 8vw;
     font-size: 16px;
     font-weight: 600;
+    cursor:pointer;
   `;
 
   const MascotImg = styled.img`
@@ -74,9 +75,9 @@ export default function LandingPageTwo() {
 
       <BtnCont>
         <Dot>
-          <div onClick={() => Router.push("/landing/landingOne")}></div>
+          <div onClick={() => Router.push("/landing/landingOne")} style={{cursor:"pointer"}}></div>
           <div></div>
-          <div onClick={() => Router.push("/landing/landingThree")}></div>
+          <div onClick={() => Router.push("/landing/landingThree")} style={{cursor:"pointer"}}></div>
         </Dot>
 
         <GeneralGreenBtn
