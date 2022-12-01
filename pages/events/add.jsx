@@ -182,9 +182,6 @@ export default function NewEvent({ categoriesList }) {
       })
       .then(() => {
         axios.post("/api/events", postEvent).then((res) => {
-
-          // window.location = `/events/${res.data}`;
-
           setEventId(res.data);
           console.log("posted successfully", res.data);
         });
