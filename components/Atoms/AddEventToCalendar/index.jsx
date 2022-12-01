@@ -14,9 +14,9 @@ cursor: pointer;
 export default function MyComponent({ event }) {
 
     useEffect(() => { atcb_init() }, []);
-    const startDate = new Date(event?.start).toLocaleDateString('ja-JP').replaceAll('/', '-');
+    const startDate = new Date(event?.start).toLocaleDateString('ja-JP').replaceAll("/home", '-');
     const startTime = new Date(event?.start).toLocaleTimeString('ja-JP', { hour12: false });
-    const endDate = event?.end ? new Date(event?.end).toLocaleDateString('ja-JP').replaceAll('/', '-') : startDate;
+    const endDate = event?.end ? new Date(event?.end).toLocaleDateString('ja-JP').replaceAll("/home", '-') : startDate;
     const endTime = event?.end ? new Date(event?.end).toLocaleTimeString('ja-JP', { hour12: false }) : startTime;
 
 

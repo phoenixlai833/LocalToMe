@@ -71,7 +71,7 @@ export default function Signout() {
                     <br />
                     <GeneralGreenBtn
                         text='Sign out'
-                        onClick={() => signOut({ callbackUrl: "/" })} />
+                        onClick={() => signOut({ callbackUrl: "/home" })} />
                 </Center>
             </Layout>
         </>

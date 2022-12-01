@@ -55,7 +55,7 @@ export default function LabelBottomNavigation({
 }) {
   const r = useRouter();
   const onHome = () => {
-    r.push("/");
+    r.push("/home");
   }
   const onCommunity = () => {
     r.push("/community");
