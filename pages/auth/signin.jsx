@@ -82,14 +82,14 @@ export default function Signin({ providers }) {
                         < LoginText>Login with</LoginText>
                         {Object.values(providers).map((provider) => (
                             <div key={provider.name}>
-                                <GeneralGreenBtn text={provider.name} h={"4.5em"} onClick={() => signIn(provider.id, { callbackUrl: "/" })} />
+                                <GeneralGreenBtn text={provider.name} h={"4.5em"} onClick={() => signIn(provider.id, { callbackUrl: "/home" })} />
                                 <br></br>
-                                {/* <Button onClick={() => signIn(provider.id, { callbackUrl: "/" })}>
+                                {/* <Button onClick={() => signIn(provider.id, { callbackUrl: "/home" })}>
                                 {provider.name}
                             </Button> */}
                             </div>
                         ))}
-                        <Link href="/">
+                        <Link href="/home">
                             <p style={{ alignSelf: "center", cursor: "pointer" }}>Continue as a guest</p>
                         </Link>
                     </Center>

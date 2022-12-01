@@ -3,7 +3,7 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/',
+        source: "/",
         destination: '/landing/splash',
         permanent: false,
       },
