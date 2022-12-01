@@ -1,7 +1,5 @@
 import { signOut } from "next-auth/react";
 import styled from 'styled-components';
-import Link from 'next/link';
-import { FlexBox, Wrapper } from '../../styles/globals';
 import GeneralGreenBtn from '../../components/Atoms/GeneralGreenBtn';
 import { useRouter } from 'next/router';
 

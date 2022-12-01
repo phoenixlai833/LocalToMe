@@ -115,10 +115,10 @@ export default function LandingPageOne() {
               transition={{
                 duration: .8,
                 ease: "easeInOut",
-                delay:.05,
+                delay: .05,
               }}>
               <BtnCont>
-                
+
                 <Dot>
                   <div></div>
 

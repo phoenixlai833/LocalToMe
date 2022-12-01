@@ -40,13 +40,16 @@ export function EventHits() {
         style={{
           display: "flex",
           flexDirection: "column",
+          justifyContent: "center",
           alignItems: "center",
+          textAlign: "center",
+          marginTop: "10%"
         }}
       >
-        <p style={{ color: "green", fontSize: "25px", width: "50vw" }}>
+        <Image src="/Mascot/Chou_detective.png" width="300%" height="300%" />
+        <p style={{ color: "green", fontSize: "25px", maxWidth: "50vw" }}>
           Sorry, we cannot find what you want...
         </p>
-        {/* <Image src="/Mascot/Chou_detective.png" width="500%" height="500%" /> */}
       </div>
     );
   if (hits[0]?.eventCreatorId) return <EventsList eventList={hits} />;
@@ -68,7 +71,7 @@ export function NewsHits() {
         <p style={{ color: "green", fontSize: "25px", width: "50vw" }}>
           Sorry, we cannot find what you want...
         </p>
-        {/* <Image src="/Mascot/Chou_detective.png" width="500%" height="500%" /> */}
+        <Image src="/Mascot/Chou_detective.png" width="100%" height="140%" />
       </div>
     );
   if (hits[0]?.newsCreatorId)
