@@ -10,8 +10,6 @@ display: grid;
 @media (max-width: 900px) {
     display: 'block',
 }
-
-
 `
 const Btn = styled.button`
 position: absolute;
