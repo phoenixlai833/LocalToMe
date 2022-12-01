@@ -42,7 +42,7 @@ display: flex;
 `
 
 
-export default function FoodBankMapPin({ foodBanksList }) {
+export default function FoodBankMapPin({ foodBanksList, hideSlider }) {
 
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [selectedFoodbank, setSelectedFoodbank] = useState(null);
@@ -76,6 +76,7 @@ export default function FoodBankMapPin({ foodBanksList }) {
                             <MarkerBtn
                                 onClick={(e) => {
                                     e.preventDefault();
+                                    hideSlider();
                                     setSelectedFoodbank(item);
                                 }}
                             >
@@ -100,7 +101,7 @@ export default function FoodBankMapPin({ foodBanksList }) {
                 >
                     <PopupCont >
                         <TopSec></TopSec>
-                        <FoodBankNameLink style={{cursor: "pointer"}}>
+                        <FoodBankNameLink style={{ cursor: "pointer" }}>
                             <Link href={`/foodBank/${selectedFoodbank.objectID}`} >
                                 <h2>{selectedFoodbank.program_name}</h2>
                             </Link>
