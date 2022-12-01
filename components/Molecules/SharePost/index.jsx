@@ -78,6 +78,9 @@ position: absolute;
     padding:auto 6px;
     right: 8%;
     height: 20px;
+    &:hover{
+        background-color: #085617;
+    }
 `
 
 const CloseBtn = styled.button`
@@ -87,6 +90,9 @@ position: absolute;
     right: 10%;
     height: 20px;
     width: 20px;
+    &:hover{
+        filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.3));
+    }
     }
 `
 

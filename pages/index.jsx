@@ -39,16 +39,26 @@ background-image: url(${props => props.src});
 background-size: cover;
 background-position: center;
 background-repeat: no-repeat;
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 border-radius: 15px;
 width: 35vw;
 height: 25vh;
+cursor: pointer;
 // margin-right: 5%;
 @media (max-width: 767px) {
     width: 90vw;
     height: 25vh;
 }
+&:hover{
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.45);
+}
 `;
+
+const ViewAll = styled.p`
+&:hover{
+  filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.15));
+}
+`
 
 const FlexWords = styled.div`
 display; flex;
@@ -164,7 +174,7 @@ export default function Home({ sortedEvents, sortedAllNews }) {
             <div style={{ display: "flex", justifyContent: "space-between", marginTop: "5%" }}>
               <p>Find help near you</p>
               <Link href={`/map`}>
-                <p style={{ color: "green" }}>view all</p>
+                <ViewAll style={{ color: "green", cursor:"pointer" }}>view all</ViewAll>
               </Link>
             </div>
             <Link key="link-to-map" href="/map">
@@ -176,7 +186,7 @@ export default function Home({ sortedEvents, sortedAllNews }) {
         <div style={{ display: "flex", justifyContent: "space-between", marginTop: "5%" }}>
           <SubHeader>Upcoming Events</SubHeader>
           <Link href={`/community?tabId=0`}>
-            <p style={{ color: "green" }}>view all</p>
+            <ViewAll style={{ color: "green", cursor: "pointer" }}>view all</ViewAll>
           </Link>
         </div>
         <UpcomingEventsContainer>
@@ -190,7 +200,7 @@ export default function Home({ sortedEvents, sortedAllNews }) {
       <div style={{ display: "flex", justifyContent: "space-between", margin: "auto 5%" }}>
         <SubHeader>Community News</SubHeader>
         <Link href={`/community?tabId=1`}>
-          <p style={{ color: "green" }}>view all</p>
+          <ViewAll style={{ color: "green", cursor: "pointer" }}>view all</ViewAll>
         </Link>
       </div>
       <AllNews allNews={sortedAllNews} sessionEmail={session ? session.user.email : null} />
