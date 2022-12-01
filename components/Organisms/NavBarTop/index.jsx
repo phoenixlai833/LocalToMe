@@ -29,7 +29,7 @@ export default function TopNavigation({
   const r = useRouter();
   // let [navValue, setNavValue] = useState(value);
   const onHome = () => {
-    r.push("/");
+    r.push("/home");
   }
   const onCommunity = () => {
     r.push("/community");
@@ -49,13 +49,13 @@ export default function TopNavigation({
         <Container maxWidth="false">
           <Toolbar disableGutters>
             <Container sx={{ display: "flex", justifyContent: "flex-start" }}>
-              <Logo src="/localtomelogo.svg" alt="Local To Me logo" aria style={{cursor:"pointer"}} onClick={()=>r.push('/')}/>
+              <Logo src="/localtomelogo.svg" alt="Local To Me logo" aria style={{cursor:"pointer"}} onClick={()=>r.push("/home")}/>
               {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}> */}
               <Typography
                 variant="h4"
                 noWrap
                 component="a"
-                href="/"
+                href="/home"
                 sx={{
                   fontWeight: 700,
                   display: "flex",

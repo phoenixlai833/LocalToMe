@@ -79,7 +79,7 @@ left: 20%;
 export default function FourOhFour() {
 
     const handleFourOFour = () => {
-        Router.push('/')
+        Router.push("/home")
     }
     return (
         <FourOhFourPage>
