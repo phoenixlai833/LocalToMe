@@ -14,11 +14,10 @@ left:90vw;
 background-color:${Colours.primary};
 color:${Colours.background};
 &:hover{
-    background-color:${Colours.secondary};
+    // background-color:${Colours.secondary};
 }
 @media (max-width: 767px) {
     left:80vw;
-
 }
 `
 export default function FloatingActionButton({
@@ -27,10 +26,9 @@ export default function FloatingActionButton({
 }) {
     const r = useRouter();
     const onPress = () => { r.push('/community/postcreate') }
-    // const onPress = () => {r.push('/events/add')}
     return (
         <ThemeProvider theme={Theme}>
-            <FloatButton aria-label="add" size="large" onClick={onPress}>
+            <FloatButton aria-label="add" size="large" onClick={onPress} color="primary" sx={{bottom:'15vh', left:"90vw"}}>
                 <AddIcon />
             </FloatButton>
         </ThemeProvider>

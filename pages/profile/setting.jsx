@@ -52,6 +52,16 @@ box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
 }
 `
 
+const AboutUsSection = styled.div`
+padding-top:25px;
+`
+
+const AboutUs = styled.a`
+padding:10px 20px 10px 0px;
+color:#108928;
+font-size:16px;
+`
+
 export default function Setting() {
     const { data: session } = useSession()
     console.log(session.user);
@@ -77,6 +87,9 @@ export default function Setting() {
                             <ThemeSection />
                             <NotificationSection />
                             <PrivacySection></PrivacySection>
+                            <AboutUsSection>
+                                <AboutUs href={"https://localtome.carrd.co/"} target="_blank">About LocalToMe</AboutUs>
+                            </AboutUsSection>
                         </ProfileDisplayCont>
 
                         <FlexBox style={{ alignSelf: "center", marginTop: "5%" }}>
@@ -85,7 +98,7 @@ export default function Setting() {
                             {/* </Link> */}
                         </FlexBox>
                     </div>
-                    <div style={{ padding: "10%" }}></div>
+                    <div style={{ padding: "11%" }}></div>
                 </DesktopBox>
                 <div className="TEMPMEDIA">
                     <NavBar value={4} />

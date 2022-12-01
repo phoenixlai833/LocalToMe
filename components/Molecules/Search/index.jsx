@@ -35,7 +35,7 @@ export default function Search({ onSearch }) {
 
   return (
     <Searchbox>
-      <SearchBar onChange={handleSearch}>
+      <SearchBar onChange={handleSearch} placeholder="Search">
       </SearchBar>
       <SearchIcon src="./searchIcon.png"></SearchIcon>
     </Searchbox>
