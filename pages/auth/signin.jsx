@@ -88,6 +88,7 @@ export default function Signin({ providers }) {
                                 duration: .8,
                                 ease: "easeInOut",
                             }}
+
                         >
                             {/* <LeftChou> */}
                             <LeftChou src="../../Mascot/MascotSignin.png" />
@@ -107,6 +108,7 @@ export default function Signin({ providers }) {
                                 duration: .8,
                                 ease: "easeInOut",
                             }}
+                            style={{ width: "100%", height: "100%", justifyContent: "space-evenly", alignItems: "center", display: "flex", flexDirection: "column" }}
                         >
                             <SplashLogo>
                                 <img src="../../Splash.png" />
