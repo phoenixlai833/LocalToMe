@@ -90,8 +90,10 @@ export default function LandingPageThree() {
             transition={{
               duration: .8,
               ease: "easeInOut",
-              delay: .05,
-            }}>
+              delay: .01,
+            }}
+            style={{ width: "100%", justifyContent: "center", alignItems: "center", display: "flex", flexDirection: "column" }}
+          >
             <Dot>
               <div onClick={() => Router.push("/landing/landingOne")} style={{ cursor: "pointer" }}></div>
 
@@ -104,6 +106,7 @@ export default function LandingPageThree() {
               text={"Get Started"}
               h={"4.5em"}
               onClick={() => Router.push("/auth/signin")}
+              style={{ width: "100%" }}
             />
           </motion.div>
         </BtnCont>

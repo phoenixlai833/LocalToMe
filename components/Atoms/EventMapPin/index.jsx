@@ -98,7 +98,7 @@ export default function EventMapPin({ events }) {
         };
     }, []);
 
-    console.log(eventDateTime)
+    // console.log(eventDateTime)
 
     return (
         <div>

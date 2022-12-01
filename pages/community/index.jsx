@@ -47,9 +47,9 @@ export function EventHits() {
         }}
       >
         <Image src="/Mascot/Chou_detective.png" width="300%" height="300%" />
-        <p style={{ color: "green", fontSize: "25px", maxWidth: "50vw" }}>
+        <h2 style={{ color: "green", fontSize: "24px", maxWidth: "80vw", paddingBottom:35 }}>
           Sorry, we cannot find what you want...
-        </p>
+        </h2>
       </div>
     );
   if (hits[0]?.eventCreatorId) return <EventsList eventList={hits} />;
@@ -72,9 +72,9 @@ export function NewsHits() {
         }}
       >
         <Image src="/Mascot/Chou_detective.png" width="300%" height="300%" />
-        <p style={{ color: "green", fontSize: "25px", maxWidth: "50vw" }}>
+        <h2 style={{ color: "green", fontSize: "24px", maxWidth: "80vw", paddingBottom:35 }}>
           Sorry, we cannot find what you want...
-        </p>
+        </h2>
       </div>
     );
   if (hits[0]?.newsCreatorId)
