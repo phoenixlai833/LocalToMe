@@ -100,7 +100,6 @@ export default function EventsList({ eventList }) {
           <EventDateAndImage>
             <EventImage src={event.eventImage} alt={event.eventName} />
             <EventDate>
-              {console.log(event.id, event.start)}
               {new Date(event.start).toLocaleString("default", {
                 month: "short",
               })}{" "}
