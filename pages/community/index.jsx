@@ -1,26 +1,20 @@
 import EventsList from "../../components/Organisms/EventsList";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AllNews from "../../components/Templates/AllNews";
 import algoliasearch from "algoliasearch/lite";
 import {
-  Index,
   InstantSearch,
-  SearchBox,
   useHits,
   useSearchBox,
 } from "react-instantsearch-hooks-web";
-import { getEvents } from "../../server/database";
 import NavBar from "../../components/Organisms/NavBar";
 import FloatingActionButton from "../../components/Atoms/FloatButton";
 import styled from "styled-components";
 import Search from "../../components/Molecules/Search";
-import { getAllNews } from "../../server/database";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { authOptions } from "../api/auth/[...nextauth].js";
 import { unstable_getServerSession } from "next-auth/next";
 import TopNavigation from "../../components/Organisms/NavBarTop";
-import { flexbox } from "@mui/system";
-import { CenterFocusStrong } from "@mui/icons-material";
 import Image from "next/image";
 
 const searchClient = algoliasearch(
@@ -29,7 +23,7 @@ const searchClient = algoliasearch(
 );
 
 function CustomSearch() {
-  const { query, refine, clear, isSearchStalled } = useSearchBox();
+  const { refine } = useSearchBox();
 
   function handleSearch(input) {
     refine(input);
@@ -46,19 +40,22 @@ export function EventHits() {
         style={{
           display: "flex",
           flexDirection: "column",
+          justifyContent: "center",
           alignItems: "center",
+          textAlign: "center",
+          marginTop: "10%"
         }}
       >
-        <p style={{ color: "green", fontSize: "25px", width: "50vw" }}>
+        <Image src="/Mascot/Chou_detective.png" width="300%" height="300%" />
+        <h2 style={{ color: "green", fontSize: "24px", maxWidth: "80vw", paddingBottom:35 }}>
           Sorry, we cannot find what you want...
-        </p>
-        {/* <Image src="/Mascot/Chou_detective.png" width="500%" height="500%" /> */}
+        </h2>
       </div>
     );
   if (hits[0]?.eventCreatorId) return <EventsList eventList={hits} />;
 }
 
-export function NewsHits({ allNews }) {
+export function NewsHits() {
   const { data: session } = useSession();
   const sessionEmail = session?.user.email;
   const { hits } = useHits();
@@ -68,13 +65,16 @@ export function NewsHits({ allNews }) {
         style={{
           display: "flex",
           flexDirection: "column",
+          justifyContent: "center",
           alignItems: "center",
+          textAlign: "center",
+          marginTop: "10%"
         }}
       >
-        <p style={{ color: "green", fontSize: "25px", width: "50vw" }}>
+        <Image src="/Mascot/Chou_detective.png" width="300%" height="300%" />
+        <h2 style={{ color: "green", fontSize: "24px", maxWidth: "80vw", paddingBottom:35 }}>
           Sorry, we cannot find what you want...
-        </p>
-        {/* <Image src="/Mascot/Chou_detective.png" width="500%" height="500%" /> */}
+        </h2>
       </div>
     );
   if (hits[0]?.newsCreatorId)
@@ -190,11 +190,13 @@ export default function Community({ tabId }) {
 }
 
 export async function getServerSideProps(context) {
+  console.time('wait for session on server');
   const session = await unstable_getServerSession(
     context.req,
     context.res,
     authOptions
   );
+  console.timeEnd('wait for session on server');
   const tabId = context.query.tabId || 0;
 
   if (!session) {
