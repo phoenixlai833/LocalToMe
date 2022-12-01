@@ -135,7 +135,6 @@ const ComBox = styled.div`
     margin-left: 18vw;
     margin-right: 18vw;
     min-height: 91vh;
-    border-radius: 15px;
     box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
   }
 `;

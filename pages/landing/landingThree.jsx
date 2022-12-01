@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import Router from "next/router";
 import GeneralGreenBtn from "../../components/Atoms/GeneralGreenBtn";
+import { motion } from 'framer-motion';
 
-
-  const LandOne = styled.div`
+const LandOne = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -19,11 +19,11 @@ import GeneralGreenBtn from "../../components/Atoms/GeneralGreenBtn";
     }
   `;
 
-  const MascotImg = styled.img`
+const MascotImg = styled.img`
     height: 300px;
     width: 300px;
   `;
-  const Dot = styled.div`
+const Dot = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,7 +42,7 @@ import GeneralGreenBtn from "../../components/Atoms/GeneralGreenBtn";
       background-color: #108928;
     }
   `;
-  const BtnCont = styled.div`
+const BtnCont = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -51,33 +51,63 @@ import GeneralGreenBtn from "../../components/Atoms/GeneralGreenBtn";
       width: 30em;
     }
   `;
-  
+
 export default function LandingPageThree() {
   return (
-    <LandOne>
-      <MascotImg src="../../Mascot/mascotNews.png" />
+    <motion.div
+      initial={{
+        opacity: 0,
+        x: -50
+      }}
+      animate={{
+        opacity: 1,
+        x: 0
+      }}
+      transition={{
+        duration: .8,
+        ease: "easeInOut",
+      }}>
 
-      <h1>Keep Track of Food Banks’ News</h1>
-      <p>
-        Be updated on News & Resources from different Food Banks and stay
-        informed.
-      </p>
+      <LandOne>
+        <MascotImg src="../../Mascot/mascotNews.png" />
 
-      <BtnCont>
-        <Dot>
-          <div onClick={() => Router.push("/landing/landingOne")} style={{cursor:"pointer"}}></div>
+        <h1>Keep Track of Food Banks’ News</h1>
+        <p>
+          Be updated on News & Resources from different Food Banks and stay
+          informed.
+        </p>
 
-          <div onClick={() => Router.push("/landing/landingTwo")} style={{cursor:"pointer"}}></div>
+        <BtnCont>
+          <motion.div
+            initial={{
+              opacity: 0,
+              x: -50
+            }}
+            animate={{
+              opacity: 1,
+              x: 0
+            }}
+            transition={{
+              duration: .8,
+              ease: "easeInOut",
+              delay: .05,
+            }}>
+            <Dot>
+              <div onClick={() => Router.push("/landing/landingOne")} style={{ cursor: "pointer" }}></div>
 
-          <div></div>
-        </Dot>
+              <div onClick={() => Router.push("/landing/landingTwo")} style={{ cursor: "pointer" }}></div>
 
-        <GeneralGreenBtn
-          text={"Get Started"}
-          h={"4.5em"}
-          onClick={() => Router.push("/auth/signin")}
-        />
-      </BtnCont>
-    </LandOne>
+              <div></div>
+            </Dot>
+
+            <GeneralGreenBtn
+              text={"Get Started"}
+              h={"4.5em"}
+              onClick={() => Router.push("/auth/signin")}
+            />
+          </motion.div>
+        </BtnCont>
+      </LandOne>
+    </motion.div>
   );
 }
