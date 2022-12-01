@@ -21,6 +21,7 @@ import { unstable_getServerSession } from "next-auth/next";
 import TopNavigation from "../../components/Organisms/NavBarTop";
 import { flexbox } from "@mui/system";
 import { CenterFocusStrong } from "@mui/icons-material";
+import Image from "next/image";
 
 const searchClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_CLIENT_ID,
@@ -49,9 +50,9 @@ export function EventHits() {
         }}
       >
         <p style={{ color: "green", fontSize: "25px" }}>
-          Sorry, we can't find what you want
+          Sorry, we can&#39t find what you want
         </p>
-        <img src="../../../Mascot/MascotBroken.png" style={{ width: "40%" }} />
+        <Image src="../../../Mascot/MascotBroken.png" style={{ width: "40%" }} />
       </div>
     );
   if (hits[0]?.eventCreatorId) return <EventsList eventList={hits} />;
@@ -71,9 +72,9 @@ export function NewsHits({ allNews }) {
         }}
       >
         <p style={{ color: "green", fontSize: "25px" }}>
-          Sorry, we can't find what you want
+          Sorry, we can&#39t find what you want
         </p>
-        <img src="../../../Mascot/MascotBroken.png" style={{ width: "40%" }} />
+        <Image src="../../../Mascot/MascotBroken.png" style={{ width: "40%" }} />
       </div>
     );
   if (hits[0]?.newsCreatorId)
