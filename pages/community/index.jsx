@@ -81,18 +81,6 @@ export function NewsHits({ allNews }) {
     return <AllNews allNews={hits} sessionEmail={sessionEmail} />;
 }
 
-// export function NewsHits() {
-//   const { data: session } = useSession();
-//   const sessionEmail = session?.user.email;
-//   const { hits } = useHits();
-//   console.log("what", hits);
-//   return (
-//     <Index indexName="prod_NEWS">
-//       <AllNews allNews={hits} sessionEmail={sessionEmail} />
-//     </Index>
-//   );
-// }
-
 const Heading = styled.p`
   margin: 1em;
   font-size: 1.5em;
@@ -152,13 +140,8 @@ const ComBox = styled.div`
   }
 `;
 
-export default function Community({ tabId, usersData }) {
+export default function Community({ tabId }) {
   const [tab, setTab] = useState(tabId);
-  // const [isAdd, setIsAdd] = useState(false);
-
-  useEffect(() => {
-    document.body.style.overflow = "auto";
-  }, []);
 
   const tabContents = {
     0: { component: <EventHits />, searchIndex: "prod_EVENTS" },
@@ -172,7 +155,7 @@ export default function Community({ tabId, usersData }) {
   };
 
   return (
-    <>
+    <div>
       <TopBar>
         <TopNavigation value={1} />
       </TopBar>
@@ -182,7 +165,6 @@ export default function Community({ tabId, usersData }) {
           searchClient={searchClient}
         >
           <CustomSearch />
-
           <Tab onClick={handleChangeTab}>
             <EventTab id="0" tabId={tab}>
               Events
@@ -204,7 +186,7 @@ export default function Community({ tabId, usersData }) {
       <Btmbar>
         <NavBar value={1} />
       </Btmbar>
-    </>
+    </div>
   );
 }
 
@@ -215,23 +197,16 @@ export async function getServerSideProps(context) {
     authOptions
   );
   const tabId = context.query.tabId || 0;
-  // const req = await getAllNews();
-  // const allNews = JSON.parse(JSON.stringify(req))
-
-  // const users = await getUsers()
-  // const usersData = JSON.parse(JSON.stringify(users));
 
   if (!session) {
     return {
       props: {
-        // allNews,
         tabId,
       },
     };
   } else {
     return {
       props: {
-        // allNews,
         tabId,
         session,
       },
