@@ -51,11 +51,13 @@ min-height: 92vh;
 box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
 }
 `
+
 const AboutUsSection = styled.div`
 padding-top:25px;
 `
+
 const AboutUs = styled.a`
-padding:10px 10px 10px 0px;
+padding:10px 20px 10px 0px;
 color:#108928;
 font-size:16px;
 `
