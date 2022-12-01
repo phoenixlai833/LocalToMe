@@ -24,6 +24,7 @@ export default function LandingPageTwo() {
     right: 8vw;
     font-size: 16px;
     font-weight: 600;
+    
   `;
 
   const MascotImg = styled.img`
