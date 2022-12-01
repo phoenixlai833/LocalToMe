@@ -188,14 +188,10 @@ export default function Event({ event, user }) {
 
 
   const dateAndTime = eventTime;
-  // const dateAndTime = new Date(event.start).toLocaleString("default", {
-  //   dateStyle: "long",
-  //   timeStyle: "short",
-  // })
 
   const handleDelete = async (e) => {
       e.preventDefault();
-      await deleteEvent(singleEventId);
+      await deleteEvent(event.id);
       router.push("/community");
   };
 

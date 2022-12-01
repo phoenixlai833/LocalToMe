@@ -51,14 +51,14 @@ const EventDate = styled.div`
     margin: 2%;
   }
   @media (max-width: 768px) {
-      left: 4%;
-  margin: 3%;
+    left: 4%;
+    margin: 3%;
   }
 `;
 
 const EventInfo = styled.div`
   height: 200px;
-  padding-right:2vw;
+  padding-right: 2vw;
 `;
 
 const EventTime = styled.div`
@@ -72,7 +72,7 @@ const EventTime = styled.div`
 `;
 
 const EventTitle = styled.a`
-  cursor:pointer;
+  cursor: pointer;
   :hover {
     color: rgb(49, 143, 237);
     // text-decoration: underline;
@@ -81,7 +81,7 @@ const EventTitle = styled.a`
 
 const Readmore = styled.span`
   color: rgb(49, 143, 237);
-  &:hover{
+  &:hover {
     filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.15));
   }
 `;
@@ -90,6 +90,9 @@ const ExtraSpace = styled.div`
 `;
 
 export default function EventsList({ eventList }) {
+  eventList = eventList
+    .filter((e) => new Date(e.end) >= new Date())
+    .sort((a, b) => new Date(a.start) - new Date(b.start));
   return (
     <div>
       {eventList.map((event) => (
