@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import GeneralGreenBtn from "../../components/Atoms/GeneralGreenBtn";
 import Router from "next/router";
-
+import { motion } from 'framer-motion';
 
 const LandOne = styled.div`
     display: flex;
@@ -63,30 +63,59 @@ const BtnCont = styled.div`
 
 export default function LandingPageTwo() {
   return (
-    <LandOne>
-      <Skip onClick={() => Router.push("/auth/signin")}>Skip</Skip>
+    <motion.div
+      initial={{
+        opacity: 0,
+        x: -50
+      }}
+      animate={{
+        opacity: 1,
+        x: 0
+      }}
+      transition={{
+        duration: .8,
+        ease: "easeInOut",
+      }}>
+      <LandOne>
+        <Skip onClick={() => Router.push("/auth/signin")}>Skip</Skip>
 
-      <MascotImg src="../../Mascot/mascotEvent.png" />
+        <MascotImg src="../../Mascot/mascotEvent.png" />
 
-      <h1>Host & Join Events</h1>
-      <p>
-        Spread the joy by hosting events or joining an event hosted by those who
-        want to help the community.
-      </p>
+        <h1>Host & Join Events</h1>
+        <p>
+          Spread the joy by hosting events or joining an event hosted by those who
+          want to help the community.
+        </p>
 
-      <BtnCont>
-        <Dot>
-          <div onClick={() => Router.push("/landing/landingOne")} style={{ cursor: "pointer" }}></div>
-          <div></div>
-          <div onClick={() => Router.push("/landing/landingThree")} style={{ cursor: "pointer" }}></div>
-        </Dot>
+        <BtnCont>
+          <motion.div
+            initial={{
+              opacity: 0,
+              x: -50
+            }}
+            animate={{
+              opacity: 1,
+              x: 0
+            }}
+            transition={{
+              duration: .8,
+              ease: "easeInOut",
+              delay: .05,
+            }}>
+            <Dot>
+              <div onClick={() => Router.push("/landing/landingOne")} style={{ cursor: "pointer" }}></div>
+              <div></div>
+              <div onClick={() => Router.push("/landing/landingThree")} style={{ cursor: "pointer" }}></div>
+            </Dot>
 
-        <GeneralGreenBtn
-          text={"Continue"}
-          h={"4.5em"}
-          onClick={() => Router.push("/landing/landingThree")}
-        />
-      </BtnCont>
-    </LandOne>
+            <GeneralGreenBtn
+              text={"Continue"}
+              h={"4.5em"}
+              onClick={() => Router.push("/landing/landingThree")}
+            />
+          </motion.div>
+        </BtnCont>
+      </LandOne>
+    </motion.div>
   );
 }

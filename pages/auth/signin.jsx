@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useSession } from "next-auth/react";
 import { authOptions } from '../api/auth/[...nextauth].js';
 import { unstable_getServerSession } from "next-auth/next";
+import { motion } from 'framer-motion'
 
 const Container = styled.div`
 display: flex;
@@ -75,23 +76,51 @@ export default function Signin({ providers }) {
             <>
                 <Container>
                     <LayoutLeft>
-                        {/* <LeftChou> */}
-                        <LeftChou src="../../Mascot/MascotSignin.png" />
+                        <motion.div initial={{
+                            opacity: 0,
+                            x: -100
+                        }}
+                            animate={{
+                                opacity: 1,
+                                x: 0
+                            }}
+                            transition={{
+                                duration: .8,
+                                ease: "easeInOut",
+                            }}
+                        >
+                            {/* <LeftChou> */}
+                            <LeftChou src="../../Mascot/MascotSignin.png" />
+                        </motion.div>
                         {/* </LeftChou> */}
                     </LayoutLeft>
                     <LayoutRight>
-                        <SplashLogo>
-                            <img src="../../Splash.png" />
-                        </SplashLogo>
-                        <Center>
-                            < LoginText>Login with</LoginText>
-                            {Object.values(providers).map((provider) => (
-                                <div key={provider.name}>
-                                    <GeneralGreenBtn text={provider.name} h={"4.5em"} onClick={() => signIn(provider.id, { callbackUrl: "/home" })} />
-                                    <br></br>
-                                </div>
-                            ))}
-                        </Center>
+                        <motion.div initial={{
+                            opacity: 0,
+                            x: 100
+                        }}
+                            animate={{
+                                opacity: 1,
+                                x: 0
+                            }}
+                            transition={{
+                                duration: .8,
+                                ease: "easeInOut",
+                            }}
+                        >
+                            <SplashLogo>
+                                <img src="../../Splash.png" />
+                            </SplashLogo>
+                            <Center>
+                                < LoginText>Login with</LoginText>
+                                {Object.values(providers).map((provider) => (
+                                    <div key={provider.name}>
+                                        <GeneralGreenBtn text={provider.name} h={"4.5em"} onClick={() => signIn(provider.id, { callbackUrl: "/home" })} />
+                                        <br></br>
+                                    </div>
+                                ))}
+                            </Center>
+                        </motion.div>
                     </LayoutRight>
                 </Container>
             </>

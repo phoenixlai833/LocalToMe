@@ -91,6 +91,9 @@ margin: 0 6% 10% 3%;
     width: 70px;
     height: 70px;
 }
+&:hover{
+    filter: drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.5));
+}
 `
 
 const MascotItem = styled.div`
@@ -108,6 +111,9 @@ margin: 0 6% 10% 3%;
 @media (min-width: 768px) {
     width: 70px;
     height: 70px;
+}
+&:hover{
+    filter: drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.5));
 }
 `
 

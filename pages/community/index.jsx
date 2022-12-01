@@ -52,7 +52,7 @@ export function EventHits() {
         <p style={{ color: "green", fontSize: "25px", width: "50vw" }}>
           Sorry, we cannot find what you want...
         </p>
-        <Image src="/Mascot/Chou_detective.png" width="500%" height="500%" />
+        {/* <Image src="/Mascot/Chou_detective.png" width="500%" height="500%" /> */}
       </div>
     );
   if (hits[0]?.eventCreatorId) return <EventsList eventList={hits} />;
@@ -74,7 +74,7 @@ export function NewsHits({ allNews }) {
         <p style={{ color: "green", fontSize: "25px", width: "50vw" }}>
           Sorry, we cannot find what you want...
         </p>
-        <Image src="/Mascot/Chou_detective.png" width="500%" height="500%" />
+        {/* <Image src="/Mascot/Chou_detective.png" width="500%" height="500%" /> */}
       </div>
     );
   if (hits[0]?.newsCreatorId)
@@ -135,7 +135,6 @@ const ComBox = styled.div`
     margin-left: 18vw;
     margin-right: 18vw;
     min-height: 91vh;
-    border-radius: 15px;
     box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
   }
 `;

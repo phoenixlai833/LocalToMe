@@ -3,6 +3,7 @@ import { Marker, Popup } from "react-map-gl";
 import Link from "next/link";
 import GetDirectionGreenBtn from "../../Atoms/GetDirectionGreenBtn";
 import styled from "styled-components";
+import FavoriteBtn from "../FavoriteBtn";
 
 const FoodBankNameLink = styled.p`
 color: #108928;
@@ -29,7 +30,23 @@ const MarkerBtn = styled.button`
 const PopupCont = styled.div`
 padding: 2%;
 `
-
+const ImageSection = styled.div`
+width:100%;
+height:100px;
+`
+const FavouriteButton = styled.div`
+position:absolute;
+border-radius:50%;
+background: rgba(255,255,255,0.9);
+display:flex;
+align-items:center;
+justify-content:center;
+width:32px;
+height:32px;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+margin-top:60px;
+margin-left:175px;
+`
 const TopSec = styled.div`
 background-color: #CDECC2;
 background-image: url("../../Mascot/MascotFallen.png");
@@ -46,6 +63,7 @@ export default function FoodBankMapPin({ foodBanksList, hideSlider }) {
 
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [selectedFoodbank, setSelectedFoodbank] = useState(null);
+    const [favorite, setFavorite] = useState(false);
 
     useEffect(() => {
         const listener = (e) => {
@@ -100,7 +118,12 @@ export default function FoodBankMapPin({ foodBanksList, hideSlider }) {
                     }}
                 >
                     <PopupCont >
-                        <TopSec></TopSec>
+                        <ImageSection>
+                            {/* <FavouriteButton>
+                                <FavoriteBtn favorite={favorite} onClick={() => setFavorite(!favorite)} />
+                            </FavouriteButton> */}
+                            <TopSec></TopSec>
+                        </ImageSection>
                         <FoodBankNameLink style={{ cursor: "pointer" }}>
                             <Link href={`/foodBank/${selectedFoodbank.objectID}`} >
                                 <h2>{selectedFoodbank.program_name}</h2>
