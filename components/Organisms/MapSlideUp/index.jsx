@@ -8,6 +8,7 @@ const ElementsPos = styled.div`
 position: absolute;
 top: 0;
 left: 0;
+pointer-events:none;
 `;
 
 const SlideBtn = styled.button`

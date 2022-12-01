@@ -1,16 +1,13 @@
 import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
 import Link from "next/link";
 import { getEvents, getAllNews } from "../server/database";
 // import { useAuthState } from "react-firebase-hooks/auth"; // to check if user is signed in
-import axios from "axios";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { Container, FlexBox, Wrapper } from "../styles/globals";
 import NavBar from '../components/Organisms/NavBar';
 import CarouselCard from "../components/Organisms/CarouselCard";
-import NewsCard from "../components/Organisms/NewsCard";
+import { motion } from 'framer-motion'
 import TopNavigation from '../components/Organisms/NavBarTop';
 import FloatingActionButton from "../components/Atoms/FloatButton";
 import AllNews from "../components/Templates/AllNews";
@@ -160,15 +157,40 @@ export default function Home({ sortedEvents, sortedAllNews }) {
       <div style={{ padding: "10% 5% 5% 5%", overflowX: "hidden" }}>
 
         <FirstSection>
-          <div>
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: -50
+            }}
+            animate={{
+              opacity: 1,
+              y: 0
+            }}
+            transition={{
+              duration: .8,
+              ease: "easeInOut",
+            }}>
             {/* {!session ? <button onClick={() => signIn()}>Sign In</button> : null} */}
 
             <SubHeader>Welcome</SubHeader>
             <h1 style={{ color: "green", lineHeight: "0", marginBottom: "4%" }}>{session ? session.user.name.split(" ")[0] : "Slayerina"}</h1>
             {/* <SearchBar>Search</SearchBar> */}
-          </div>
+          </motion.div>
 
-          <div>
+          <motion.div
+            initial={{
+              opacity: 0,
+              x: 50
+            }}
+            animate={{
+              opacity: 1,
+              x: 0
+            }}
+            transition={{
+              duration: .8,
+              ease: "easeInOut",
+              delay: .1,
+            }}>
             <div style={{ display: "flex", justifyContent: "space-between", marginTop: "5%" }}>
               <p>Find help near you</p>
               <Link href={`/map`}>
@@ -178,30 +200,60 @@ export default function Home({ sortedEvents, sortedAllNews }) {
             <Link key="link-to-map" href="/map">
               <ImageContainer src={"/FoodBankMap.png"} ></ImageContainer>
             </Link>
-          </div>
+          </motion.div>
         </FirstSection>
 
+        <motion.div
+          initial={{
+            opacity: 0,
+            x: -50
+          }}
+          animate={{
+            opacity: 1,
+            x: 0
+          }}
+          transition={{
+            duration: .8,
+            ease: "easeInOut",
+            delay: .2,
+          }}>
         <div style={{ display: "flex", justifyContent: "space-between", marginTop: "5%" }}>
           <SubHeader>Upcoming Events</SubHeader>
           <Link href={`/community?tabId=0`}>
             <ViewAll style={{ color: "green", cursor: "pointer" }}>view all</ViewAll>
           </Link>
         </div>
-        <UpcomingEventsContainer>
-          <EventListContainer>
-            <ul style={{ display: "flex", listStyle: "none", padding: "0" }}>
-              {UpcomingEventCards}
-            </ul>
-          </EventListContainer>
-        </UpcomingEventsContainer>
+          <UpcomingEventsContainer>
+            <EventListContainer>
+              <ul style={{ display: "flex", listStyle: "none", padding: "0" }}>
+                {UpcomingEventCards}
+              </ul>
+            </EventListContainer>
+          </UpcomingEventsContainer>
+        </motion.div>
       </div>
+      <motion.div
+      initial={{
+        opacity: 0,
+        x: 50
+      }}
+      animate={{
+        opacity: 1,
+        x: 0
+      }}
+      transition={{
+        duration: .8,
+        ease: "easeInOut",
+        delay: .5,
+      }}>
       <div style={{ display: "flex", justifyContent: "space-between", margin: "auto 5%" }}>
         <SubHeader>Community News</SubHeader>
         <Link href={`/community?tabId=1`}>
           <ViewAll style={{ color: "green", cursor: "pointer" }}>view all</ViewAll>
         </Link>
       </div>
-      <AllNews allNews={sortedAllNews} sessionEmail={session ? session.user.email : null} />
+        <AllNews allNews={sortedAllNews} sessionEmail={session ? session.user.email : null} />
+      </motion.div>
       <div className="smallDisplayNone">
         <NavBar value={0} />
       </div>

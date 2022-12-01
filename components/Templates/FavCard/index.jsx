@@ -32,7 +32,7 @@ height: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: auto;
+    overflow: hidden;
     border-radius: 20px;
 box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25);
 @media (min-width: 768px) {
