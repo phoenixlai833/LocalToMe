@@ -1,6 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import React from "react";
-import Router from  "next/router";
+import Router from "next/router";
 
 const fadeOut = keyframes`
     0% {opacity: 1;}
@@ -17,13 +17,13 @@ const SplashLogo = styled.div`
 `;
 
 export default function Splash() {
-  setTimeout(function () {
-    Router.push("/landing/landingOne");
-  }, 1500);
+    setTimeout(function () {
+        Router.push("/landing/landingOne");
+    }, 1500);
 
-  return (
-    <SplashLogo>
-      <img src="../../Splash.png" />
-    </SplashLogo>
-  );
+    return (
+        <SplashLogo>
+            <img src="../../Splash.png" />
+        </SplashLogo>
+    );
 }

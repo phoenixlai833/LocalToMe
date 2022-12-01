@@ -48,6 +48,7 @@ const FourNum = styled.img`
         left:26%;
         top: 10%;
     }
+    
     `
 
 const BearImage = styled.img`
@@ -74,6 +75,7 @@ left: 20%;
    }
     `
 
+
 export default function FourOhFour() {
 
     const handleFourOFour = () => {
@@ -81,15 +83,14 @@ export default function FourOhFour() {
     }
     return (
         <FourOhFourPage>
-            <FourNum src='500.png' alt="500 Img" />
-            <BearImage src='404bear.png' alt="404 Img" />
+            <FourNum src='/404img.png' alt="404 Img" />
+            <BearImage src='/404bear.png' alt="404 Img" />
             <Text>
                 <h1>
-                    Hmm... we seem to have lost our way!
+                    Hmm... you seem to have lost your way!
                 </h1>
                 <h3>
-                    Let us go home. It is dangerous to wander around! Your dad is probably worriedly waiting in the kitchen...
-
+                    Let us get you home. It is dangerous wandering around alone! Your mom is probably worriedly waiting at the door...
                 </h3>
             </Text>
             <Btn onClick={handleFourOFour}>Take Me Home</Btn>

@@ -127,10 +127,10 @@ export async function deleteEvent(id) {
   const storage = getStorage();
   const fileRef = ref(storage, fileUrl);
   const fileName = decodeURIComponent(fileUrl.split("/home").pop().split("?")[0]);
-  console.log(fileName);
-  if (fileName !== "event-default.png") {
-    await deleteObject(fileRef);
-  }
+  // console.log(fileName);
+  // if (fileName !== "event-default.png") {
+  //   await deleteObject(fileRef);
+  // }
   await deleteDoc(doc(db, "event", id));
   index.deleteObject(id).wait();
 }
@@ -173,14 +173,14 @@ export async function getNews(id) {
   const fileUrl = newsSnap.data().newsImage;
   let fileName = decodeURIComponent(fileUrl.split("/home").pop().split("?")[0]);
   const news = { id, ...newsSnap.data(), fileName };
-  // const newsCreatorSnap = await getDoc(news.newsCreatorId);//should change the eventCreatorId to eventCreatorData
-  // const newsCreator = { id: newsCreatorSnap.id, ...newsCreatorSnap.data() };
-  // const joinedNews = {
-  //   ...news,
-  //   newsCreatorId: newsCreator
-  // }
-  // return joinedNews;
-  return news;
+  const newsCreatorSnap = await getDoc(news.newsCreatorId);//should change the eventCreatorId to eventCreatorData
+  const newsCreator = { id: newsCreatorSnap.id, ...newsCreatorSnap.data() };
+  const joinedNews = {
+    ...news,
+    newsCreatorId: newsCreator
+  }
+  return joinedNews;
+  // return news;
 }
 
 export async function addNews(news) {

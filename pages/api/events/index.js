@@ -23,6 +23,8 @@ export default async function handler(req, res) {
     // Handle PUT requests
     console.log(req.body)
     const eventId = await db.editEvent(req.body)
+    const event = await db.getEvent(eventId);
+    index.partialUpdateObject({ ...event, objectID: event.id }).wait()
     res.status(200).json(eventId);
   }
 }
