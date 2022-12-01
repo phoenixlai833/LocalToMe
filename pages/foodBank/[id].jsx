@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getFoodBank, addFoodBank } from '../../server/database';
 import NavBar from '../../components/Organisms/NavBar';
 import TopBanner from '../../components/Molecules/TopBanner';
@@ -9,7 +9,6 @@ import { Wrapper, Container, FlexBox } from '../../styles/globals';
 import { Filter, EventFilter } from '../../components/Atoms/Filters';
 import GetDirectionGreenBtn from '../../components/Atoms/GetDirectionGreenBtn';
 import styled from 'styled-components';
-import { FunctionsBox } from '../events/[id]';
 import SharePost from "../../components/Molecules/SharePost";
 import FavoriteBtn from "../../components/Atoms/FavoriteBtn";
 import axios from "axios";
@@ -19,8 +18,7 @@ import { unstable_getServerSession } from "next-auth/next";
 import { getUsers, getUser } from "../../server/database";
 import { useRouter } from 'next/router';
 import TopNavigation from '../../components/Organisms/NavBarTop';
-
-
+import AddEventToCalendar from '../../components/Atoms/AddEventToCalendar';
 
 const EventImageBlock = styled.div`
     position: relative;
@@ -77,13 +75,34 @@ box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
 }
 `
 
+const FunctionsBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: absolute;
+  background-color: RGBA(255, 255, 255, 0.9);
+  width: 40px;
+  height: 75px;
+  position: absolute;
+  right: 3%;
+  bottom: 10%;
+  border-radius: 20px;
+  padding: 8px;
+  box-shadow: 1px 4px 4px 2px rgba(0, 0, 0, 0.25);
+`;
+
 export default function FoodBank({ d, user }) {
+
     const { data: session } = useSession()
     const [shareUrl, setShareUrl] = useState('');
     const [share, setShare] = useState(false);
     const [navValue, setNavValue] = useState(2);
     const [copied, setCopied] = useState(false);
     const router = useRouter()
+
+    useEffect(() => {
+        document.body.style.overflow = 'auto';
+    }, [])
 
     var locationInfo = [];
     var locationIcons = [];
@@ -115,7 +134,7 @@ export default function FoodBank({ d, user }) {
         setCopied(false);
     }
 
-    const ifFavorite = user?.favorite?.location.filter((singleLocation) => singleLocation.id === d.id).length > 0 ? true : false;
+    const ifFavorite = user?.favorite?.location?.filter((singleLocation) => singleLocation.id === d.id).length > 0 ? true : false;
     const [favorite, setFavorite] = useState(ifFavorite);
 
 
@@ -141,7 +160,7 @@ export default function FoodBank({ d, user }) {
     return (
         <Wrapper direction="column" gap="10px" sx={{ alignItems: "normal" }}>
             <TopBar>
-                <TopNavigation value={1} />
+                <TopNavigation value={2} />
             </TopBar>
             <DesktopBox>
                 {/* can place d.program_name with d.organization_name */}
@@ -149,8 +168,7 @@ export default function FoodBank({ d, user }) {
                 <EventImageBlock >
                     <EventImage src={d.foodBank_Image} alt={d.program_name} />
                     <FunctionsBox>
-                        <img src="../calenderIcon.png" alt="calendar icon" />
-                        <img src="../shareLinkIcons.png" alt="calendar icon" onClick={onShare} />
+                        <img src="../shareLinkIcons.png" alt="calendar icon" onClick={onShare} style={{cursor:"pointer"}}/>
                         <FavoriteBtn favorite={favorite} onClick={handleOnClick} />
                     </FunctionsBox>
                 </EventImageBlock>

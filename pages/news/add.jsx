@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Router from "next/router";
 import { storage } from "../../firebase/clientApp";
 import { getAllCategories } from "../../server/database";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
@@ -118,13 +119,13 @@ export default function NewNews({ categoriesList }) {
         axios.post("/api/news", postnews).then((res) => {
             console.log("posted successfully", res.data);
             setNewsId(res.data);
-            // window.location = `/community?tabId=1`
+           
         });
     }
 
 
     const handleViewPost = () => {
-        window.location = `/community?tabId=1`
+        Router.push(`/community?tabId=1`)
     };
 
     return (

@@ -150,6 +150,7 @@ export default function EventForm({
           apiKey="AIzaSyAUs6s26xUAKwIvhRKEtPP5S3GbWAfWkfY"
           apiOptions={{ language: "en", region: "ca" }}
           selectProps={{
+            defaultInputValue: event.eventLocation,
             clearValue: true,
             onChange: handleChangeEventLocation,
             placeholder: "",

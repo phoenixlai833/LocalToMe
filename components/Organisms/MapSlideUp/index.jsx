@@ -11,19 +11,19 @@ left: 0;
 `;
 
 const SlideBtn = styled.button`
-background-color: gray;
+background-color: #108928;
 width: 10px;
-height: 20vh;
+height: 10vh;
 border: none;
 border-radius: 12px;
 @media (max-width: 768px) {
     width: 20vw;
     height: 13px;
+    margin: 5%;
 }
 `;
 
 const ButtonArea = styled.div`
-background-color: white;
 width: 10vw;
 height: 100vh; 
 display: flex;
@@ -33,6 +33,7 @@ align-items: center;
     justify-content: center;
     align-items: center;
     width: 100vw;
+    height: 50px;
 }
 `
 
@@ -52,11 +53,10 @@ const Spacer = styled.div`
 }
 `
 
-export default function MapSlideUp({ foodBanks }) {
-    let [showing, setShowing] = useState(true);
+export default function MapSlideUp({ foodBanks, show, hideSlider, showSlider }) {
 
     function toggleShowing() {
-        return showing ? setShowing(false) : setShowing(true)
+        return show ? hideSlider() : showSlider();
     }
 
     const foodBankComponent = foodBanks.map((foodBank) => {
@@ -97,7 +97,7 @@ export default function MapSlideUp({ foodBanks }) {
     return (
         <>
             <ElementsPos>
-                <div className={`${styles.background} + ${showing ? styles.slidein : styles.slideout}`}>
+                <div className={`${styles.background} + ${show ? styles.slidein : styles.slideout}`}>
                     <ul className={styles.noSpace}>
                         <Spacer></Spacer>
                         {foodBankComponent}

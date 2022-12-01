@@ -1,6 +1,6 @@
 // import SingleEvent from "../../components/SingleEvent";
 import { getEvent, deleteEvent, getUser, getUsers } from "../../server/database";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from 'next/router';
 import React from "react";
 import styled from "styled-components";
@@ -22,7 +22,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { authOptions } from '../api/auth/[...nextauth].js';
 import { unstable_getServerSession } from "next-auth/next";
 import TopNavigation from "../../components/Organisms/NavBarTop";
-
+import AddEventToCalendar from "../../components/Atoms/AddEventToCalendar";
 
 const EventImageBlock = styled.div`
   position: relative;
@@ -52,11 +52,10 @@ export const FunctionsBox = styled.div`
   bottom: 10%;
   border-radius: 20px;
   padding: 8px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 1px 4px 4px 2px rgba(0, 0, 0, 0.25);
 `;
 
 const EventDescription = styled.div`
-
   background:${Colours.background};
    display:flex;
    padding:12px 20px;
@@ -163,6 +162,10 @@ box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
 
 export default function Event({ event, user }) {
 
+  useEffect(() => {
+    document.body.style.overflow = 'auto';
+  }, [])
+
   const { data: session } = useSession()
 
   const [navValue, setNavValue] = useState(1);
@@ -184,19 +187,12 @@ export default function Event({ event, user }) {
   }
 
 
-
   const dateAndTime = eventTime;
-  // const dateAndTime = new Date(event.start).toLocaleString("default", {
-  //   dateStyle: "long",
-  //   timeStyle: "short",
-  // })
 
-  const handleDelete = (singleEventId) => async (e) => {
-    {
+  const handleDelete = async (e) => {
       e.preventDefault();
-      deleteEvent(singleEventId);
+      await deleteEvent(event.id);
       router.push("/community");
-    }
   };
 
   function onDelete() {
@@ -245,7 +241,7 @@ export default function Event({ event, user }) {
   return (
     <div>
       <TopBar>
-        <TopNavigation value={1}/>
+        <TopNavigation value={1} />
       </TopBar>
       <DesktopBox>
         <TopBanner text={event.eventName} back={false} />
@@ -253,8 +249,8 @@ export default function Event({ event, user }) {
         <EventImageBlock >
           <EventImage src={event.eventImage} alt={event.eventName} />
           <FunctionsBox>
-            <img src="../calenderIcon.png" alt="calendar icon" />
-            <img src="../shareLinkIcons.png" alt="calendar icon" onClick={onShare} />
+            <AddEventToCalendar event={event} />
+            <img src="../shareLinkIcons.png" alt="calendar icon" onClick={onShare} style={{cursor:"pointer"}}/>
             <FavoriteBtn favorite={favorite} onClick={handleOnClick} />
           </FunctionsBox>
         </EventImageBlock>
@@ -268,6 +264,7 @@ export default function Event({ event, user }) {
           style={{
             display: "flex",
             justifyContent: "space-between",
+            alignItems: "center",
             margin: "0 5%",
           }}
         >
@@ -278,7 +275,7 @@ export default function Event({ event, user }) {
                 <div style={{ display: "flex" }}>
                   <img src="/Edit-icon.svg" alt="Edit Event" />
                   &nbsp;
-                  <p>Edit Event</p>
+                  <p style={{ margin: "0%" }}>Edit Event</p>
                 </div>
               </Link>
               <div style={{ display: "flex" }}>
@@ -295,7 +292,7 @@ export default function Event({ event, user }) {
 
         <EventDescription>
           <b>About:</b>
-          <p style={{ fontSize: '14px' }}>{event.eventContent}</p>
+          <p style={{ fontSize: '14px', overflowWrap: "break-word" }}>{event.eventContent}</p>
         </EventDescription>
         <EventCat>
           <EventCategoryTag eventCategories={event.eventTags} selected={true} />
@@ -310,7 +307,7 @@ export default function Event({ event, user }) {
             <BtnCont>
               <CancelBtn onClick={hidePopup}>Cancel</CancelBtn>
               <a href={`/community`}>
-                <DeleteBtn onClick={handleDelete(event.id)}>Confirm</DeleteBtn>
+                <DeleteBtn onClick={handleDelete}>Confirm</DeleteBtn>
               </a>
             </BtnCont>
           </DeleteCont>
@@ -322,7 +319,11 @@ export default function Event({ event, user }) {
         <SharePost shareUrl={shareUrl} share={share} closeShare={handleCloseShare} copied={copied} changeOnCopy={handleOnCopy} />
       </Sharebox>
 
-        <NavBar value={1}/>
+      <div className="TEMPMEDIA">
+        <NavBar value={navValue} onChange={(event, newValue) => {
+          setNavValue(newValue);
+        }} />
+      </div>
     </div >
   )
 }
@@ -331,6 +332,9 @@ export async function getServerSideProps(context) {
   const session = await unstable_getServerSession(context.req, context.res, authOptions)
   const req = await getEvent(context.params.id);
   const event = JSON.parse(JSON.stringify(req));
+
+
+
 
   if (!session) {
     return {
@@ -349,3 +353,13 @@ export async function getServerSideProps(context) {
 
   }
 }
+
+
+    // if (!event) {
+  //   return {
+  //     redirect: {
+  //       destination: "/404",
+  //       permanent: false,
+  //     },
+  //   };
+  // } 

@@ -16,6 +16,7 @@ padding-bottom: 60px;
 const NextArrow = styled.img`
 width: 400;
 height: 400;
+cursor: pointer;
 `
 
 export default function AccountSection({onRoute=()=>{}}) {

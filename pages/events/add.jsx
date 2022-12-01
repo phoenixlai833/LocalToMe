@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Router from "next/router";
 import { db, app, storage } from "../../firebase/clientApp";
 import { getAllCategories } from "../../server/database";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
@@ -164,7 +165,7 @@ export default function NewEvent({ categoriesList }) {
       eventContent: event.eventContent,
       eventCreatorId: userId,
       start: event.start,
-      end: event.end,
+      end: event.end > event.start ? event.end : event.start,
       eventImage: event.eventImage,
       eventLocation: event.eventLocation,
       eventName: event.eventName,
@@ -181,7 +182,6 @@ export default function NewEvent({ categoriesList }) {
       })
       .then(() => {
         axios.post("/api/events", postEvent).then((res) => {
-          // window.location = `/events/${res.data}`;
           setEventId(res.data);
           console.log("posted successfully", res.data);
         });
@@ -190,12 +190,13 @@ export default function NewEvent({ categoriesList }) {
 
   const handleViewPost = () => {
     console.log("viewid", eventId);
-    window.location = `/events/${eventId}`;
+    Router.push(`/events/${eventId}`);
   };
 
   return (
     <>
       <TopBar>
+        <TopNavigation value={1} />
         <TopNavigation value={1} />
       </TopBar>
       <DesktopBox>

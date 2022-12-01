@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ReactMapGL, {
   GeolocateControl,
   NavigationControl,
@@ -33,6 +33,7 @@ import NavBar from "../components/Organisms/NavBar";
 import Search from "../components/Molecules/Search";
 import TopNavigation from "../components/Organisms/NavBarTop";
 import { motion } from "framer-motion";
+import Loading from "../components/Molecules/LoadingAnimation/LoadingAnimation";
 
 const searchClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_CLIENT_ID,
@@ -48,17 +49,17 @@ function CustomSearch() {
   return <Search onSearch={handleSearch} />;
 }
 
-function FoodBankSlideUpHits() {
-  const { hits } = useHits();
+// function FoodBankSlideUpHits() {
+//   const { hits } = useHits();
 
-  return <MapSlideUp foodBanks={hits} />;
-}
+//   return <MapSlideUp foodBanks={hits} show={showing} />;
+// }
 
-function FoodBankPinHits() {
-  const { hits } = useHits();
+// function FoodBankPinHits() {
+//   const { hits } = useHits();
 
-  return <FoodBankMapPin foodBanksList={hits} />;
-}
+//   return <FoodBankMapPin foodBanksList={hits} hideSlider={setShowing(false)}/>;
+// }
 
 function EventMapPinHits() {
   const { hits } = useHits();
@@ -79,7 +80,7 @@ const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_REACT_APP_MAPBOX_TOKEN; // Set your
 
 const SearchArea = styled.div`
   position: absolute;
-  top: 100px;
+  top: 5vh;
   right: 3%;
   padding: 2%;
   width: 40vw;
@@ -123,11 +124,11 @@ const FilterListContainer = styled.div`
 
 const TopBar = styled.div`
   @media (max-width: 767px) {
-    display:none;
-}
-`
+    display: none;
+  }
+`;
 
-export default function FoodBankMap({ foodBanksList, eventList }) {
+export default function FoodBankMap() {
   const [viewport, setViewport] = useState({
     latitude: 49.24357,
     longitude: -123.08943,
@@ -136,13 +137,43 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
     zoom: 11,
   });
 
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+  }, []);
+
   const [userLocation, setUserLocation] = useState({});
   const mapRef = useRef();
 
-  const filterFoodBanks = () => { };
+  const [isFoodBankFilter, setIsFoodBankFilter] = useState(false);
+  const [isEventFilter, setIsEventFilter] = useState(false);
+
+  const filterFoodBanks = () => {
+    setIsFoodBankFilter(!isFoodBankFilter);
+    setIsEventFilter(false);
+  };
+
+  const filterEvents = () => {
+    setIsEventFilter(!isEventFilter);
+    setIsFoodBankFilter(false);
+  };
+
+  let [showing, setShowing] = useState(true);
+  function FoodBankSlideUpHits() {
+    const { hits } = useHits();
+
+    return <MapSlideUp foodBanks={hits} show={showing} hideSlider={() => setShowing(false)} showSlider={() => setShowing(true)} />;
+  }
+
+  function FoodBankPinHits() {
+    const { hits } = useHits();
+
+    return <FoodBankMapPin foodBanksList={hits} hideSlider={() => setShowing(false)} />;
+  }
+
 
   return (
     <InstantSearch indexName="prod_FOODBANKS" searchClient={searchClient}>
+      <Loading sec={2000} />
       <TopBar>
         <TopNavigation value={2} />
       </TopBar>
@@ -159,6 +190,7 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
           }}
         >
           <GeolocateControl
+            style={{ marginTop: "60px", }}
             position="top-right"
             positionOptions={{ enableHighAccuracy: true }} // This will enable the high accuracy of the location
             showUserLocation={true}
@@ -172,24 +204,34 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
               });
             }}
           />
-          <NavigationControl position="top-right" style={{ marginTop: "80px" }} />
+
+          <NavigationControl position="top-right" style={{ marginTop: "15px" }} />
           {/* <ScaleControl position="top-right" /> */}
 
-          <Index indexName="prod_EVENTS">
-            <EventMapPinHits />
-          </Index>
 
-          <Index indexName="prod_FOODBANKS">
-            <FoodBankPinHits />
-          </Index>
+          {!isFoodBankFilter && (
+            <Index indexName="prod_EVENTS">
+              <EventMapPinHits />
+            </Index>
+          )}
 
-          <Index indexName="prod_PANTRIES">
-            <PantryMapPinHits />
-          </Index>
+          {!isEventFilter && (
+            <Index indexName="prod_FOODBANKS">
+              <FoodBankPinHits />
+            </Index>
+          )}
 
-          <Index indexName="prod_FRIDGES">
-            <FridgeMapPinHits />
-          </Index>
+          {!isFoodBankFilter && !isEventFilter && (
+            <Index indexName="prod_PANTRIES">
+              <PantryMapPinHits />
+            </Index>
+          )}
+
+          {!isFoodBankFilter && !isEventFilter && (
+            <Index indexName="prod_FRIDGES">
+              <FridgeMapPinHits />
+            </Index>
+          )}
 
           {/* <EventMapPin events={eventList} /> */}
           {/* <FoodBankMapPin foodBanksList={foodBanksList} /> */}
@@ -207,18 +249,22 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
               <ul style={{ display: "flex", listStyle: "none", padding: "0" }}>
                 <li>
                   <Filters
+                    isFilter={isFoodBankFilter}
                     tag={"Food Banks"}
-                    color={"white"}
+                    color={isFoodBankFilter ? "#1CAE33" : "#FFFFFF"}
                     icon={"food_bank"}
+                    txtcolor={isFoodBankFilter ? "#FFFFFF" : "#000000"}
                     onPress={filterFoodBanks}
                   />
                 </li>
                 <li>
                   <Filters
+                    isFilter={isEventFilter}
                     tag={"Events"}
-                    color={"white"}
-                    icon={"food_bank"}
-                    onPress={filterFoodBanks}
+                    color={isEventFilter ? "#1CAE33" : "#FFFFFF"}
+                    icon={"event"}
+                    txtcolor={isEventFilter ? "#FFFFFF" : "#000000"}
+                    onPress={filterEvents}
                   />
                 </li>
                 {/* <li><Filters tag={"Open Now"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} /></li>
@@ -227,32 +273,10 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
             </FilterbtnSection>
           </FilterListContainer>
         </SearchArea>
-        <div class="smallDisplayNone">
+        <div className="smallDisplayNone">
           <NavBar value={2} />
         </div>
       </div>
     </InstantSearch>
   );
 }
-
-// export async function getServerSideProps(context) {
-//   // Everything in this function happens on the server
-//   const foodBanksData = await getFoodBanks();
-//   const foodBanksList = JSON.parse(JSON.stringify(foodBanksData));
-
-//   //get events from database
-//   const req = await getEvents();
-//   const eventList = JSON.parse(JSON.stringify(req));
-
-//   //get pantries from database
-//   const pantriesData = await getPantries();
-//   const pantriesList = JSON.parse(JSON.stringify(pantriesData));
-
-//   //get fridge from database
-//   const fridgesData = await getFridges();
-//   const fridgesList = JSON.parse(JSON.stringify(fridgesData));
-//   return {
-//     props: { foodBanksList, eventList, pantriesList, fridgesList }, // will be passed to the page component as props
-//   };
-// }
-

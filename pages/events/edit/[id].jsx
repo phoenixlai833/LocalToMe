@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Router from "next/router";
 import { db, app, storage } from "../../../firebase/clientApp";
 import {
   getEvents,
@@ -132,7 +133,7 @@ export default function EditEvent({ defaultEvent, categoriesList }) {
   function handleConfirm() {
     const putEvent = {
       id: defaultEvent.id,
-      eventContent: event.eventDescription,
+      eventContent: event.eventContent,
       // eventCreatorId: defaultEvent.eventCreatorId,
       start: event.start,
       end: event.end,
@@ -151,7 +152,7 @@ export default function EditEvent({ defaultEvent, categoriesList }) {
       })
       .then(() => {
         axios.put("/api/events", putEvent).then((res) => {
-          window.location = `/events/${res.data}`;
+          Router.push(`/events/${res.data}`);
           setEventId(res.data);
           console.log("edited successfully", res.data);
         });
@@ -160,7 +161,7 @@ export default function EditEvent({ defaultEvent, categoriesList }) {
 
   const handleViewPost = () => {
     console.log("viewid", eventId);
-    window.location = `/events/${eventId}`;
+    Router.push(`/events/${eventId}`);
   };
 
   return (

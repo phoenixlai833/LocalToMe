@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
-import { getAllNews } from '../../../server/database';
+import { getAllNews } from "../../../server/database";
 import { Colours } from "../../../styles/globals";
-import styled from 'styled-components';
+import styled from "styled-components";
 import { Avatar } from "@mui/material";
 import Icon from "@mui/material/Icon";
 import Link from "next/link";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 import { deleteNews } from "../../../server/database";
 import EventCategoryTag from "../../Atoms/EventCategoryTag";
 import axios from "axios";
 
 const NewsList = styled.div`
   position: relative;
-
-`
+`;
 
 const NewsCont = styled.div`
   margin: 1.5em;
@@ -50,7 +49,6 @@ const LeftCont = styled.div`
 const TextDiv = styled.div`
   display: flex;
   flex-direction: column;
-
 `;
 
 const InfoDiv = styled.div`
@@ -97,7 +95,7 @@ const ImageContainer = styled.div`
   background-repeat: no-repeat;
   border-radius: 15px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  width:75vw;
+  width: 75vw;
   height: 25vh;
   @media (min-width: 768px) {
     width: 45vw;
@@ -132,6 +130,9 @@ const ReadMoreBtn = styled.button`
   bottom: 0;
   right: 0;
   margin: -10px;
+  &:hover {
+    filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.15));
+  }
 `;
 
 const EditNews = styled.div`
@@ -154,12 +155,13 @@ const AbsPos = styled.div`
   position: absolute;
   top: 10vh;
   left: 20vw;
+  z-index: 1000;
 `;
 
 const DeleteCont = styled.div`
-  position:fixed;
-  top:40%;
-  left:50%;
+  position: fixed;
+  top: 40%;
+  left: 50%;
   transform: translate(-50%, -50%);
   background-color: #ffffff;
   width: 35vw;
@@ -198,9 +200,9 @@ const DeleteBtn = styled.button`
 
   color: #ffffff;
   margin: 2%;
-`
+`;
 const CancelBtn = styled.button`
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border: 2px solid #535353;
   border-radius: 15px;
   height: 44px;
@@ -221,8 +223,10 @@ export default function AllNews({ allNews, sessionEmail }) {
 
   const handleDelete = (singleEventId) => async (e) => {
     e.preventDefault();
-    deleteNews(singleEventId);
-    router.push("/community");
+    console.log(singleEventId);
+    await deleteNews(singleEventId);
+    window.location.reload();
+    // router.push("/community");
   };
 
   const handlePopup = (id) => (e) => {
@@ -234,10 +238,11 @@ export default function AllNews({ allNews, sessionEmail }) {
   function hidePopup() {
     setConfirmDelete(false);
   }
-
+  allNews = allNews.sort(
+    (a, b) => new Date(b.newsDateCreated) - new Date(a.newsDateCreated)
+  );
   return (
     <>
-
       {allNews.map((news) => (
         // let user;
         // axios.get(`/api/users/${news.newsCreatorId}`);
@@ -266,7 +271,10 @@ export default function AllNews({ allNews, sessionEmail }) {
                   <Tag key={tag}>{tag}</Tag>
                 ))}
               </TagList> */}
-              <EventCategoryTag eventCategories={news.newsTags} selected={true} />
+              <EventCategoryTag
+                eventCategories={news.newsTags}
+                selected={true}
+              />
 
               <Content>
                 <p>
@@ -285,13 +293,13 @@ export default function AllNews({ allNews, sessionEmail }) {
                 )}
               </Content>
 
-              {news.newsImage && <ImageContainer
-                src={news.newsImage}
-              ></ImageContainer>}
+              {news.newsImage && (
+                <ImageContainer src={news.newsImage}></ImageContainer>
+              )}
             </TextDiv>
           </NewsCont>
 
-          {sessionEmail === news.newsCreatorId.email && (
+          {sessionEmail == news.newsCreatorId.email && (
             <Func>
               <Link href={`/news/edit/${news.id}`}>
                 <EditNews>
@@ -329,9 +337,7 @@ export default function AllNews({ allNews, sessionEmail }) {
 
           <Hr />
         </NewsList>
-      )
-      )
-      }
+      ))}
       <ExtraSpace />
     </>
   );

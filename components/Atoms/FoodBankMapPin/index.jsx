@@ -42,7 +42,7 @@ display: flex;
 `
 
 
-export default function FoodBankMapPin({ foodBanksList }) {
+export default function FoodBankMapPin({ foodBanksList, hideSlider }) {
 
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [selectedFoodbank, setSelectedFoodbank] = useState(null);
@@ -76,6 +76,7 @@ export default function FoodBankMapPin({ foodBanksList }) {
                             <MarkerBtn
                                 onClick={(e) => {
                                     e.preventDefault();
+                                    hideSlider();
                                     setSelectedFoodbank(item);
                                 }}
                             >
@@ -100,8 +101,8 @@ export default function FoodBankMapPin({ foodBanksList }) {
                 >
                     <PopupCont >
                         <TopSec></TopSec>
-                        <FoodBankNameLink>
-                            <Link href={`/foodBank/${selectedFoodbank.objectID}`}>
+                        <FoodBankNameLink style={{ cursor: "pointer" }}>
+                            <Link href={`/foodBank/${selectedFoodbank.objectID}`} >
                                 <h2>{selectedFoodbank.program_name}</h2>
                             </Link>
                         </FoodBankNameLink>
@@ -110,18 +111,6 @@ export default function FoodBankMapPin({ foodBanksList }) {
                                 <b>Location</b>
                                 <br></br>
                                 {selectedFoodbank.location_address}
-                            </p>}
-                        {selectedFoodbank.organization_name &&
-                            <p>
-                                <b>Organization Name</b>
-                                <br></br>
-                                {selectedFoodbank.organization_name}
-                            </p>}
-                        {selectedFoodbank.signup_email &&
-                            <p>
-                                <b>Email</b>
-                                <br></br>
-                                {selectedFoodbank.signup_email}
                             </p>}
                         {selectedFoodbank.program_population_served &&
                             <p>

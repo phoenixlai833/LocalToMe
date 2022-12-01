@@ -70,7 +70,7 @@ export default function DeletePopup({ showDelete, eventId, hidePopup }) {
     e.preventDefault();
     console.log("ACUALLY DELETING", eventId);
     await deleteEvent(eventId);
-    index.deleteEvent(eventId).wait();
+    // index.deleteObject(eventId).wait();
     window.location.reload();
   };
 
