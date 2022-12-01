@@ -79,12 +79,12 @@ left: 20%;
 export default function FourOhFour() {
 
     const handleFourOFour = () => {
-        Router.push('/')
+        Router.push("/home")
     }
     return (
         <FourOhFourPage>
-            <FourNum src='404img.png' alt="404 Img" />
-            <BearImage src='404bear.png' alt="404 Img" />
+            <FourNum src='/404img.png' alt="404 Img" />
+            <BearImage src='/404bear.png' alt="404 Img" />
             <Text>
                 <h1>
                     Hmm... you seem to have lost your way!

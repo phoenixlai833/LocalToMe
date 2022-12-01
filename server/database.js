@@ -79,7 +79,7 @@ export async function getEvent(id) {
     return undefined
   }
   const fileUrl = eventSnap.data().eventImage;
-  let fileName = decodeURIComponent(fileUrl.split("/").pop().split("?")[0]);
+  let fileName = decodeURIComponent(fileUrl.split("/home").pop().split("?")[0]);
   const event = { id, ...eventSnap.data(), fileName };
   const eventCreatorSnap = await getDoc(event.eventCreatorId); //should change the eventCreatorId to eventCreatorData
   const eventCreator = { id: eventCreatorSnap.id, ...eventCreatorSnap.data() };
@@ -126,7 +126,7 @@ export async function deleteEvent(id) {
   const fileUrl = eventSnap.data().eventImage;
   const storage = getStorage();
   const fileRef = ref(storage, fileUrl);
-  const fileName = decodeURIComponent(fileUrl.split("/").pop().split("?")[0]);
+  const fileName = decodeURIComponent(fileUrl.split("/home").pop().split("?")[0]);
   console.log(fileName);
   if (fileName !== "event-default.png") {
     await deleteObject(fileRef);
@@ -171,16 +171,16 @@ export async function getNews(id) {
   const newsRef = doc(db, "news", id);
   const newsSnap = await getDoc(newsRef);
   const fileUrl = newsSnap.data().newsImage;
-  let fileName = decodeURIComponent(fileUrl.split("/").pop().split("?")[0]);
+  let fileName = decodeURIComponent(fileUrl.split("/home").pop().split("?")[0]);
   const news = { id, ...newsSnap.data(), fileName };
-  // const newsCreatorSnap = await getDoc(news.newsCreatorId);//should change the eventCreatorId to eventCreatorData
-  // const newsCreator = { id: newsCreatorSnap.id, ...newsCreatorSnap.data() };
-  // const joinedNews = {
-  //   ...news,
-  //   newsCreatorId: newsCreator
-  // }
-  // return joinedNews;
-  return news;
+  const newsCreatorSnap = await getDoc(news.newsCreatorId);//should change the eventCreatorId to eventCreatorData
+  const newsCreator = { id: newsCreatorSnap.id, ...newsCreatorSnap.data() };
+  const joinedNews = {
+    ...news,
+    newsCreatorId: newsCreator
+  }
+  return joinedNews;
+  // return news;
 }
 
 export async function addNews(news) {
