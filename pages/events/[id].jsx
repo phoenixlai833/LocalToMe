@@ -193,12 +193,10 @@ export default function Event({ event, user }) {
   //   timeStyle: "short",
   // })
 
-  const handleDelete = (singleEventId) => async (e) => {
-    {
+  const handleDelete = async (e) => {
       e.preventDefault();
       await deleteEvent(singleEventId);
       router.push("/community");
-    }
   };
 
   function onDelete() {
@@ -313,7 +311,7 @@ export default function Event({ event, user }) {
             <BtnCont>
               <CancelBtn onClick={hidePopup}>Cancel</CancelBtn>
               <a href={`/community`}>
-                <DeleteBtn onClick={handleDelete(event.id)}>Confirm</DeleteBtn>
+                <DeleteBtn onClick={handleDelete}>Confirm</DeleteBtn>
               </a>
             </BtnCont>
           </DeleteCont>
