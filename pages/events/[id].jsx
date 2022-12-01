@@ -254,7 +254,7 @@ export default function Event({ event, user }) {
           <EventImage src={event.eventImage} alt={event.eventName} />
           <FunctionsBox>
             <AddEventToCalendar event={event} />
-            <img src="../shareLinkIcons.png" alt="calendar icon" onClick={onShare} />
+            <img src="../shareLinkIcons.png" alt="calendar icon" onClick={onShare} style={{cursor:"pointer"}}/>
             <FavoriteBtn favorite={favorite} onClick={handleOnClick} />
           </FunctionsBox>
         </EventImageBlock>

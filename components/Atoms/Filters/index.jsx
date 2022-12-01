@@ -17,19 +17,26 @@ const FilterCont = styled.div`
    font-size:12px;
    border: ${props => props.border || "0px"};
    // margin:2% auto;
+
 `
 
 
 export default function Filter({
-   tag = "",
-   // tagline = filterOpt[tag].tag,
-   onPress = () => { },
-   active = false,
+   tag,
+   isFilter,
+   onPress,
    icon = filterOpt[tag].icon,
-   color = active ? filterOpt[tag].color : 'white',
-   txtcolor = active ? Colours.background : Colours.foregroud,
+   color,
+   txtcolor,
    dropshadow = '0px 4px 4px rgba(0, 0, 0, 0.25)'
+   // color = isFilter ? filterOpt[tag].color : 'white',
+   // active = false,
+   // tagline = filterOpt[tag].tag,
+   // txtcolor = active ? Colours.background : Colours.foreground,
 }) {
+
+
+
 
    return <FilterCont contshadow={dropshadow} txtcolor={txtcolor} active={false} onClick={onPress} color={color}>
       {icon && <Icon>{icon}</Icon>}
@@ -37,6 +44,8 @@ export default function Filter({
       <p>{tag}</p>
    </FilterCont>
 }
+
+
 
 export function EventFilter({
    tag = "",

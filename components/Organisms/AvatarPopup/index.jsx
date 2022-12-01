@@ -39,6 +39,9 @@ width: 5vw;
 @media (min-width: 768px) {
     width: 25px;
 }
+&:hover{
+    filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.3));
+}
 `
 
 const YourAvatar = styled.div`
@@ -81,6 +84,7 @@ border: 3px solid ${Colours.primary};
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 width: 12vw;
 height: 12vw; 
+cursor:pointer; 
 margin: 0 6% 10% 3%;
 @media (min-width: 768px) {
     background-size: 50px; 
@@ -96,6 +100,7 @@ background-position: center;
 background-repeat: no-repeat; 
 background-size: cover; 
 background-color: ${props => props.selected ? "#FFB800" : "#D9D9D9"};
+cursor:pointer; 
 // background-color: #D9D9D9;
 width: 12vw;
 height: 12vw; 
@@ -182,7 +187,7 @@ export default function AvatarPopup({ currentUrl, submitAvatar, imgPath = "/Avat
             <SelectionCont>
                 <div style={{ display: "flex", width: "95%", flexDirection: "row-reverse" }}>
                     <ImgCont onClick={handleClick}>
-                        <Image src={"/close.svg"} width={"100%"} height={"100%"}></Image>
+                        <Image src={"/close.svg"} width={"100%"} height={"100%"} style={{cursor:"pointer"}}></Image>
                     </ImgCont>
                 </div>
 

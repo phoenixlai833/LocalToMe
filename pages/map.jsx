@@ -143,7 +143,19 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
   const [userLocation, setUserLocation] = useState({});
   const mapRef = useRef();
 
-  const filterFoodBanks = () => { };
+  const [isFoodBankFilter, setIsFoodBankFilter] = useState(false);
+  const [isEventFilter, setIsEventFilter] = useState(false);
+
+  const filterFoodBanks = () => {
+    setIsFoodBankFilter(!isFoodBankFilter);
+    setIsEventFilter(false);
+  };
+
+
+  const filterEvents = () => {
+    setIsEventFilter(!isEventFilter);
+    setIsFoodBankFilter(false);
+  }
 
   return (
     <InstantSearch indexName="prod_FOODBANKS" searchClient={searchClient}>
@@ -211,18 +223,22 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
               <ul style={{ display: "flex", listStyle: "none", padding: "0" }}>
                 <li>
                   <Filters
+                    isFilter={isFoodBankFilter}
                     tag={"Food Banks"}
-                    color={"white"}
+                    color={isFoodBankFilter ? "#1CAE33" : "#FFFFFF"}
                     icon={"food_bank"}
+                    txtcolor={isFoodBankFilter ? "#FFFFFF" : "#000000"}
                     onPress={filterFoodBanks}
                   />
                 </li>
                 <li>
                   <Filters
+                    isFilter={isEventFilter}
                     tag={"Events"}
-                    color={"white"}
-                    icon={"food_bank"}
-                    onPress={filterFoodBanks}
+                    color={isEventFilter ? "#1CAE33" : "#FFFFFF"}
+                    icon={"event"}
+                    txtcolor={isEventFilter ? "#FFFFFF" : "#000000"}
+                    onPress={filterEvents}
                   />
                 </li>
                 {/* <li><Filters tag={"Open Now"} color={"white"} icon={"food_bank"} onPress={filterFoodBanks} /></li>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Router from "next/router" ;
 import { storage } from "../../../firebase/clientApp";
 import { getNews, getAllCategories } from "../../../server/database";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
@@ -94,7 +95,7 @@ export default function NewNews({ newsItem, categoriesList }) {
     }
 
     const handleViewPost = () => {
-        window.location = `/community?tabId=1`
+        Router.push(`/community?tabId=1`)
     };
 
     return (
