@@ -53,11 +53,10 @@ const Spacer = styled.div`
 }
 `
 
-export default function MapSlideUp({ foodBanks }) {
-    let [showing, setShowing] = useState(true);
+export default function MapSlideUp({ foodBanks, show, hideSlider, showSlider }) {
 
     function toggleShowing() {
-        return showing ? setShowing(false) : setShowing(true)
+        return show ? hideSlider() : showSlider();
     }
 
     const foodBankComponent = foodBanks.map((foodBank) => {
@@ -98,7 +97,7 @@ export default function MapSlideUp({ foodBanks }) {
     return (
         <>
             <ElementsPos>
-                <div className={`${styles.background} + ${showing ? styles.slidein : styles.slideout}`}>
+                <div className={`${styles.background} + ${show ? styles.slidein : styles.slideout}`}>
                     <ul className={styles.noSpace}>
                         <Spacer></Spacer>
                         {foodBankComponent}

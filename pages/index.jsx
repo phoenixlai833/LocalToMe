@@ -18,7 +18,6 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { authOptions } from './api/auth/[...nextauth].js';
 import { unstable_getServerSession } from "next-auth/next";
 import LoginPopup from "../components/Organisms/LoginPopup";
-import Loading from "../components/Molecules/LoadingAnimation/LoadingAnimation";
 
 
 const SearchBar = styled.div`
@@ -152,20 +151,19 @@ export default function Home({ sortedEvents, sortedAllNews }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <FloatingActionButton />
-      {/* <Loading /> */}
       <TopBar>
         <TopNavigation value={0} />
       </TopBar>
 
       {/* <LoginPopup /> */}
 
-      <div style={{ padding: "5% 5% 5% 5%", overflowX: "hidden" }}>
+      <div style={{ padding: "10% 5% 5% 5%", overflowX: "hidden" }}>
 
         <FirstSection>
           <div>
             {/* {!session ? <button onClick={() => signIn()}>Sign In</button> : null} */}
 
-            <SubHeader>Good Morning,</SubHeader>
+            <SubHeader>Welcome</SubHeader>
             <h1 style={{ color: "green", lineHeight: "0", marginBottom: "4%" }}>{session ? session.user.name.split(" ")[0] : "Slayerina"}</h1>
             {/* <SearchBar>Search</SearchBar> */}
           </div>
@@ -174,7 +172,7 @@ export default function Home({ sortedEvents, sortedAllNews }) {
             <div style={{ display: "flex", justifyContent: "space-between", marginTop: "5%" }}>
               <p>Find help near you</p>
               <Link href={`/map`}>
-                <ViewAll style={{ color: "green", cursor:"pointer" }}>view all</ViewAll>
+                <ViewAll style={{ color: "green", cursor: "pointer" }}>view all</ViewAll>
               </Link>
             </div>
             <Link key="link-to-map" href="/map">
@@ -216,14 +214,14 @@ export async function getServerSideProps(context) {
   const session = await unstable_getServerSession(context.req, context.res, authOptions)
   const req = await getEvents();
   const events = JSON.parse(JSON.stringify(req));
-  const sortedEvents = events.sort((a, b) => new Date(a.start) - new Date(b.start));
-
+  const allSortedEvents = events.sort((a, b) => new Date(a.start) - new Date(b.start));
+  const sortedEvents = allSortedEvents.filter((e) => new Date(e.end) >= new Date())
 
   const news = await getAllNews();
-  const allNews = JSON.parse(JSON.stringify(news)); // filter out old events?
+  const allNews = JSON.parse(JSON.stringify(news));
   const sortedAllNews = allNews.sort((a, b) => new Date(b.newsDateCreated) - new Date(a.newsDateCreated));
 
-  // console.log("THIS ONE", sortedAllNews)
+  // console.log("THIS ONE", sortedEvents)
 
   if (!session) {
     return {
