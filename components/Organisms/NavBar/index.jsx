@@ -2,10 +2,8 @@ import * as React from 'react';
 import styled from 'styled-components'
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-// import { Colours, Theme } from '../../styles/globals';
 import { Colours } from "../../../styles/globals";
 import { ThemeProvider } from '@mui/material';
-import { useState } from 'react';
 import { useRouter } from 'next/router';
 import NavBarIcons from '../../Atoms/NavIcons';
 
