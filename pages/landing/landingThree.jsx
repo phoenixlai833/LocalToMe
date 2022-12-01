@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Router from "next/router";
 import GeneralGreenBtn from "../../components/Atoms/GeneralGreenBtn";
 
-export default function LandingPageThree() {
+
   const LandOne = styled.div`
     display: flex;
     flex-direction: column;
@@ -51,7 +51,7 @@ export default function LandingPageThree() {
       width: 30em;
     }
   `;
-
+export default function LandingPageThree() {
   return (
     <LandOne>
       <MascotImg src="../../Mascot/mascotNews.png" />
