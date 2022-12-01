@@ -2,8 +2,8 @@ import styled from "styled-components";
 import GeneralGreenBtn from "../../components/Atoms/GeneralGreenBtn";
 import Router from "next/router";
 
-export default function LandingPageTwo() {
-  const LandOne = styled.div`
+
+const LandOne = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -18,7 +18,7 @@ export default function LandingPageTwo() {
       }
     }
   `;
-  const Skip = styled.div`
+const Skip = styled.div`
     position: absolute;
     top: 6vh;
     right: 8vw;
@@ -27,11 +27,11 @@ export default function LandingPageTwo() {
     cursor:pointer;
   `;
 
-  const MascotImg = styled.img`
+const MascotImg = styled.img`
     height: 300px;
     width: 300px;
   `;
-  const Dot = styled.div`
+const Dot = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -51,7 +51,7 @@ export default function LandingPageTwo() {
     }
   `;
 
-  const BtnCont = styled.div`
+const BtnCont = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -61,6 +61,7 @@ export default function LandingPageTwo() {
     }
   `;
 
+export default function LandingPageTwo() {
   return (
     <LandOne>
       <Skip onClick={() => Router.push("/auth/signin")}>Skip</Skip>
@@ -75,9 +76,9 @@ export default function LandingPageTwo() {
 
       <BtnCont>
         <Dot>
-          <div onClick={() => Router.push("/landing/landingOne")} style={{cursor:"pointer"}}></div>
+          <div onClick={() => Router.push("/landing/landingOne")} style={{ cursor: "pointer" }}></div>
           <div></div>
-          <div onClick={() => Router.push("/landing/landingThree")} style={{cursor:"pointer"}}></div>
+          <div onClick={() => Router.push("/landing/landingThree")} style={{ cursor: "pointer" }}></div>
         </Dot>
 
         <GeneralGreenBtn
