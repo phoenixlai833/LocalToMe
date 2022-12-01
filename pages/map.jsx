@@ -43,7 +43,7 @@ const searchClient = algoliasearch(
 
 function CustomSearch() {
   const { query, refine, clear, isSearchStalled } = useSearchBox();
-  
+
   function handleSearch(input) {
     refine(input);
   }
@@ -176,7 +176,7 @@ export default function FoodBankMap() {
     setIsEventFilter(false);
     setIsPantryFilter(false);
   };
-  
+
   let [showing, setShowing] = useState(true);
   function FoodBankSlideUpHits() {
     const { hits } = useHits();
