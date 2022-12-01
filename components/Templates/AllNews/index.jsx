@@ -129,7 +129,7 @@ const ReadMoreBtn = styled.button`
   position: absolute;
   bottom: 0;
   right: 0;
-  margin: -10px;
+  margin: -10px 12px;
   &:hover {
     filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.15));
   }
@@ -148,7 +148,7 @@ const DeleteNews = styled.div`
 const Func = styled.div`
   position: absolute;
   top: 0;
-  right: 13vw;
+  right: 6vw;
 `;
 
 const AbsPos = styled.div`
@@ -279,7 +279,7 @@ export default function AllNews({ allNews, sessionEmail }) {
               />
 
               <Content>
-                <p>
+                <p style={{ overflowWrap: "break-word", width: "85%" }}>
                   {!showMore && news.newsContent?.length > 100
                     ? news.newsContent.substring(0, 100) + "..."
                     : news.newsContent}
