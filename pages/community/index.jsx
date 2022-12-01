@@ -29,7 +29,7 @@ const searchClient = algoliasearch(
 );
 
 function CustomSearch() {
-  const { query, refine, clear, isSearchStalled } = useSearchBox();
+  const { query, refine, clear } = useSearchBox();
 
   function handleSearch(input) {
     refine(input);
