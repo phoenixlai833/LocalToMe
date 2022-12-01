@@ -1,4 +1,4 @@
-
+import Router from 'next/router'
 import styled from 'styled-components'
 
 
@@ -77,7 +77,7 @@ left: 20%;
 export default function FourOhFour() {
 
     const handleFourOFour = () => {
-        window.location.href = "/"
+        Router.push('/')
     }
     return (
         <FourOhFourPage>
