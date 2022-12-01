@@ -80,7 +80,7 @@ const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_REACT_APP_MAPBOX_TOKEN; // Set your
 
 const SearchArea = styled.div`
   position: absolute;
-  top: 100px;
+  top: 5vh;
   right: 3%;
   padding: 2%;
   width: 40vw;
@@ -190,6 +190,7 @@ export default function FoodBankMap() {
           }}
         >
           <GeolocateControl
+            style={{ marginTop: "60px", }}
             position="top-right"
             positionOptions={{ enableHighAccuracy: true }} // This will enable the high accuracy of the location
             showUserLocation={true}
@@ -203,10 +204,10 @@ export default function FoodBankMap() {
               });
             }}
           />
-          <NavigationControl
-            position="top-right"
-            style={{ marginTop: "80px" }}
-          />
+
+          <NavigationControl position="top-right" style={{ marginTop: "15px" }} />
+          {/* <ScaleControl position="top-right" /> */}
+
 
           {!isFoodBankFilter && (
             <Index indexName="prod_EVENTS">
