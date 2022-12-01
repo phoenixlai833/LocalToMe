@@ -18,7 +18,9 @@ import { getAllNews } from "../../server/database";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { authOptions } from "../api/auth/[...nextauth].js";
 import { unstable_getServerSession } from "next-auth/next";
-import TopNavigation from '../../components/Organisms/NavBarTop';
+import TopNavigation from "../../components/Organisms/NavBarTop";
+import { flexbox } from "@mui/system";
+import { CenterFocusStrong } from "@mui/icons-material";
 
 const searchClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_CLIENT_ID,
@@ -37,14 +39,45 @@ function CustomSearch() {
 export function EventHits() {
   const { hits } = useHits();
 
+  if (hits.length === 0)
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <p style={{ color: "green", fontSize: "25px" }}>
+          Sorry, we can't find what you want
+        </p>
+        <img src="../../../Mascot/MascotBroken.png" style={{ width: "40%" }} />
+      </div>
+    );
   if (hits[0]?.eventCreatorId) return <EventsList eventList={hits} />;
 }
 
 export function NewsHits({ allNews }) {
-  const { data: session } = useSession()
-  const sessionEmail = session?.user.email
+  const { data: session } = useSession();
+  const sessionEmail = session?.user.email;
   const { hits } = useHits();
-  if (hits[0]?.newsCreatorId) return <AllNews allNews={hits} sessionEmail={sessionEmail} />
+  if (hits.length === 0)
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <p style={{ color: "green", fontSize: "25px" }}>
+          Sorry, we can't find what you want
+        </p>
+        <img src="../../../Mascot/MascotBroken.png" style={{ width: "40%" }} />
+      </div>
+    );
+  if (hits[0]?.newsCreatorId)
+    return <AllNews allNews={hits} sessionEmail={sessionEmail} />;
 }
 
 // export function NewsHits() {
@@ -58,7 +91,6 @@ export function NewsHits({ allNews }) {
 //     </Index>
 //   );
 // }
-
 
 const Heading = styled.p`
   margin: 1em;
@@ -96,38 +128,36 @@ const NewTab = styled.p`
 
 const TopBar = styled.div`
   @media (max-width: 768px) {
-    display:none;
-}
-`
+    display: none;
+  }
+`;
 
 const Btmbar = styled.div`
-margin-top: 5rem;
-    @media (min-width: 768px) {
-        display:none;
-    }
-    `
+  margin-top: 5rem;
+  @media (min-width: 768px) {
+    display: none;
+  }
+`;
 
 const ComBox = styled.div`
-@media (min-width: 768px) {
-border: 1px solid #ffffff;
-margin-top: 9vh;
-margin-left: 18vw;
-margin-right: 18vw;
-min-height: 91vh;
-border-radius: 15px;
-   box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
-
-}
-`
-
+  @media (min-width: 768px) {
+    border: 1px solid #ffffff;
+    margin-top: 9vh;
+    margin-left: 18vw;
+    margin-right: 18vw;
+    min-height: 91vh;
+    border-radius: 15px;
+    box-shadow: 1px 1px 10px rgba(10, 57, 26, 0.45);
+  }
+`;
 
 export default function Community({ tabId, usersData }) {
   const [tab, setTab] = useState(tabId);
   // const [isAdd, setIsAdd] = useState(false);
 
   useEffect(() => {
-    document.body.style.overflow = 'auto';
-  }, [])
+    document.body.style.overflow = "auto";
+  }, []);
 
   const tabContents = {
     0: { component: <EventHits />, searchIndex: "prod_EVENTS" },
@@ -150,7 +180,6 @@ export default function Community({ tabId, usersData }) {
           indexName={tabContents[tab].searchIndex}
           searchClient={searchClient}
         >
-
           <CustomSearch />
 
           <Tab onClick={handleChangeTab}>
