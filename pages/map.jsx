@@ -123,11 +123,11 @@ const FilterListContainer = styled.div`
 
 const TopBar = styled.div`
   @media (max-width: 767px) {
-    display:none;
-}
-`
+    display: none;
+  }
+`;
 
-export default function FoodBankMap({ foodBanksList, eventList }) {
+export default function FoodBankMap() {
   const [viewport, setViewport] = useState({
     latitude: 49.24357,
     longitude: -123.08943,
@@ -137,8 +137,8 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
   });
 
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
-  }, [])
+    document.body.style.overflow = "hidden";
+  }, []);
 
   const [userLocation, setUserLocation] = useState({});
   const mapRef = useRef();
@@ -151,11 +151,10 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
     setIsEventFilter(false);
   };
 
-
   const filterEvents = () => {
     setIsEventFilter(!isEventFilter);
     setIsFoodBankFilter(false);
-  }
+  };
 
   return (
     <InstantSearch indexName="prod_FOODBANKS" searchClient={searchClient}>
@@ -188,24 +187,34 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
               });
             }}
           />
-          <NavigationControl position="top-right" style={{ marginTop: "80px" }} />
-          {/* <ScaleControl position="top-right" /> */}
+          <NavigationControl
+            position="top-right"
+            style={{ marginTop: "80px" }}
+          />
 
-          <Index indexName="prod_EVENTS">
-            <EventMapPinHits />
-          </Index>
+          {!isFoodBankFilter && (
+            <Index indexName="prod_EVENTS">
+              <EventMapPinHits />
+            </Index>
+          )}
 
-          <Index indexName="prod_FOODBANKS">
-            <FoodBankPinHits />
-          </Index>
+          {!isEventFilter && (
+            <Index indexName="prod_FOODBANKS">
+              <FoodBankPinHits />
+            </Index>
+          )}
 
-          <Index indexName="prod_PANTRIES">
-            <PantryMapPinHits />
-          </Index>
+          {!isFoodBankFilter && !isEventFilter && (
+            <Index indexName="prod_PANTRIES">
+              <PantryMapPinHits />
+            </Index>
+          )}
 
-          <Index indexName="prod_FRIDGES">
-            <FridgeMapPinHits />
-          </Index>
+          {!isFoodBankFilter && !isEventFilter && (
+            <Index indexName="prod_FRIDGES">
+              <FridgeMapPinHits />
+            </Index>
+          )}
 
           {/* <EventMapPin events={eventList} /> */}
           {/* <FoodBankMapPin foodBanksList={foodBanksList} /> */}
@@ -254,25 +263,3 @@ export default function FoodBankMap({ foodBanksList, eventList }) {
     </InstantSearch>
   );
 }
-
-// export async function getServerSideProps(context) {
-//   // Everything in this function happens on the server
-//   const foodBanksData = await getFoodBanks();
-//   const foodBanksList = JSON.parse(JSON.stringify(foodBanksData));
-
-//   //get events from database
-//   const req = await getEvents();
-//   const eventList = JSON.parse(JSON.stringify(req));
-
-//   //get pantries from database
-//   const pantriesData = await getPantries();
-//   const pantriesList = JSON.parse(JSON.stringify(pantriesData));
-
-//   //get fridge from database
-//   const fridgesData = await getFridges();
-//   const fridgesList = JSON.parse(JSON.stringify(fridgesData));
-//   return {
-//     props: { foodBanksList, eventList, pantriesList, fridgesList }, // will be passed to the page component as props
-//   };
-// }
-
