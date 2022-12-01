@@ -17,6 +17,7 @@ const GreenBigBtn = styled.button`
     // box-shadow: 0px 6px 10px #979494;
     justify-content: center;
     align-items: center;
+    cursor:pointer;
     &:hover {
         background-color: #085617;
       }
@@ -34,6 +35,7 @@ const GreenSmallBtn = styled.button`
     height: 40px;
     font-size: small;
     // box-shadow: 0px 6px 10px #979494;
+    cursor: pointer;
     margin: 5% auto;
     &:hover {
         background-color: #085617;

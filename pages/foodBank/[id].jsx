@@ -168,7 +168,7 @@ export default function FoodBank({ d, user }) {
                 <EventImageBlock >
                     <EventImage src={d.foodBank_Image} alt={d.program_name} />
                     <FunctionsBox>
-                        <img src="../shareLinkIcons.png" alt="calendar icon" onClick={onShare} />
+                        <img src="../shareLinkIcons.png" alt="calendar icon" onClick={onShare} style={{cursor:"pointer"}}/>
                         <FavoriteBtn favorite={favorite} onClick={handleOnClick} />
                     </FunctionsBox>
                 </EventImageBlock>

@@ -66,6 +66,7 @@ margin: 10px;
 position: absolute;
 right: 0px;
 z-index: 100;
+cursor: pointer;
 @media (min-width: 767px) {
 right: 18%;
 top: 87px;
@@ -86,6 +87,7 @@ background-color: ${Colours.primary};
 color:${Colours.background};
 z-index: 1;
 position: relative;
+cursor:pointer;
 &:hover{
     background-color:${Colours.secondary};
 }

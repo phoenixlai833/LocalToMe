@@ -132,6 +132,9 @@ const ReadMoreBtn = styled.button`
   bottom: 0;
   right: 0;
   margin: -10px;
+  &:hover{
+    filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.15));
+  }
 `;
 
 const EditNews = styled.div`

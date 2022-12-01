@@ -100,8 +100,8 @@ export default function FoodBankMapPin({ foodBanksList }) {
                 >
                     <PopupCont >
                         <TopSec></TopSec>
-                        <FoodBankNameLink>
-                            <Link href={`/foodBank/${selectedFoodbank.objectID}`}>
+                        <FoodBankNameLink style={{cursor: "pointer"}}>
+                            <Link href={`/foodBank/${selectedFoodbank.objectID}`} >
                                 <h2>{selectedFoodbank.program_name}</h2>
                             </Link>
                         </FoodBankNameLink>
