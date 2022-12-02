@@ -2,6 +2,7 @@ import { signOut } from "next-auth/react";
 import styled from 'styled-components';
 import GeneralGreenBtn from '../../components/Atoms/GeneralGreenBtn';
 import { useRouter } from 'next/router';
+import { motion } from 'framer-motion'
 
 const Layout = styled.div`
 display: flex;
@@ -52,25 +53,41 @@ export default function Signout() {
     return (
         <>
             <Layout>
-                <SplashLogo>
-                    <img src="../../Splash.png" />
-                </SplashLogo>
-                <Center>
+                <motion.div
+                    initial={{
+                        opacity: 0,
+                        y: -50
+                    }}
+                    animate={{
+                        opacity: 1,
+                        y: 0
+                    }}
+                    transition={{
+                        duration: .8,
+                        ease: "easeInOut",
+                    }}
+                    style={{ width: "100%", height: "100%", justifyContent: "space-evenly", alignItems: "center", display: "flex", flexDirection: "column" }}
+                >
+                    <SplashLogo>
+                        <img src="../../Splash.png" />
+                    </SplashLogo>
+                    <Center>
 
-                    < LogoutText>Are you sure you want to sign out?</LogoutText>
-                    <GeneralGreenBtn
-                        onClick={() => r.back()}
-                        active={'#D1EAC8'}
-                        txtcolor={'#108928'}
-                        inactive={'white'}
-                        borderstyle={' 3px solid #108928 '}
-                        text='Back' />
+                        <LogoutText>Are you sure you want to sign out?</LogoutText>
+                        <GeneralGreenBtn
+                            onClick={() => r.back()}
+                            active={'#D1EAC8'}
+                            txtcolor={'#108928'}
+                            inactive={'white'}
+                            borderstyle={' 3px solid #108928 '}
+                            text='Back' />
 
-                    <br />
-                    <GeneralGreenBtn
-                        text='Sign out'
-                        onClick={() => signOut({ callbackUrl: "/home" })} />
-                </Center>
+                        <br />
+                        <GeneralGreenBtn
+                            text='Sign out'
+                            onClick={() => signOut({ callbackUrl: "/home" })} />
+                    </Center>
+                </motion.div>
             </Layout>
         </>
     )

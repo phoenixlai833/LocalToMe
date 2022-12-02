@@ -36,7 +36,7 @@ export default function EditAccount() {
                 <TopNavigation value={4} />
             </TopBar>
             <DesktopBox>
-                <TopBanner text='Account' back={false}></TopBanner>
+                <TopBanner text='Account'></TopBanner>
                 <Wrapper gap={'10px'} direction={'column'} padding={'30px'}>
                     <MainHeader fontweight={700} txt='Account Information'></MainHeader>
                     <ShortTextInput label='Name' value={session.user.name}></ShortTextInput>

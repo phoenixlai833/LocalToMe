@@ -6,6 +6,7 @@ const ItemCard = styled.div`
 display: flex;
 justify-content: center;
 margin: 3% 0 3% 0;
+
 `
 const ImageContainer = styled.div`
 background-image: url(${props => props.src});
@@ -15,6 +16,7 @@ background-repeat: no-repeat;
 border-radius: 15px;
 min-width: 10vw;
 min-height: 15vh;
+overflow:hidden;
 margin-right: 5%;
 @media (max-width: 767px) {
     width: 30vw;
@@ -45,15 +47,19 @@ export default function MapSlideItem({ fb }) {
             <ItemCard>
                 <ImageContainer src={fb.foodBank_Image} ></ImageContainer>
                 <FbInfo>
-                    <FoodBankNameLink>
-                        <Link href={`/foodBank/${fb.objectID}`}>
-                            <a>{fb.program_name}</a>
-                        </Link>
-                    </FoodBankNameLink>
                     <div>
-                        <b>2 miles away</b>
+                        <FoodBankNameLink>
+                            <Link href={`/foodBank/${fb.objectID}`}>
+                                <a><b>{fb.program_name}</b></a>
+                            </Link>
+                        </FoodBankNameLink>
                         <p>{fb.location_address}</p>
+                        {/* <p>{fb.description && fb.description.slice(0, 45)}...</p> */}
                     </div>
+                    {/* <div>
+                        <p>{fb.location_address}</p>
+                        <b>2 miles away</b>
+                    </div> */}
                 </FbInfo>
 
             </ItemCard>
