@@ -23,6 +23,7 @@ const searchClient = algoliasearch(
 );
 
 function CustomSearch() {
+
   const { refine } = useSearchBox();
 
   function handleSearch(input) {

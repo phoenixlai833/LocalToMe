@@ -7,16 +7,18 @@ import { useRouter } from 'next/router';
 
 
 const FloatButton = styled(Fab)`
+// position:fixed;
+// display:flex;
 background-color:${Colours.primary};
 color:${Colours.background};
 &:hover{
-    // background-color:${Colours.secondary};
+    background-color:${Colours.secondary};
 }
 `
 const FloatDiv = styled.div`
 position:fixed;
-bottom:15vh;
-left:90vw;
+bottom: 15vh;
+right: 10vw;
 z-index:100;
 @media (max-width: 767px) {
     left:80vw;

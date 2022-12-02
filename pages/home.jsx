@@ -172,7 +172,7 @@ export default function Home({ sortedEvents, sortedAllNews }) {
             }}>
             {/* {!session ? <button onClick={() => signIn()}>Sign In</button> : null} */}
 
-            <SubHeader>Welcome</SubHeader>
+            <SubHeader>Welcome,</SubHeader>
             <h1 style={{ color: "green", lineHeight: "0", marginBottom: "4%" }}>{session ? session.user.name.split(" ")[0] : "Slayerina"}</h1>
             {/* <SearchBar>Search</SearchBar> */}
           </motion.div>
@@ -217,12 +217,12 @@ export default function Home({ sortedEvents, sortedAllNews }) {
             ease: "easeInOut",
             delay: .2,
           }}>
-        <div style={{ display: "flex", justifyContent: "space-between", marginTop: "5%" }}>
-          <SubHeader>Upcoming Events</SubHeader>
-          <Link href={`/community?tabId=0`}>
-            <ViewAll style={{ color: "green", cursor: "pointer" }}>view all</ViewAll>
-          </Link>
-        </div>
+          <div style={{ display: "flex", justifyContent: "space-between", marginTop: "5%" }}>
+            <SubHeader>Upcoming Events</SubHeader>
+            <Link href={`/community?tabId=0`}>
+              <ViewAll style={{ color: "green", cursor: "pointer" }}>view all</ViewAll>
+            </Link>
+          </div>
           <UpcomingEventsContainer>
             <EventListContainer>
               <ul style={{ display: "flex", listStyle: "none", padding: "0" }}>
@@ -233,25 +233,25 @@ export default function Home({ sortedEvents, sortedAllNews }) {
         </motion.div>
       </div>
       <motion.div
-      initial={{
-        opacity: 0,
-        x: 50
-      }}
-      animate={{
-        opacity: 1,
-        x: 0
-      }}
-      transition={{
-        duration: .8,
-        ease: "easeInOut",
-        delay: .5,
-      }}>
-      <div style={{ display: "flex", justifyContent: "space-between", margin: "auto 5%" }}>
-        <SubHeader>Community News</SubHeader>
-        <Link href={`/community?tabId=1`}>
-          <ViewAll style={{ color: "green", cursor: "pointer" }}>view all</ViewAll>
-        </Link>
-      </div>
+        initial={{
+          opacity: 0,
+          x: 50
+        }}
+        animate={{
+          opacity: 1,
+          x: 0
+        }}
+        transition={{
+          duration: .8,
+          ease: "easeInOut",
+          delay: .5,
+        }}>
+        <div style={{ display: "flex", justifyContent: "space-between", margin: "auto 5%" }}>
+          <SubHeader>Community News</SubHeader>
+          <Link href={`/community?tabId=1`}>
+            <ViewAll style={{ color: "green", cursor: "pointer" }}>view all</ViewAll>
+          </Link>
+        </div>
         <AllNews allNews={sortedAllNews} sessionEmail={session ? session.user.email : null} />
       </motion.div>
       <div className="smallDisplayNone">

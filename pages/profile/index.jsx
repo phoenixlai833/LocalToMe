@@ -106,9 +106,9 @@ z-index: 4;
 `
 
 const ShareBox = styled.div`
-position: absolute;
-left: 20vw;
-top: 30vh;
+position: fixed;
+left: 20%;
+top: 30%;
 z-index: 3;
 @media (min-width: 768px) {
     left: 35vw;
