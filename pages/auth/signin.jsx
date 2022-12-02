@@ -88,7 +88,6 @@ export default function Signin({ providers }) {
                                 duration: .8,
                                 ease: "easeInOut",
                             }}
-
                         >
                             {/* <LeftChou> */}
                             <LeftChou src="../../Mascot/MascotSignin.png" />
@@ -132,29 +131,58 @@ export default function Signin({ providers }) {
             <>
                 <Container>
                     <LayoutLeft>
-                        {/* <LeftChou> */}
-                        <LeftChou src="../../Mascot/MascotSignin.png" />
-                        {/* </LeftChou> */}
+                        <motion.div initial={{
+                            opacity: 0,
+                            x: -100
+                        }}
+                            animate={{
+                                opacity: 1,
+                                x: 0
+                            }}
+                            transition={{
+                                duration: .8,
+                                ease: "easeInOut",
+                            }}
+                        >
+                            {/* <LeftChou> */}
+                            <LeftChou src="../../Mascot/MascotSignin.png" />
+                            {/* </LeftChou> */}
+                        </motion.div>
                     </LayoutLeft>
                     <LayoutRight>
-                        <SplashLogo>
-                            <img src="../../Splash.png" />
-                        </SplashLogo>
-                        <Center>
-                            < LoginText>Login with</LoginText>
-                            {Object.values(providers).map((provider) => (
-                                <div key={provider.name}>
-                                    <GeneralGreenBtn text={provider.name} h={"4.5em"} onClick={() => signIn(provider.id, { callbackUrl: "/home" })} />
-                                    <br></br>
-                                    {/* <Button onClick={() => signIn(provider.id, { callbackUrl: "/home" })}>
+                        <motion.div initial={{
+                            opacity: 0,
+                            x: 100
+                        }}
+                            animate={{
+                                opacity: 1,
+                                x: 0
+                            }}
+                            transition={{
+                                duration: .8,
+                                ease: "easeInOut",
+                            }}
+                            style={{ width: "100%", height: "100%", justifyContent: "space-evenly", alignItems: "center", display: "flex", flexDirection: "column" }}
+                        >
+                            <SplashLogo>
+                                <img src="../../Splash.png" />
+                            </SplashLogo>
+                            <Center>
+                                < LoginText>Login with</LoginText>
+                                {Object.values(providers).map((provider) => (
+                                    <div key={provider.name}>
+                                        <GeneralGreenBtn text={provider.name} h={"4.5em"} onClick={() => signIn(provider.id, { callbackUrl: "/home" })} />
+                                        <br></br>
+                                        {/* <Button onClick={() => signIn(provider.id, { callbackUrl: "/home" })}>
                                     {provider.name}
                                 </Button> */}
-                                </div>
-                            ))}
-                            <Link href="/home">
-                                <p style={{ alignSelf: "center", cursor: "pointer" }}>Continue as a guest</p>
-                            </Link>
-                        </Center>
+                                    </div>
+                                ))}
+                                <Link href="/home">
+                                    <p style={{ alignSelf: "center", cursor: "pointer" }}>Continue as a guest</p>
+                                </Link>
+                            </Center>
+                        </motion.div>
                     </LayoutRight>
                 </Container>
             </>
