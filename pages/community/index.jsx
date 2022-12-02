@@ -1,5 +1,5 @@
 import EventsList from "../../components/Organisms/EventsList";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AllNews from "../../components/Templates/AllNews";
 import algoliasearch from "algoliasearch/lite";
 import {
@@ -48,7 +48,7 @@ export function EventHits() {
         }}
       >
         <Image src="/Mascot/Chou_detective.png" width="300%" height="300%" />
-        <h2 style={{ color: "green", fontSize: "24px", maxWidth: "80vw", paddingBottom:35 }}>
+        <h2 style={{ color: "green", fontSize: "24px", maxWidth: "80vw", paddingBottom: 35 }}>
           Sorry, we cannot find what you want...
         </h2>
       </div>
@@ -73,7 +73,7 @@ export function NewsHits() {
         }}
       >
         <Image src="/Mascot/Chou_detective.png" width="300%" height="300%" />
-        <h2 style={{ color: "green", fontSize: "24px", maxWidth: "80vw", paddingBottom:35 }}>
+        <h2 style={{ color: "green", fontSize: "24px", maxWidth: "80vw", paddingBottom: 35 }}>
           Sorry, we cannot find what you want...
         </h2>
       </div>
@@ -153,6 +153,10 @@ export default function Community({ tabId }) {
       setTab(+e.target.id);
     }
   };
+  
+  useEffect(() => {
+    document.body.style.overflow = 'auto';
+  }, [])
 
   return (
     <div>
