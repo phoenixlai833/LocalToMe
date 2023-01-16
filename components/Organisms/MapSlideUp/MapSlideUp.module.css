@@ -98,7 +98,6 @@
     height: 50vh;
     background: white;
     border-radius: 30px 30px 0 0;
-    /* overflow: hidden; */
     padding: 5%;
     transform: translateY(25%);
     -webkit-transform: translateY(25%);
@@ -118,31 +117,31 @@
 
   @keyframes slide-in {
     100% {
-      transform: translateY(-100%);
+      transform: translateY(-450px);
     }
   }
 
   @-webkit-keyframes slide-in {
     100% {
-      -webkit-transform: translateY(-100%);
+      -webkit-transform: translateY(-450px);
     }
   }
 
   @keyframes slide-out {
     0% {
-      transform: translateY(-100%);
+      transform: translateY(-450px);
     }
     100% {
-      transform: translateY(-50%);
+      transform: translateY(-130px);
     }
   }
 
   @-webkit-keyframes slide-out {
     0% {
-      -webkit-transform: translateY(-100%);
+      -webkit-transform: translateY(-450px);
     }
     100% {
-      -webkit-transform: translateY(-50%);
+      -webkit-transform: translateY(-130px);
     }
   }
 }
