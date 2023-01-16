@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Welcome to the LocalToMe!
+<div align= "center">
+<img width="230" alt="logo@2x" src="https://user-images.githubusercontent.com/91308007/199421516-713244cb-2a3a-4907-b43b-e1f5b2a980a4.svg">
+</div>
 
-## Getting Started
+## The Problem
+Provide easier access to local resources for the low-income and food insecure population.
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Table of contents
+1. [What is LocalToMe](#what-is-localtome)
+2. [Main Features](#main-features)
+3. [Technologies Used](#technologies-used)
+4. [Challenges and Additional Fatures](#challenges-additional-features)
+5. [How To Run](#how-to-run)
+6. [Credits](#credits)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## <a name='what-is-localtome'/>What is LocalToMe?
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+**LocalToMe is a web app that locates and provides low-income families/individuals with free or accessible food resources near their area within their budgets.**
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Due to the recent effects of inflation and the pandemic, many low-income families/individuals faced the unaffordability of basic necessities and unstable living conditions. Assist programs and government resources are there to help families in times of need, however, navigating all the information can be difficult to understand and take action. Therefore, our purpose is to localize and simplify the process of getting aid. In our app, users can find all the available resources near them along with resource's contacts, opening hours, requirements, services and contacts. In addition, users can navigate and discover events, news, and updates from big non-profit organizations, local food drives, and individuals.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+<img width="1595" alt="Screen Shot 2022-09-26 at 11 38 09 PM" src="https://user-images.githubusercontent.com/41124039/192451398-61456cb2-8ca7-4d3c-9195-5a7567d8a37d.png">
+<br></br>
 
-## Learn More
+## <a name='main-features'/>Main Features
 
-To learn more about Next.js, take a look at the following resources:
+### Resources Map:
+* Allow users to find specific food assistance resources near their location 
+* Provides accurate and important information caters to users' needs
+<br>
+<div align="center">
+<img width="25%" alt="mapfeature" src="https://user-images.githubusercontent.com/91308007/199417945-4026fa8a-708e-40bb-a0b6-9d70dc78c2fc.png">
+<img width="25%" alt="mapfeaturepin" src="https://user-images.githubusercontent.com/91308007/199417953-c9c3a2fe-e076-47b1-9342-5aa11d355dd2.png">
+<img width="25%" alt="mapfeatureinfo" src="https://user-images.githubusercontent.com/91308007/199417951-3c82ccc6-fa6e-4943-8cee-95f9cf5bdff2.png">
+</div>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Community Page:
+* Discover events and news posted by the community 
+* Host events or create a news post
+<br>
+<div align="center">
+<img width="243" alt="communiity event page" src="https://user-images.githubusercontent.com/91308007/199413942-56a54712-2aa8-4ff5-acf1-1a3f0b5719c4.png">
+<img width="243" alt="createpost" src="https://user-images.githubusercontent.com/91308007/199414656-d5b0bb54-964a-4de1-a10a-65bd11238563.png">
+<img width="243" alt="createevents" src="https://user-images.githubusercontent.com/91308007/199415374-b3c04a77-f12a-45e1-aad4-d7fbe33595e5.png">
+</div>
+<br>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Favourites:
+* Like or share to socials(add to calendar function is still in-progress)
+* When logged in, users can ike locations and events which are saved in the favourites page for future reference
+<br>
+<div align="center">
+<img width="243" alt="communiity event page" src="https://user-images.githubusercontent.com/91308007/199413942-56a54712-2aa8-4ff5-acf1-1a3f0b5719c4.png">
+<img width="243" alt="createpost" src="https://user-images.githubusercontent.com/91308007/199414656-d5b0bb54-964a-4de1-a10a-65bd11238563.png">
+<img width="243" alt="createevents" src="https://user-images.githubusercontent.com/91308007/199415374-b3c04a77-f12a-45e1-aad4-d7fbe33595e5.png">
+</div>
+<br>
 
-## Deploy on Vercel
+### Custom Profile:
+* Select a cute mascot or upload your own profile photo
+* See your own created events and news
+<br>
+<div align="center">
+<img width="243" alt="communiity event page" src="https://user-images.githubusercontent.com/91308007/199413942-56a54712-2aa8-4ff5-acf1-1a3f0b5719c4.png">
+<img width="243" alt="createpost" src="https://user-images.githubusercontent.com/91308007/199414656-d5b0bb54-964a-4de1-a10a-65bd11238563.png">
+<img width="243" alt="createevents" src="https://user-images.githubusercontent.com/91308007/199415374-b3c04a77-f12a-45e1-aad4-d7fbe33595e5.png">
+</div>
+<br>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## <a name='technologies-used'/>Technologies Used
+add badges or logos:
+React, Next.js, Firebase, Styled Components, Storybook, Vercel
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-use yarn, ignore package-lock.json
+## <a name='challenges-additional-features'/>Challenges and Additional Fatures
+## <a name='how-to-run'/>How To Run
+## <a name='credits'/>Credits
+
+
