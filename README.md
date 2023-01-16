@@ -11,9 +11,10 @@ Provide easier access to local resources for the low-income and food insecure po
 1. [What is LocalToMe](#what-is-localtome)
 2. [Main Features](#main-features)
 3. [Technologies Used](#technologies-used)
-4. [Challenges and Additional Fatures](#challenges-additional-features)
-5. [How To Run](#how-to-run)
-6. [Credits](#credits)
+4. [Challenges](#challenges)
+5. [Additional Fatures](#additional-features)
+6. [How To Run](#how-to-run)
+7. [Credits](#credits)
 
 ## <a name='what-is-localtome'/>What is LocalToMe?
 
@@ -73,9 +74,42 @@ Due to the recent effects of inflation and the pandemic, many low-income familie
 add badges or logos:
 React, Next.js, Firebase, Styled Components, Storybook, Vercel
 
+## <a name='challenges'/>Challenges
+### Difficulty getting food banks to work with us:
+Food banks are very busy and a majority of their workers consist of volunteers. Getting in contact with someone in the organization or anyone with experience with the food bank system was hard. We wanted more insight into the real problems they face and to see if there were any gaps we could fill.
 
-## <a name='challenges-additional-features'/>Challenges and Additional Fatures
+### Chosen database not optimal for the purpose:
+We chose firebase initially because it was a technology we wanted to learn and found that it was very all inclusive in terms of services. However, we later found that the noSQL Realtime Database was probably the wrong option for the CRUD style application that we were building. Without proper foresight, updating the database got more complicated due to the lack of relationships, requiring various checks to perform certain tasks.
+
+### Limitations of usage on the free tier of services:
+Certain tools such as Algolia had more limited free teir services. For example, we can only show 20 items max in the event list in community. MapBox provided more free features however had a cap on the number of requests in a day.
+
+### Time constraints:
+This project was a interdiscplinary class in our third semester at BCIT with 3 Designers and 3 Developers in our team. We balanced other courses with this project and followed a strict schedule to research, design, and develop the idea, and demonstrated it in a final presentation at the end of the semester. We were able to quickly reach our MVP and complete many features, but still have additional polishing and ideas to explore.
+
+## <a name='additional-features'/>Possible Additional Fatures
+ - User survey upon registering to customize their experience
+ - Verification system for events to prove legitimacy
+ - Color theme switcher
+ - Food bank portal to update their own information on the fly
+
+
 ## <a name='how-to-run'/>How To Run
-## <a name='credits'/>Credits
+1. Install dependencies needed to run the project
 
+```sh
+yarn install
+```
+2. Run the Dev Project
+
+```sh
+yarn dev
+```
+## <a name='credits'/>Credits
+- [Oliver](https://github.com/OliverNguyen226)
+- [Yoyo](https://github.com/yoyochen68)
+- [Phoenix](https://github.com/phoenixlai833)
+- [Phillip](https://github.com/Pho86)
+- [Angelyne](https://github.com/atran02)
+- [Mai Ahn](https://github.com/mverakore)
 
