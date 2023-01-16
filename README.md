@@ -6,6 +6,10 @@
 ## The Problem
 Provide easier access to local resources for the low-income and food insecure population.
 
+💅✨ : [Figma](https://www.figma.com/file/i6QYurksfcfo4QrhNuYZJy/LocalToMe?node-id=0%3A1)
+
+
+:globe_with_meridians: :rocket: : [Web App](https://localtome.vercel.app/)
 
 ## Table of contents
 1. [What is LocalToMe](#what-is-localtome)
