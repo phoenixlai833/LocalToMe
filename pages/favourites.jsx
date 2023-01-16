@@ -140,7 +140,9 @@ export default function Favorites({ user }) {
           <TopNavigation value={3} />
         </TopBar>
         <FavBox>
-          <Search onSearch={() => console.log("nothing")} />
+          <br></br>
+          <br></br>
+          {/* <Search onSearch={() => console.log("nothing")} /> */}
           <Tabs tabId={tab} onChangeTab={handleChangeTab} tabList={tabList} />
           <FavorPage>
             {console.log("hi", tab, tabContents[tab].component)}
