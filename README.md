@@ -36,9 +36,9 @@ Due to the recent effects of inflation and the pandemic, many low-income familie
 * Provides accurate and important information caters to users' needs
 <br>
 <div align="center">
-<img width="25%" alt="mapfeature" src="https://user-images.githubusercontent.com/91308007/199417945-4026fa8a-708e-40bb-a0b6-9d70dc78c2fc.png">
-<img width="25%" alt="mapfeaturepin" src="https://user-images.githubusercontent.com/91308007/199417953-c9c3a2fe-e076-47b1-9342-5aa11d355dd2.png">
-<img width="25%" alt="mapfeatureinfo" src="https://user-images.githubusercontent.com/91308007/199417951-3c82ccc6-fa6e-4943-8cee-95f9cf5bdff2.png">
+<img width="25%" alt="map1" src="https://user-images.githubusercontent.com/41124039/213036725-174fd9b7-95c3-4faf-b117-02da19fe0876.png">
+<img width="25%" alt="map2" src="https://user-images.githubusercontent.com/41124039/213036724-2afcfa7e-15c7-4190-9622-a20baee5f8c2.png">
+<img width="25%" alt="map3" src="https://user-images.githubusercontent.com/41124039/213036718-275bed49-b2b2-497b-8ba3-c7efd26120f2.png">
 </div>
 
 ### Community Page:
@@ -46,20 +46,21 @@ Due to the recent effects of inflation and the pandemic, many low-income familie
 * Host events or create a news post
 <br>
 <div align="center">
-<img width="243" alt="communiity event page" src="https://user-images.githubusercontent.com/91308007/199413942-56a54712-2aa8-4ff5-acf1-1a3f0b5719c4.png">
-<img width="243" alt="createpost" src="https://user-images.githubusercontent.com/91308007/199414656-d5b0bb54-964a-4de1-a10a-65bd11238563.png">
-<img width="243" alt="createevents" src="https://user-images.githubusercontent.com/91308007/199415374-b3c04a77-f12a-45e1-aad4-d7fbe33595e5.png">
+<img width="20%" alt="community1" src="https://user-images.githubusercontent.com/41124039/213036826-dc75880c-a734-4fc5-ae29-39390f72016c.png">
+<img width="20%" alt="community4" src="https://user-images.githubusercontent.com/41124039/213036836-81f6e2a7-7c78-4ee6-97af-70ec63f542ed.png">
+<img width="20%" alt="community2" src="https://user-images.githubusercontent.com/41124039/213036832-dae9b504-b97e-4eca-b5a3-d6e1178de67b.png">
+<img width="20%" alt="community3" src="https://user-images.githubusercontent.com/41124039/213036833-103ee658-87b5-4c1a-8272-cddad87cb105.png">
 </div>
 <br>
 
 ### Favourites:
-* Like or share to socials(add to calendar function is still in-progress)
+* Like or share to socials
 * When logged in, users can ike locations and events which are saved in the favourites page for future reference
 <br>
 <div align="center">
-<img width="243" alt="communiity event page" src="https://user-images.githubusercontent.com/91308007/199413942-56a54712-2aa8-4ff5-acf1-1a3f0b5719c4.png">
-<img width="243" alt="createpost" src="https://user-images.githubusercontent.com/91308007/199414656-d5b0bb54-964a-4de1-a10a-65bd11238563.png">
-<img width="243" alt="createevents" src="https://user-images.githubusercontent.com/91308007/199415374-b3c04a77-f12a-45e1-aad4-d7fbe33595e5.png">
+<img width="25%" alt="favorite2" src="https://user-images.githubusercontent.com/41124039/213036948-cf6b7bb0-6f37-4947-9e59-db9e96fab9e9.png">
+<img width="25%" alt="favorite1" src="https://user-images.githubusercontent.com/41124039/213036945-da0656f5-0a87-4520-9aaf-f189c482e881.png">
+<img width="25%" alt="favorite3" src="https://user-images.githubusercontent.com/41124039/213036951-386d64d7-e505-4438-b8c5-ee8db5d09f28.png">
 </div>
 <br>
 
@@ -68,9 +69,9 @@ Due to the recent effects of inflation and the pandemic, many low-income familie
 * See your own created events and news
 <br>
 <div align="center">
-<img width="243" alt="communiity event page" src="https://user-images.githubusercontent.com/91308007/199413942-56a54712-2aa8-4ff5-acf1-1a3f0b5719c4.png">
-<img width="243" alt="createpost" src="https://user-images.githubusercontent.com/91308007/199414656-d5b0bb54-964a-4de1-a10a-65bd11238563.png">
-<img width="243" alt="createevents" src="https://user-images.githubusercontent.com/91308007/199415374-b3c04a77-f12a-45e1-aad4-d7fbe33595e5.png">
+<img width="25%" alt="profile1" src="https://user-images.githubusercontent.com/41124039/213037013-99a61f6a-c7a8-47c8-ac8b-78529b0bc8f3.png">
+<img width="25%" alt="profile2" src="https://user-images.githubusercontent.com/41124039/213037014-c5883b7f-aec3-4286-a14b-6dd051feb595.png">
+<img width="25%" alt="profile3" src="https://user-images.githubusercontent.com/41124039/213037018-83996f00-0fff-449d-876a-fde49124de35.png">
 </div>
 <br>
 
@@ -94,9 +95,9 @@ This project was a interdiscplinary class in our third semester at BCIT with 3 D
 ## <a name='additional-features'/>Possible Additional Fatures
  - User survey upon registering to customize their experience
  - Verification system for events to prove legitimacy
- - Color theme switcher
+ - Add to calendar
+ - functionality for the settings page such as Color theme switcher
  - Food bank portal to update their own information on the fly
-
 
 ## <a name='how-to-run'/>How To Run
 1. Install dependencies needed to run the project
