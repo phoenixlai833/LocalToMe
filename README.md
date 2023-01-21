@@ -111,5 +111,5 @@ yarn install
 yarn dev
 ```
 ## <a name='credits'/>Credits
-[Oliver](https://github.com/OliverNguyen226), [Yoyo](https://github.com/yoyochen68), [Phoenix](https://github.com/phoenixlai833), [Phillip](https://github.com/Pho86), [Angelyne](https://github.com/atran02), [Mai Ahn](https://github.com/mverakore)
+[Oliver](https://github.com/OliverNguyen226), [Yoyo](https://github.com/yoyochen68), [Phoenix](https://github.com/phoenixlai833), [Phillip](https://github.com/Pho86), [Angelyne](https://github.com/atran02), [Mai Anh](https://github.com/mverakore)
 
