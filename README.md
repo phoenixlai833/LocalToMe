@@ -76,8 +76,12 @@ Due to the recent effects of inflation and the pandemic, many low-income familie
 <br>
 
 ## <a name='technologies-used'/>Technologies Used
-add badges or logos:
-React, Next.js, Firebase, Styled Components, Storybook, Vercel
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white)
+![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
+![Storybook](https://img.shields.io/badge/-Storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white)
+![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
 
 ## <a name='challenges'/>Challenges
 ### Difficulty getting food banks to work with us:
