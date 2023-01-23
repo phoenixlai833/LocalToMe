@@ -13,8 +13,8 @@ Provide easier access to local resources for the low-income and food insecure po
 
 ## Table of contents
 1. [What is LocalToMe](#what-is-localtome)
-2. [Main Features](#main-features)
-3. [Technologies Used](#technologies-used)
+2. [Technologies Used](#technologies-used)
+3. [Main Features](#main-features)
 4. [Challenges](#challenges)
 5. [Additional Fatures](#additional-features)
 6. [How To Run](#how-to-run)
@@ -28,6 +28,17 @@ Due to the recent effects of inflation and the pandemic, many low-income familie
 
 <img width="1595" alt="Screen Shot 2022-09-26 at 11 38 09 PM" src="https://user-images.githubusercontent.com/41124039/192451398-61456cb2-8ca7-4d3c-9195-5a7567d8a37d.png">
 <br></br>
+
+
+## <a name='technologies-used'/>Technologies Used
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white)
+![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
+![Storybook](https://img.shields.io/badge/-Storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white)
+![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
+
+<br>
 
 ## <a name='main-features'/>Main Features
 
@@ -74,14 +85,6 @@ Due to the recent effects of inflation and the pandemic, many low-income familie
 <img width="25%" alt="profile3" src="https://user-images.githubusercontent.com/41124039/213037018-83996f00-0fff-449d-876a-fde49124de35.png">
 </div>
 <br>
-
-## <a name='technologies-used'/>Technologies Used
-![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
-![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white)
-![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
-![Storybook](https://img.shields.io/badge/-Storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white)
-![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
 
 ## <a name='challenges'/>Challenges
 ### Difficulty getting food banks to work with us:
